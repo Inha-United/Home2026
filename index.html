@@ -101,56 +101,60 @@
     ======================= */
     .team-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 40px;
-      margin-top: 60px;
-      padding: 0 40px;
-      text-align: center;
+      margin-top: 50px;
+      padding: 0 30px;
+      justify-items: center;
     }
     
     .team-member {
-      background: #fff;
+      background: #ffffff;
       border-radius: 20px;
-      padding: 20px;
+      padding: 30px 20px;
+      text-align: center;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      width: 100%;
+      max-width: 300px;
     }
     
     .team-member:hover {
       transform: translateY(-6px);
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
     }
     
     .team-member img {
-      width: 140px;
-      height: 140px;
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
       object-fit: cover;
-      margin-bottom: 15px;
       border: 3px solid #0078ff30;
+      margin-bottom: 15px;
     }
     
     .team-member h3 {
-      margin: 10px 0 5px;
+      font-size: 1.2em;
       font-weight: 600;
+      margin: 10px 0 5px;
     }
     
     .team-member p {
-      color: #555;
+      color: #666;
+      font-size: 0.95em;
       margin-bottom: 12px;
-      font-size: 0.95rem;
     }
     
-    /* Social icons inside each member */
+    /* 소셜 아이콘 영역 */
     .social-icons {
       display: flex;
       justify-content: center;
-      gap: 14px;
+      gap: 12px;
     }
     
     .social-icons a {
-      color: #333;
-      font-size: 1.3em;
+      color: #555;
+      font-size: 1.25em;
       transition: color 0.3s ease, transform 0.2s ease;
     }
     
@@ -276,6 +280,15 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
+    <!-- Google Scholar & Homepage용 커스텀 아이콘 (Font Awesome에 직접 없으므로 대체 사용) -->
+    <style>
+      .fa-scholar::before {
+        content: "\f19d"; /* graduation-cap 아이콘으로 대체 */
+      }
+      .fa-homepage::before {
+        content: "\f015"; /* 집 아이콘 */
+      }
+    </style>
     
     <section class="section about" id="about">
       <h1>Our Team</h1>
@@ -301,6 +314,8 @@
             <a href="mailto:leader@email.com"
               ><i class="fas fa-envelope"></i
             ></a>
+            <a href="https://scholar.google.com/citations?user=XXXX" target="_blank" title="Google Scholar"><i class="fa fa-scholar"></i></a>
+            <a href="https://username.github.io" target="_blank" title="Homepage"><i class="fa fa-homepage"></i></a>
           </div>
         </div>
     
