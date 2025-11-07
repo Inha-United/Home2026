@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Inha-United@Home</title>
 
   <!-- fullPage.js -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.min.js"></script>
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Font Awesome Icons -->
+  <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/a2e0f6f1d9.js" crossorigin="anonymous"></script>
 
   <style>
@@ -56,24 +56,24 @@
       color: #0078ff;
     }
 
-    /* Sections */
+    /* Section layout */
     .section {
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
-      min-height: 100vh;  /* height → min-height */
+      min-height: 100vh;
       text-align: center;
-      padding: 80px 20px 60px;  /* 상단 패딩 추가 */
+      padding: 100px 20px 60px; /* header 공간 확보 */
     }
 
     /* Home */
     .home {
-      position: relative;
       background-color: white;
+      position: relative;
     }
 
-    /* Left Social Icons */
+    /* Fixed Left Social Icons */
     .social {
       position: fixed;
       left: 40px;
@@ -84,86 +84,16 @@
       gap: 18px;
       z-index: 100;
     }
-    
     .social a {
-      color: #74a9e1;
+      color: #0078ff;
       font-size: 24px;
       transition: all 0.3s ease;
     }
-    
     .social a:hover {
-      color: #0078ff;
       transform: scale(1.15);
     }
-    
-    /* =======================
-       Team Section
-    ======================= */
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 40px;
-      margin-top: 50px;
-      padding: 0 30px;
-      justify-items: center;
-    }
-    
-    .team-member {
-      background: #ffffff;
-      border-radius: 20px;
-      padding: 30px 20px;
-      text-align: center;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      width: 100%;
-      max-width: 300px;
-    }
-    
-    .team-member:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
-    }
-    
-    .team-member img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #0078ff30;
-      margin-bottom: 15px;
-    }
-    
-    .team-member h3 {
-      font-size: 1.2em;
-      font-weight: 600;
-      margin: 10px 0 5px;
-    }
-    
-    .team-member p {
-      color: #666;
-      font-size: 0.95em;
-      margin-bottom: 12px;
-    }
-    
-    /* 소셜 아이콘 영역 */
-    .social-icons {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-    }
-    
-    .social-icons a {
-      color: #555;
-      font-size: 1.25em;
-      transition: color 0.3s ease, transform 0.2s ease;
-    }
-    
-    .social-icons a:hover {
-      color: #0078ff;
-      transform: scale(1.2);
-    }
 
-    /* Text */
+    /* Home Text */
     .home h1 {
       font-size: 3rem;
       font-weight: 700;
@@ -181,12 +111,14 @@
       padding: 12px 24px;
       font-size: 1rem;
       cursor: pointer;
+      transition: all 0.2s ease;
     }
     .home button:hover {
-      background-color: #005fcc;
+      background-color: #0060e0;
+      transform: translateY(-2px);
     }
 
-    /* About Section */
+    /* About / Team */
     .about {
       background-color: #f9f9f9;
     }
@@ -199,52 +131,111 @@
       font-size: 1.1rem;
       max-width: 700px;
     }
-    .section video {
-      width: 80%;
-      max-width: 900px;
-      border-radius: 12px;
-      margin-top: 20px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 40px;
+      margin-top: 50px;
+      padding: 0 30px;
+      justify-items: center;
     }
-    .fp-watermark {
-      display: none !important;
+    .team-member {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      width: 100%;
+      max-width: 300px;
     }
+    .team-member:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+    }
+    .team-member img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #0078ff30;
+      margin-bottom: 15px;
+    }
+    .team-member h3 {
+      font-size: 1.2em;
+      font-weight: 600;
+      margin: 10px 0 5px;
+    }
+    .team-member p {
+      color: #666;
+      font-size: 0.95em;
+      margin-bottom: 12px;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+    }
+    .social-icons a {
+      color: #555;
+      font-size: 1.25em;
+      transition: color 0.3s ease, transform 0.2s ease;
+    }
+    .social-icons a:hover {
+      color: #0078ff;
+      transform: scale(1.2);
+    }
+
+    /* Custom Font Awesome Replacements */
+    .fa-scholar::before {
+      content: "\f19d";
+    }
+    .fa-homepage::before {
+      content: "\f015";
+    }
+
+    /* Research */
+    .research-list {
+      text-align: left;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    /* Open Source */
+    .opensource {
+      background-color: #f9f9f9;
+    }
+
+    /* Media */
     .media .video-container {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 40px; /* 영상 사이 간격 */
-      flex-wrap: wrap; /* 화면 작으면 자동으로 줄바꿈 */
+      gap: 40px;
+      flex-wrap: wrap;
       margin-top: 30px;
     }
-    
     .media video {
-      width: 45%; /* 두 개가 나란히 보이게 */
+      width: 45%;
       max-width: 600px;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    @media (max-width: 900px) {
+      .media video {
+        width: 90%;
+      }
     }
 
-
-    /* Simple table style for team info */
-    table {
-      margin-top: 20px;
-      border-collapse: collapse;
-      width: 80%;
-      max-width: 700px;
+    .fp-watermark {
+      display: none !important;
     }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 10px;
-    }
-    th {
-      background: #efefef;
-    }
-
   </style>
 </head>
 <body>
-
   <header>
     <h1>Inha-United@Home</h1>
     <nav>
@@ -257,14 +248,13 @@
   </header>
 
   <div id="fullpage">
-
     <!-- Home -->
     <section class="section home" data-anchor="home">
       <div class="social">
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-linkedin"></i></a>
-        <a href="#"><i class="fab fa-youtube"></i></a>
-        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-instagram" aria-label="Instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin" aria-label="LinkedIn"></i></a>
+        <a href="#"><i class="fab fa-youtube" aria-label="YouTube"></i></a>
+        <a href="#"><i class="fab fa-github" aria-label="GitHub"></i></a>
       </div>
       <div>
         <h1>Welcome!</h1>
@@ -275,29 +265,14 @@
     </section>
 
     <!-- About / Team -->
-    <!-- Font Awesome 불러오기 (아이콘 표시용) -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
-    <!-- Google Scholar & Homepage용 커스텀 아이콘 (Font Awesome에 직접 없으므로 대체 사용) -->
-    <style>
-      .fa-scholar::before {
-        content: "\f19d"; /* graduation-cap 아이콘으로 대체 */
-      }
-      .fa-homepage::before {
-        content: "\f015"; /* 집 아이콘 */
-      }
-    </style>
-    
-    <section class="section about" id="about">
+    <section class="section about" data-anchor="about" id="about">
       <h1>Our Team</h1>
       <p>
         We are a newly founded robotics research team at Inha University, 
         focusing on service robots, autonomous perception, and intelligent control systems 
         for domestic and public environments.
       </p>
-    
+
       <div class="team-grid">
         <!-- Member 1 -->
         <div class="team-member">
@@ -305,58 +280,39 @@
           <h3>Leader Name</h3>
           <p>Team Leader</p>
           <div class="social-icons">
-            <a href="https://github.com/username" target="_blank"
-              ><i class="fab fa-github"></i
-            ></a>
-            <a href="https://linkedin.com/in/username" target="_blank"
-              ><i class="fab fa-linkedin"></i
-            ></a>
-            <a href="mailto:leader@email.com"
-              ><i class="fas fa-envelope"></i
-            ></a>
-            <a href="https://scholar.google.com/citations?user=XXXX" target="_blank" title="Google Scholar"><i class="fa fa-scholar"></i></a>
-            <a href="https://username.github.io" target="_blank" title="Homepage"><i class="fa fa-homepage"></i></a>
+            <a href="https://github.com/username" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/username" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:leader@email.com"><i class="fas fa-envelope"></i></a>
+            <a href="https://scholar.google.com/citations?user=XXXX" target="_blank"><i class="fa fa-scholar"></i></a>
+            <a href="https://username.github.io" target="_blank"><i class="fa fa-homepage"></i></a>
           </div>
         </div>
-    
+
         <!-- Member 2 -->
         <div class="team-member">
           <img src="https://github.com/octocat.png" alt="Member 2" />
           <h3>Member 2</h3>
           <p>Vision & Perception</p>
           <div class="social-icons">
-            <a href="https://github.com/member2" target="_blank"
-              ><i class="fab fa-github"></i
-            ></a>
-            <a href="https://linkedin.com/in/member2" target="_blank"
-              ><i class="fab fa-linkedin"></i
-            ></a>
-            <a href="mailto:member2@email.com"
-              ><i class="fas fa-envelope"></i
-            ></a>
+            <a href="https://github.com/member2" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/member2" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:member2@email.com"><i class="fas fa-envelope"></i></a>
           </div>
         </div>
-    
+
         <!-- Member 3 -->
         <div class="team-member">
           <img src="https://github.com/octocat.png" alt="Member 3" />
           <h3>Member 3</h3>
           <p>Control & Planning</p>
           <div class="social-icons">
-            <a href="https://github.com/member3" target="_blank"
-              ><i class="fab fa-github"></i
-            ></a>
-            <a href="https://linkedin.com/in/member3" target="_blank"
-              ><i class="fab fa-linkedin"></i
-            ></a>
-            <a href="mailto:member3@email.com"
-              ><i class="fas fa-envelope"></i
-            ></a>
+            <a href="https://github.com/member3" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/member3" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:member3@email.com"><i class="fas fa-envelope"></i></a>
           </div>
         </div>
       </div>
     </section>
-
 
     <!-- Research -->
     <section class="section" data-anchor="approach">
@@ -365,7 +321,7 @@
         Our work focuses on integrating vision, language, and control in real-world service robots.
         We aim to build reproducible systems that can perceive, plan, and act intelligently.
       </p>
-      <ul style="text-align:left;max-width:600px;">
+      <ul class="research-list">
         <li>Vision-Language Grounding for Object Understanding</li>
         <li>Operational Space Control for Manipulation</li>
         <li>Reinforcement Learning in Real-to-Sim Environments</li>
@@ -373,7 +329,7 @@
     </section>
 
     <!-- Open Source -->
-    <section class="section" data-anchor="opensource" style="background:#f9f9f9;">
+    <section class="section opensource" data-anchor="opensource">
       <h1>Open-Source Contributions</h1>
       <p>All our research outputs and robot models will be publicly available.</p>
       <p><a href="https://github.com/Inha-United" target="_blank">🔗 Visit our GitHub</a></p>
@@ -390,34 +346,30 @@
       </p>
       <div class="video-container">
         <video controls autoplay muted loop playsinline>
-          <source src="IMG_6070.mp4" type="video/mp4">
+          <source src="IMG_6070.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         <video controls autoplay muted loop playsinline>
-          <source src="IMG_6071.mp4" type="video/mp4">
+          <source src="IMG_6071.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>
     </section>
-
   </div>
 
   <script>
     new fullpage('#fullpage', {
       autoScrolling: true,
       fitToSection: true,
-      fitToSectionDelay: 500,
       scrollingSpeed: 700,
       anchors: ['home', 'about', 'approach', 'opensource', 'media'],
       navigation: true,
       navigationTooltips: ['Home', 'Team', 'Research', 'Open Source', 'Media'],
       showActiveTooltip: true,
-      paddingTop: '60px', // ✅ header 높이만큼 여백 확보
-      responsiveWidth: 900, // ✅ 모바일/태블릿에서는 일반 스크롤로 전환
+      responsiveWidth: 900,
       scrollBar: false,
-      credits: { enabled: false }
+      credits: { enabled: false },
     });
   </script>
-
 </body>
 </html>
