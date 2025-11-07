@@ -227,7 +227,21 @@
     
     /* Footer info (주소 & 메일) */
     .footer-info {
-      margin-bottom: 40px; /* 위쪽 공간 확보 */
+      margin-bottom: 40px;       /* 기존 아래 공간 */
+      margin-top: 20px;          /* 위쪽 공간 조금만 */
+      font-size: 1.1rem;         /* 글자 크기 키움 */
+      line-height: 1.5;          /* 줄 간격 */
+      text-align: center;
+    }
+    /* 이메일 링크 강조 */
+    .footer-info a {
+      font-weight: 600;
+      color: #0078ff;
+      text-decoration: none;
+    }
+    
+    .footer-info a:hover {
+      text-decoration: underline;
     }
     
     /* Lab logos - 넓게 분포 */
