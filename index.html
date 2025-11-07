@@ -114,13 +114,14 @@
     
     .team-row {
       display: flex;
+      flex-wrap: wrap; 
       gap: 30px; /* 멤버 간 간격 */
       justify-content: center;
       width: 100%;
     }
     
     .team-row .team-member {
-      flex: 1 1 0;
+      flex: 1 1 250px;
       max-width: 300px; /* 원하는 최대 폭 */
     }
     
@@ -341,7 +342,8 @@
        Team Section (규격 맞춤)
     ======================= */
     .section.team {
-      height: 100vh;                 /* 화면 전체 높이 */
+      height: 100vh;
+      height: auto;                 /* 화면 전체 높이 */
       display: flex;
       flex-direction: column;
       justify-content: center;       /* 세로 중앙정렬 */
