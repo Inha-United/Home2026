@@ -62,9 +62,9 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      height: 100vh;
+      min-height: 100vh;  /* height → min-height */
       text-align: center;
-      padding: 0 20px;
+      padding: 80px 20px 60px;  /* 상단 패딩 추가 */
     }
 
     /* Home */
@@ -405,11 +405,17 @@
   <script>
     new fullpage('#fullpage', {
       autoScrolling: true,
+      fitToSection: true,
+      fitToSectionDelay: 500,
+      scrollingSpeed: 700,
       anchors: ['home', 'about', 'approach', 'opensource', 'media'],
       navigation: true,
       navigationTooltips: ['Home', 'Team', 'Research', 'Open Source', 'Media'],
       showActiveTooltip: true,
-      credits: { enabled: false }  // ✅ hides the fullPage.js credit
+      paddingTop: '60px', // ✅ header 높이만큼 여백 확보
+      responsiveWidth: 900, // ✅ 모바일/태블릿에서는 일반 스크롤로 전환
+      scrollBar: false,
+      credits: { enabled: false }
     });
   </script>
 
