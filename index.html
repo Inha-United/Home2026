@@ -59,12 +59,13 @@
     /* Sections */
     .section {
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
-      min-height: 100vh;  /* height → min-height */
+      min-height: 100vh;   /* ✅ 최소 100vh, 초과 시 자동 확장 */
       text-align: center;
-      padding: 80px 20px 60px;  /* 상단 패딩 추가 */
+      padding: 80px 20px 100px; /* 위아래 여유 */
+      box-sizing: border-box;
     }
 
     /* Home */
@@ -405,16 +406,15 @@
   <script>
     new fullpage('#fullpage', {
       autoScrolling: true,
-      fitToSection: true,
-      fitToSectionDelay: 500,
-      scrollingSpeed: 700,
+      fitToSection: false,  // ✅ 섹션 크기 강제 맞춤 비활성화
+      scrollOverflow: false, // ✅ 내부 스크롤 완전 비활성화
       anchors: ['home', 'about', 'approach', 'opensource', 'media'],
       navigation: true,
       navigationTooltips: ['Home', 'Team', 'Research', 'Open Source', 'Media'],
       showActiveTooltip: true,
-      paddingTop: '60px', // ✅ header 높이만큼 여백 확보
-      responsiveWidth: 900, // ✅ 모바일/태블릿에서는 일반 스크롤로 전환
-      scrollBar: false,
+      paddingTop: '60px',
+      scrollingSpeed: 700,
+      responsiveWidth: 900,
       credits: { enabled: false }
     });
   </script>
