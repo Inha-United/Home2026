@@ -186,16 +186,16 @@
       background-color: #005fcc;
     }
 
-    /* About Section */
-    .about {
+    /* Team Section */
+    .team {
       background-color: #f9f9f9;
     }
-    .about h1 {
+    .team h1 {
       font-size: 2.5rem;
       font-weight: 700;
       margin-bottom: 10px;
     }
-    .about p {
+    .team p {
       font-size: 1.1rem;
       max-width: 700px;
     }
@@ -320,10 +320,11 @@
     <h1>Inha-United@Home</h1>
     <nav>
       <a href="#home">Home</a>
-      <a href="#about">Team</a>
-      <a href="#approach">Research</a>
+      <a href="#team">Team</a>
+      <a href="#research">Research</a>
       <a href="#opensource">Open Source</a>
       <a href="#media">Media</a>
+      <a href="#contact">Contact</a>
     </nav>
   </header>
 
@@ -341,7 +342,7 @@
         <h1>Welcome!</h1>
         <p>We are <b>Inha-United@Home</b> 🤖</p>
         <p>A newly founded RoboCup @Home team from Inha University (2025).</p>
-        <button onclick="location.href='#about'">Learn More</button>
+        <button onclick="location.href='#team'">Learn More</button>
       </div>
     </section>
 
@@ -361,7 +362,7 @@
       }
     </style>
     
-    <section class="section about" id="about">
+    <section class="section team" id="team">
       <h1>Our Team</h1>
       <p>
         We are a newly founded robotics research team at Inha University, 
@@ -430,7 +431,7 @@
 
 
     <!-- Research -->
-    <section class="section" data-anchor="approach">
+    <section class="section" data-anchor="research">
       <h1>Scientific Approach</h1>
       <p>
         Our work focuses on integrating vision, language, and control in real-world service robots.
@@ -504,7 +505,7 @@
   <script>
     new fullpage('#fullpage', {
       autoScrolling: true,
-      anchors: ['home', 'about', 'approach', 'opensource', 'media', 'contact'],
+      anchors: ['home', 'team', 'research', 'opensource', 'media', 'contact'],
       navigationTooltips: ['Home', 'Team', 'Research', 'Open Source', 'Media', 'Contact'],
       navigation: true,
       showActiveTooltip: true,
