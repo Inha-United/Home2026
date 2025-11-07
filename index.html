@@ -128,6 +128,16 @@
       font-size: 1.1rem;
       max-width: 700px;
     }
+    .section video {
+      width: 80%;
+      max-width: 900px;
+      border-radius: 12px;
+      margin-top: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .fp-watermark {
+      display: none !important;
+    }
 
     /* Simple table style for team info */
     table {
@@ -215,9 +225,19 @@
     </section>
 
     <!-- Media -->
-    <section class="section" data-anchor="media">
+    <section class="section media" data-anchor="media">
       <h1>Media</h1>
-      <p>Photos and videos of our robots will be available soon.</p>
+      <p>Our robots in action — demonstrations from our 2025 development sessions.</p>
+      <div class="video-container">
+        <video controls autoplay muted loop playsinline>
+          <source src="IMG_6070.mov" type="video/quicktime">
+          Your browser does not support the video tag.
+        </video>
+        <video controls autoplay muted loop playsinline>
+          <source src="IMG_6071.mov" type="video/quicktime">
+          Your browser does not support the video tag.
+        </video>
+      </div>
     </section>
 
   </div>
