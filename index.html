@@ -257,11 +257,10 @@
     .section.contact {
       display: flex;
       flex-direction: column;
-      justify-content: center; /* 상단 h1 / 하단 footer */
+      justify-content: space-between; /* 상단 h1 / 하단 footer */
       align-items: center;
       text-align: center;
-      gap: 600px; /* contact h1과 contact us 간격 */
-      padding: 40px 20px;
+      padding: 120px 20px 40px; /* ⬅️ 상단 패딩 늘리기 */
       min-height: calc(var(--vh, 1vh) * 100);
       background: linear-gradient(to bottom, #ffffff 0%, #ffffff 70%, #cce7ff 100%);
     }
