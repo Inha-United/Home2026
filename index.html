@@ -46,7 +46,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 40px;
-      background: rgba(204, 231, 255, 0.9);
+      background: linear-gradient(to bottom, #cce7ff 0%, #ffffff 100%);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid #eee;
       z-index: 10;
@@ -58,11 +58,12 @@
     nav a {
       margin-left: 25px;
       text-decoration: none;
-      color: #333;
+      color: #004c99; /* 진한 파랑 - 잘 읽힘 */
       font-weight: 500;
+      transition: color 0.3s;
     }
     nav a:hover {
-      color: #0078ff;
+      color: #0078ff; /* hover 시 약간 쨍한 파랑 */
     }
     
     div.fp-watermark {
