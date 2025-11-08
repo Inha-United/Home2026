@@ -257,12 +257,16 @@
     .section.contact {
       display: flex;
       flex-direction: column;
-      justify-content: space-between; /* 상단 h1 / 하단 footer */
+      justify-content: center; /* 상단 h1 / 하단 footer */
       align-items: center;
       text-align: center;
       padding: 40px 20px;
-      height: calc(var(--vh, 1vh) * 100);
+      min-height: calc(var(--vh, 1vh) * 100);
       background: linear-gradient(to bottom, #ffffff 0%, #ffffff 70%, #cce7ff 100%);
+    }
+
+    .section.contact h1 {
+      margin-bottom: 40px; /* 적당히 여백 추가 */
     }
     
     /* Footer info (주소 & 메일) */
@@ -289,6 +293,7 @@
       margin-top: 40px;    /* footer-info와 로고 간격 */
       width: 100%;
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       gap: 200px;
