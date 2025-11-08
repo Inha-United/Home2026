@@ -255,26 +255,22 @@
     
     /* Contact Section */
     .section.contact {
-      
-      justify-content: center; /* 세로 중앙 */
-      text-align: center;
-      height: auto;  
-      margin-top: 40px;
-      background: linear-gradient(to bottom, #ffffff 30%, #cce7ff 100%);
       display: flex;
       flex-direction: column;
+      justify-content: space-between; /* 상단 h1 / 하단 footer */
       align-items: center;
-      height: 100vh;       /* 화면 전체 높이 */
-      padding: 40px 20px;
       text-align: center;
+      padding: 40px 20px;
+      height: calc(var(--vh, 1vh) * 100);
+      background: linear-gradient(to bottom, #ffffff 0%, #ffffff 70%, #cce7ff 100%);
     }
     
     /* Footer info (주소 & 메일) */
     .footer-info {
-      margin-bottom: 40px;       /* 기존 아래 공간 */
-      margin-top: 40px;          /* 위쪽 공간 조금만 */
-      font-size: 1.1rem;         /* 글자 크기 키움 */
-      line-height: 1.5;          /* 줄 간격 */
+      margin: 0;            /* 기존 margin 제거 */
+      padding-bottom: 20px; /* 위쪽 공간 확보 */
+      font-size: 1.1rem;
+      line-height: 1.5;
       text-align: center;
     }
     /* 이메일 링크 강조 */
@@ -290,13 +286,12 @@
     
     /* Lab logos - 넓게 분포 */
     footer .lab-logos {
-      margin-top: 60px;
-      display: flex;
-      justify-content: space-between; /* 좌우 균등 배치 */
-      align-items: center;
-      gap: 200px;       /* gap을 늘림 */
-      flex-wrap: nowrap; /* 한 줄 유지 */
+      margin-top: 40px;    /* footer-info와 로고 간격 */
       width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 200px;
     }
     
     footer .lab-logos a {
