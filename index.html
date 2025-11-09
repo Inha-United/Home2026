@@ -75,23 +75,15 @@
       --vh: 1vh;
     }
     
+    /* 모든 섹션 높이에 100vh 대신 calc(var(--vh) * 100) 사용 */
     .section {
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      height: 100vh; /* 데스크탑 기본 */
+      height: calc(var(--vh, 1vh) * 100);
       text-align: center;
       padding: 0 20px;
-    }
-    
-    /* 모바일 전용 높이 조정 */
-    @media (max-width: 900px) {
-      .section {
-        height: calc(var(--vh, 1vh) * 100);
-        min-height: 100vh; /* 혹시라도 vh가 작게 계산될 경우 대비 */
-        padding: 100px 20px; /* 모바일은 여백 넉넉히 */
-      }
     }
 
     /* Home */
@@ -261,39 +253,20 @@
       background: #efefef;
     }
     
-    /* ==== contact 섹션: 데스크탑에서는 원래(full-screen) 스타일, 모바일은 자동 레이아웃 ==== */
+    /* Contact Section */
     .section.contact {
       display: flex;
       flex-direction: column;
-      justify-content: space-between; /* 상단 h1 / 하단 footer 분리 */
+      justify-content: space-between; /* 상단 h1 / 하단 footer */
       align-items: center;
       text-align: center;
-      padding: 240px 20px 40px; /* 데스크탑 기본 패딩 (원래대로) */
-      min-height: 100vh;
+      padding: 240px 20px 40px; /* ⬅️ 상단 패딩 늘리기 */
+      min-height: calc(var(--vh, 1vh) * 100);
       background: linear-gradient(to bottom, #ffffff 0%, #ffffff 70%, #cce7ff 100%);
-      /* 기본 상태(데스크탑에 적용될 높이는 아래 미디어쿼리에서 설정) */
-    }
-    
-    /* 데스크탑: 화면 전체 높이(원래 동적 vh 사용) */
-    @media (min-width: 901px) {
-      .section.contact {
-        height: calc(var(--vh, 1vh) * 100);
-        min-height: calc(var(--vh, 1vh) * 100);
-        padding: 240px 20px 40px;
-      }
-    }
-    
-    /* 모바일: 섹션을 자동 높이로 만들고 패딩을 줄임 (기존 수정본과 동일한 동작) */
-    @media (max-width: 900px) {
-      .section.contact {
-        height: auto;
-        min-height: calc(var(--vh, 1vh) * 100); /* 안전용: 필요하면 모바일에서 최소 높이 유지 */
-        padding: 120px 20px 40px; /* 모바일에서 상단 패딩 축소 */
-      }
     }
 
     .section.contact h1 {
-      margin-bottom: 60px; /* 적당히 여백 추가 */
+      margin-bottom: 0px; /* 적당히 여백 추가 */
     }
     
     /* Footer info (주소 & 메일) */
@@ -394,48 +367,29 @@
       margin-top: 2px;
     }
     /* =======================
-       Team Section (데스크탑 상단 정렬)
+       Team Section (규격 맞춤)
     ======================= */
     .section.team {
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;   /* 상단부터 배치 */
-      align-items: center;
+      justify-content: center;       /* 세로 중앙정렬 */
+      align-items: center;           /* 가로 중앙정렬 */
       background-color: #f9f9f9;
-      overflow: hidden;
+      overflow: hidden;              /* 내부 스크롤 제거 */
       text-align: center;
-      padding: 60px 40px;           /* 상단 패딩 조정 */
-      min-height: 100vh;             /* 화면보다 작으면 최소 높이 */
+      padding: 0 40px;
     }
     
     .section.team h1 {
       font-size: 2.5rem;
       font-weight: 700;
-      margin-bottom: 20px;           /* 하단 간격 확보 */
+      margin-bottom: 10px;
     }
     
     .section.team p {
       font-size: 1.1rem;
       max-width: 700px;
-      margin: 0 auto 40px auto;     /* 텍스트 하단 간격 확보 */
-      text-align: center;
-      line-height: 1.6;
-    }
-
-    /* 모바일 대응 */
-    @media (max-width: 900px) {
-      .section.team {
-        padding: 80px 20px;         /* 모바일은 여백 조금 늘림 */
-      }
-      .section.team h1 {
-        font-size: 2rem;
-        margin-bottom: 15px;
-      }
-      .section.team p {
-        font-size: 1rem;
-        margin-bottom: 30px;
-      }
-    }
+    }   
 
         /* 1️⃣ 모바일 높이 자동 조절 */
     .section.team,
@@ -491,39 +445,17 @@
     }
     
     .media video {
-      width: 45%;             /* 기본: 데스크탑에서는 두 개 나란히 (약 절반 폭) */
-      max-width: 500px;       /* 단일 영상일 때 넓게 보이도록 확장 */
+      width: 20%;
+      max-width: 450px;
       height: auto;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      transition: transform 0.3s ease;
     }
     
     /* 모바일에서 영상 하나씩 보이게 */
     @media (max-width: 900px) {
       .media video {
         width: 80%;
-      }
-    }
-    @media (max-width: 900px) {
-      header {
-        position: relative;
-        background: #cce7ff;
-      }
-      .section {
-        height: auto !important;
-        min-height: 100vh;
-        padding: 100px 20px;
-      }
-    }
-    .fp-tooltip {
-      color: #000 !important; /* 검은색으로 변경 */
-    }
-    @media (max-width: 900px) {
-      .section.contact {
-        height: auto;
-        padding: 120px 20px 40px; /* 모바일에서만 축소 */
-        min-height: calc(var(--vh, 1vh) * 100);
       }
     }
   </style>
@@ -755,36 +687,19 @@
   </div>
 
   <script>
-    // 모바일 화면 너비에 따라 fullPage.js 비활성화
-    function initFullPage() {
-      if (window.innerWidth > 900) {
-        if (!window.fullpage_api) {
-          new fullpage('#fullpage', {
-            autoScrolling: true,
-            fitToSection: false,
-            anchors: ['home', 'team', 'research', 'opensource', 'media', 'contact'],
-            navigation: true,
-            showActiveTooltip: true,
-            credits: { enabled: false }
-          });
-        }
-      } else {
-        // 모바일일 때 fullPage 제거 + 일반 스크롤 복원
-        if (window.fullpage_api) {
-          fullpage_api.destroy('all');
-        }
-        document.querySelector('body').style.overflow = 'auto';
-        document.querySelectorAll('.section').forEach(sec => {
-          sec.style.height = 'auto';
-          sec.style.minHeight = '100vh';
-        });
-      }
-    }
-  
-    window.addEventListener('load', initFullPage);
-    window.addEventListener('resize', initFullPage);
+    new fullpage('#fullpage', {
+      autoScrolling: true,
+      scrollOverflow: false,
+      fitToSection: false, 
+      responsiveWidth: 900, // ✅ 900px 이하에서는 fullPage 비활성화
+      anchors: ['home', 'team', 'research', 'opensource', 'media', 'contact'],
+      navigationTooltips: ['Home', 'Team', 'Research', 'Open Source', 'Media', 'Contact'],
+      navigation: true,
+      showActiveTooltip: true,
+      showFullpageCredits: false,
+      credits: { enabled: false }  // ✅ hides the fullPage.js credit
+    });
   </script>
-
 
 </body>
 </html>
