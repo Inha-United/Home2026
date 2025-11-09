@@ -458,6 +458,20 @@
         width: 80%;
       }
     }
+    @media (max-width: 900px) {
+      header {
+        position: relative;
+        background: #cce7ff;
+      }
+      .section {
+        height: auto !important;
+        min-height: 100vh;
+        padding: 100px 20px;
+      }
+    }
+    .fp-tooltip {
+      color: #000 !important; /* 검은색으로 변경 */
+    }
   </style>
 </head>
 <body>
@@ -687,19 +701,36 @@
   </div>
 
   <script>
-    new fullpage('#fullpage', {
-      autoScrolling: true,
-      scrollOverflow: false,
-      fitToSection: false, 
-      responsiveWidth: 900, // ✅ 900px 이하에서는 fullPage 비활성화
-      anchors: ['home', 'team', 'research', 'opensource', 'media', 'contact'],
-      navigationTooltips: ['Home', 'Team', 'Research', 'Open Source', 'Media', 'Contact'],
-      navigation: true,
-      showActiveTooltip: true,
-      showFullpageCredits: false,
-      credits: { enabled: false }  // ✅ hides the fullPage.js credit
-    });
+    // 모바일 화면 너비에 따라 fullPage.js 비활성화
+    function initFullPage() {
+      if (window.innerWidth > 900) {
+        if (!window.fullpage_api) {
+          new fullpage('#fullpage', {
+            autoScrolling: true,
+            fitToSection: false,
+            anchors: ['home', 'team', 'research', 'opensource', 'media', 'contact'],
+            navigation: true,
+            showActiveTooltip: true,
+            credits: { enabled: false }
+          });
+        }
+      } else {
+        // 모바일일 때 fullPage 제거 + 일반 스크롤 복원
+        if (window.fullpage_api) {
+          fullpage_api.destroy('all');
+        }
+        document.querySelector('body').style.overflow = 'auto';
+        document.querySelectorAll('.section').forEach(sec => {
+          sec.style.height = 'auto';
+          sec.style.minHeight = '100vh';
+        });
+      }
+    }
+  
+    window.addEventListener('load', initFullPage);
+    window.addEventListener('resize', initFullPage);
   </script>
+
 
 </body>
 </html>
