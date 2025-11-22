@@ -208,38 +208,36 @@
     .swiper-button-prev { left: 0; }
     .swiper-button-next { right: 0; }
 
-    /* [수정] PC/Mobile 분기 스타일링 */
-    
-    /* PC (900px 이상): 2줄 그리드 적용 */
+    /* PC (901px 이상) */
     @media (min-width: 901px) {
       .swiper-container.team-slider {
-        height: 550px; /* 2줄 높이 확보 */
+        height: 550px; 
       }
       .swiper-slide {
-        height: calc((100% - 30px) / 2) !important; /* 높이 계산 */
+        height: calc((100% - 30px) / 2) !important; 
         display: flex;
         justify-content: center;
         align-items: center;
       }
     }
 
-    /* Mobile (900px 이하): 1줄 가로 스크롤 적용 */
+    /* Mobile (900px 이하) */
     @media (max-width: 900px) {
-      .slider-wrapper { padding: 0; } /* 좌우 여백 제거 */
-      .swiper-button-next, .swiper-button-prev { display: none; } /* 버튼 숨기기 */
+      .slider-wrapper { padding: 0; }
+      .swiper-button-next, .swiper-button-prev { display: none; }
       
       .swiper-container.team-slider {
-        height: auto; /* 높이 자동 */
-        padding-bottom: 40px; /* 페이지네이션 여백 */
+        height: auto; 
+        padding-bottom: 40px;
       }
       .swiper-slide {
         height: auto !important;
-        width: auto !important; /* 내용물 크기에 맞춤 (slidesPerView: auto용) */
+        width: auto !important;
         display: flex;
         justify-content: center;
       }
       .team-member {
-        width: 260px; /* 카드 너비 고정 */
+        width: 260px;
       }
     }
 
@@ -254,7 +252,7 @@
     .opensource a { color: var(--primary-blue); font-weight: 600; text-decoration: underline; }
 
     /* =======================
-       Media
+       Media (수정됨)
        ======================= */
     .media { background-color: #fff; }
     .media a { color: var(--primary-blue); font-weight: 600; }
@@ -276,6 +274,46 @@
       border-radius: 16px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
       background: #000;
+      transition: transform 0.3s;
+    }
+    
+    .media video:hover {
+        transform: scale(1.02);
+    }
+
+    /* [Mobile] Media 수정: 가로 스크롤 적용 */
+    @media (max-width: 900px) {
+      .video-container {
+        flex-wrap: nowrap; /* 줄바꿈 금지 */
+        overflow-x: auto;  /* 가로 스크롤 허용 */
+        justify-content: flex-start; /* 왼쪽부터 정렬 */
+        gap: 20px;
+        padding: 10px 20px 20px 20px; /* 그림자 잘림 방지 및 여백 */
+        
+        /* 스크롤 스냅 (부드럽게 멈춤) */
+        scroll-snap-type: x mandatory; 
+        -webkit-overflow-scrolling: touch;
+      }
+
+      /* 스크롤바 숨기기 (깔끔하게) */
+      .video-container::-webkit-scrollbar {
+        display: none;
+      }
+
+      .media video {
+        /* 화면 너비의 75% 정도만 차지하게 해서 옆에 다음 비디오가 살짝 보이게 함 */
+        width: 75vw; 
+        max-width: 320px;
+        aspect-ratio: 9 / 16;
+        
+        /* 중요: Flexbox 내에서 크기 고정 */
+        flex-shrink: 0; 
+        
+        /* 중요: 스크롤 스냅 포인트 */
+        scroll-snap-align: center;
+        
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      }
     }
 
     /* =======================
@@ -373,9 +411,6 @@
         padding: 100px 20px 60px;
       }
       .section h1 { font-size: 2.2rem; margin-bottom: 40px; }
-      
-      /* Media Mobile */
-      .media video { width: 100%; max-width: 100%; }
 
       /* Contact Mobile */
       .contact { padding-top: 100px; }
@@ -642,11 +677,10 @@
     // 2. Swiper Slider Init
     new Swiper('.team-slider', {
       // 공통 설정 (기본값: 모바일용 1줄 세팅)
-      slidesPerView: 'auto', // CSS width에 맞춤 (가운데 정렬 효과를 위해)
-      centeredSlides: true,  // 현재 슬라이드 가운데 정렬
+      slidesPerView: 'auto', 
+      centeredSlides: true,  
       spaceBetween: 20,
       
-      // 모바일에서는 그리드 비활성화 (기본)
       grid: {
         rows: 1,
       },
