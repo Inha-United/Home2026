@@ -313,8 +313,9 @@
     .contact-container {
       display: flex;
       flex-direction: column;
-      justify-content: space-between; /* 상단 내용 <-> 하단 로고 벌리기 */
-      align-items: center;
+      justify-content: center; /* 상단 내용 <-> 하단 로고 벌리기 */
+      align-items: center;/* [추가] 메일 정보와 로고 사이의 간격 (이 숫자를 조절하세요) */
+      gap: 80px;
       
       width: 100%;
       max-width: 1200px;
