@@ -154,12 +154,11 @@
        ======================= */
     .team { background-color: #f9f9f9; width: 100%; }
     
+    /* [수정] 기존 컨테이너 스타일 재정의 */
     .swiper-container {
       width: 100%;
-      max-width: 1100px;
-      padding: 0 50px 40px 50px; 
-      position: relative;
-      height: auto; 
+      padding: 0 10px 40px 10px; /* 슬라이드 내부 여백만 남김 */
+      /* max-width는 slider-wrapper가 제어하므로 제거해도 됨 */
     }
 
     .swiper-wrapper { height: auto; }
@@ -201,16 +200,54 @@
     .social-icons a { color: #999; font-size: 1.1em; }
     .social-icons a:hover { color: var(--primary-blue); transform: scale(1.2); }
 
-    .swiper-button-next, .swiper-button-prev { color: var(--primary-blue); width: 44px; height: 44px; z-index: 10; top: 50%; transform: translateY(-50%); margin-top: -20px;}
     .swiper-pagination-bullet-active { background-color: var(--primary-blue); }
-    
-    /* 좌우 위치 명시적 지정 (컨테이너 패딩 안쪽으로 배치) */
-    .swiper-button-prev {
-      left: 10px; 
+
+    /* [수정] Team Slider Wrapper: 버튼을 담을 공간 확보 */
+    .slider-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 1400px; /* 전체 폭 */
+      margin: 0 auto;
+      padding: 0 60px;   /* ★ 양옆에 60px씩 여백을 주어 버튼이 들어갈 자리를 만듭니다 */
     }
 
+    /* [수정] 기존 컨테이너 스타일 재정의 */
+    .swiper-container {
+      width: 100%;
+      padding: 0 10px 40px 10px; /* 슬라이드 내부 여백만 남김 */
+      /* max-width는 slider-wrapper가 제어하므로 제거해도 됨 */
+    }
+
+    /* [수정] 버튼 위치를 '진짜' 바깥으로 배치 */
+    .swiper-button-prev,
     .swiper-button-next {
-      right: 10px; 
+      position: absolute;
+      top: 45%;            /* 수직 중앙 */
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      color: var(--primary-blue);
+      z-index: 10;
+      cursor: pointer;
+    }
+    
+    /* 왼쪽 버튼: 래퍼의 왼쪽 패딩 영역에 배치 */
+    .swiper-button-prev {
+      left: 5px; 
+      right: auto;
+    }
+
+    /* 오른쪽 버튼: 래퍼의 오른쪽 패딩 영역에 배치 */
+    .swiper-button-next {
+      right: 5px;
+      left: auto;
+    }
+    
+    /* 화살표 아이콘 크기 */
+    .swiper-button-prev:after, 
+    .swiper-button-next:after {
+      font-size: 1.8rem; 
+      font-weight: bold;
     }
 
     /* 모바일에서는 버튼 숨기기 (기존 코드 유지) */
@@ -373,7 +410,7 @@
       </div>
     </section>
 
-    <section class="section team" data-anchor="team">
+<section class="section team" data-anchor="team">
       <div class="max-w-container">
         <h1>Our Team</h1>
         <p class="desc">
@@ -381,126 +418,128 @@
           focusing on service robots, autonomous perception, and intelligent control systems.
         </p>
 
-        <div class="swiper-container team-slider">
-          <div class="swiper-wrapper">
-            
-            <div class="swiper-slide">
-              <div class="team-member">
-                <img src="img/lmh.webp" alt="Minho Lee" onerror="this.src='https://via.placeholder.com/90?text=M1'" />
-                <h3>Minho Lee</h3>
-                <p>Team Leader</p>
-                <div class="social-icons">
-                  <a href="#"><i class="fab fa-github"></i></a>
-                  <a href="#"><i class="fa fa-scholar"></i></a>
-                </div>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="team-member">
-                <img src="https://sparolab.github.io/img/people/master/%EC%A1%B0%EB%8F%99%EC%A7%84_%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84.jpg" alt="Dongjin Cho" onerror="this.src='https://via.placeholder.com/90?text=M2'" />
-                <h3>Dongjin Cho</h3>
-                <p>MS Student</p>
-                <div class="social-icons">
-                  <a href="#"><i class="fab fa-github"></i></a>
-                </div>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="team-member">
-                <img src="https://sparolab.github.io/img/people/master/%EC%9D%B4%EB%AF%BC%ED%98%B8_%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84.jpg" alt="Minho Lee" onerror="this.src='https://via.placeholder.com/90?text=M3'" />
-                <h3>Minho Lee</h3>
-                <p>MS Student</p>
-                <div class="social-icons">
-                  <a href="#"><i class="fab fa-github"></i></a>
-                </div>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="team-member">
-                <img src="img/kjt.jpg" alt="Jungtae Kim" onerror="this.src='https://via.placeholder.com/90?text=M4'" />
-                <h3>Jungtae Kim</h3>
-                <p>Undergraduate</p>
-                <div class="social-icons">
-                  <a href="#"><i class="fab fa-github"></i></a>
-                </div>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="team-member">
-                <img src="img/lsh.jpg" alt="Sanghyun Lee" onerror="this.src='https://via.placeholder.com/90?text=M5'" />
-                <h3>Sanghyun Lee</h3>
-                <p>Undergraduate</p>
-                <div class="social-icons">
-                  <a href="#"><i class="fab fa-github"></i></a>
-                </div>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="team-member">
-                <img src="https://github.com/octocat.png" alt="Member 6" />
-                <h3>Member 6</h3>
-                <p>Software & Backend</p>
-                <div class="social-icons">
-                  <a href="#"><i class="fab fa-github"></i></a>
-                </div>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="team-member">
-                <img src="img/pgw.jpg" alt="Gunwoo Park" onerror="this.src='https://via.placeholder.com/90?text=M7'" />
-                <h3>Gunwoo Park</h3>
-                <p>Undergraduate</p>
-                <div class="social-icons">
-                  <a href="#"><i class="fab fa-github"></i></a>
-                </div>
-              </div>
-            </div>
-
-             <div class="swiper-slide">
-              <div class="team-member">
-                <img src="img/jwk.jpg" alt="Wonhyuk Jung" onerror="this.src='https://via.placeholder.com/90?text=M8'" />
-                <h3>Wonhyuk Jung</h3>
-                <p>Undergraduate</p>
-                <div class="social-icons">
-                  <a href="#"><i class="fab fa-github"></i></a>
-                </div>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="team-member">
-                <img src="https://via.placeholder.com/90?text=M9" alt="Member 9" />
-                <h3>Member 9</h3>
-                <p>New Researcher</p>
-                <div class="social-icons">
-                  <a href="#"><i class="fab fa-github"></i></a>
-                </div>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="team-member">
-                <img src="https://via.placeholder.com/90?text=M10" alt="Member 10" />
-                <h3>Member 10</h3>
-                <p>New Researcher</p>
-                <div class="social-icons">
-                  <a href="#"><i class="fab fa-github"></i></a>
-                </div>
-              </div>
-            </div>
-
-          </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-next"></div>
+        <div class="slider-wrapper">
+          
           <div class="swiper-button-prev"></div>
-        </div>
-      </div>
+          <div class="swiper-button-next"></div>
+
+          <div class="swiper-container team-slider">
+            <div class="swiper-wrapper">
+              
+              <div class="swiper-slide">
+                <div class="team-member">
+                  <img src="img/lmh.webp" alt="Minho Lee" onerror="this.src='https://via.placeholder.com/90?text=M1'" />
+                  <h3>Minho Lee</h3>
+                  <p>Team Leader</p>
+                  <div class="social-icons">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fa fa-scholar"></i></a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="team-member">
+                  <img src="https://sparolab.github.io/img/people/master/%EC%A1%B0%EB%8F%99%EC%A7%84_%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84.jpg" alt="Dongjin Cho" onerror="this.src='https://via.placeholder.com/90?text=M2'" />
+                  <h3>Dongjin Cho</h3>
+                  <p>MS Student</p>
+                  <div class="social-icons">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="team-member">
+                  <img src="https://sparolab.github.io/img/people/master/%EC%9D%B4%EB%AF%BC%ED%98%B8_%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84.jpg" alt="Minho Lee" onerror="this.src='https://via.placeholder.com/90?text=M3'" />
+                  <h3>Minho Lee</h3>
+                  <p>MS Student</p>
+                  <div class="social-icons">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="team-member">
+                  <img src="img/kjt.jpg" alt="Jungtae Kim" onerror="this.src='https://via.placeholder.com/90?text=M4'" />
+                  <h3>Jungtae Kim</h3>
+                  <p>Undergraduate</p>
+                  <div class="social-icons">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="team-member">
+                  <img src="img/lsh.jpg" alt="Sanghyun Lee" onerror="this.src='https://via.placeholder.com/90?text=M5'" />
+                  <h3>Sanghyun Lee</h3>
+                  <p>Undergraduate</p>
+                  <div class="social-icons">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="team-member">
+                  <img src="https://github.com/octocat.png" alt="Member 6" />
+                  <h3>Member 6</h3>
+                  <p>Software & Backend</p>
+                  <div class="social-icons">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="team-member">
+                  <img src="img/pgw.jpg" alt="Gunwoo Park" onerror="this.src='https://via.placeholder.com/90?text=M7'" />
+                  <h3>Gunwoo Park</h3>
+                  <p>Undergraduate</p>
+                  <div class="social-icons">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                  </div>
+                </div>
+              </div>
+
+               <div class="swiper-slide">
+                <div class="team-member">
+                  <img src="img/jwk.jpg" alt="Wonhyuk Jung" onerror="this.src='https://via.placeholder.com/90?text=M8'" />
+                  <h3>Wonhyuk Jung</h3>
+                  <p>Undergraduate</p>
+                  <div class="social-icons">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="team-member">
+                  <img src="https://via.placeholder.com/90?text=M9" alt="Member 9" />
+                  <h3>Member 9</h3>
+                  <p>New Researcher</p>
+                  <div class="social-icons">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="team-member">
+                  <img src="https://via.placeholder.com/90?text=M10" alt="Member 10" />
+                  <h3>Member 10</h3>
+                  <p>New Researcher</p>
+                  <div class="social-icons">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="swiper-pagination"></div>
+          </div> </div> </div>
     </section>
 
     <section class="section" data-anchor="research">
