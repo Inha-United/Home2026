@@ -252,21 +252,28 @@
     .opensource a { color: var(--primary-blue); font-weight: 600; text-decoration: underline; }
 
     /* =======================
-       Media (원래대로 복구)
+       Media (PC 스크롤바 버그 수정)
        ======================= */
     .media { background-color: #fff; }
     .media a { color: var(--primary-blue); font-weight: 600; }
     
-    /* [수정] 다시 줄바꿈 허용 (모바일에서 수직 쌓임) */
+    /* 비디오 컨테이너 */
     .video-container {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 40px;
-      flex-wrap: wrap; /* 원래대로 복구 */
+      flex-wrap: wrap; 
       margin-top: 20px;
       width: 100%;
+      
+      /* [중요] PC에서 마우스 오버 시 스크롤바 생기는 것 방지 */
+      overflow: hidden; 
+      padding: 10px; /* hover scale로 잘림 방지 여백 */
     }
+    
+    /* PC에서 혹시 모를 스크롤바 숨김 처리 */
+    .video-container::-webkit-scrollbar { display: none; }
     
     .media video {
       width: 400px; 
@@ -276,6 +283,8 @@
       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
       background: #000;
       transition: transform 0.3s;
+      /* 비디오 자체에서 오버플로우 발생 방지 */
+      display: block; 
     }
     .media video:hover { transform: scale(1.02); }
 
