@@ -147,7 +147,7 @@
     }
 
     /* =======================
-       Team (2 Rows Grid)
+       Team (Responsive Grid)
        ======================= */
     .team { background-color: #f9f9f9; width: 100%; }
     
@@ -158,22 +158,10 @@
       margin-top: 10px;
     }
 
-    /* [중요] 2줄 그리드를 위해 높이를 강제로 지정해야 합니다.
-      카드 높이(240px) * 2 + 간격(20~30px) + 여백 등 고려 
-    */
     .swiper-container.team-slider {
       width: 100%;
-      height: 550px; /* 2줄이 들어갈 충분한 높이 */
       padding: 0 10px;
       overflow: hidden;
-    }
-
-    /* [중요] 그리드 모드에서 각 슬라이드의 높이 설정 */
-    .swiper-slide {
-      height: calc((100% - 30px) / 2) !important; /* 전체 높이에서 간격 빼고 절반 */
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
 
     .team-member {
@@ -217,18 +205,42 @@
     }
     .swiper-button-prev:after, 
     .swiper-button-next:after { font-size: 1.2rem; font-weight: bold; }
-
     .swiper-button-prev { left: 0; }
     .swiper-button-next { right: 0; }
 
+    /* [수정] PC/Mobile 분기 스타일링 */
+    
+    /* PC (900px 이상): 2줄 그리드 적용 */
+    @media (min-width: 901px) {
+      .swiper-container.team-slider {
+        height: 550px; /* 2줄 높이 확보 */
+      }
+      .swiper-slide {
+        height: calc((100% - 30px) / 2) !important; /* 높이 계산 */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    /* Mobile (900px 이하): 1줄 가로 스크롤 적용 */
     @media (max-width: 900px) {
-      /* 모바일에서는 높이를 줄여서 1줄만 보여줄 수도 있고, 2줄 유지할 수도 있습니다.
-         여기서는 2줄 유지를 위해 높이 유지 */
-      .slider-wrapper { padding: 0; }
-      .swiper-button-next, .swiper-button-prev { display: none; }
+      .slider-wrapper { padding: 0; } /* 좌우 여백 제거 */
+      .swiper-button-next, .swiper-button-prev { display: none; } /* 버튼 숨기기 */
       
-      /* 모바일 카드 크기 반응형 */
-      .team-member { width: 100%; max-width: 260px; }
+      .swiper-container.team-slider {
+        height: auto; /* 높이 자동 */
+        padding-bottom: 40px; /* 페이지네이션 여백 */
+      }
+      .swiper-slide {
+        height: auto !important;
+        width: auto !important; /* 내용물 크기에 맞춤 (slidesPerView: auto용) */
+        display: flex;
+        justify-content: center;
+      }
+      .team-member {
+        width: 260px; /* 카드 너비 고정 */
+      }
     }
 
     /* =======================
@@ -352,7 +364,7 @@
     .lab-link span { font-size: 1rem; font-weight: 600; margin-top: 5px; }
 
     /* =======================
-       Mobile Responsiveness
+       Mobile Responsiveness (Global)
        ======================= */
     @media (max-width: 900px) {
       .section {
@@ -361,11 +373,6 @@
         padding: 100px 20px 60px;
       }
       .section h1 { font-size: 2.2rem; margin-bottom: 40px; }
-      
-      /* Team Mobile */
-      .swiper-container { padding: 0 0 40px 0; max-width: 100%; }
-      .swiper-button-next, .swiper-button-prev { display: none; }
-      .team-member { margin: 0 auto; }
       
       /* Media Mobile */
       .media video { width: 100%; max-width: 100%; }
@@ -632,33 +639,16 @@
       credits: { enabled: false }
     });
 
-    // 2. Swiper Slider Init (2 Rows Grid)
+    // 2. Swiper Slider Init
     new Swiper('.team-slider', {
-      // 2줄로 설정
-      grid: {
-        rows: 2,
-        fill: 'row',
-      },
-      // 카드 간격
-      spaceBetween: 30,
+      // 공통 설정 (기본값: 모바일용 1줄 세팅)
+      slidesPerView: 'auto', // CSS width에 맞춤 (가운데 정렬 효과를 위해)
+      centeredSlides: true,  // 현재 슬라이드 가운데 정렬
+      spaceBetween: 20,
       
-      // 화면 크기별 한 줄에 보여줄 갯수 설정
-      breakpoints: {
-        0: {
-          slidesPerView: 1, // 모바일: 1열 2행
-          grid: { rows: 2 },
-          spaceBetween: 20
-        },
-        700: {
-          slidesPerView: 2, // 태블릿: 2열 2행
-          grid: { rows: 2 },
-          spaceBetween: 20
-        },
-        1100: {
-          slidesPerView: 4, // PC: 4열 2행
-          grid: { rows: 2 },
-          spaceBetween: 30
-        }
+      // 모바일에서는 그리드 비활성화 (기본)
+      grid: {
+        rows: 1,
       },
       
       pagination: {
@@ -669,6 +659,20 @@
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       },
+
+      // 화면 크기별 설정 (Breakpoints)
+      breakpoints: {
+        // [PC 모드] 901px 이상에서는 2줄 그리드 적용
+        901: {
+          slidesPerView: 4, // 한 줄에 4개
+          centeredSlides: false, // 왼쪽 정렬
+          grid: {
+            rows: 2,
+            fill: 'row',
+          },
+          spaceBetween: 30,
+        }
+      }
     });
   </script>
 
