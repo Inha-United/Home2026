@@ -147,32 +147,30 @@
     }
 
     /* =======================
-       Team (Free Mode Slider)
+       Team (2 Rows Grid)
        ======================= */
     .team { background-color: #f9f9f9; width: 100%; }
     
     .slider-wrapper {
       position: relative;
       width: 100%;
-      /* 버튼 공간 확보를 위해 패딩 조정 */
       padding: 0 50px; 
       margin-top: 10px;
     }
 
-    .swiper-container {
+    /* [중요] 2줄 그리드를 위해 높이를 강제로 지정해야 합니다.
+      카드 높이(240px) * 2 + 간격(20~30px) + 여백 등 고려 
+    */
+    .swiper-container.team-slider {
       width: 100%;
-      padding: 20px 10px 40px 10px; /* 그림자 잘림 방지 여백 */
+      height: 550px; /* 2줄이 들어갈 충분한 높이 */
+      padding: 0 10px;
       overflow: hidden;
     }
 
-    .swiper-wrapper {
-      /* Free Mode 필수 설정 */
-      transition-timing-function: linear; 
-    }
-
-    /* [중요] slide width를 auto로 설정하여 내용물 크기만큼만 차지하게 함 */
+    /* [중요] 그리드 모드에서 각 슬라이드의 높이 설정 */
     .swiper-slide {
-      width: auto !important; 
+      height: calc((100% - 30px) / 2) !important; /* 전체 높이에서 간격 빼고 절반 */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -185,7 +183,7 @@
       text-align: center;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      width: 260px; /* 카드 고정 너비 */
+      width: 260px; 
       height: 240px; 
       display: flex;
       flex-direction: column;
@@ -208,7 +206,6 @@
     .social-icons a { color: #999; font-size: 1.1em; }
     .social-icons a:hover { color: var(--primary-blue); transform: scale(1.2); }
 
-    /* 네비게이션 버튼 스타일 */
     .swiper-button-prev,
     .swiper-button-next {
       width: 40px; height: 40px;
@@ -216,6 +213,7 @@
       background: rgba(255,255,255,0.8);
       border-radius: 50%;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      z-index: 10;
     }
     .swiper-button-prev:after, 
     .swiper-button-next:after { font-size: 1.2rem; font-weight: bold; }
@@ -224,8 +222,13 @@
     .swiper-button-next { right: 0; }
 
     @media (max-width: 900px) {
-      .slider-wrapper { padding: 0; } /* 모바일은 좌우 여백 제거 */
+      /* 모바일에서는 높이를 줄여서 1줄만 보여줄 수도 있고, 2줄 유지할 수도 있습니다.
+         여기서는 2줄 유지를 위해 높이 유지 */
+      .slider-wrapper { padding: 0; }
       .swiper-button-next, .swiper-button-prev { display: none; }
+      
+      /* 모바일 카드 크기 반응형 */
+      .team-member { width: 100%; max-width: 260px; }
     }
 
     /* =======================
@@ -295,7 +298,7 @@
       text-align: center;
       width: 100%;
       margin-bottom: 0px;
-      gap: 20px; /* 로고와 내용 사이 간격 조정 */
+      gap: 20px;
     }
     
     .footer-info {
@@ -362,8 +365,7 @@
       /* Team Mobile */
       .swiper-container { padding: 0 0 40px 0; max-width: 100%; }
       .swiper-button-next, .swiper-button-prev { display: none; }
-      /* 모바일에서도 고정 크기 유지하며 스크롤되게 하거나, 꽉 차게 변경 */
-      .team-member { width: 260px; margin: 0 auto; } 
+      .team-member { margin: 0 auto; }
       
       /* Media Mobile */
       .media video { width: 100%; max-width: 100%; }
@@ -630,22 +632,34 @@
       credits: { enabled: false }
     });
 
-    // 2. Swiper Slider Init (Free Mode)
+    // 2. Swiper Slider Init (2 Rows Grid)
     new Swiper('.team-slider', {
-      // [핵심 설정] 'auto'로 설정하면 CSS width(260px)에 맞춰서 나열됨
-      slidesPerView: 'auto',
-      
-      // [핵심 설정] 부드러운 연속 스크롤 활성화
-      freeMode: true,
-      
-      // 슬라이드 간격
+      // 2줄로 설정
+      grid: {
+        rows: 2,
+        fill: 'row',
+      },
+      // 카드 간격
       spaceBetween: 30,
       
-      // 마우스로 잡고 끌기 가능
-      grabCursor: true,
-      
-      // Loop는 Free mode에서 갯수가 적으면 오작동할 수 있으니 false 추천
-      loop: false, 
+      // 화면 크기별 한 줄에 보여줄 갯수 설정
+      breakpoints: {
+        0: {
+          slidesPerView: 1, // 모바일: 1열 2행
+          grid: { rows: 2 },
+          spaceBetween: 20
+        },
+        700: {
+          slidesPerView: 2, // 태블릿: 2열 2행
+          grid: { rows: 2 },
+          spaceBetween: 20
+        },
+        1100: {
+          slidesPerView: 4, // PC: 4열 2행
+          grid: { rows: 2 },
+          spaceBetween: 30
+        }
+      },
       
       pagination: {
         el: '.swiper-pagination',
@@ -655,8 +669,6 @@
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       },
-      // 반응형 브레이크포인트가 필요하다면 아래에 재정의 가능하지만,
-      // slidesPerView: 'auto'를 쓰면 대부분 자연스럽게 해결됩니다.
     });
   </script>
 
