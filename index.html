@@ -91,7 +91,7 @@
 
     .max-w-container {
       width: 100%;
-      max-width: 1200px;
+      max-width: 1400px; /* 비디오 커짐에 따라 전체 폭 증가 */
       margin: 0 auto;
       display: flex;
       flex-direction: column;
@@ -99,19 +99,19 @@
       justify-content: center;
     }
 
-    /* ✅ 섹션 제목 간격 대폭 증가 */
+    /* 섹션 제목 간격 */
     .section h1 {
       font-size: 2.8rem;
       font-weight: 700;
-      margin-bottom: 60px; /* 제목과 본문 사이 거리 확보 */
+      margin-bottom: 60px; 
       margin-top: 0;
     }
     
-    /* ✅ 본문 설명 간격 조정 */
+    /* 본문 설명 간격 */
     .section p.desc {
       font-size: 1.15rem;
       max-width: 700px;
-      margin: 0 auto 50px auto; /* 본문과 콘텐츠(그리드/비디오 등) 사이 거리 확보 */
+      margin: 0 auto 50px auto; 
       line-height: 1.6;
       color: #555;
     }
@@ -120,7 +120,7 @@
        Home
        ======================= */
     .home { background: linear-gradient(to bottom, #cce7ff 0%, #ffffff 100%); }
-    .home h1 { margin-bottom: 20px; /* Home은 예외적으로 좁게 */ font-size: 3.5rem; }
+    .home h1 { margin-bottom: 20px; font-size: 3.5rem; }
     .home p { font-size: 1.3rem; margin-bottom: 40px; }
     .home button {
       background-color: var(--primary-blue);
@@ -186,9 +186,7 @@
       align-items: center;
       justify-content: center;
     }
-    
     .team-member:hover { transform: translateY(-6px); box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15); }
-    
     .team-member img {
       width: 90px; height: 90px;
       border-radius: 50%;
@@ -217,7 +215,7 @@
     .opensource a { color: var(--primary-blue); font-weight: 600; text-decoration: underline; }
 
     /* =======================
-       Media
+       Media (비디오 크기 확대)
        ======================= */
     .media { background-color: #fff; }
     .media a { color: var(--primary-blue); font-weight: 600; }
@@ -228,13 +226,14 @@
       align-items: center;
       gap: 40px;
       flex-wrap: wrap;
-      margin-top: 20px; /* desc와 간격 */
+      margin-top: 20px;
       width: 100%;
     }
     
     .media video {
-      width: 480px; 
-      max-width: 100%;
+      /* ✅ 수정됨: PC에서 비디오 크기 대폭 확대 */
+      width: 600px; 
+      max-width: 90%;
       aspect-ratio: 16 / 9;
       border-radius: 16px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
@@ -242,32 +241,31 @@
     }
 
     /* =======================
-       Contact (Footer Bottom Layout)
+       Contact (Footer 로고 하단 배치)
        ======================= */
     .contact {
-      /* 화면 꽉 채우고 정렬 조정 */
-      justify-content: flex-start; /* 상단부터 배치 */
-      padding-top: 150px; /* 상단 여백 */
-      padding-bottom: 0;
+      justify-content: flex-start; 
+      padding-top: 150px; 
+      padding-bottom: 20px; /* 하단 여백 약간 */
       background: linear-gradient(to bottom, #ffffff 0%, #ffffff 60%, #cce7ff 100%);
     }
     
+    /* ✅ 컨테이너 높이를 100%로 늘려 공간 확보 */
     .contact-container {
       display: flex;
       flex-direction: column;
-      justify-content: space-between; /* 위아래로 벌림 */
-      height: 100%;
+      justify-content: space-between; /* 위아래 끝으로 배치 */
+      height: 100%; 
       width: 100%;
       max-width: 1200px;
-      padding-bottom: 40px; /* 하단 여백 */
     }
 
     .contact-top {
-      flex: 1; /* 남은 공간 차지 */
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center; /* 중앙 정렬 */
+      justify-content: center;
+      flex-grow: 1; /* 위쪽 공간 차지 */
     }
 
     .footer-info { 
@@ -277,15 +275,15 @@
     }
     .footer-info a { font-weight: 600; color: var(--primary-blue); }
     
-    /* ✅ 로고들을 하단으로 밀기 위한 설정 */
+    /* ✅ 로고 하단 고정 */
     .lab-logos {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      align-items: flex-end; /* 바닥 정렬 */
-      gap: 80px; /* 로고 간격 */
-      margin-top: auto; /* 위쪽 여백을 자동으로 채워서 바닥으로 */
-      padding-top: 40px;
+      align-items: flex-end; 
+      gap: 80px;
+      padding-bottom: 20px; /* 바닥에서 약간 띄움 */
+      width: 100%;
     }
 
     .lab-link {
@@ -321,9 +319,12 @@
       .swiper-button-next, .swiper-button-prev { display: none; }
       .team-member { width: 100%; max-width: 300px; height: auto; padding: 20px; } 
       
+      /* Media Mobile */
+      .media video { width: 100%; max-width: 100%; }
+
       /* Contact Mobile */
       .contact { padding-top: 100px; }
-      .lab-logos { gap: 40px; margin-top: 60px; }
+      .lab-logos { gap: 40px; margin-top: 60px; padding-bottom: 20px; }
       .lab-link img { height: 60px; }
     }
   </style>
@@ -537,7 +538,7 @@
     <section class="section contact" data-anchor="contact">
       <div class="contact-container">
         <div class="contact-top">
-          <h1 style="margin-bottom: 40px;">Contact</h1>
+          <h1>Contact</h1>
           <div class="footer-info">
             <p>📧 <a href="mailto:inharobocuphome@gmail.com">inharobocuphome@gmail.com</a></p>
             <p>📍 Inha University, 100 Inha-ro, Michuhol-gu, Incheon, South Korea</p>
