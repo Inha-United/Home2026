@@ -12,7 +12,6 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
   <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <script>
@@ -91,7 +90,7 @@
 
     .max-w-container {
       width: 100%;
-      max-width: 1400px; /* 비디오 커짐에 따라 전체 폭 증가 */
+      max-width: 1400px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
@@ -99,15 +98,13 @@
       justify-content: center;
     }
 
-    /* 섹션 제목 간격 */
     .section h1 {
       font-size: 2.8rem;
       font-weight: 700;
-      margin-bottom: 60px; 
+      margin-bottom: 30px; 
       margin-top: 0;
     }
     
-    /* 본문 설명 간격 */
     .section p.desc {
       font-size: 1.15rem;
       max-width: 700px;
@@ -150,24 +147,35 @@
     }
 
     /* =======================
-       Team (2행 4열 Grid Layout)
+       Team (Free Mode Slider)
        ======================= */
     .team { background-color: #f9f9f9; width: 100%; }
     
-    /* [수정] 기존 컨테이너 스타일 재정의 */
-    .swiper-container {
+    .slider-wrapper {
+      position: relative;
       width: 100%;
-      padding: 0 10px 40px 10px; /* 슬라이드 내부 여백만 남김 */
-      /* max-width는 slider-wrapper가 제어하므로 제거해도 됨 */
+      /* 버튼 공간 확보를 위해 패딩 조정 */
+      padding: 0 50px; 
+      margin-top: 10px;
     }
 
-    .swiper-wrapper { height: auto; }
+    .swiper-container {
+      width: 100%;
+      padding: 20px 10px 40px 10px; /* 그림자 잘림 방지 여백 */
+      overflow: hidden;
+    }
+
+    .swiper-wrapper {
+      /* Free Mode 필수 설정 */
+      transition-timing-function: linear; 
+    }
+
+    /* [중요] slide width를 auto로 설정하여 내용물 크기만큼만 차지하게 함 */
     .swiper-slide {
+      width: auto !important; 
       display: flex;
       justify-content: center;
       align-items: center;
-      height: auto;
-      box-sizing: border-box;
     }
 
     .team-member {
@@ -177,8 +185,7 @@
       text-align: center;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      width: 260px;
-      max-width: 100%;
+      width: 260px; /* 카드 고정 너비 */
       height: 240px; 
       display: flex;
       flex-direction: column;
@@ -186,6 +193,7 @@
       justify-content: center;
     }
     .team-member:hover { transform: translateY(-6px); box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15); }
+    
     .team-member img {
       width: 90px; height: 90px;
       border-radius: 50%;
@@ -200,60 +208,26 @@
     .social-icons a { color: #999; font-size: 1.1em; }
     .social-icons a:hover { color: var(--primary-blue); transform: scale(1.2); }
 
-    .swiper-pagination-bullet-active { background-color: var(--primary-blue); }
-
-    /* [수정] Team Slider Wrapper: 버튼을 담을 공간 확보 */
-    .slider-wrapper {
-      position: relative;
-      width: 100%;
-      max-width: 1400px; /* 전체 폭 */
-      margin: 0 auto;
-      padding: 0 60px;   /* ★ 양옆에 60px씩 여백을 주어 버튼이 들어갈 자리를 만듭니다 */
-    }
-
-    /* [수정] 기존 컨테이너 스타일 재정의 */
-    .swiper-container {
-      width: 100%;
-      padding: 0 10px 40px 10px; /* 슬라이드 내부 여백만 남김 */
-      /* max-width는 slider-wrapper가 제어하므로 제거해도 됨 */
-    }
-
-    /* [수정] 버튼 위치를 '진짜' 바깥으로 배치 */
+    /* 네비게이션 버튼 스타일 */
     .swiper-button-prev,
     .swiper-button-next {
-      position: absolute;
-      top: 45%;            /* 수직 중앙 */
-      transform: translateY(-50%);
-      width: 44px;
-      height: 44px;
+      width: 40px; height: 40px;
       color: var(--primary-blue);
-      z-index: 10;
-      cursor: pointer;
+      background: rgba(255,255,255,0.8);
+      border-radius: 50%;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
-    
-    /* 왼쪽 버튼: 래퍼의 왼쪽 패딩 영역에 배치 */
-    .swiper-button-prev {
-      left: 5px; 
-      right: auto;
-    }
-
-    /* 오른쪽 버튼: 래퍼의 오른쪽 패딩 영역에 배치 */
-    .swiper-button-next {
-      right: 5px;
-      left: auto;
-    }
-    
-    /* 화살표 아이콘 크기 */
     .swiper-button-prev:after, 
-    .swiper-button-next:after {
-      font-size: 1.8rem; 
-      font-weight: bold;
-    }
+    .swiper-button-next:after { font-size: 1.2rem; font-weight: bold; }
 
-    /* 모바일에서는 버튼 숨기기 (기존 코드 유지) */
+    .swiper-button-prev { left: 0; }
+    .swiper-button-next { right: 0; }
+
     @media (max-width: 900px) {
+      .slider-wrapper { padding: 0; } /* 모바일은 좌우 여백 제거 */
       .swiper-button-next, .swiper-button-prev { display: none; }
     }
+
     /* =======================
        Research & Open Source
        ======================= */
@@ -265,7 +239,7 @@
     .opensource a { color: var(--primary-blue); font-weight: 600; text-decoration: underline; }
 
     /* =======================
-       Media (비디오 크기 확대)
+       Media
        ======================= */
     .media { background-color: #fff; }
     .media a { color: var(--primary-blue); font-weight: 600; }
@@ -281,7 +255,6 @@
     }
     
     .media video {
-      /* ✅ 수정됨: PC에서 비디오 크기 대폭 확대 */
       width: 400px; 
       max-width: 90%;
       aspect-ratio: 9 / 16;
@@ -291,56 +264,45 @@
     }
 
     /* =======================
-       Contact Section (수정 최종)
+       Contact Section
        ======================= */
     .contact {
-      /* 1. 전체 화면 높이 확보 (비율 유지 핵심) */
       width: 100%;
-      min-height: 100vh; /* 화면 꽉 차게 */
-      
-      /* 2. 두 번째 코드의 여백 적용 (상단 240px) */
+      min-height: 100vh;
       padding: 240px 20px 40px; 
-      box-sizing: border-box; /* 패딩 포함 크기 계산 */
-      
-      /* 3. 내부 컨텐츠 중앙 정렬을 위한 flex */
+      box-sizing: border-box;
       display: flex;
       justify-content: center;
-      
       background: linear-gradient(to bottom, #ffffff 0%, #ffffff 60%, #cce7ff 100%);
     }
     
-    /* ✅ 가장 중요한 부분: 내부 컨테이너가 높이를 다 쓰도록 강제 */
     .contact-container {
       display: flex;
       flex-direction: column;
-      justify-content: center; /* 상단 내용 <-> 하단 로고 벌리기 */
-      align-items: center;/* [추가] 메일 정보와 로고 사이의 간격 (이 숫자를 조절하세요) */
+      justify-content: center; 
+      align-items: center;
       gap: 80px;
-      
       width: 100%;
       max-width: 1200px;
-      height: 100%; /* 부모 높이 상속 */
-      flex-grow: 1; /* 남은 공간 모두 차지 */
+      height: 100%;
+      flex-grow: 1;
     }
     
-    /* 상단 텍스트 (제목, 설명 등) */
     .contact-top {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      width: 100%;/* 👇 이 값을 추가하거나 늘려주세요 (기본: 0 or auto) */
+      width: 100%;
       margin-bottom: 0px;
-      gap: 300px
-      /* 로고가 바닥에 붙도록 상단 내용이 공간을 밀어냄 */
+      gap: 20px; /* 로고와 내용 사이 간격 조정 */
     }
     
-    /* Footer Info (주소, 이메일) */
     .footer-info {
       font-size: 1.1rem;
       line-height: 1.6;
       text-align: center;
-      margin-bottom: 20px; /* 로고와의 간격 확보 */
+      margin-bottom: 20px;
     }
     
     .footer-info a {
@@ -349,24 +311,17 @@
       text-decoration: none;
     }
     
-    /* =======================
-       Lab Logos (하단 배치 및 비율)
-       ======================= */
     .lab-logos {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between; /* 로고가 적을 땐 중앙, 많으면 벌어짐 */
+      justify-content: space-between;
       align-items: flex-end;
       width: 100%;
-      gap: 40px; /* 기본 간격 */
+      gap: 40px;
     }
     
-    /* 화면이 넓을 때(데스크탑)는 양옆으로 쫙 벌려줌 (두 번째 코드 스타일) */
     @media (min-width: 1024px) {
-      .lab-logos {
-        justify-content: space-between;
-        gap: 150px; /* 넓은 간격 */
-      }
+      .lab-logos { justify-content: space-between; gap: 150px; }
     }
     
     .lab-link {
@@ -378,31 +333,21 @@
       transition: transform 0.3s;
     }
     
-    .lab-link:hover {
-      transform: translateY(-5px);
-      color: #0078ff;
-    }
+    .lab-link:hover { transform: translateY(-5px); color: #0078ff; }
     
-    /* ✅ 이미지 크기: 두 번째 코드처럼 100px로 고정 */
     .lab-link img {
-      height: 100px; /* 로고 키움 */
-      width: auto;   /* 비율 유지 */
+      height: 100px;
+      width: auto;   
       margin-bottom: 15px;
       object-fit: contain;
       opacity: 0.9;
       transition: 0.3s;
     }
     
-    .lab-link img:hover {
-      opacity: 1;
-      transform: scale(1.05);
-    }
+    .lab-link img:hover { opacity: 1; transform: scale(1.05); }
     
-    .lab-link span {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-top: 5px;
-    }
+    .lab-link span { font-size: 1rem; font-weight: 600; margin-top: 5px; }
+
     /* =======================
        Mobile Responsiveness
        ======================= */
@@ -417,7 +362,8 @@
       /* Team Mobile */
       .swiper-container { padding: 0 0 40px 0; max-width: 100%; }
       .swiper-button-next, .swiper-button-prev { display: none; }
-      .team-member { width: 100%; max-width: 300px; height: auto; padding: 20px; } 
+      /* 모바일에서도 고정 크기 유지하며 스크롤되게 하거나, 꽉 차게 변경 */
+      .team-member { width: 260px; margin: 0 auto; } 
       
       /* Media Mobile */
       .media video { width: 100%; max-width: 100%; }
@@ -469,7 +415,6 @@
         </p>
     
         <div class="slider-wrapper">
-          
           <div class="swiper-button-prev"></div>
           <div class="swiper-button-next"></div>
     
@@ -587,8 +532,12 @@
                 </div>
               </div>
     
-            </div> <div class="swiper-pagination"></div>
-          </div> </div> </div> </section>
+            </div> 
+            <div class="swiper-pagination"></div>
+          </div> 
+        </div> 
+      </div> 
+    </section>
 
     <section class="section" data-anchor="research">
       <div class="max-w-container">
@@ -681,13 +630,21 @@
       credits: { enabled: false }
     });
 
-    // 2. Swiper Slider Init (Grid Mode)
+    // 2. Swiper Slider Init (Free Mode)
     new Swiper('.team-slider', {
-      grid: {
-        rows: 2,
-        fill: 'row', 
-      },
-      spaceBetween: 20,
+      // [핵심 설정] 'auto'로 설정하면 CSS width(260px)에 맞춰서 나열됨
+      slidesPerView: 'auto',
+      
+      // [핵심 설정] 부드러운 연속 스크롤 활성화
+      freeMode: true,
+      
+      // 슬라이드 간격
+      spaceBetween: 30,
+      
+      // 마우스로 잡고 끌기 가능
+      grabCursor: true,
+      
+      // Loop는 Free mode에서 갯수가 적으면 오작동할 수 있으니 false 추천
       loop: false, 
       
       pagination: {
@@ -698,26 +655,8 @@
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       },
-      breakpoints: {
-        // 모바일 (0px ~ 640px): 1열 2행 (한 화면에 2명)
-        0: {
-          slidesPerView: 1, 
-          grid: { rows: 2 },
-          spaceBetween: 20,
-        },
-        // 태블릿 (640px ~ 1024px): 2열 2행 (한 화면에 4명)
-        640: {
-          slidesPerView: 2,
-          grid: { rows: 2 },
-          spaceBetween: 20,
-        },
-        // PC (1024px 이상): 4열 2행 (한 화면에 8명)
-        1024: {
-          slidesPerView: 4,
-          grid: { rows: 2 },
-          spaceBetween: 30,
-        },
-      }
+      // 반응형 브레이크포인트가 필요하다면 아래에 재정의 가능하지만,
+      // slidesPerView: 'auto'를 쓰면 대부분 자연스럽게 해결됩니다.
     });
   </script>
 
