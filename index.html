@@ -291,77 +291,78 @@
     }
 
     /* =======================
-       Contact (Footer 로고 하단 배치 수정본)
+       Contact Section (수정 최종)
        ======================= */
-    
     .contact {
-      /* ✅ 화면 전체 높이 사용 (비율 유지를 위해 필수) */
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
+      /* 1. 전체 화면 높이 확보 (비율 유지 핵심) */
+      width: 100%;
+      min-height: 100vh; /* 화면 꽉 차게 */
       
-      /* ✅ 두 번째 코드의 패딩 값 적용 (상단 여백 확보) */
+      /* 2. 두 번째 코드의 여백 적용 (상단 240px) */
       padding: 240px 20px 40px; 
-      min-height: 100vh; /* 또는 calc(var(--vh, 1vh) * 100) */
+      box-sizing: border-box; /* 패딩 포함 크기 계산 */
       
-      /* 배경 그라데이션 */
-      background: linear-gradient(to bottom, #ffffff 0%, #ffffff 70%, #cce7ff 100%);
+      /* 3. 내부 컨텐츠 중앙 정렬을 위한 flex */
+      display: flex;
+      justify-content: center;
+      
+      background: linear-gradient(to bottom, #ffffff 0%, #ffffff 60%, #cce7ff 100%);
     }
     
-    /* 컨테이너: 내용을 중앙 정렬 & 로고를 하단으로 밀어냄 */
+    /* ✅ 가장 중요한 부분: 내부 컨테이너가 높이를 다 쓰도록 강제 */
     .contact-container {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: space-between; /* 상단 내용 <-> 하단 로고 벌리기 */
       align-items: center;
+      
       width: 100%;
       max-width: 1200px;
-      flex-grow: 1; /* 남은 공간 차지 */
+      height: 100%; /* 부모 높이 상속 */
+      flex-grow: 1; /* 남은 공간 모두 차지 */
     }
     
+    /* 상단 텍스트 (제목, 설명 등) */
     .contact-top {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       text-align: center;
-      margin-bottom: auto; /* 로고와 거리를 벌림 */
+      width: 100%;
+      /* 로고가 바닥에 붙도록 상단 내용이 공간을 밀어냄 */
     }
     
-    /* Footer Info (주소 & 이메일) */
-    .footer-info { 
-      font-size: 1.2rem; 
-      line-height: 1.6; 
-      margin-bottom: 40px; /* 로고와의 최소 간격 */
+    /* Footer Info (주소, 이메일) */
+    .footer-info {
+      font-size: 1.1rem;
+      line-height: 1.6;
       text-align: center;
+      margin-bottom: 60px; /* 로고와의 간격 확보 */
     }
-    .footer-info a { 
-      font-weight: 600; 
-      color: #0078ff; /* var(--primary-blue) 대체 가능 */
+    
+    .footer-info a {
+      font-weight: 600;
+      color: #0078ff;
       text-decoration: none;
     }
-    .footer-info a:hover { text-decoration: underline; }
     
     /* =======================
-       ✅ Lab Logos (비율 수정 핵심)
+       Lab Logos (하단 배치 및 비율)
        ======================= */
     .lab-logos {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between; /* 양끝 정렬 */
-      align-items: flex-end; 
+      justify-content: center; /* 로고가 적을 땐 중앙, 많으면 벌어짐 */
+      align-items: flex-end;
       width: 100%;
-      
-      /* ✅ 두 번째 코드처럼 넓은 간격 적용 */
-      gap: 100px; /* 화면이 좁을 때를 대비해 200px 대신 유동적으로 */
-      max-width: 1000px; /* 로고들이 너무 벌어지지 않도록 제한 */
+      gap: 80px; /* 기본 간격 */
     }
     
-    /* 화면이 충분히 넓을 때 간격 더 벌리기 (선택 사항) */
-    @media (min-width: 1200px) {
+    /* 화면이 넓을 때(데스크탑)는 양옆으로 쫙 벌려줌 (두 번째 코드 스타일) */
+    @media (min-width: 1024px) {
       .lab-logos {
-        gap: 200px;
+        justify-content: space-between;
+        gap: 150px; /* 넓은 간격 */
       }
     }
     
@@ -369,35 +370,35 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      flex: 1; /* 공간 균등 분배 */
-      min-width: 150px; /* 최소 너비 확보 */
       text-decoration: none;
       color: #333;
       transition: transform 0.3s;
     }
     
-    .lab-link:hover { 
-      transform: translateY(-4px); 
-      color: #0078ff; 
+    .lab-link:hover {
+      transform: translateY(-5px);
+      color: #0078ff;
     }
     
-    /* ✅ 이미지 크기 키움 (55px -> 100px) */
+    /* ✅ 이미지 크기: 두 번째 코드처럼 100px로 고정 */
     .lab-link img {
-      height: 100px; 
-      margin-bottom: 15px; /* 텍스트와 간격 */
+      height: 100px; /* 로고 키움 */
+      width: auto;   /* 비율 유지 */
+      margin-bottom: 15px;
       object-fit: contain;
       opacity: 0.9;
       transition: 0.3s;
     }
     
-    .lab-link img:hover { 
-      opacity: 1; 
-      transform: scale(1.05); 
+    .lab-link img:hover {
+      opacity: 1;
+      transform: scale(1.05);
     }
     
-    .lab-link span { 
-      font-size: 1rem; 
-      font-weight: 600; 
+    .lab-link span {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-top: 5px;
     }
     /* =======================
        Mobile Responsiveness
