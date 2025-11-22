@@ -8,45 +8,41 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.min.js"></script>
 
-  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <style>
     /* =======================
-       1. Global Variables & Reset
+       기본 설정 및 변수
        ======================= */
     :root {
-      --primary-color: #0056b3;    /* 인하대 블루 톤 */
-      --hover-color: #003d80;
-      --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-      --glass-bg: rgba(255, 255, 255, 0.85);
-      --shadow-card: 0 10px 25px rgba(0, 0, 0, 0.05);
-      --shadow-hover: 0 15px 35px rgba(0, 0, 0, 0.1);
-      --vh: 1vh;
+      --vh: 1vh; /* 모바일 브라우저 높이 대응용 변수 */
     }
-
+    
     * {
       box-sizing: border-box;
       font-family: 'Pretendard', sans-serif;
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
     }
-
+    
     body {
-      color: #333;
       background-color: #fff;
+      color: #333;
     }
+    
+    a { text-decoration: none; color: inherit; transition: 0.3s; }
+    ul { list-style: none; padding: 0; }
 
-    a { text-decoration: none; color: inherit; }
-    ul { list-style: none; }
-
-    /* Custom Icons */
+    /* 커스텀 아이콘 대체 설정 */
     .fa-scholar::before { content: "\f19d"; } /* graduation-cap */
     .fa-homepage::before { content: "\f015"; } /* home */
 
+    /* fullPage.js 워터마크 숨김 */
+    .fp-watermark { display: none !important; }
+
     /* =======================
-       2. Navigation Bar
+       Navigation Bar (기존 디자인 유지)
        ======================= */
     header {
       position: fixed;
@@ -55,325 +51,240 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 5%;
-      background: var(--glass-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(0,0,0,0.05);
-      z-index: 999;
+      padding: 0 40px;
+      /* 기존 그라데이션 유지 */
+      background: linear-gradient(to bottom, #b5dbff 0%, #cce7ff 100%);
+      backdrop-filter: blur(5px);
+      z-index: 100;
     }
-
     header h1 {
-      font-size: 1.2rem;
-      font-weight: 800;
-      color: var(--primary-color);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #000;
     }
-
-    nav {
-      display: flex;
-      gap: 25px;
-    }
-
     nav a {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: #555;
-      transition: color 0.3s;
+      margin-left: 25px;
+      color: #004c99; /* 기존 진한 파랑 */
+      font-weight: 500;
     }
+    nav a:hover { color: #0078ff; }
 
-    nav a:hover {
-      color: var(--primary-color);
-    }
-
-    /* Mobile Nav (숨김 처리 및 간소화) */
-    @media (max-width: 768px) {
-      nav { display: none; } /* 햄버거 메뉴 구현 전 임시 숨김 or 간소화 필요 */
-      header { justify-content: center; }
+    /* 모바일 네비게이션 간략화 */
+    @media (max-width: 900px) {
+      header { padding: 0 20px; justify-content: center; }
+      nav { display: none; } /* 모바일에서 메뉴 숨김 (필요시 햄버거 메뉴 추가 가능) */
     }
 
     /* =======================
-       3. FullPage Layout
+       공통 섹션 레이아웃
        ======================= */
-    /* fullPage watermark hidden */
-    .fp-watermark { display: none !important; }
-
     .section {
-      text-align: center;
-      position: relative;
-      overflow: hidden; /* 기본 오버플로우 숨김 */
-    }
-
-    .section-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
-      height: 100%;
+      align-items: center;
+      text-align: center;
+      /* 모바일 높이 계산 개선 */
+      height: calc(var(--vh, 1vh) * 100); 
+      padding: 0 20px;
+      position: relative;
+      overflow: hidden;
     }
 
     /* =======================
-       4. Sections Styling
+       1. Home Section
        ======================= */
-    
-    /* --- HOME --- */
     .home {
-      background: linear-gradient(to bottom, #eef2f3, #ffffff);
+      background: linear-gradient(to bottom, #cce7ff 0%, #ffffff 100%);
     }
-    .home h1 {
-      font-size: 3.5rem;
-      font-weight: 800;
-      margin-bottom: 10px;
-      color: #222;
-    }
-    .home p {
-      font-size: 1.2rem;
-      color: #666;
-      margin-bottom: 30px;
-      line-height: 1.6;
-    }
-    .btn-primary {
-      background-color: var(--primary-color);
+    .home h1 { font-size: 3rem; font-weight: 700; margin: 0; }
+    .home p { font-size: 1.2rem; margin: 10px 0 20px; }
+    .home button {
+      background-color: #0078ff; /* 기존 버튼 색 */
       color: white;
       border: none;
-      padding: 14px 32px;
+      border-radius: 8px;
+      padding: 12px 24px;
       font-size: 1rem;
-      font-weight: 600;
-      border-radius: 50px;
       cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0, 86, 179, 0.3);
+      transition: 0.3s;
     }
-    .btn-primary:hover {
-      background-color: var(--hover-color);
-      transform: translateY(-2px);
-    }
+    .home button:hover { background-color: #005fcc; }
 
-    /* Floating Social Icons (Left) */
-    .social-sidebar {
+    /* Left Social Icons */
+    .social {
       position: fixed;
       left: 40px;
       top: 50%;
       transform: translateY(-50%);
       display: flex;
       flex-direction: column;
-      gap: 20px;
-      z-index: 100;
+      gap: 18px;
+      z-index: 99;
     }
-    .social-sidebar a {
-      color: #aab8c2;
-      font-size: 22px;
-      transition: 0.3s;
+    .social a {
+      color: #74a9e1;
+      font-size: 24px;
     }
-    .social-sidebar a:hover {
-      color: var(--primary-color);
-      transform: scale(1.2);
+    .social a:hover {
+      color: #0078ff;
+      transform: scale(1.15);
     }
     @media (max-width: 900px) {
-      .social-sidebar { display: none; }
+      .social { display: none; } /* 모바일에서 공간 확보를 위해 숨김 */
     }
 
-    /* --- TEAM --- */
-    .team { background-color: #f8faff; }
-    .section-title {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      color: #111;
+    /* =======================
+       2. Team Section
+       ======================= */
+    .team {
+      background-color: #f9f9f9;
+      /* 모바일에서 내용이 길어질 경우 스크롤 허용 */
+      overflow-y: auto !important; 
     }
-    .section-desc {
-      font-size: 1.1rem;
-      color: #666;
-      max-width: 700px;
-      margin-bottom: 40px;
-    }
+    .team h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; margin-top: 20px; }
+    .team p.description { font-size: 1.1rem; max-width: 700px; margin-bottom: 30px; }
 
     .team-grid {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 24px;
+      gap: 30px;
       width: 100%;
-      max-height: 70vh; /* 스크롤 가능하게 제한 */
-      overflow-y: auto; /* 내용 많을 시 내부 스크롤 */
-      padding: 10px;
+      max-width: 1200px;
+      padding-bottom: 40px;
     }
     
-    /* 스크롤바 숨기기 (Chrome, Safari, Opera) */
-    .team-grid::-webkit-scrollbar { display: none; }
-    .team-grid { -ms-overflow-style: none; scrollbar-width: none; }
-
-    .team-member {
-      background: #fff;
-      width: 260px;
-      padding: 30px 20px;
-      border-radius: 20px;
-      box-shadow: var(--shadow-card);
-      transition: 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .team-member:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-hover);
-    }
-    .team-member img {
-      width: 100px; height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 15px;
-      border: 3px solid #e6f0ff;
-    }
-    .team-member h3 { font-size: 1.1rem; margin-bottom: 5px; }
-    .team-member p { font-size: 0.9rem; color: #888; margin-bottom: 15px; }
-    
-    .member-social a {
-      margin: 0 6px;
-      color: #ccc;
-      font-size: 1.1rem;
-      transition: color 0.3s;
-    }
-    .member-social a:hover { color: var(--primary-color); }
-
-    /* --- RESEARCH --- */
-    .research-list {
-      background: white;
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: var(--shadow-card);
-      text-align: left;
-      display: inline-block;
-    }
-    .research-list li {
-      margin-bottom: 15px;
-      font-size: 1.1rem;
-      display: flex;
-      align-items: center;
-    }
-    .research-list li::before {
-      content: "\f058"; /* check-circle */
-      font-family: "Font Awesome 6 Free";
-      font-weight: 900;
-      color: var(--primary-color);
-      margin-right: 12px;
-    }
-
-    /* --- OPEN SOURCE --- */
-    .opensource { background-color: #fafafa; }
-    .github-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 20px;
-      padding: 12px 24px;
-      background: #24292e;
-      color: #fff;
-      border-radius: 8px;
-      font-weight: 600;
-      transition: 0.3s;
-    }
-    .github-link:hover {
-      background: #000;
-      transform: scale(1.05);
-    }
-
-    /* --- MEDIA --- */
-    .media { background-color: #fff; }
-    .video-wrapper {
+    .team-row {
       display: flex;
       justify-content: center;
       gap: 30px;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+
+    .team-member {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      flex: 1 1 250px;
+      max-width: 300px;
+    }
+    .team-member:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+    }
+    .team-member img {
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(0, 120, 255, 0.2);
+      margin-bottom: 15px;
+    }
+    .team-member h3 { font-size: 1.2em; font-weight: 600; margin: 10px 0 5px; }
+    .team-member p { color: #666; font-size: 0.95em; margin-bottom: 12px; }
+
+    .social-icons { display: flex; justify-content: center; gap: 12px; }
+    .social-icons a { color: #555; font-size: 1.25em; }
+    .social-icons a:hover { color: #0078ff; transform: scale(1.2); }
+
+    /* =======================
+       3. Research & Open Source
+       ======================= */
+    .research-content { text-align: left; max-width: 600px; }
+    .research-content li { margin-bottom: 8px; list-style-type: disc; margin-left: 20px; }
+    
+    .opensource { background-color: #f9f9f9; }
+    .opensource a { color: #0078ff; font-weight: 600; text-decoration: underline; }
+
+    /* =======================
+       4. Media Section
+       ======================= */
+    .media { background-color: #fff; }
+    .media a { color: #0078ff; font-weight: 600; }
+    .video-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px; /* 간격 조정 */
       flex-wrap: wrap;
       margin-top: 30px;
       width: 100%;
     }
-    .video-card {
-      width: 300px; /* 고정 폭 혹은 % */
+    .media video {
+      width: 400px; /* 기존 비율 유지하되 고정폭 설정 */
       max-width: 90%;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: var(--shadow-card);
-      background: #000;
-    }
-    .video-card video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
-    /* --- CONTACT & FOOTER --- */
+    /* =======================
+       5. Contact Section
+       ======================= */
     .contact {
-      background: linear-gradient(to top, #e6f0ff 0%, #ffffff 100%);
-    }
-    .footer-content {
-      margin-top: auto;
-      width: 100%;
+      /* 기존 상단 여백 유지하되 Flex 구조로 정렬 */
+      justify-content: space-between;
+      padding-top: 180px; /* 기존 240px에서 살짝 조정하여 균형 맞춤 */
       padding-bottom: 40px;
+      background: linear-gradient(to bottom, #ffffff 0%, #ffffff 70%, #cce7ff 100%);
     }
-    .contact-info {
-      margin-bottom: 40px;
-      font-size: 1.1rem;
-      line-height: 1.8;
-    }
-    .contact-info a { color: var(--primary-color); font-weight: 700; }
+    
+    .contact footer { width: 100%; }
+    
+    .footer-info { margin-bottom: 40px; font-size: 1.1rem; line-height: 1.6; }
+    .footer-info a { font-weight: 600; color: #0078ff; }
     
     .lab-logos {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
-      gap: 40px; /* 간격 조정 */
-      margin-top: 30px;
+      justify-content: space-around; /* 기존 spread wide 느낌 유지 */
+      align-items: center;
+      gap: 40px;
+      margin-top: 20px;
+      padding: 0 20px;
     }
-    .lab-item {
+    .lab-link {
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: 0.3s;
-      width: 120px;
+      min-width: 120px;
     }
-    .lab-item:hover { transform: translateY(-5px); }
-    .lab-item img {
-      height: 60px;
-      width: auto;
+    .lab-link:hover { transform: translateY(-4px); color: #0078ff; }
+    .lab-link img {
+      height: 80px; /* 로고 크기 적절히 통일 */
       margin-bottom: 10px;
       object-fit: contain;
+      opacity: 0.9;
+      transition: 0.3s;
     }
-    .lab-item span {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: #444;
-    }
+    .lab-link img:hover { opacity: 1; transform: scale(1.05); }
+    .lab-link span { font-size: 0.95rem; font-weight: 600; }
 
     /* =======================
-       5. Mobile Responsiveness
+       반응형 처리 (Mobile)
        ======================= */
     @media (max-width: 900px) {
-      .home h1 { font-size: 2.5rem; }
-      
-      /* 모바일에서는 fullPage 스크롤 해제 및 일반 스크롤로 변경 */
+      /* fullPage 해제 시 섹션 높이 자동 조절 */
       .section {
         height: auto !important;
         min-height: 100vh;
         padding: 80px 20px 40px;
       }
       
-      /* 팀 그리드 모바일 최적화 */
-      .team-grid {
-        max-height: none; /* 내부 스크롤 해제 */
-        overflow: visible;
-      }
-      .team-member { width: 100%; max-width: 320px; }
-
-      /* 비디오 세로 배치 */
-      .video-wrapper { flex-direction: column; align-items: center; }
-      .video-card { width: 100%; max-width: 400px; }
+      /* Team 멤버 배치 */
+      .team-member { flex: 1 1 100%; max-width: 350px; margin-bottom: 20px; }
       
-      /* 로고 정렬 */
+      /* Media 비디오 배치 */
+      .video-container { flex-direction: column; gap: 20px; }
+      .media video { width: 100%; }
+      
+      /* Contact 로고 배치 */
       .lab-logos { gap: 30px; }
+      .contact { padding-top: 100px; } /* 모바일에서는 상단 여백 줄임 */
     }
   </style>
 </head>
@@ -391,105 +302,111 @@
     </nav>
   </header>
 
-  <aside class="social-sidebar">
-    <a href="#"><i class="fab fa-instagram"></i></a>
-    <a href="#"><i class="fab fa-linkedin"></i></a>
-    <a href="#"><i class="fab fa-youtube"></i></a>
-    <a href="#"><i class="fab fa-github"></i></a>
-  </aside>
-
   <div id="fullpage">
 
     <section class="section home" data-anchor="home">
-      <div class="section-content">
+      <div class="social">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+      </div>
+      <div>
         <h1>Welcome!</h1>
-        <p>
-          We are <b>Inha-United@Home</b> 🤖<br>
-          Leading the future of Service Robotics at Inha University.
-        </p>
-        <button class="btn-primary" onclick="location.href='#team'">Meet Our Team</button>
+        <p>We are <b>Inha-United@Home</b> 🤖</p>
+        <p>A newly founded RoboCup @Home team from Inha University (2025).</p>
+        <button onclick="location.href='#team'">Learn More</button>
       </div>
     </section>
 
     <section class="section team" data-anchor="team">
-      <div class="section-content">
-        <h1 class="section-title">Our Team</h1>
-        <p class="section-desc">
-          We are a passionate group of researchers focusing on autonomous perception<br>
-          and intelligent control for service robots.
-        </p>
+      <h1>Our Team</h1>
+      <p class="description">
+        We are a newly founded robotics research team at Inha University, 
+        focusing on service robots, autonomous perception, and intelligent control systems 
+        for domestic and public environments.
+      </p>
 
-        <div class="team-grid">
+      <div class="team-grid">
+        <div class="team-row">
           <div class="team-member">
-            <img src="img/lmh.webp" alt="Minho Lee" onerror="this.src='https://via.placeholder.com/100'"/>
+            <img src="img/lmh.webp" alt="Minho Lee" onerror="this.src='https://via.placeholder.com/120'" />
             <h3>Minho Lee</h3>
             <p>Team Leader</p>
-            <div class="member-social">
-              <a href="#"><i class="fab fa-github"></i></a>
-              <a href="#"><i class="fas fa-envelope"></i></a>
-              <a href="#"><i class="fa fa-scholar"></i></a>
+            <div class="social-icons">
+              <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+              <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+              <a href="mailto:leader@email.com"><i class="fas fa-envelope"></i></a>
+              <a href="#" target="_blank" title="Google Scholar"><i class="fa fa-scholar"></i></a>
+              <a href="#" target="_blank" title="Homepage"><i class="fa fa-homepage"></i></a>
             </div>
           </div>
 
           <div class="team-member">
-            <img src="https://sparolab.github.io/img/people/master/%EC%A1%B0%EB%8F%99%EC%A7%84_%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84.jpg" alt="Dongjin Cho" />
+            <img src="https://sparolab.github.io/img/people/master/%EC%A1%B0%EB%8F%99%EC%A7%84_%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84.jpg" alt="Dongjin Cho" onerror="this.src='https://via.placeholder.com/120'" />
             <h3>Dongjin Cho</h3>
             <p>MS Student</p>
-            <div class="member-social">
+            <div class="social-icons">
               <a href="#"><i class="fab fa-github"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
               <a href="#"><i class="fas fa-envelope"></i></a>
             </div>
           </div>
 
           <div class="team-member">
-            <img src="https://sparolab.github.io/img/people/master/%EC%9D%B4%EB%AF%BC%ED%98%B8_%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84.jpg" alt="Minho Lee" />
+            <img src="https://sparolab.github.io/img/people/master/%EC%9D%B4%EB%AF%BC%ED%98%B8_%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84.jpg" alt="Minho Lee" onerror="this.src='https://via.placeholder.com/120'" />
             <h3>Minho Lee</h3>
             <p>MS Student</p>
-            <div class="member-social">
+            <div class="social-icons">
               <a href="#"><i class="fab fa-github"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
               <a href="#"><i class="fas fa-envelope"></i></a>
             </div>
           </div>
 
           <div class="team-member">
-            <img src="img/kjt.jpg" alt="Jungtae Kim" onerror="this.src='https://via.placeholder.com/100'"/>
+            <img src="img/kjt.jpg" alt="Jungtae Kim" onerror="this.src='https://via.placeholder.com/120'" />
             <h3>Jungtae Kim</h3>
-            <p>Undergraduate</p>
-            <div class="member-social">
+            <p>Undergraduate Student</p>
+            <div class="social-icons">
               <a href="#"><i class="fab fa-github"></i></a>
             </div>
           </div>
+        </div>
 
+        <div class="team-row">
           <div class="team-member">
-            <img src="img/lsh.jpg" alt="Sanghyun Lee" onerror="this.src='https://via.placeholder.com/100'"/>
+            <img src="img/lsh.jpg" alt="Sanghyun Lee" onerror="this.src='https://via.placeholder.com/120'" />
             <h3>Sanghyun Lee</h3>
-            <p>Undergraduate</p>
-            <div class="member-social">
+            <p>Undergraduate Student</p>
+            <div class="social-icons">
               <a href="#"><i class="fab fa-github"></i></a>
             </div>
           </div>
 
           <div class="team-member">
-            <img src="https://github.com/octocat.png" alt="Developer" />
+            <img src="https://github.com/octocat.png" alt="Member 6" />
             <h3>Member 6</h3>
-            <p>Software Engineer</p>
-            <div class="member-social">
+            <p>Software & Backend</p>
+            <div class="social-icons">
               <a href="#"><i class="fab fa-github"></i></a>
             </div>
           </div>
-           <div class="team-member">
-            <img src="img/pgw.jpg" alt="Gunwoo Park" onerror="this.src='https://via.placeholder.com/100'"/>
-            <h3>Gunwoo Park</h3>
-            <p>Undergraduate</p>
-            <div class="member-social">
-              <a href="#"><i class="fab fa-github"></i></a>
-            </div>
-          </div>
+
           <div class="team-member">
-            <img src="img/jwk.jpg" alt="Wonhyuk Jung" onerror="this.src='https://via.placeholder.com/100'"/>
+            <img src="img/pgw.jpg" alt="Gunwoo Park" onerror="this.src='https://via.placeholder.com/120'" />
+            <h3>Gunwoo Park</h3>
+            <p>Undergraduate Student</p>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+
+          <div class="team-member">
+            <img src="img/jwk.jpg" alt="Wonhyuk Jung" onerror="this.src='https://via.placeholder.com/120'" />
             <h3>Won Hyuk Jung</h3>
-            <p>Undergraduate</p>
-            <div class="member-social">
+            <p>Undergraduate Student</p>
+            <div class="social-icons">
               <a href="#"><i class="fab fa-github"></i></a>
             </div>
           </div>
@@ -497,111 +414,94 @@
       </div>
     </section>
 
-    <section class="section research" data-anchor="research">
-      <div class="section-content">
-        <h1 class="section-title">Research Areas</h1>
-        <p class="section-desc">
-          Integrative research on Vision, Language, and Action (VLA) for real-world applications.
-        </p>
-        <ul class="research-list">
-          <li>Vision-Language Grounding for Object Understanding</li>
-          <li>Operational Space Control for Mobile Manipulation</li>
-          <li>Reinforcement Learning (Sim-to-Real Transfer)</li>
-          <li>Human-Robot Interaction in Domestic Environments</li>
-        </ul>
-      </div>
+    <section class="section" data-anchor="research">
+      <h1>Research</h1>
+      <p>
+        Our work focuses on integrating vision, language, and control in real-world service robots.
+        We aim to build reproducible systems that can perceive, plan, and act intelligently.
+      </p>
+      <ul class="research-content">
+        <li>Vision-Language Grounding for Object Understanding</li>
+        <li>Operational Space Control for Manipulation</li>
+        <li>Reinforcement Learning in Real-to-Sim Environments</li>
+      </ul>
     </section>
 
     <section class="section opensource" data-anchor="opensource">
-      <div class="section-content">
-        <h1 class="section-title">Open Source</h1>
-        <p class="section-desc">
-          We believe in open science. All our datasets, models, and simulation environments are publicly available.
-        </p>
-        <a href="https://github.com/Inha-United" target="_blank" class="github-link">
-          <i class="fab fa-github fa-lg"></i>
-          Visit Inha-United GitHub
-        </a>
-      </div>
+      <h1>Open-Source Contributions</h1>
+      <p>All our research outputs and robot models will be publicly available.</p>
+      <p><a href="https://github.com/Inha-United" target="_blank">🔗 Visit our GitHub</a></p>
     </section>
 
     <section class="section media" data-anchor="media">
-      <div class="section-content">
-        <h1 class="section-title">Media & Demo</h1>
-        <p class="section-desc">
-          Featured Robot: <a href="https://www.rainbow-robotics.com/en_rby1" target="_blank" style="color:var(--primary-color); font-weight:600;">RB-Y1</a> (Rainbow Robotics)
-        </p>
-        
-        <div class="video-wrapper">
-          <div class="video-card">
-            <video controls autoplay muted loop playsinline>
-              <source src="IMG_6070.mp4" type="video/mp4">
-              Your browser does not support video.
-            </video>
-          </div>
-          <div class="video-card">
-            <video controls autoplay muted loop playsinline>
-              <source src="IMG_6071.mp4" type="video/mp4">
-              Your browser does not support video.
-            </video>
-          </div>
-        </div>
+      <h1>Media</h1>
+      <p>
+        Our robots — 
+        <a href="https://www.rainbow-robotics.com/en_rby1" target="_blank" rel="noopener noreferrer">
+          RB-Y1 from Rainbow Robotics
+        </a>.
+      </p>
+      <div class="video-container">
+        <video controls autoplay muted loop playsinline>
+          <source src="IMG_6070.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <video controls autoplay muted loop playsinline>
+          <source src="IMG_6071.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
       </div>
     </section>
 
     <section class="section contact" data-anchor="contact">
-      <div class="section-content">
-        <h1 class="section-title">Contact Us</h1>
-        
-        <div class="footer-content">
-          <div class="contact-info">
-            <p><i class="fas fa-envelope"></i> <a href="mailto:inharobocuphome@gmail.com">inharobocuphome@gmail.com</a></p>
-            <p><i class="fas fa-map-marker-alt"></i> Inha University, Incheon, South Korea</p>
-          </div>
-
-          <div class="lab-logos">
-            <a href="https://sparolab.github.io" target="_blank" class="lab-item">
-              <img src="https://sparolab.github.io/assets/favicon.png" alt="SPARO Lab">
-              <span>SPARO Lab</span>
-            </a>
-            <a href="https://rcv-inha.notion.site/webhome" target="_blank" class="lab-item">
-              <img src="RCVLAB.webp" alt="RCV Lab" onerror="this.src='https://via.placeholder.com/60?text=RCV'"/>
-              <span>RCV Lab</span>
-            </a>
-            <a href="https://artemis-inha.github.io/" target="_blank" class="lab-item">
-              <img src="https://artemis-inha.github.io/assets/images/logo.jpg" alt="ARTEMIS Lab" onerror="this.src='https://via.placeholder.com/60?text=ARTEMIS'"/>
-              <span>ARTEMIS Lab</span>
-            </a>
-            <a href="https://wjahn.github.io/rils/" target="_blank" class="lab-item">
-              <img src="https://wjahn.github.io/rils/assets/images/logo_inha.png" alt="RILS Lab" onerror="this.src='https://via.placeholder.com/60?text=RILS'"/>
-              <span>RILS Lab</span>
-            </a>
-          </div>
+      <h1>Contact</h1>
+      <footer>
+        <div class="footer-info">
+          <p>📧 Contact us: <a href="mailto:inharobocuphome@gmail.com">inharobocuphome@gmail.com</a></p>
+          <p>📍 Inha University, 100 Inha-ro, Michuhol-gu, Incheon, South Korea</p>
         </div>
-      </div>
-    </section>
 
+        <div class="lab-logos">
+          <a href="https://sparolab.github.io" target="_blank" class="lab-link">
+            <img src="https://sparolab.github.io/assets/favicon.png" alt="Sparo Lab" onerror="this.src='https://via.placeholder.com/80'">
+            <span>SPARO Lab</span>
+          </a>
+          <a href="https://rcv-inha.notion.site/webhome" target="_blank" class="lab-link">
+            <img src="RCVLAB.webp" alt="RCV Lab" onerror="this.src='https://via.placeholder.com/80?text=RCV'">
+            <span>RCV Lab</span>
+          </a>
+          <a href="https://artemis-inha.github.io/" target="_blank" class="lab-link">
+            <img src="https://artemis-inha.github.io/assets/images/logo.jpg" alt="Artemis Lab" onerror="this.src='https://via.placeholder.com/80?text=Artemis'">
+            <span>ARTEMIS Lab</span>
+          </a>
+          <a href="https://wjahn.github.io/rils/" target="_blank" class="lab-link">
+            <img src="https://wjahn.github.io/rils/assets/images/logo_inha.png" alt="RILS Lab" onerror="this.src='https://via.placeholder.com/80?text=RILS'">
+            <span>RILS Lab</span>
+          </a>
+        </div>
+      </footer>
+    </section>
   </div>
 
   <script>
-    // 모바일 100vh 버그 수정
+    // 모바일 브라우저 높이(vh) 문제 해결 스크립트
     function setVh() {
       const vh = window.innerHeight * 0.01;
       document.documentElement.style.setProperty('--vh', `${vh}px`);
     }
     setVh();
     window.addEventListener('resize', setVh);
+    window.addEventListener('orientationchange', setVh);
 
-    // FullPage.js 초기화
     new fullpage('#fullpage', {
       autoScrolling: true,
-      scrollHorizontally: true,
-      navigation: true,
-      navigationPosition: 'right',
+      scrollOverflow: true, // 내용이 길면 스크롤 가능하게 설정
+      fitToSection: false,
+      responsiveWidth: 900, // 900px 이하에서는 일반 스크롤 방식으로 전환
       anchors: ['home', 'team', 'research', 'opensource', 'media', 'contact'],
       navigationTooltips: ['Home', 'Team', 'Research', 'Open Source', 'Media', 'Contact'],
+      navigation: true,
       showActiveTooltip: true,
-      responsiveWidth: 900, // 900px 이하에서는 fullpage 해제 (일반 스크롤)
       credits: { enabled: false }
     });
   </script>
