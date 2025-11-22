@@ -201,9 +201,22 @@
     .social-icons a { color: #999; font-size: 1.1em; }
     .social-icons a:hover { color: var(--primary-blue); transform: scale(1.2); }
 
-    .swiper-button-next, .swiper-button-prev { color: var(--primary-blue); width: 30px; }
+    .swiper-button-next, .swiper-button-prev { color: var(--primary-blue); width: 44px; height: 44px; z-index: 10; top: 50%; transform: translateY(-50%); margin-top: -20px;}
     .swiper-pagination-bullet-active { background-color: var(--primary-blue); }
+    
+    /* 좌우 위치 명시적 지정 (컨테이너 패딩 안쪽으로 배치) */
+    .swiper-button-prev {
+      left: 10px; 
+    }
 
+    .swiper-button-next {
+      right: 10px; 
+    }
+
+    /* 모바일에서는 버튼 숨기기 (기존 코드 유지) */
+    @media (max-width: 900px) {
+      .swiper-button-next, .swiper-button-prev { display: none; }
+    }
     /* =======================
        Research & Open Source
        ======================= */
