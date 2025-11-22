@@ -16,7 +16,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <script>
-    // 모바일 vh 문제 해결
     function setVh() {
       const vh = window.innerHeight * 0.01;
       document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -27,9 +26,6 @@
   </script>
 
   <style>
-    /* =======================
-       기본 설정 (기존 유지)
-       ======================= */
     :root {
       --vh: 1vh;
       --primary-blue: #0078ff;
@@ -47,18 +43,15 @@
       color: #333;
     }
 
-    /* fullPage.js 워터마크 숨김 */
     .fp-watermark { display: none !important; }
-
     a { text-decoration: none; color: inherit; transition: 0.3s; }
     ul { list-style: none; padding: 0; }
 
-    /* 커스텀 아이콘 */
     .fa-scholar::before { content: "\f19d"; }
     .fa-homepage::before { content: "\f015"; }
 
     /* =======================
-       Navigation Bar (기존 유지)
+       Header
        ======================= */
     header {
       position: fixed;
@@ -72,25 +65,17 @@
       backdrop-filter: blur(10px);
       z-index: 100;
     }
-    header h1 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #000;
-    }
-    nav a {
-      margin-left: 25px;
-      color: var(--dark-blue);
-      font-weight: 500;
-    }
+    header h1 { font-size: 1.1rem; font-weight: 700; color: #000; }
+    nav a { margin-left: 25px; color: var(--dark-blue); font-weight: 500; }
     nav a:hover { color: var(--primary-blue); }
 
     @media (max-width: 900px) {
       header { padding: 0 20px; justify-content: center; }
-      nav { display: none; } /* 모바일 메뉴 숨김 */
+      nav { display: none; }
     }
 
     /* =======================
-       공통 섹션 레이아웃
+       Common Layout (PC 비율 깨짐 방지 핵심)
        ======================= */
     .section {
       display: flex;
@@ -104,12 +89,21 @@
       overflow: hidden;
     }
 
-    /* =======================
-       Home Section
-       ======================= */
-    .home {
-      background: linear-gradient(to bottom, #cce7ff 0%, #ffffff 100%);
+    /* 콘텐츠가 너무 넓게 퍼지지 않도록 잡아주는 컨테이너 */
+    .max-w-container {
+      width: 100%;
+      max-width: 1200px; /* PC 최적 너비 제한 */
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
+
+    /* =======================
+       Home
+       ======================= */
+    .home { background: linear-gradient(to bottom, #cce7ff 0%, #ffffff 100%); }
     .home h1 { font-size: 3rem; font-weight: 700; margin: 0; }
     .home p { font-size: 1.2rem; margin: 10px 0 20px; }
     .home button {
@@ -124,15 +118,11 @@
     }
     .home button:hover { background-color: #005fcc; }
 
-    /* Social Icons (Left) */
     .social {
       position: fixed;
-      left: 40px;
-      top: 50%;
+      left: 40px; top: 50%;
       transform: translateY(-50%);
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
+      display: flex; flex-direction: column; gap: 18px;
       z-index: 99;
     }
     .social a { color: #74a9e1; font-size: 24px; }
@@ -144,27 +134,23 @@
     }
 
     /* =======================
-       Team Section (Swiper 적용)
+       Team (Swiper 비율 최적화)
        ======================= */
-    .team {
-      background-color: #f9f9f9;
-      width: 100%;
-    }
+    .team { background-color: #f9f9f9; width: 100%; }
     .team h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
     .team p.desc { font-size: 1.1rem; max-width: 700px; margin-bottom: 30px; }
 
-    /* Swiper 컨테이너 스타일 */
     .swiper-container {
       width: 100%;
-      max-width: 1200px; /* PC 최대 폭 */
-      padding: 40px 50px; /* 좌우 화살표 공간 확보 */
+      max-width: 1300px; /* 슬라이더 전체 폭 제한 */
+      padding: 20px 50px 50px 50px; /* 좌우 화살표 공간 및 하단 페이지네이션 공간 */
       position: relative;
     }
 
     .swiper-slide {
       display: flex;
-      justify-content: center;
-      height: auto; /* 카드 높이 자동 */
+      justify-content: center; /* 카드 중앙 정렬 */
+      height: auto;
     }
 
     .team-member {
@@ -174,15 +160,16 @@
       text-align: center;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      width: 100%;
-      max-width: 280px; /* 카드 최대 너비 */
-      margin: 10px auto; /* 중앙 정렬 */
+      
+      /* PC/모바일 공통 카드 사이즈 고정 */
+      width: 260px; 
+      height: 100%; /* 높이 통일 */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     
-    .team-member:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
-    }
+    .team-member:hover { transform: translateY(-6px); box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15); }
     
     .team-member img {
       width: 120px; height: 120px;
@@ -194,109 +181,111 @@
     .team-member h3 { font-size: 1.2em; font-weight: 600; margin: 10px 0 5px; }
     .team-member p { color: #666; font-size: 0.95em; margin-bottom: 12px; }
 
-    .social-icons { display: flex; justify-content: center; gap: 12px; }
+    .social-icons { display: flex; justify-content: center; gap: 12px; margin-top: auto; /* 아이콘 하단 고정 */ }
     .social-icons a { color: #555; font-size: 1.25em; }
     .social-icons a:hover { color: var(--primary-blue); transform: scale(1.2); }
 
-    /* Swiper Custom Colors */
-    .swiper-button-next, .swiper-button-prev {
-      color: var(--primary-blue);
-      font-weight: bold;
-    }
-    .swiper-pagination-bullet-active {
-      background-color: var(--primary-blue);
-    }
+    .swiper-button-next, .swiper-button-prev { color: var(--primary-blue); width: 30px; }
+    .swiper-pagination-bullet-active { background-color: var(--primary-blue); }
 
     /* =======================
        Research & Open Source
        ======================= */
-    .research-list { text-align: left; max-width: 600px; }
-    .research-list li { margin-bottom: 8px; list-style-type: disc; margin-left: 20px; }
+    .research-list { text-align: left; max-width: 600px; width: 100%; }
+    .research-list li { margin-bottom: 12px; list-style-type: disc; margin-left: 20px; font-size: 1.15rem; }
     
     .opensource { background-color: #f9f9f9; }
+    .opensource p { font-size: 1.2rem; margin-bottom: 20px; }
     .opensource a { color: var(--primary-blue); font-weight: 600; text-decoration: underline; }
 
     /* =======================
-       Media Section
+       Media (PC 사이즈 조정)
        ======================= */
     .media { background-color: #fff; }
     .media a { color: var(--primary-blue); font-weight: 600; }
+    
     .video-container {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 40px;
+      gap: 30px;
       flex-wrap: wrap;
-      margin-top: 30px;
+      margin-top: 40px;
       width: 100%;
     }
+    
     .media video {
-      width: 400px;
-      max-width: 90%;
-      height: auto;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      /* PC에서 너무 작거나 크지 않도록 설정 */
+      width: 450px; 
+      max-width: 100%;
+      aspect-ratio: 16 / 9; /* 비율 고정 */
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      background: #000; /* 로딩 전 검은 화면 */
     }
 
     /* =======================
-       Contact Section
+       Contact
        ======================= */
     .contact {
       justify-content: space-between;
-      padding-top: 180px;
+      padding-top: 140px; /* PC 상단 여백 */
       padding-bottom: 40px;
       background: linear-gradient(to bottom, #ffffff 0%, #ffffff 70%, #cce7ff 100%);
     }
-    .contact footer { width: 100%; }
-    .footer-info { margin-bottom: 40px; font-size: 1.1rem; line-height: 1.6; }
+    .contact footer { width: 100%; max-width: 1000px; margin: 0 auto; }
+    .footer-info { margin-bottom: 50px; font-size: 1.15rem; line-height: 1.8; }
     .footer-info a { font-weight: 600; color: var(--primary-blue); }
     
     .lab-logos {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-around;
+      justify-content: center; /* 가운데 정렬 */
       align-items: center;
-      gap: 40px;
+      gap: 60px; /* 간격 균일화 */
       margin-top: 20px;
-      padding: 0 20px;
     }
     .lab-link {
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-width: 120px;
+      width: 140px; /* 로고 영역 너비 통일 */
     }
     .lab-link:hover { transform: translateY(-4px); color: var(--primary-blue); }
     .lab-link img {
-      height: 80px;
-      margin-bottom: 10px;
+      height: 70px;
+      margin-bottom: 12px;
       object-fit: contain;
-      opacity: 0.9;
+      opacity: 0.85;
       transition: 0.3s;
     }
     .lab-link img:hover { opacity: 1; transform: scale(1.05); }
     .lab-link span { font-size: 0.95rem; font-weight: 600; }
 
     /* =======================
-       반응형 처리 (Mobile)
+       Mobile Responsiveness
        ======================= */
     @media (max-width: 900px) {
       .section {
         height: auto !important;
         min-height: 100vh;
-        padding: 80px 20px 40px;
+        padding: 100px 20px 60px; /* 모바일 여백 조정 */
       }
       
-      /* Team Section Mobile */
-      .swiper-container { padding: 0 10px 40px 10px; /* 화살표 숨기거나 하단 배치 시 패딩 조정 */ }
-      .swiper-button-next, .swiper-button-prev { display: none; } /* 모바일은 터치로 하므로 화살표 숨김 */
+      /* Team Mobile */
+      .swiper-container { padding: 0 0 40px 0; max-width: 100%; }
+      .swiper-button-next, .swiper-button-prev { display: none; }
+      .team-member { width: 100%; max-width: 300px; } /* 모바일은 카드 꽉 차게 */
       .team p.desc { font-size: 1rem; margin-bottom: 20px; }
 
-      /* Media & Contact */
-      .video-container { flex-direction: column; gap: 20px; }
-      .media video { width: 100%; }
-      .lab-logos { gap: 30px; }
+      /* Media Mobile */
+      .video-container { flex-direction: column; gap: 20px; margin-top: 20px; }
+      .media video { width: 100%; max-width: 100%; }
+
+      /* Contact Mobile */
       .contact { padding-top: 100px; }
+      .lab-logos { gap: 40px; }
+      .lab-link img { height: 60px; }
     }
   </style>
 </head>
@@ -323,7 +312,7 @@
         <a href="#"><i class="fab fa-youtube"></i></a>
         <a href="#"><i class="fab fa-github"></i></a>
       </div>
-      <div>
+      <div class="max-w-container">
         <h1>Welcome!</h1>
         <p>We are <b>Inha-United@Home</b> 🤖</p>
         <p>A newly founded RoboCup @Home team from Inha University (2025).</p>
@@ -332,183 +321,188 @@
     </section>
 
     <section class="section team" data-anchor="team">
-      <h1>Our Team</h1>
-      <p class="desc">
-        We are a newly founded robotics research team at Inha University, 
-        focusing on service robots, autonomous perception, and intelligent control systems 
-        for domestic and public environments.
-      </p>
+      <div class="max-w-container">
+        <h1>Our Team</h1>
+        <p class="desc">
+          We are a newly founded robotics research team at Inha University, 
+          focusing on service robots, autonomous perception, and intelligent control systems.
+        </p>
 
-      <div class="swiper-container team-slider">
-        <div class="swiper-wrapper">
-          
-          <div class="swiper-slide">
-            <div class="team-member">
-              <img src="img/lmh.webp" alt="Minho Lee" onerror="this.src='https://via.placeholder.com/120?text=Member'" />
-              <h3>Minho Lee</h3>
-              <p>Team Leader</p>
-              <div class="social-icons">
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="mailto:leader@email.com"><i class="fas fa-envelope"></i></a>
-                <a href="#"><i class="fa fa-scholar"></i></a>
+        <div class="swiper-container team-slider">
+          <div class="swiper-wrapper">
+            
+            <div class="swiper-slide">
+              <div class="team-member">
+                <img src="img/lmh.webp" alt="Minho Lee" onerror="this.src='https://via.placeholder.com/120?text=User'" />
+                <h3>Minho Lee</h3>
+                <p>Team Leader</p>
+                <div class="social-icons">
+                  <a href="#"><i class="fab fa-github"></i></a>
+                  <a href="#"><i class="fa fa-scholar"></i></a>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="swiper-slide">
-            <div class="team-member">
-              <img src="https://sparolab.github.io/img/people/master/%EC%A1%B0%EB%8F%99%EC%A7%84_%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84.jpg" alt="Dongjin Cho" onerror="this.src='https://via.placeholder.com/120?text=Member'" />
-              <h3>Dongjin Cho</h3>
-              <p>MS Student</p>
-              <div class="social-icons">
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fas fa-envelope"></i></a>
+            <div class="swiper-slide">
+              <div class="team-member">
+                <img src="https://sparolab.github.io/img/people/master/%EC%A1%B0%EB%8F%99%EC%A7%84_%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84.jpg" alt="Dongjin Cho" onerror="this.src='https://via.placeholder.com/120?text=User'" />
+                <h3>Dongjin Cho</h3>
+                <p>MS Student</p>
+                <div class="social-icons">
+                  <a href="#"><i class="fab fa-github"></i></a>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="swiper-slide">
-            <div class="team-member">
-              <img src="https://sparolab.github.io/img/people/master/%EC%9D%B4%EB%AF%BC%ED%98%B8_%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84.jpg" alt="Minho Lee" onerror="this.src='https://via.placeholder.com/120?text=Member'" />
-              <h3>Minho Lee</h3>
-              <p>MS Student</p>
-              <div class="social-icons">
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fas fa-envelope"></i></a>
+            <div class="swiper-slide">
+              <div class="team-member">
+                <img src="https://sparolab.github.io/img/people/master/%EC%9D%B4%EB%AF%BC%ED%98%B8_%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84.jpg" alt="Minho Lee" onerror="this.src='https://via.placeholder.com/120?text=User'" />
+                <h3>Minho Lee</h3>
+                <p>MS Student</p>
+                <div class="social-icons">
+                  <a href="#"><i class="fab fa-github"></i></a>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="swiper-slide">
-            <div class="team-member">
-              <img src="img/kjt.jpg" alt="Jungtae Kim" onerror="this.src='https://via.placeholder.com/120?text=Member'" />
-              <h3>Jungtae Kim</h3>
-              <p>Undergraduate</p>
-              <div class="social-icons">
-                <a href="#"><i class="fab fa-github"></i></a>
+            <div class="swiper-slide">
+              <div class="team-member">
+                <img src="img/kjt.jpg" alt="Jungtae Kim" onerror="this.src='https://via.placeholder.com/120?text=User'" />
+                <h3>Jungtae Kim</h3>
+                <p>Undergraduate</p>
+                <div class="social-icons">
+                  <a href="#"><i class="fab fa-github"></i></a>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="swiper-slide">
-            <div class="team-member">
-              <img src="img/lsh.jpg" alt="Sanghyun Lee" onerror="this.src='https://via.placeholder.com/120?text=Member'" />
-              <h3>Sanghyun Lee</h3>
-              <p>Undergraduate</p>
-              <div class="social-icons">
-                <a href="#"><i class="fab fa-github"></i></a>
+            <div class="swiper-slide">
+              <div class="team-member">
+                <img src="img/lsh.jpg" alt="Sanghyun Lee" onerror="this.src='https://via.placeholder.com/120?text=User'" />
+                <h3>Sanghyun Lee</h3>
+                <p>Undergraduate</p>
+                <div class="social-icons">
+                  <a href="#"><i class="fab fa-github"></i></a>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="swiper-slide">
-            <div class="team-member">
-              <img src="https://github.com/octocat.png" alt="Member 6" />
-              <h3>Member 6</h3>
-              <p>Software & Backend</p>
-              <div class="social-icons">
-                <a href="#"><i class="fab fa-github"></i></a>
+            <div class="swiper-slide">
+              <div class="team-member">
+                <img src="https://github.com/octocat.png" alt="Member 6" />
+                <h3>Member 6</h3>
+                <p>Software & Backend</p>
+                <div class="social-icons">
+                  <a href="#"><i class="fab fa-github"></i></a>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="swiper-slide">
-            <div class="team-member">
-              <img src="img/pgw.jpg" alt="Gunwoo Park" onerror="this.src='https://via.placeholder.com/120?text=Member'" />
-              <h3>Gunwoo Park</h3>
-              <p>Undergraduate</p>
-              <div class="social-icons">
-                <a href="#"><i class="fab fa-github"></i></a>
+            <div class="swiper-slide">
+              <div class="team-member">
+                <img src="img/pgw.jpg" alt="Gunwoo Park" onerror="this.src='https://via.placeholder.com/120?text=User'" />
+                <h3>Gunwoo Park</h3>
+                <p>Undergraduate</p>
+                <div class="social-icons">
+                  <a href="#"><i class="fab fa-github"></i></a>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="swiper-slide">
-            <div class="team-member">
-              <img src="img/jwk.jpg" alt="Wonhyuk Jung" onerror="this.src='https://via.placeholder.com/120?text=Member'" />
-              <h3>Won Hyuk Jung</h3>
-              <p>Undergraduate</p>
-              <div class="social-icons">
-                <a href="#"><i class="fab fa-github"></i></a>
+             <div class="swiper-slide">
+              <div class="team-member">
+                <img src="img/jwk.jpg" alt="Wonhyuk Jung" onerror="this.src='https://via.placeholder.com/120?text=User'" />
+                <h3>Won Hyuk Jung</h3>
+                <p>Undergraduate</p>
+                <div class="social-icons">
+                  <a href="#"><i class="fab fa-github"></i></a>
+                </div>
               </div>
             </div>
-          </div>
 
+          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
         </div>
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
       </div>
     </section>
 
     <section class="section" data-anchor="research">
-      <h1>Research</h1>
-      <p>
-        Our work focuses on integrating vision, language, and control in real-world service robots.
-        We aim to build reproducible systems that can perceive, plan, and act intelligently.
-      </p>
-      <ul class="research-list">
-        <li>Vision-Language Grounding for Object Understanding</li>
-        <li>Operational Space Control for Manipulation</li>
-        <li>Reinforcement Learning in Real-to-Sim Environments</li>
-      </ul>
+      <div class="max-w-container">
+        <h1>Research</h1>
+        <p style="max-width: 700px; margin-bottom: 30px;">
+          Our work focuses on integrating vision, language, and control in real-world service robots.
+          We aim to build reproducible systems that can perceive, plan, and act intelligently.
+        </p>
+        <ul class="research-list">
+          <li>Vision-Language Grounding for Object Understanding</li>
+          <li>Operational Space Control for Manipulation</li>
+          <li>Reinforcement Learning in Real-to-Sim Environments</li>
+        </ul>
+      </div>
     </section>
 
     <section class="section opensource" data-anchor="opensource">
-      <h1>Open-Source Contributions</h1>
-      <p>All our research outputs and robot models will be publicly available.</p>
-      <p><a href="https://github.com/Inha-United" target="_blank">🔗 Visit our GitHub</a></p>
+      <div class="max-w-container">
+        <h1>Open-Source Contributions</h1>
+        <p>All our research outputs and robot models will be publicly available.</p>
+        <p><a href="https://github.com/Inha-United" target="_blank">🔗 Visit our GitHub</a></p>
+      </div>
     </section>
 
     <section class="section media" data-anchor="media">
-      <h1>Media</h1>
-      <p>
-        Our robots — 
-        <a href="https://www.rainbow-robotics.com/en_rby1" target="_blank" rel="noopener noreferrer">
-          RB-Y1 from Rainbow Robotics
-        </a>.
-      </p>
-      <div class="video-container">
-        <video controls autoplay muted loop playsinline>
-          <source src="IMG_6070.mp4" type="video/mp4">
-          Your browser does not support video.
-        </video>
-        <video controls autoplay muted loop playsinline>
-          <source src="IMG_6071.mp4" type="video/mp4">
-          Your browser does not support video.
-        </video>
+      <div class="max-w-container">
+        <h1>Media</h1>
+        <p>
+          Featured Robot: 
+          <a href="https://www.rainbow-robotics.com/en_rby1" target="_blank" rel="noopener noreferrer">
+            RB-Y1 from Rainbow Robotics
+          </a>
+        </p>
+        <div class="video-container">
+          <video controls autoplay muted loop playsinline>
+            <source src="IMG_6070.mp4" type="video/mp4">
+            Your browser does not support video.
+          </video>
+          <video controls autoplay muted loop playsinline>
+            <source src="IMG_6071.mp4" type="video/mp4">
+            Your browser does not support video.
+          </video>
+        </div>
       </div>
     </section>
 
     <section class="section contact" data-anchor="contact">
-      <h1>Contact</h1>
-      <footer>
-        <div class="footer-info">
-          <p>📧 Contact us: <a href="mailto:inharobocuphome@gmail.com">inharobocuphome@gmail.com</a></p>
-          <p>📍 Inha University, 100 Inha-ro, Michuhol-gu, Incheon, South Korea</p>
-        </div>
+      <div class="max-w-container" style="height:100%; justify-content: space-between;">
+        <h1 style="margin-top: 0;">Contact</h1>
+        
+        <footer>
+          <div class="footer-info">
+            <p>📧 <a href="mailto:inharobocuphome@gmail.com">inharobocuphome@gmail.com</a></p>
+            <p>📍 Inha University, 100 Inha-ro, Michuhol-gu, Incheon, South Korea</p>
+          </div>
 
-        <div class="lab-logos">
-          <a href="https://sparolab.github.io" target="_blank" class="lab-link">
-            <img src="https://sparolab.github.io/assets/favicon.png" alt="Sparo Lab" onerror="this.src='https://via.placeholder.com/80'">
-            <span>SPARO Lab</span>
-          </a>
-          <a href="https://rcv-inha.notion.site/webhome" target="_blank" class="lab-link">
-            <img src="RCVLAB.webp" alt="RCV Lab" onerror="this.src='https://via.placeholder.com/80?text=RCV'">
-            <span>RCV Lab</span>
-          </a>
-          <a href="https://artemis-inha.github.io/" target="_blank" class="lab-link">
-            <img src="https://artemis-inha.github.io/assets/images/logo.jpg" alt="Artemis Lab" onerror="this.src='https://via.placeholder.com/80?text=Artemis'">
-            <span>ARTEMIS Lab</span>
-          </a>
-          <a href="https://wjahn.github.io/rils/" target="_blank" class="lab-link">
-            <img src="https://wjahn.github.io/rils/assets/images/logo_inha.png" alt="RILS Lab" onerror="this.src='https://via.placeholder.com/80?text=RILS'">
-            <span>RILS Lab</span>
-          </a>
-        </div>
-      </footer>
+          <div class="lab-logos">
+            <a href="https://sparolab.github.io" target="_blank" class="lab-link">
+              <img src="https://sparolab.github.io/assets/favicon.png" alt="Sparo Lab" onerror="this.src='https://via.placeholder.com/80'">
+              <span>SPARO Lab</span>
+            </a>
+            <a href="https://rcv-inha.notion.site/webhome" target="_blank" class="lab-link">
+              <img src="RCVLAB.webp" alt="RCV Lab" onerror="this.src='https://via.placeholder.com/80?text=RCV'">
+              <span>RCV Lab</span>
+            </a>
+            <a href="https://artemis-inha.github.io/" target="_blank" class="lab-link">
+              <img src="https://artemis-inha.github.io/assets/images/logo.jpg" alt="Artemis Lab" onerror="this.src='https://via.placeholder.com/80?text=Artemis'">
+              <span>ARTEMIS Lab</span>
+            </a>
+            <a href="https://wjahn.github.io/rils/" target="_blank" class="lab-link">
+              <img src="https://wjahn.github.io/rils/assets/images/logo_inha.png" alt="RILS Lab" onerror="this.src='https://via.placeholder.com/80?text=RILS'">
+              <span>RILS Lab</span>
+            </a>
+          </div>
+        </footer>
+      </div>
     </section>
   </div>
 
@@ -518,7 +512,7 @@
       autoScrolling: true,
       scrollOverflow: true,
       fitToSection: false,
-      responsiveWidth: 900, // 900px 이하에서는 스크롤 스냅 해제 (자연스러운 스크롤)
+      responsiveWidth: 900, 
       anchors: ['home', 'team', 'research', 'opensource', 'media', 'contact'],
       navigationTooltips: ['Home', 'Team', 'Research', 'Open Source', 'Media', 'Contact'],
       navigation: true,
@@ -526,11 +520,12 @@
       credits: { enabled: false }
     });
 
-    // 2. Swiper Slider Init (Team Section)
+    // 2. Swiper Slider Init
     new Swiper('.team-slider', {
-      slidesPerView: 1,       // 기본 모바일: 1개 보임
-      spaceBetween: 20,       // 카드 사이 간격
-      loop: true,             // 무한 반복
+      slidesPerView: 1,
+      spaceBetween: 20,
+      loop: true,
+      centeredSlides: false, // 왼쪽부터 채우기
       pagination: {
         el: '.swiper-pagination',
         clickable: true,
@@ -541,11 +536,11 @@
       },
       breakpoints: {
         640: {
-          slidesPerView: 2,   // 태블릿 세로: 2개
+          slidesPerView: 2,
           spaceBetween: 20,
         },
         1024: {
-          slidesPerView: 4,   // 데스크탑: 4개 (기존 4열 배열과 유사 효과)
+          slidesPerView: 4, /* PC에서는 4개씩 */
           spaceBetween: 30,
         },
       }
