@@ -75,7 +75,7 @@
     }
 
     /* =======================
-       Common Layout (PC 비율 깨짐 방지 핵심)
+       Common Layout
        ======================= */
     .section {
       display: flex;
@@ -89,10 +89,9 @@
       overflow: hidden;
     }
 
-    /* 콘텐츠가 너무 넓게 퍼지지 않도록 잡아주는 컨테이너 */
     .max-w-container {
       width: 100%;
-      max-width: 1200px; /* PC 최적 너비 제한 */
+      max-width: 1200px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
@@ -134,55 +133,72 @@
     }
 
     /* =======================
-       Team (Swiper 비율 최적화)
+       Team (2행 4열 Grid Layout)
        ======================= */
     .team { background-color: #f9f9f9; width: 100%; }
     .team h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
-    .team p.desc { font-size: 1.1rem; max-width: 700px; margin-bottom: 30px; }
+    
+    /* ✅ 수정됨: 텍스트 중앙 정렬 및 마진 오토 적용 */
+    .team p.desc { 
+      font-size: 1.1rem; 
+      max-width: 700px; 
+      margin: 0 auto 40px auto; /* 상우하좌: 상단0, 좌우auto(중앙), 하단40px */
+      line-height: 1.6;
+    }
 
     .swiper-container {
       width: 100%;
-      max-width: 1300px; /* 슬라이더 전체 폭 제한 */
-      padding: 20px 50px 50px 50px; /* 좌우 화살표 공간 및 하단 페이지네이션 공간 */
+      max-width: 1300px;
+      padding: 0 50px 40px 50px; /* 화살표 및 하단 여백 */
       position: relative;
+      height: auto; 
+    }
+
+    /* 그리드 레이아웃을 위한 높이 조정 */
+    .swiper-wrapper {
+      /* Swiper Grid 모드일 때 높이가 중요함 */
+      height: auto;
     }
 
     .swiper-slide {
       display: flex;
-      justify-content: center; /* 카드 중앙 정렬 */
+      justify-content: center;
+      align-items: center;
+      /* ✅ 2행 높이 계산: (전체높이 - 간격) / 2 */
       height: auto;
+      box-sizing: border-box;
     }
 
     .team-member {
       background: #ffffff;
       border-radius: 20px;
-      padding: 30px 20px;
+      padding: 20px 15px;
       text-align: center;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      
-      /* PC/모바일 공통 카드 사이즈 고정 */
-      width: 260px; 
-      height: 100%; /* 높이 통일 */
+      width: 260px;
+      max-width: 100%;
+      height: 240px; /* 카드 높이 고정 */
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
     }
     
     .team-member:hover { transform: translateY(-6px); box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15); }
     
     .team-member img {
-      width: 120px; height: 120px;
+      width: 90px; height: 90px;
       border-radius: 50%;
       object-fit: cover;
       border: 3px solid rgba(0, 120, 255, 0.3);
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
-    .team-member h3 { font-size: 1.2em; font-weight: 600; margin: 10px 0 5px; }
-    .team-member p { color: #666; font-size: 0.95em; margin-bottom: 12px; }
+    .team-member h3 { font-size: 1.1em; font-weight: 600; margin: 5px 0; }
+    .team-member p { color: #666; font-size: 0.9em; margin-bottom: 10px; }
 
-    .social-icons { display: flex; justify-content: center; gap: 12px; margin-top: auto; /* 아이콘 하단 고정 */ }
-    .social-icons a { color: #555; font-size: 1.25em; }
+    .social-icons { display: flex; justify-content: center; gap: 10px; }
+    .social-icons a { color: #999; font-size: 1.1em; }
     .social-icons a:hover { color: var(--primary-blue); transform: scale(1.2); }
 
     .swiper-button-next, .swiper-button-prev { color: var(--primary-blue); width: 30px; }
@@ -199,7 +215,7 @@
     .opensource a { color: var(--primary-blue); font-weight: 600; text-decoration: underline; }
 
     /* =======================
-       Media (PC 사이즈 조정)
+       Media
        ======================= */
     .media { background-color: #fff; }
     .media a { color: var(--primary-blue); font-weight: 600; }
@@ -215,13 +231,12 @@
     }
     
     .media video {
-      /* PC에서 너무 작거나 크지 않도록 설정 */
       width: 450px; 
       max-width: 100%;
-      aspect-ratio: 16 / 9; /* 비율 고정 */
+      aspect-ratio: 16 / 9;
       border-radius: 16px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      background: #000; /* 로딩 전 검은 화면 */
+      background: #000;
     }
 
     /* =======================
@@ -229,7 +244,7 @@
        ======================= */
     .contact {
       justify-content: space-between;
-      padding-top: 140px; /* PC 상단 여백 */
+      padding-top: 140px;
       padding-bottom: 40px;
       background: linear-gradient(to bottom, #ffffff 0%, #ffffff 70%, #cce7ff 100%);
     }
@@ -240,16 +255,16 @@
     .lab-logos {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center; /* 가운데 정렬 */
+      justify-content: center;
       align-items: center;
-      gap: 60px; /* 간격 균일화 */
+      gap: 60px;
       margin-top: 20px;
     }
     .lab-link {
       display: flex;
       flex-direction: column;
       align-items: center;
-      width: 140px; /* 로고 영역 너비 통일 */
+      width: 140px;
     }
     .lab-link:hover { transform: translateY(-4px); color: var(--primary-blue); }
     .lab-link img {
@@ -269,13 +284,13 @@
       .section {
         height: auto !important;
         min-height: 100vh;
-        padding: 100px 20px 60px; /* 모바일 여백 조정 */
+        padding: 100px 20px 60px;
       }
       
       /* Team Mobile */
       .swiper-container { padding: 0 0 40px 0; max-width: 100%; }
       .swiper-button-next, .swiper-button-prev { display: none; }
-      .team-member { width: 100%; max-width: 300px; } /* 모바일은 카드 꽉 차게 */
+      .team-member { width: 100%; max-width: 300px; height: auto; padding: 20px; } 
       .team p.desc { font-size: 1rem; margin-bottom: 20px; }
 
       /* Media Mobile */
@@ -333,7 +348,7 @@
             
             <div class="swiper-slide">
               <div class="team-member">
-                <img src="img/lmh.webp" alt="Minho Lee" onerror="this.src='https://via.placeholder.com/120?text=User'" />
+                <img src="img/lmh.webp" alt="Minho Lee" onerror="this.src='https://via.placeholder.com/90?text=User'" />
                 <h3>Minho Lee</h3>
                 <p>Team Leader</p>
                 <div class="social-icons">
@@ -345,7 +360,7 @@
 
             <div class="swiper-slide">
               <div class="team-member">
-                <img src="https://sparolab.github.io/img/people/master/%EC%A1%B0%EB%8F%99%EC%A7%84_%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84.jpg" alt="Dongjin Cho" onerror="this.src='https://via.placeholder.com/120?text=User'" />
+                <img src="https://sparolab.github.io/img/people/master/%EC%A1%B0%EB%8F%99%EC%A7%84_%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84.jpg" alt="Dongjin Cho" onerror="this.src='https://via.placeholder.com/90?text=User'" />
                 <h3>Dongjin Cho</h3>
                 <p>MS Student</p>
                 <div class="social-icons">
@@ -356,7 +371,7 @@
 
             <div class="swiper-slide">
               <div class="team-member">
-                <img src="https://sparolab.github.io/img/people/master/%EC%9D%B4%EB%AF%BC%ED%98%B8_%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84.jpg" alt="Minho Lee" onerror="this.src='https://via.placeholder.com/120?text=User'" />
+                <img src="https://sparolab.github.io/img/people/master/%EC%9D%B4%EB%AF%BC%ED%98%B8_%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84.jpg" alt="Minho Lee" onerror="this.src='https://via.placeholder.com/90?text=User'" />
                 <h3>Minho Lee</h3>
                 <p>MS Student</p>
                 <div class="social-icons">
@@ -367,7 +382,7 @@
 
             <div class="swiper-slide">
               <div class="team-member">
-                <img src="img/kjt.jpg" alt="Jungtae Kim" onerror="this.src='https://via.placeholder.com/120?text=User'" />
+                <img src="img/kjt.jpg" alt="Jungtae Kim" onerror="this.src='https://via.placeholder.com/90?text=User'" />
                 <h3>Jungtae Kim</h3>
                 <p>Undergraduate</p>
                 <div class="social-icons">
@@ -378,7 +393,7 @@
 
             <div class="swiper-slide">
               <div class="team-member">
-                <img src="img/lsh.jpg" alt="Sanghyun Lee" onerror="this.src='https://via.placeholder.com/120?text=User'" />
+                <img src="img/lsh.jpg" alt="Sanghyun Lee" onerror="this.src='https://via.placeholder.com/90?text=User'" />
                 <h3>Sanghyun Lee</h3>
                 <p>Undergraduate</p>
                 <div class="social-icons">
@@ -400,7 +415,7 @@
 
             <div class="swiper-slide">
               <div class="team-member">
-                <img src="img/pgw.jpg" alt="Gunwoo Park" onerror="this.src='https://via.placeholder.com/120?text=User'" />
+                <img src="img/pgw.jpg" alt="Gunwoo Park" onerror="this.src='https://via.placeholder.com/90?text=User'" />
                 <h3>Gunwoo Park</h3>
                 <p>Undergraduate</p>
                 <div class="social-icons">
@@ -411,7 +426,7 @@
 
              <div class="swiper-slide">
               <div class="team-member">
-                <img src="img/jwk.jpg" alt="Wonhyuk Jung" onerror="this.src='https://via.placeholder.com/120?text=User'" />
+                <img src="img/jwk.jpg" alt="Wonhyuk Jung" onerror="this.src='https://via.placeholder.com/90?text=User'" />
                 <h3>Won Hyuk Jung</h3>
                 <p>Undergraduate</p>
                 <div class="social-icons">
@@ -520,12 +535,16 @@
       credits: { enabled: false }
     });
 
-    // 2. Swiper Slider Init
+    // 2. Swiper Slider Init (Grid Mode)
     new Swiper('.team-slider', {
-      slidesPerView: 1,
+      // 그리드 모드 활성화
+      grid: {
+        rows: 2, // 2줄 배치
+        fill: 'row', // 행 우선 채우기
+      },
       spaceBetween: 20,
-      loop: true,
-      centeredSlides: false, // 왼쪽부터 채우기
+      loop: false, // ✅ 무한 반복 해제
+      
       pagination: {
         el: '.swiper-pagination',
         clickable: true,
@@ -535,12 +554,22 @@
         prevEl: '.swiper-button-prev',
       },
       breakpoints: {
-        640: {
-          slidesPerView: 2,
+        // 모바일 (0px ~ 640px): 1열 2행 (한 화면에 2명)
+        0: {
+          slidesPerView: 1, 
+          grid: { rows: 2 },
           spaceBetween: 20,
         },
+        // 태블릿 (640px ~ 1024px): 2열 2행 (한 화면에 4명)
+        640: {
+          slidesPerView: 2,
+          grid: { rows: 2 },
+          spaceBetween: 20,
+        },
+        // PC (1024px 이상): 4열 2행 (한 화면에 8명) -> 모든 멤버 노출
         1024: {
-          slidesPerView: 4, /* PC에서는 4개씩 */
+          slidesPerView: 4,
+          grid: { rows: 2 },
           spaceBetween: 30,
         },
       }
