@@ -8,16 +8,32 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.min.js"></script>
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
   <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
+  <script>
+    // 모바일 vh 문제 해결
+    function setVh() {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+    setVh();
+    window.addEventListener('resize', setVh);
+    window.addEventListener('orientationchange', setVh);
+  </script>
+
   <style>
     /* =======================
-       기본 설정 및 변수
+       기본 설정 (기존 유지)
        ======================= */
     :root {
-      --vh: 1vh; /* 모바일 브라우저 높이 대응용 변수 */
+      --vh: 1vh;
+      --primary-blue: #0078ff;
+      --dark-blue: #004c99;
     }
     
     * {
@@ -30,19 +46,19 @@
       background-color: #fff;
       color: #333;
     }
-    
-    a { text-decoration: none; color: inherit; transition: 0.3s; }
-    ul { list-style: none; padding: 0; }
-
-    /* 커스텀 아이콘 대체 설정 */
-    .fa-scholar::before { content: "\f19d"; } /* graduation-cap */
-    .fa-homepage::before { content: "\f015"; } /* home */
 
     /* fullPage.js 워터마크 숨김 */
     .fp-watermark { display: none !important; }
 
+    a { text-decoration: none; color: inherit; transition: 0.3s; }
+    ul { list-style: none; padding: 0; }
+
+    /* 커스텀 아이콘 */
+    .fa-scholar::before { content: "\f19d"; }
+    .fa-homepage::before { content: "\f015"; }
+
     /* =======================
-       Navigation Bar (기존 디자인 유지)
+       Navigation Bar (기존 유지)
        ======================= */
     header {
       position: fixed;
@@ -52,9 +68,8 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 40px;
-      /* 기존 그라데이션 유지 */
       background: linear-gradient(to bottom, #b5dbff 0%, #cce7ff 100%);
-      backdrop-filter: blur(5px);
+      backdrop-filter: blur(10px);
       z-index: 100;
     }
     header h1 {
@@ -64,15 +79,14 @@
     }
     nav a {
       margin-left: 25px;
-      color: #004c99; /* 기존 진한 파랑 */
+      color: var(--dark-blue);
       font-weight: 500;
     }
-    nav a:hover { color: #0078ff; }
+    nav a:hover { color: var(--primary-blue); }
 
-    /* 모바일 네비게이션 간략화 */
     @media (max-width: 900px) {
       header { padding: 0 20px; justify-content: center; }
-      nav { display: none; } /* 모바일에서 메뉴 숨김 (필요시 햄버거 메뉴 추가 가능) */
+      nav { display: none; } /* 모바일 메뉴 숨김 */
     }
 
     /* =======================
@@ -84,7 +98,6 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      /* 모바일 높이 계산 개선 */
       height: calc(var(--vh, 1vh) * 100); 
       padding: 0 20px;
       position: relative;
@@ -92,7 +105,7 @@
     }
 
     /* =======================
-       1. Home Section
+       Home Section
        ======================= */
     .home {
       background: linear-gradient(to bottom, #cce7ff 0%, #ffffff 100%);
@@ -100,7 +113,7 @@
     .home h1 { font-size: 3rem; font-weight: 700; margin: 0; }
     .home p { font-size: 1.2rem; margin: 10px 0 20px; }
     .home button {
-      background-color: #0078ff; /* 기존 버튼 색 */
+      background-color: var(--primary-blue);
       color: white;
       border: none;
       border-radius: 8px;
@@ -111,7 +124,7 @@
     }
     .home button:hover { background-color: #005fcc; }
 
-    /* Left Social Icons */
+    /* Social Icons (Left) */
     .social {
       position: fixed;
       left: 40px;
@@ -122,45 +135,36 @@
       gap: 18px;
       z-index: 99;
     }
-    .social a {
-      color: #74a9e1;
-      font-size: 24px;
-    }
-    .social a:hover {
-      color: #0078ff;
-      transform: scale(1.15);
-    }
+    .social a { color: #74a9e1; font-size: 24px; }
+    .social a:hover { color: var(--primary-blue); transform: scale(1.15); }
+    
     @media (max-width: 900px) {
-      .social { display: none; } /* 모바일에서 공간 확보를 위해 숨김 */
+      .social { display: none; }
+      .home h1 { font-size: 2.2rem; }
     }
 
     /* =======================
-       2. Team Section
+       Team Section (Swiper 적용)
        ======================= */
     .team {
       background-color: #f9f9f9;
-      /* 모바일에서 내용이 길어질 경우 스크롤 허용 */
-      overflow-y: auto !important; 
+      width: 100%;
     }
-    .team h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; margin-top: 20px; }
-    .team p.description { font-size: 1.1rem; max-width: 700px; margin-bottom: 30px; }
+    .team h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
+    .team p.desc { font-size: 1.1rem; max-width: 700px; margin-bottom: 30px; }
 
-    .team-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
+    /* Swiper 컨테이너 스타일 */
+    .swiper-container {
       width: 100%;
-      max-width: 1200px;
-      padding-bottom: 40px;
+      max-width: 1200px; /* PC 최대 폭 */
+      padding: 40px 50px; /* 좌우 화살표 공간 확보 */
+      position: relative;
     }
-    
-    .team-row {
+
+    .swiper-slide {
       display: flex;
       justify-content: center;
-      gap: 30px;
-      width: 100%;
-      flex-wrap: wrap;
+      height: auto; /* 카드 높이 자동 */
     }
 
     .team-member {
@@ -170,18 +174,21 @@
       text-align: center;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      flex: 1 1 250px;
-      max-width: 300px;
+      width: 100%;
+      max-width: 280px; /* 카드 최대 너비 */
+      margin: 10px auto; /* 중앙 정렬 */
     }
+    
     .team-member:hover {
       transform: translateY(-6px);
       box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
     }
+    
     .team-member img {
       width: 120px; height: 120px;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid rgba(0, 120, 255, 0.2);
+      border: 3px solid rgba(0, 120, 255, 0.3);
       margin-bottom: 15px;
     }
     .team-member h3 { font-size: 1.2em; font-weight: 600; margin: 10px 0 5px; }
@@ -189,33 +196,42 @@
 
     .social-icons { display: flex; justify-content: center; gap: 12px; }
     .social-icons a { color: #555; font-size: 1.25em; }
-    .social-icons a:hover { color: #0078ff; transform: scale(1.2); }
+    .social-icons a:hover { color: var(--primary-blue); transform: scale(1.2); }
+
+    /* Swiper Custom Colors */
+    .swiper-button-next, .swiper-button-prev {
+      color: var(--primary-blue);
+      font-weight: bold;
+    }
+    .swiper-pagination-bullet-active {
+      background-color: var(--primary-blue);
+    }
 
     /* =======================
-       3. Research & Open Source
+       Research & Open Source
        ======================= */
-    .research-content { text-align: left; max-width: 600px; }
-    .research-content li { margin-bottom: 8px; list-style-type: disc; margin-left: 20px; }
+    .research-list { text-align: left; max-width: 600px; }
+    .research-list li { margin-bottom: 8px; list-style-type: disc; margin-left: 20px; }
     
     .opensource { background-color: #f9f9f9; }
-    .opensource a { color: #0078ff; font-weight: 600; text-decoration: underline; }
+    .opensource a { color: var(--primary-blue); font-weight: 600; text-decoration: underline; }
 
     /* =======================
-       4. Media Section
+       Media Section
        ======================= */
     .media { background-color: #fff; }
-    .media a { color: #0078ff; font-weight: 600; }
+    .media a { color: var(--primary-blue); font-weight: 600; }
     .video-container {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 40px; /* 간격 조정 */
+      gap: 40px;
       flex-wrap: wrap;
       margin-top: 30px;
       width: 100%;
     }
     .media video {
-      width: 400px; /* 기존 비율 유지하되 고정폭 설정 */
+      width: 400px;
       max-width: 90%;
       height: auto;
       border-radius: 12px;
@@ -223,25 +239,22 @@
     }
 
     /* =======================
-       5. Contact Section
+       Contact Section
        ======================= */
     .contact {
-      /* 기존 상단 여백 유지하되 Flex 구조로 정렬 */
       justify-content: space-between;
-      padding-top: 180px; /* 기존 240px에서 살짝 조정하여 균형 맞춤 */
+      padding-top: 180px;
       padding-bottom: 40px;
       background: linear-gradient(to bottom, #ffffff 0%, #ffffff 70%, #cce7ff 100%);
     }
-    
     .contact footer { width: 100%; }
-    
     .footer-info { margin-bottom: 40px; font-size: 1.1rem; line-height: 1.6; }
-    .footer-info a { font-weight: 600; color: #0078ff; }
+    .footer-info a { font-weight: 600; color: var(--primary-blue); }
     
     .lab-logos {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-around; /* 기존 spread wide 느낌 유지 */
+      justify-content: space-around;
       align-items: center;
       gap: 40px;
       margin-top: 20px;
@@ -253,9 +266,9 @@
       align-items: center;
       min-width: 120px;
     }
-    .lab-link:hover { transform: translateY(-4px); color: #0078ff; }
+    .lab-link:hover { transform: translateY(-4px); color: var(--primary-blue); }
     .lab-link img {
-      height: 80px; /* 로고 크기 적절히 통일 */
+      height: 80px;
       margin-bottom: 10px;
       object-fit: contain;
       opacity: 0.9;
@@ -268,23 +281,22 @@
        반응형 처리 (Mobile)
        ======================= */
     @media (max-width: 900px) {
-      /* fullPage 해제 시 섹션 높이 자동 조절 */
       .section {
         height: auto !important;
         min-height: 100vh;
         padding: 80px 20px 40px;
       }
       
-      /* Team 멤버 배치 */
-      .team-member { flex: 1 1 100%; max-width: 350px; margin-bottom: 20px; }
-      
-      /* Media 비디오 배치 */
+      /* Team Section Mobile */
+      .swiper-container { padding: 0 10px 40px 10px; /* 화살표 숨기거나 하단 배치 시 패딩 조정 */ }
+      .swiper-button-next, .swiper-button-prev { display: none; } /* 모바일은 터치로 하므로 화살표 숨김 */
+      .team p.desc { font-size: 1rem; margin-bottom: 20px; }
+
+      /* Media & Contact */
       .video-container { flex-direction: column; gap: 20px; }
       .media video { width: 100%; }
-      
-      /* Contact 로고 배치 */
       .lab-logos { gap: 30px; }
-      .contact { padding-top: 100px; } /* 모바일에서는 상단 여백 줄임 */
+      .contact { padding-top: 100px; }
     }
   </style>
 </head>
@@ -321,96 +333,113 @@
 
     <section class="section team" data-anchor="team">
       <h1>Our Team</h1>
-      <p class="description">
+      <p class="desc">
         We are a newly founded robotics research team at Inha University, 
         focusing on service robots, autonomous perception, and intelligent control systems 
         for domestic and public environments.
       </p>
 
-      <div class="team-grid">
-        <div class="team-row">
-          <div class="team-member">
-            <img src="img/lmh.webp" alt="Minho Lee" onerror="this.src='https://via.placeholder.com/120'" />
-            <h3>Minho Lee</h3>
-            <p>Team Leader</p>
-            <div class="social-icons">
-              <a href="#" target="_blank"><i class="fab fa-github"></i></a>
-              <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
-              <a href="mailto:leader@email.com"><i class="fas fa-envelope"></i></a>
-              <a href="#" target="_blank" title="Google Scholar"><i class="fa fa-scholar"></i></a>
-              <a href="#" target="_blank" title="Homepage"><i class="fa fa-homepage"></i></a>
+      <div class="swiper-container team-slider">
+        <div class="swiper-wrapper">
+          
+          <div class="swiper-slide">
+            <div class="team-member">
+              <img src="img/lmh.webp" alt="Minho Lee" onerror="this.src='https://via.placeholder.com/120?text=Member'" />
+              <h3>Minho Lee</h3>
+              <p>Team Leader</p>
+              <div class="social-icons">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:leader@email.com"><i class="fas fa-envelope"></i></a>
+                <a href="#"><i class="fa fa-scholar"></i></a>
+              </div>
             </div>
           </div>
 
-          <div class="team-member">
-            <img src="https://sparolab.github.io/img/people/master/%EC%A1%B0%EB%8F%99%EC%A7%84_%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84.jpg" alt="Dongjin Cho" onerror="this.src='https://via.placeholder.com/120'" />
-            <h3>Dongjin Cho</h3>
-            <p>MS Student</p>
-            <div class="social-icons">
-              <a href="#"><i class="fab fa-github"></i></a>
-              <a href="#"><i class="fab fa-linkedin"></i></a>
-              <a href="#"><i class="fas fa-envelope"></i></a>
+          <div class="swiper-slide">
+            <div class="team-member">
+              <img src="https://sparolab.github.io/img/people/master/%EC%A1%B0%EB%8F%99%EC%A7%84_%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84.jpg" alt="Dongjin Cho" onerror="this.src='https://via.placeholder.com/120?text=Member'" />
+              <h3>Dongjin Cho</h3>
+              <p>MS Student</p>
+              <div class="social-icons">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+              </div>
             </div>
           </div>
 
-          <div class="team-member">
-            <img src="https://sparolab.github.io/img/people/master/%EC%9D%B4%EB%AF%BC%ED%98%B8_%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84.jpg" alt="Minho Lee" onerror="this.src='https://via.placeholder.com/120'" />
-            <h3>Minho Lee</h3>
-            <p>MS Student</p>
-            <div class="social-icons">
-              <a href="#"><i class="fab fa-github"></i></a>
-              <a href="#"><i class="fab fa-linkedin"></i></a>
-              <a href="#"><i class="fas fa-envelope"></i></a>
+          <div class="swiper-slide">
+            <div class="team-member">
+              <img src="https://sparolab.github.io/img/people/master/%EC%9D%B4%EB%AF%BC%ED%98%B8_%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84.jpg" alt="Minho Lee" onerror="this.src='https://via.placeholder.com/120?text=Member'" />
+              <h3>Minho Lee</h3>
+              <p>MS Student</p>
+              <div class="social-icons">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+              </div>
             </div>
           </div>
 
-          <div class="team-member">
-            <img src="img/kjt.jpg" alt="Jungtae Kim" onerror="this.src='https://via.placeholder.com/120'" />
-            <h3>Jungtae Kim</h3>
-            <p>Undergraduate Student</p>
-            <div class="social-icons">
-              <a href="#"><i class="fab fa-github"></i></a>
+          <div class="swiper-slide">
+            <div class="team-member">
+              <img src="img/kjt.jpg" alt="Jungtae Kim" onerror="this.src='https://via.placeholder.com/120?text=Member'" />
+              <h3>Jungtae Kim</h3>
+              <p>Undergraduate</p>
+              <div class="social-icons">
+                <a href="#"><i class="fab fa-github"></i></a>
+              </div>
             </div>
           </div>
+
+          <div class="swiper-slide">
+            <div class="team-member">
+              <img src="img/lsh.jpg" alt="Sanghyun Lee" onerror="this.src='https://via.placeholder.com/120?text=Member'" />
+              <h3>Sanghyun Lee</h3>
+              <p>Undergraduate</p>
+              <div class="social-icons">
+                <a href="#"><i class="fab fa-github"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="team-member">
+              <img src="https://github.com/octocat.png" alt="Member 6" />
+              <h3>Member 6</h3>
+              <p>Software & Backend</p>
+              <div class="social-icons">
+                <a href="#"><i class="fab fa-github"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="team-member">
+              <img src="img/pgw.jpg" alt="Gunwoo Park" onerror="this.src='https://via.placeholder.com/120?text=Member'" />
+              <h3>Gunwoo Park</h3>
+              <p>Undergraduate</p>
+              <div class="social-icons">
+                <a href="#"><i class="fab fa-github"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="team-member">
+              <img src="img/jwk.jpg" alt="Wonhyuk Jung" onerror="this.src='https://via.placeholder.com/120?text=Member'" />
+              <h3>Won Hyuk Jung</h3>
+              <p>Undergraduate</p>
+              <div class="social-icons">
+                <a href="#"><i class="fab fa-github"></i></a>
+              </div>
+            </div>
+          </div>
+
         </div>
-
-        <div class="team-row">
-          <div class="team-member">
-            <img src="img/lsh.jpg" alt="Sanghyun Lee" onerror="this.src='https://via.placeholder.com/120'" />
-            <h3>Sanghyun Lee</h3>
-            <p>Undergraduate Student</p>
-            <div class="social-icons">
-              <a href="#"><i class="fab fa-github"></i></a>
-            </div>
-          </div>
-
-          <div class="team-member">
-            <img src="https://github.com/octocat.png" alt="Member 6" />
-            <h3>Member 6</h3>
-            <p>Software & Backend</p>
-            <div class="social-icons">
-              <a href="#"><i class="fab fa-github"></i></a>
-            </div>
-          </div>
-
-          <div class="team-member">
-            <img src="img/pgw.jpg" alt="Gunwoo Park" onerror="this.src='https://via.placeholder.com/120'" />
-            <h3>Gunwoo Park</h3>
-            <p>Undergraduate Student</p>
-            <div class="social-icons">
-              <a href="#"><i class="fab fa-github"></i></a>
-            </div>
-          </div>
-
-          <div class="team-member">
-            <img src="img/jwk.jpg" alt="Wonhyuk Jung" onerror="this.src='https://via.placeholder.com/120'" />
-            <h3>Won Hyuk Jung</h3>
-            <p>Undergraduate Student</p>
-            <div class="social-icons">
-              <a href="#"><i class="fab fa-github"></i></a>
-            </div>
-          </div>
-        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
       </div>
     </section>
 
@@ -420,7 +449,7 @@
         Our work focuses on integrating vision, language, and control in real-world service robots.
         We aim to build reproducible systems that can perceive, plan, and act intelligently.
       </p>
-      <ul class="research-content">
+      <ul class="research-list">
         <li>Vision-Language Grounding for Object Understanding</li>
         <li>Operational Space Control for Manipulation</li>
         <li>Reinforcement Learning in Real-to-Sim Environments</li>
@@ -444,11 +473,11 @@
       <div class="video-container">
         <video controls autoplay muted loop playsinline>
           <source src="IMG_6070.mp4" type="video/mp4">
-          Your browser does not support the video tag.
+          Your browser does not support video.
         </video>
         <video controls autoplay muted loop playsinline>
           <source src="IMG_6071.mp4" type="video/mp4">
-          Your browser does not support the video tag.
+          Your browser does not support video.
         </video>
       </div>
     </section>
@@ -484,25 +513,42 @@
   </div>
 
   <script>
-    // 모바일 브라우저 높이(vh) 문제 해결 스크립트
-    function setVh() {
-      const vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
-    }
-    setVh();
-    window.addEventListener('resize', setVh);
-    window.addEventListener('orientationchange', setVh);
-
+    // 1. FullPage.js Init
     new fullpage('#fullpage', {
       autoScrolling: true,
-      scrollOverflow: true, // 내용이 길면 스크롤 가능하게 설정
+      scrollOverflow: true,
       fitToSection: false,
-      responsiveWidth: 900, // 900px 이하에서는 일반 스크롤 방식으로 전환
+      responsiveWidth: 900, // 900px 이하에서는 스크롤 스냅 해제 (자연스러운 스크롤)
       anchors: ['home', 'team', 'research', 'opensource', 'media', 'contact'],
       navigationTooltips: ['Home', 'Team', 'Research', 'Open Source', 'Media', 'Contact'],
       navigation: true,
       showActiveTooltip: true,
       credits: { enabled: false }
+    });
+
+    // 2. Swiper Slider Init (Team Section)
+    new Swiper('.team-slider', {
+      slidesPerView: 1,       // 기본 모바일: 1개 보임
+      spaceBetween: 20,       // 카드 사이 간격
+      loop: true,             // 무한 반복
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      breakpoints: {
+        640: {
+          slidesPerView: 2,   // 태블릿 세로: 2개
+          spaceBetween: 20,
+        },
+        1024: {
+          slidesPerView: 4,   // 데스크탑: 4개 (기존 4열 배열과 유사 효과)
+          spaceBetween: 30,
+        },
+      }
     });
   </script>
 
