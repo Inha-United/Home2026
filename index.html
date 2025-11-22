@@ -99,19 +99,36 @@
       justify-content: center;
     }
 
+    /* ✅ 섹션 제목 간격 대폭 증가 */
+    .section h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 60px; /* 제목과 본문 사이 거리 확보 */
+      margin-top: 0;
+    }
+    
+    /* ✅ 본문 설명 간격 조정 */
+    .section p.desc {
+      font-size: 1.15rem;
+      max-width: 700px;
+      margin: 0 auto 50px auto; /* 본문과 콘텐츠(그리드/비디오 등) 사이 거리 확보 */
+      line-height: 1.6;
+      color: #555;
+    }
+
     /* =======================
        Home
        ======================= */
     .home { background: linear-gradient(to bottom, #cce7ff 0%, #ffffff 100%); }
-    .home h1 { font-size: 3rem; font-weight: 700; margin: 0; }
-    .home p { font-size: 1.2rem; margin: 10px 0 20px; }
+    .home h1 { margin-bottom: 20px; /* Home은 예외적으로 좁게 */ font-size: 3.5rem; }
+    .home p { font-size: 1.3rem; margin-bottom: 40px; }
     .home button {
       background-color: var(--primary-blue);
       color: white;
       border: none;
       border-radius: 8px;
-      padding: 12px 24px;
-      font-size: 1rem;
+      padding: 14px 32px;
+      font-size: 1.1rem;
       cursor: pointer;
       transition: 0.3s;
     }
@@ -121,50 +138,35 @@
       position: fixed;
       left: 40px; top: 50%;
       transform: translateY(-50%);
-      display: flex; flex-direction: column; gap: 18px;
+      display: flex; flex-direction: column; gap: 20px;
       z-index: 99;
     }
-    .social a { color: #74a9e1; font-size: 24px; }
+    .social a { color: #74a9e1; font-size: 26px; }
     .social a:hover { color: var(--primary-blue); transform: scale(1.15); }
     
     @media (max-width: 900px) {
       .social { display: none; }
-      .home h1 { font-size: 2.2rem; }
+      .home h1 { font-size: 2.5rem; }
     }
 
     /* =======================
        Team (2행 4열 Grid Layout)
        ======================= */
     .team { background-color: #f9f9f9; width: 100%; }
-    .team h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
     
-    /* ✅ 수정됨: 텍스트 중앙 정렬 및 마진 오토 적용 */
-    .team p.desc { 
-      font-size: 1.1rem; 
-      max-width: 700px; 
-      margin: 0 auto 40px auto; /* 상우하좌: 상단0, 좌우auto(중앙), 하단40px */
-      line-height: 1.6;
-    }
-
     .swiper-container {
       width: 100%;
       max-width: 1300px;
-      padding: 0 50px 40px 50px; /* 화살표 및 하단 여백 */
+      padding: 0 50px 40px 50px; 
       position: relative;
       height: auto; 
     }
 
-    /* 그리드 레이아웃을 위한 높이 조정 */
-    .swiper-wrapper {
-      /* Swiper Grid 모드일 때 높이가 중요함 */
-      height: auto;
-    }
-
+    .swiper-wrapper { height: auto; }
     .swiper-slide {
       display: flex;
       justify-content: center;
       align-items: center;
-      /* ✅ 2행 높이 계산: (전체높이 - 간격) / 2 */
       height: auto;
       box-sizing: border-box;
     }
@@ -178,7 +180,7 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       width: 260px;
       max-width: 100%;
-      height: 240px; /* 카드 높이 고정 */
+      height: 240px; 
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -208,10 +210,10 @@
        Research & Open Source
        ======================= */
     .research-list { text-align: left; max-width: 600px; width: 100%; }
-    .research-list li { margin-bottom: 12px; list-style-type: disc; margin-left: 20px; font-size: 1.15rem; }
+    .research-list li { margin-bottom: 15px; list-style-type: disc; margin-left: 20px; font-size: 1.2rem; }
     
     .opensource { background-color: #f9f9f9; }
-    .opensource p { font-size: 1.2rem; margin-bottom: 20px; }
+    .opensource p.link-text { font-size: 1.3rem; margin-top: 30px; }
     .opensource a { color: var(--primary-blue); font-weight: 600; text-decoration: underline; }
 
     /* =======================
@@ -224,14 +226,14 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 30px;
+      gap: 40px;
       flex-wrap: wrap;
-      margin-top: 40px;
+      margin-top: 20px; /* desc와 간격 */
       width: 100%;
     }
     
     .media video {
-      width: 450px; 
+      width: 480px; 
       max-width: 100%;
       aspect-ratio: 16 / 9;
       border-radius: 16px;
@@ -240,26 +242,52 @@
     }
 
     /* =======================
-       Contact
+       Contact (Footer Bottom Layout)
        ======================= */
     .contact {
-      justify-content: space-between;
-      padding-top: 140px;
-      padding-bottom: 40px;
-      background: linear-gradient(to bottom, #ffffff 0%, #ffffff 70%, #cce7ff 100%);
+      /* 화면 꽉 채우고 정렬 조정 */
+      justify-content: flex-start; /* 상단부터 배치 */
+      padding-top: 150px; /* 상단 여백 */
+      padding-bottom: 0;
+      background: linear-gradient(to bottom, #ffffff 0%, #ffffff 60%, #cce7ff 100%);
     }
-    .contact footer { width: 100%; max-width: 1000px; margin: 0 auto; }
-    .footer-info { margin-bottom: 50px; font-size: 1.15rem; line-height: 1.8; }
+    
+    .contact-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; /* 위아래로 벌림 */
+      height: 100%;
+      width: 100%;
+      max-width: 1200px;
+      padding-bottom: 40px; /* 하단 여백 */
+    }
+
+    .contact-top {
+      flex: 1; /* 남은 공간 차지 */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; /* 중앙 정렬 */
+    }
+
+    .footer-info { 
+      font-size: 1.2rem; 
+      line-height: 2; 
+      margin-bottom: 20px;
+    }
     .footer-info a { font-weight: 600; color: var(--primary-blue); }
     
+    /* ✅ 로고들을 하단으로 밀기 위한 설정 */
     .lab-logos {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      align-items: center;
-      gap: 60px;
-      margin-top: 20px;
+      align-items: flex-end; /* 바닥 정렬 */
+      gap: 80px; /* 로고 간격 */
+      margin-top: auto; /* 위쪽 여백을 자동으로 채워서 바닥으로 */
+      padding-top: 40px;
     }
+
     .lab-link {
       display: flex;
       flex-direction: column;
@@ -268,14 +296,14 @@
     }
     .lab-link:hover { transform: translateY(-4px); color: var(--primary-blue); }
     .lab-link img {
-      height: 70px;
-      margin-bottom: 12px;
+      height: 75px;
+      margin-bottom: 15px;
       object-fit: contain;
-      opacity: 0.85;
+      opacity: 0.9;
       transition: 0.3s;
     }
     .lab-link img:hover { opacity: 1; transform: scale(1.05); }
-    .lab-link span { font-size: 0.95rem; font-weight: 600; }
+    .lab-link span { font-size: 1rem; font-weight: 600; }
 
     /* =======================
        Mobile Responsiveness
@@ -286,20 +314,16 @@
         min-height: 100vh;
         padding: 100px 20px 60px;
       }
+      .section h1 { font-size: 2.2rem; margin-bottom: 40px; }
       
       /* Team Mobile */
       .swiper-container { padding: 0 0 40px 0; max-width: 100%; }
       .swiper-button-next, .swiper-button-prev { display: none; }
       .team-member { width: 100%; max-width: 300px; height: auto; padding: 20px; } 
-      .team p.desc { font-size: 1rem; margin-bottom: 20px; }
-
-      /* Media Mobile */
-      .video-container { flex-direction: column; gap: 20px; margin-top: 20px; }
-      .media video { width: 100%; max-width: 100%; }
-
+      
       /* Contact Mobile */
       .contact { padding-top: 100px; }
-      .lab-logos { gap: 40px; }
+      .lab-logos { gap: 40px; margin-top: 60px; }
       .lab-link img { height: 60px; }
     }
   </style>
@@ -348,7 +372,7 @@
             
             <div class="swiper-slide">
               <div class="team-member">
-                <img src="img/lmh.webp" alt="Minho Lee" onerror="this.src='https://via.placeholder.com/90?text=User'" />
+                <img src="img/lmh.webp" alt="Minho Lee" onerror="this.src='https://via.placeholder.com/90?text=M1'" />
                 <h3>Minho Lee</h3>
                 <p>Team Leader</p>
                 <div class="social-icons">
@@ -360,7 +384,7 @@
 
             <div class="swiper-slide">
               <div class="team-member">
-                <img src="https://sparolab.github.io/img/people/master/%EC%A1%B0%EB%8F%99%EC%A7%84_%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84.jpg" alt="Dongjin Cho" onerror="this.src='https://via.placeholder.com/90?text=User'" />
+                <img src="https://sparolab.github.io/img/people/master/%EC%A1%B0%EB%8F%99%EC%A7%84_%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84.jpg" alt="Dongjin Cho" onerror="this.src='https://via.placeholder.com/90?text=M2'" />
                 <h3>Dongjin Cho</h3>
                 <p>MS Student</p>
                 <div class="social-icons">
@@ -371,7 +395,7 @@
 
             <div class="swiper-slide">
               <div class="team-member">
-                <img src="https://sparolab.github.io/img/people/master/%EC%9D%B4%EB%AF%BC%ED%98%B8_%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84.jpg" alt="Minho Lee" onerror="this.src='https://via.placeholder.com/90?text=User'" />
+                <img src="https://sparolab.github.io/img/people/master/%EC%9D%B4%EB%AF%BC%ED%98%B8_%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84.jpg" alt="Minho Lee" onerror="this.src='https://via.placeholder.com/90?text=M3'" />
                 <h3>Minho Lee</h3>
                 <p>MS Student</p>
                 <div class="social-icons">
@@ -382,7 +406,7 @@
 
             <div class="swiper-slide">
               <div class="team-member">
-                <img src="img/kjt.jpg" alt="Jungtae Kim" onerror="this.src='https://via.placeholder.com/90?text=User'" />
+                <img src="img/kjt.jpg" alt="Jungtae Kim" onerror="this.src='https://via.placeholder.com/90?text=M4'" />
                 <h3>Jungtae Kim</h3>
                 <p>Undergraduate</p>
                 <div class="social-icons">
@@ -393,7 +417,7 @@
 
             <div class="swiper-slide">
               <div class="team-member">
-                <img src="img/lsh.jpg" alt="Sanghyun Lee" onerror="this.src='https://via.placeholder.com/90?text=User'" />
+                <img src="img/lsh.jpg" alt="Sanghyun Lee" onerror="this.src='https://via.placeholder.com/90?text=M5'" />
                 <h3>Sanghyun Lee</h3>
                 <p>Undergraduate</p>
                 <div class="social-icons">
@@ -415,7 +439,7 @@
 
             <div class="swiper-slide">
               <div class="team-member">
-                <img src="img/pgw.jpg" alt="Gunwoo Park" onerror="this.src='https://via.placeholder.com/90?text=User'" />
+                <img src="img/pgw.jpg" alt="Gunwoo Park" onerror="this.src='https://via.placeholder.com/90?text=M7'" />
                 <h3>Gunwoo Park</h3>
                 <p>Undergraduate</p>
                 <div class="social-icons">
@@ -426,9 +450,31 @@
 
              <div class="swiper-slide">
               <div class="team-member">
-                <img src="img/jwk.jpg" alt="Wonhyuk Jung" onerror="this.src='https://via.placeholder.com/90?text=User'" />
-                <h3>Won Hyuk Jung</h3>
+                <img src="img/jwk.jpg" alt="Wonhyuk Jung" onerror="this.src='https://via.placeholder.com/90?text=M8'" />
+                <h3>Wonhyuk Jung</h3>
                 <p>Undergraduate</p>
+                <div class="social-icons">
+                  <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="team-member">
+                <img src="https://via.placeholder.com/90?text=M9" alt="Member 9" />
+                <h3>Member 9</h3>
+                <p>New Researcher</p>
+                <div class="social-icons">
+                  <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="team-member">
+                <img src="https://via.placeholder.com/90?text=M10" alt="Member 10" />
+                <h3>Member 10</h3>
+                <p>New Researcher</p>
                 <div class="social-icons">
                   <a href="#"><i class="fab fa-github"></i></a>
                 </div>
@@ -446,7 +492,7 @@
     <section class="section" data-anchor="research">
       <div class="max-w-container">
         <h1>Research</h1>
-        <p style="max-width: 700px; margin-bottom: 30px;">
+        <p class="desc">
           Our work focuses on integrating vision, language, and control in real-world service robots.
           We aim to build reproducible systems that can perceive, plan, and act intelligently.
         </p>
@@ -461,15 +507,15 @@
     <section class="section opensource" data-anchor="opensource">
       <div class="max-w-container">
         <h1>Open-Source Contributions</h1>
-        <p>All our research outputs and robot models will be publicly available.</p>
-        <p><a href="https://github.com/Inha-United" target="_blank">🔗 Visit our GitHub</a></p>
+        <p class="desc">All our research outputs and robot models will be publicly available.</p>
+        <p class="link-text"><a href="https://github.com/Inha-United" target="_blank">🔗 Visit our GitHub</a></p>
       </div>
     </section>
 
     <section class="section media" data-anchor="media">
       <div class="max-w-container">
         <h1>Media</h1>
-        <p>
+        <p class="desc">
           Featured Robot: 
           <a href="https://www.rainbow-robotics.com/en_rby1" target="_blank" rel="noopener noreferrer">
             RB-Y1 from Rainbow Robotics
@@ -489,34 +535,33 @@
     </section>
 
     <section class="section contact" data-anchor="contact">
-      <div class="max-w-container" style="height:100%; justify-content: space-between;">
-        <h1 style="margin-top: 0;">Contact</h1>
-        
-        <footer>
+      <div class="contact-container">
+        <div class="contact-top">
+          <h1 style="margin-bottom: 40px;">Contact</h1>
           <div class="footer-info">
             <p>📧 <a href="mailto:inharobocuphome@gmail.com">inharobocuphome@gmail.com</a></p>
             <p>📍 Inha University, 100 Inha-ro, Michuhol-gu, Incheon, South Korea</p>
           </div>
+        </div>
 
-          <div class="lab-logos">
-            <a href="https://sparolab.github.io" target="_blank" class="lab-link">
-              <img src="https://sparolab.github.io/assets/favicon.png" alt="Sparo Lab" onerror="this.src='https://via.placeholder.com/80'">
-              <span>SPARO Lab</span>
-            </a>
-            <a href="https://rcv-inha.notion.site/webhome" target="_blank" class="lab-link">
-              <img src="RCVLAB.webp" alt="RCV Lab" onerror="this.src='https://via.placeholder.com/80?text=RCV'">
-              <span>RCV Lab</span>
-            </a>
-            <a href="https://artemis-inha.github.io/" target="_blank" class="lab-link">
-              <img src="https://artemis-inha.github.io/assets/images/logo.jpg" alt="Artemis Lab" onerror="this.src='https://via.placeholder.com/80?text=Artemis'">
-              <span>ARTEMIS Lab</span>
-            </a>
-            <a href="https://wjahn.github.io/rils/" target="_blank" class="lab-link">
-              <img src="https://wjahn.github.io/rils/assets/images/logo_inha.png" alt="RILS Lab" onerror="this.src='https://via.placeholder.com/80?text=RILS'">
-              <span>RILS Lab</span>
-            </a>
-          </div>
-        </footer>
+        <div class="lab-logos">
+          <a href="https://sparolab.github.io" target="_blank" class="lab-link">
+            <img src="https://sparolab.github.io/assets/favicon.png" alt="Sparo Lab" onerror="this.src='https://via.placeholder.com/80'">
+            <span>SPARO Lab</span>
+          </a>
+          <a href="https://rcv-inha.notion.site/webhome" target="_blank" class="lab-link">
+            <img src="RCVLAB.webp" alt="RCV Lab" onerror="this.src='https://via.placeholder.com/80?text=RCV'">
+            <span>RCV Lab</span>
+          </a>
+          <a href="https://artemis-inha.github.io/" target="_blank" class="lab-link">
+            <img src="https://artemis-inha.github.io/assets/images/logo.jpg" alt="Artemis Lab" onerror="this.src='https://via.placeholder.com/80?text=Artemis'">
+            <span>ARTEMIS Lab</span>
+          </a>
+          <a href="https://wjahn.github.io/rils/" target="_blank" class="lab-link">
+            <img src="https://wjahn.github.io/rils/assets/images/logo_inha.png" alt="RILS Lab" onerror="this.src='https://via.placeholder.com/80?text=RILS'">
+            <span>RILS Lab</span>
+          </a>
+        </div>
       </div>
     </section>
   </div>
@@ -537,13 +582,12 @@
 
     // 2. Swiper Slider Init (Grid Mode)
     new Swiper('.team-slider', {
-      // 그리드 모드 활성화
       grid: {
-        rows: 2, // 2줄 배치
-        fill: 'row', // 행 우선 채우기
+        rows: 2,
+        fill: 'row', 
       },
       spaceBetween: 20,
-      loop: false, // ✅ 무한 반복 해제
+      loop: false, 
       
       pagination: {
         el: '.swiper-pagination',
@@ -566,7 +610,7 @@
           grid: { rows: 2 },
           spaceBetween: 20,
         },
-        // PC (1024px 이상): 4열 2행 (한 화면에 8명) -> 모든 멤버 노출
+        // PC (1024px 이상): 4열 2행 (한 화면에 8명)
         1024: {
           slidesPerView: 4,
           grid: { rows: 2 },
