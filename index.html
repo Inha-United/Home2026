@@ -91,7 +91,7 @@
 
     .max-w-container {
       width: 100%;
-      max-width: 1400px; /* 비디오 커짐에 따라 전체 폭 증가 */
+      max-width: 1400px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
@@ -201,7 +201,14 @@
     .social-icons a { color: #999; font-size: 1.1em; }
     .social-icons a:hover { color: var(--primary-blue); transform: scale(1.2); }
 
-    .swiper-button-next, .swiper-button-prev { color: var(--primary-blue); width: 30px; }
+    /* ✅ 슬라이드 버튼 양끝 배치 */
+    .swiper-button-next, .swiper-button-prev { 
+      color: var(--primary-blue); 
+      width: 30px; 
+    }
+    .swiper-button-next { right: 0 !important; }
+    .swiper-button-prev { left: 0 !important; }
+
     .swiper-pagination-bullet-active { background-color: var(--primary-blue); }
 
     /* =======================
@@ -224,17 +231,17 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 80px;
+      gap: 60px;
       flex-wrap: wrap;
       margin-top: 20px;
       width: 100%;
     }
     
     .media video {
-      /* ✅ 수정됨: PC에서 비디오 크기 대폭 확대 */
-      width: 400px; 
+      /* ✅ PC 기준 600px 확대, 16:9 비율 */
+      width: 600px; 
       max-width: 90%;
-      aspect-ratio: 9 / 16;
+      aspect-ratio: 16 / 9;
       border-radius: 16px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
       background: #000;
@@ -246,15 +253,14 @@
     .contact {
       justify-content: flex-start; 
       padding-top: 150px; 
-      padding-bottom: 20px; /* 하단 여백 약간 */
+      padding-bottom: 10px; /* ✅ 바닥 패딩 최소화 */
       background: linear-gradient(to bottom, #ffffff 0%, #ffffff 60%, #cce7ff 100%);
     }
     
-    /* ✅ 컨테이너 높이를 100%로 늘려 공간 확보 */
     .contact-container {
       display: flex;
       flex-direction: column;
-      justify-content: space-between; /* 위아래 끝으로 배치 */
+      justify-content: space-between; /* ✅ 위아래 끝으로 배치 */
       height: 100%; 
       width: 100%;
       max-width: 1200px;
@@ -265,7 +271,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      flex-grow: 1; /* 위쪽 공간 차지 */
+      flex-grow: 1; 
     }
 
     .footer-info { 
@@ -275,14 +281,13 @@
     }
     .footer-info a { font-weight: 600; color: var(--primary-blue); }
     
-    /* ✅ 로고 하단 고정 */
     .lab-logos {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       align-items: flex-end; 
       gap: 80px;
-      padding-bottom: 20px; /* 바닥에서 약간 띄움 */
+      padding-bottom: 20px; 
       width: 100%;
     }
 
