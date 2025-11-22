@@ -252,7 +252,7 @@
     .opensource a { color: var(--primary-blue); font-weight: 600; text-decoration: underline; }
 
     /* =======================
-       Media (수정됨)
+       Media
        ======================= */
     .media { background-color: #fff; }
     .media a { color: var(--primary-blue); font-weight: 600; }
@@ -276,69 +276,54 @@
       background: #000;
       transition: transform 0.3s;
     }
-    
-    .media video:hover {
-        transform: scale(1.02);
-    }
+    .media video:hover { transform: scale(1.02); }
 
-    /* [Mobile] Media 수정: 가로 스크롤 적용 */
+    /* [Mobile] Media 가로 스크롤 */
     @media (max-width: 900px) {
       .video-container {
-        flex-wrap: nowrap; /* 줄바꿈 금지 */
-        overflow-x: auto;  /* 가로 스크롤 허용 */
-        justify-content: flex-start; /* 왼쪽부터 정렬 */
+        flex-wrap: nowrap; 
+        overflow-x: auto;  
+        justify-content: flex-start; 
         gap: 20px;
-        padding: 10px 20px 20px 20px; /* 그림자 잘림 방지 및 여백 */
-        
-        /* 스크롤 스냅 (부드럽게 멈춤) */
+        padding: 10px 20px 20px 20px; 
         scroll-snap-type: x mandatory; 
         -webkit-overflow-scrolling: touch;
       }
-
-      /* 스크롤바 숨기기 (깔끔하게) */
-      .video-container::-webkit-scrollbar {
-        display: none;
-      }
-
+      .video-container::-webkit-scrollbar { display: none; }
       .media video {
-        /* 화면 너비의 75% 정도만 차지하게 해서 옆에 다음 비디오가 살짝 보이게 함 */
         width: 75vw; 
         max-width: 320px;
         aspect-ratio: 9 / 16;
-        
-        /* 중요: Flexbox 내에서 크기 고정 */
         flex-shrink: 0; 
-        
-        /* 중요: 스크롤 스냅 포인트 */
         scroll-snap-align: center;
-        
         box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       }
     }
 
     /* =======================
-       Contact Section
+       Contact Section (Layout Updated)
        ======================= */
     .contact {
       width: 100%;
       min-height: 100vh;
-      padding: 240px 20px 40px; 
+      /* PC: 상단 여백 넉넉히 */
+      padding: 160px 20px 60px; 
       box-sizing: border-box;
       display: flex;
       justify-content: center;
+      align-items: center;
       background: linear-gradient(to bottom, #ffffff 0%, #ffffff 60%, #cce7ff 100%);
     }
     
     .contact-container {
       display: flex;
       flex-direction: column;
-      justify-content: center; 
+      justify-content: space-between; /* 위아래 내용을 벌림 */
       align-items: center;
-      gap: 80px;
       width: 100%;
-      max-width: 1200px;
+      max-width: 1000px;
       height: 100%;
-      flex-grow: 1;
+      min-height: 50vh; /* 최소 높이 확보 */
     }
     
     .contact-top {
@@ -346,35 +331,33 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
+      margin-bottom: 40px;
       width: 100%;
-      margin-bottom: 0px;
-      gap: 20px;
     }
+
+    .contact-top h1 { margin-bottom: 20px; }
     
     .footer-info {
       font-size: 1.1rem;
-      line-height: 1.6;
+      line-height: 1.8;
       text-align: center;
-      margin-bottom: 20px;
     }
-    
     .footer-info a {
       font-weight: 600;
       color: #0078ff;
       text-decoration: none;
     }
-    
+
+    /* [수정됨] 랩 로고 컨테이너 */
     .lab-logos {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: flex-end;
       width: 100%;
-      gap: 40px;
-    }
-    
-    @media (min-width: 1024px) {
-      .lab-logos { justify-content: space-between; gap: 150px; }
+      display: flex;
+      justify-content: center;
+      align-items: center; /* 수직 중앙 정렬 (중요) */
+      gap: 60px; /* 로고 사이 간격 */
+      flex-wrap: wrap; /* PC에서는 줄바꿈 허용하되 센터 유지 */
+      margin-top: auto; /* 하단으로 밀기 */
+      padding-top: 40px;
     }
     
     .lab-link {
@@ -385,25 +368,20 @@
       color: #333;
       transition: transform 0.3s;
     }
-    
     .lab-link:hover { transform: translateY(-5px); color: #0078ff; }
     
     .lab-link img {
-      height: 100px;
-      width: auto;   
-      margin-bottom: 15px;
-      object-fit: contain;
+      height: 80px; /* PC 이미지 높이 통일 */
+      width: auto;
+      object-fit: contain; /* 비율 유지하며 안에 쏙 */
+      margin-bottom: 12px;
       opacity: 0.9;
       transition: 0.3s;
     }
-    
     .lab-link img:hover { opacity: 1; transform: scale(1.05); }
-    
-    .lab-link span { font-size: 1rem; font-weight: 600; margin-top: 5px; }
+    .lab-link span { font-size: 0.95rem; font-weight: 600; color: #555; }
 
-    /* =======================
-       Mobile Responsiveness (Global)
-       ======================= */
+    /* [Mobile] Contact Layout & Grid */
     @media (max-width: 900px) {
       .section {
         height: auto !important;
@@ -412,10 +390,28 @@
       }
       .section h1 { font-size: 2.2rem; margin-bottom: 40px; }
 
-      /* Contact Mobile */
-      .contact { padding-top: 100px; }
-      .lab-logos { gap: 40px; margin-top: 60px; padding-bottom: 20px; }
-      .lab-link img { height: 60px; }
+      .contact { 
+        padding-top: 120px; 
+        padding-bottom: 60px;
+      }
+      
+      .contact-container {
+        justify-content: center;
+        gap: 60px; /* 모바일에서 위아래 간격 */
+      }
+      
+      /* [핵심] 모바일에서는 깔끔한 2x2 그리드로 변경 */
+      .lab-logos {
+        display: grid; 
+        grid-template-columns: repeat(2, 1fr); /* 2열 격자 */
+        gap: 30px 20px; /* 세로 가로 간격 */
+        width: 100%;
+        max-width: 360px; /* 너무 퍼지지 않게 제한 */
+      }
+      
+      .lab-link img {
+        height: 60px; /* 모바일 로고 크기 조절 */
+      }
     }
   </style>
 </head>
