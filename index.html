@@ -382,11 +382,23 @@
       .contact { 
         padding-top: 120px; 
         padding-bottom: 60px;
+        display: block;
       }
       
       .contact-container {
         justify-content: center;
         gap: 60px; 
+        height: auto; 
+        min-height: auto;
+      }
+      
+      /* ★ 중요: PC에서 설정한 큰 여백을 모바일에서 리셋 ★ */
+      .footer-info {
+        margin-top: 40px; /* 280px -> 40px로 축소 */
+      }
+      
+      .footer-info a {
+        margin-top: 0; /* 240px -> 0으로 리셋 */
       }
       
       /* Mobile Logo Grid (깔끔한 2x2 유지) */
