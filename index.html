@@ -256,7 +256,7 @@
     .research-list { text-align: left; max-width: 900px; width: 100%; }
     .research-list li { margin-bottom: 15px; list-style-type: disc; margin-left: 20px; font-size: 1.2rem; }
     
-    .opensource { background-color: #f9f9f9; }
+    .opensource { background-color: #fff; }
     .opensource p.link-text { font-size: 1.3rem; margin-top: 30px; }
     .opensource a { color: var(--primary-blue); font-weight: 600; text-decoration: underline; }
 
@@ -388,6 +388,16 @@
         display: block;
         overflow: visible;
       }
+      
+      /* --- [수정 1] Open Source 섹션 최적화 시작 --- */
+      /* Research와 Media 사이에 자연스럽게 녹아들도록 설정 */
+      .section.opensource {
+        background-color: #fff !important; /* 배경을 흰색으로 변경 */
+        min-height: auto !important;       /* 강제 100vh 해제 (내용만큼만 높이 차지) */
+        padding-top: 20px;                 /* 위쪽 여백 줄임 (위 섹션과 가깝게) */
+        padding-bottom: 60px;              /* 아래쪽 여백 적당히 */
+      }
+      
       .section h1 { font-size: 2.2rem; margin-bottom: 40px; }
 
       .contact { 
