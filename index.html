@@ -382,11 +382,11 @@
     /* [Mobile] Global & Layout */
     @media (max-width: 900px) {
       .section {
-        height: auto !important;
-        min-height: 100vh;
-        padding: 100px 20px 60px;
-        display: block;
-        overflow: visible;
+        /* height: auto !important;  <-- 삭제 */
+        /* min-height: 100vh;        <-- 삭제 */
+        /* display: block;           <-- 삭제 */
+        /* overflow: visible;        <-- 삭제 */
+        padding: 80px 20px;
       }
       
       /* --- [수정 1] Open Source 섹션 최적화 시작 --- */
@@ -700,7 +700,7 @@
       autoScrolling: true,
       scrollOverflow: true,
       fitToSection: false,
-      responsiveWidth: 900, 
+      // responsiveWidth: 900, 
       anchors: ['home', 'team', 'research', 'opensource', 'media', 'contact'],
       navigationTooltips: ['Home', 'Team', 'Research', 'Open Source', 'Media', 'Contact'],
       navigation: true,
