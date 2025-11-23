@@ -436,20 +436,27 @@
       
       /* ★★★ [Team 섹션 잘림 현상 완벽 수정] ★★★ */
       /* 1. 섹션 자체를 상단 정렬로 강제 변경 */
+      /* ★★★ [Team 섹션 수정] ★★★ */
       .section.team {
         display: flex !important;
         flex-direction: column !important;
-        justify-content: flex-start !important; /* 중앙 정렬 해제 -> 위에서부터 시작 */
+        justify-content: flex-start !important;
         
-        /* 헤더(60px)보다 훨씬 아래에서 시작하도록 여백 대폭 추가 */
-        padding-top: 120px !important; 
+        /* padding-top을 120px에서 80px로 줄여 공간 확보 */
+        padding-top: 80px !important; 
         padding-bottom: 60px !important;
         
-        /* 높이 강제 설정을 풀어서 내용만큼 늘어나게 함 */
         height: auto !important;
-        min-height: 100vh; 
+        min-height: 100vh;
       }
-
+      
+      /* 설명 글 여백 줄이기 */
+      .section p.desc {
+          margin-bottom: 30px; /* 기존 50px -> 30px */
+          font-size: 1rem;     /* 폰트 크기도 살짝 조절 (선택사항) */
+          padding: 0 10px;     /* 좌우 여백 확보 */
+      }
+      
       /* 2. FullPage.js가 만드는 내부 테이블 셀(fp-tableCell)의 수직 중앙 정렬 무력화 */
       .section.team .fp-tableCell {
         display: flex !important;
