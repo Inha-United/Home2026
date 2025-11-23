@@ -450,11 +450,31 @@
         min-height: 100vh;
       }
       
-      /* 설명 글 여백 줄이기 */
+      /* 설명 글 여백 및 너비 수정 */
       .section p.desc {
-          margin-bottom: 30px; /* 기존 50px -> 30px */
-          font-size: 1rem;     /* 폰트 크기도 살짝 조절 (선택사항) */
-          padding: 0 10px;     /* 좌우 여백 확보 */
+          /* 1. 너비 강제 조정 (가장 중요) */
+          width: 100% !important;       /* 부모 컨테이너 너비에 맞춤 */
+          max-width: 100% !important;   /* 화면을 뚫고 나가지 않게 제한 */
+          
+          /* 2. 텍스트 줄바꿈 설정 */
+          white-space: normal !important;  /* 텍스트 자동 줄바꿈 허용 */
+          word-break: keep-all;            /* 단어 단위로 예쁘게 끊기 (한글/영문 혼용 시 좋음) */
+          word-wrap: break-word;           /* 긴 단어가 있을 경우 강제 줄바꿈 */
+  
+          /* 3. 여백 및 정렬 */
+          margin-bottom: 30px;
+          padding: 0 10px;         /* 좌우 안쪽 여백 */
+          box-sizing: border-box;  /* padding이 너비에 포함되도록 설정 (잘림 방지 필수) */
+          
+          font-size: 1rem;
+      }
+  
+      /* 만약 부모 컨테이너인 .max-w-container 때문에 잘리는 것이라면 아래 코드도 추가 */
+      .section.team .max-w-container {
+          width: 100% !important;
+          max-width: 100% !important;
+          padding-left: 0 !important;
+          padding-right: 0 !important;
       }
       
       /* 2. FullPage.js가 만드는 내부 테이블 셀(fp-tableCell)의 수직 중앙 정렬 무력화 */
@@ -465,13 +485,6 @@
         align-items: center !important;
         vertical-align: top !important;
         height: auto !important;
-      }
-      
-      /* 3. 컨테이너 여백 제거 (padding-top으로 제어하므로) */
-      .section.team .max-w-container {
-        justify-content: flex-start !important;
-        margin-top: 0 !important;
-        padding-top: 0 !important;
       }
 
       /* 4. 제목이 너무 크면 줄임 (선택 사항) */
