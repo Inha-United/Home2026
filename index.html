@@ -260,42 +260,76 @@
     .opensource p.link-text { font-size: 1.3rem; margin-top: 30px; }
     .opensource a { color: var(--primary-blue); font-weight: 600; text-decoration: underline; }
 
-    /* =======================
-       Media (PC 스크롤바 버그 수정)
+/* =======================
+       Media (PC 스크롤바 버그 수정 및 반응형 개선)
        ======================= */
     .media { background-color: #fff; }
     .media a { color: var(--primary-blue); font-weight: 600; }
     
-    /* 비디오 컨테이너 */
+    /* 비디오 컨테이너: 유연하게 배치 */
     .video-container {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 80px;
-      flex-wrap: wrap; 
-      margin-top: 20px;
+      flex-wrap: wrap; /* 공간 부족 시 자동 줄바꿈 */
+      gap: 4vw; /* 고정 80px 대신 화면 너비 비례 간격 사용 */
+      margin-top: 30px;
       width: 100%;
+      max-width: 1200px; /* 너무 넓게 퍼지지 않도록 제한 */
       
-      /* [중요] PC에서 마우스 오버 시 스크롤바 생기는 것 방지 */
-      overflow: hidden; 
-      padding: 10px; /* hover scale로 잘림 방지 여백 */
+      /* PC 스크롤바 방지 및 내부 패딩 */
+      overflow: visible; 
+      padding: 10px; 
     }
     
-    /* PC에서 혹시 모를 스크롤바 숨김 처리 */
-    .video-container::-webkit-scrollbar { display: none; }
-    
+    /* 비디오 스타일: 크기 유동적 조절 */
     .media video {
-      width: 360px; 
-      max-width: 90%;
-      aspect-ratio: 9 / 16;
+      /* 기본적으로 화면의 30% 정도 차지하되, 최소/최대 크기 제한 */
+      width: 30%; 
+      min-width: 280px; /* 너무 작아지지 않음 */
+      max-width: 360px; /* 너무 커지지 않음 */
+      
+      /* 중요: 9:16 세로 영상이므로, 화면 높이에 맞춰 높이를 제한해야 함 */
+      max-height: 55vh; 
+      
+      aspect-ratio: 9 / 16; /* 비율 유지 */
       border-radius: 16px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
       background: #000;
       transition: transform 0.3s;
-      /* 비디오 자체에서 오버플로우 발생 방지 */
       display: block; 
     }
+
     .media video:hover { transform: scale(1.02); }
+
+    /* [Tablet & Mobile] 화면이 좁아지면 설정 변경 */
+    @media (max-width: 900px) {
+      .video-container {
+        gap: 20px; /* 모바일에서는 간격 축소 */
+        flex-direction: row; /* 가로 배치 유지하되 */
+      }
+
+      .media video {
+        /* 모바일에서는 비디오 크기를 조금 더 줄여서 한 화면에 들어오게 시도 */
+        width: 45%; 
+        min-width: 160px; /* 더 작은 화면 대응 */
+        max-width: 300px;
+        max-height: 50vh; /* 높이 제한을 더 빡빡하게 */
+      }
+    }
+
+    /* [Small Mobile] 아주 좁은 화면에서는 세로로 쌓기 */
+    @media (max-width: 480px) {
+      .video-container {
+        flex-direction: column; /* 세로 정렬 */
+      }
+      .media video {
+        width: 80%; /* 꽉 차게 */
+        max-width: 280px;
+        min-width: unset;
+        margin-bottom: 20px;
+      }
+    }
 
     /* =======================
        Contact Section
