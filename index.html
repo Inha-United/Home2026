@@ -399,7 +399,28 @@
       }
       
       .section h1 { font-size: 2.2rem; margin-bottom: 40px; }
+      
+      /* ★ [수정] Team 섹션 잘림 방지 ★ */
+      .section.team {
+        /* 중앙 정렬을 해제하고 위에서부터 배치 */
+        justify-content: flex-start !important; 
+        
+        /* 헤더(60px)보다 아래에서 시작하도록 여백 추가 */
+        padding-top: 90px !important; 
+        padding-bottom: 20px !important;
+      }
 
+      /* Team 섹션 내부 컨테이너도 위쪽 정렬 */
+      .section.team .max-w-container {
+        justify-content: flex-start !important;
+      }
+
+      /* 설명 글씨가 너무 길면 슬라이더를 밀어내니 마진 조절 */
+      .section.team p.desc {
+        margin-bottom: 20px !important; 
+        font-size: 1rem; /* 폰트 살짝 줄여서 공간 확보 (선택사항) */
+      }
+      
       /* Contact 섹션 여백 최적화 */
       .contact { 
         /* 위아래 여백을 대폭 줄여서 화면 안에 들어오게 함 */
