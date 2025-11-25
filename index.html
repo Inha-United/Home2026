@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inha-United@Home</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <script>
+    function setVh() {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+    setVh();
+    window.addEventListener('resize', setVh);
+    window.addEventListener('orientationchange', setVh);
+  </script>
+
+  <style>
+    :root {
+      --vh: 1vh;
+      --primary-blue: #0078ff;
+      --dark-blue: #004c99;
+    }
+    
+    * {
+      box-sizing: border-box;
+      font-family: 'Pretendard', sans-serif;
+      margin: 0; padding: 0;
+    }
+    
+    body {
+      background-color: #fff;
+      color: #333;
+    }
+
+    .fp-watermark { display: none !important; }
+    a { text-decoration: none; color: inherit; transition: 0.3s; }
+    ul { list-style: none; padding: 0; }
+
+    .fa-scholar::before { content: "\f19d"; }
+    .fa-homepage::before { content: "\f015"; }
+
+    /* =======================
+       Header
+       ======================= */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      background: linear-gradient(to bottom, #b5dbff 0%, #cce7ff 100%);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+    }
+    header h1 { font-size: 1.1rem; font-weight: 700; color: #000; }
+    nav a { margin-left: 25px; color: var(--dark-blue); font-weight: 500; }
+    nav a:hover { color: var(--primary-blue); }
+
+    @media (max-width: 900px) {
+      header { padding: 0 20px; justify-content: center; }
+      nav { display: none; }
+    }
+
+    /* =======================
+       Common Layout
+       ======================= */
+    .section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      height: calc(var(--vh, 1vh) * 100); 
+      padding: 0 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .max-w-container {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .section h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 30px; 
+      margin-top: 0;
+    }
+    
+    .section p.desc {
+      font-size: 1.15rem;
+      max-width: 700px;
+      margin: 0 auto 50px auto; 
+      line-height: 1.6;
+      color: #555;
+    }
+
+    /* =======================
+       Home
+       ======================= */
+    .home { background: linear-gradient(to bottom, #cce7ff 0%, #ffffff 100%); }
+    .home h1 { margin-bottom: 20px; font-size: 3.5rem; }
+    .home p { font-size: 1.3rem; margin-bottom: 40px; }
+    .home button {
+      background-color: var(--primary-blue);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 14px 32px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .home button:hover { background-color: #005fcc; }
+
+    .social {
+      position: fixed;
+      left: 40px; top: 50%;
+      transform: translateY(-50%);
+      display: flex; flex-direction: column; gap: 20px;
+      z-index: 99;
+    }
+    .social a { color: #74a9e1; font-size: 26px; }
+    .social a:hover { color: var(--primary-blue); transform: scale(1.15); }
+    
+    @media (max-width: 900px) {
+      .social { display: none; }
+      .home h1 { font-size: 2.5rem; margin-top: 50px; }
+      }
+    }
+
+    /* =======================
+       Team (Responsive Grid)
+       ======================= */
+    .team { background-color: #f9f9f9; width: 100%; }
+    
+    .slider-wrapper {
+      position: relative;
+      width: 100%;
+      padding: 0 50px; 
+      margin-top: 10px;
+    }
+
+    .swiper-container.team-slider {
+      width: 100%;
+      padding: 0 10px;
+      overflow: hidden;
+    }
+
+    .team-member {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 20px 15px;
+      text-align: center;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      width: 200px; 
+      height: 240px; 
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .team-member:hover { transform: translateY(-6px); box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15); }
+    
+    .team-member img {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(0, 120, 255, 0.3);
+      margin-bottom: 10px;
+    }
+    .team-member h3 { font-size: 1.1em; font-weight: 600; margin: 5px 0; }
+    .team-member p { color: #666; font-size: 0.9em; margin-bottom: 10px; }
+
+    .social-icons { display: flex; justify-content: center; gap: 10px; }
+    .social-icons a { color: #999; font-size: 1.1em; }
+    .social-icons a:hover { color: var(--primary-blue); transform: scale(1.2); }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+      width: 40px; height: 40px;
+      color: var(--primary-blue);
+      background: rgba(255,255,255,0.8);
+      border-radius: 50%;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      z-index: 10;
+    }
+    .swiper-button-prev:after, 
+    .swiper-button-next:after { font-size: 1.2rem; font-weight: bold; }
+    .swiper-button-prev { left: 0; }
+    .swiper-button-next { right: 0; }
+
+    /* [PC] 2 Rows Grid Layout (복구됨) */
+    @media (min-width: 901px) {
+      .swiper-container.team-slider {
+        height: 550px; /* 2줄 높이 확보 */
+      }
+      .swiper-slide {
+        height: calc((100% - 30px) / 2) !important; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    /* [Mobile] 1 Row Scroll (최적화) */
+    @media (max-width: 900px) {
+      .slider-wrapper { padding: 0; }
+      .swiper-button-next, .swiper-button-prev { display: none; }
+      
+      .swiper-container.team-slider {
+        height: auto; 
+        padding-bottom: 40px;
+      }
+      .swiper-slide {
+        height: auto !important;
+        width: auto !important;
+        display: flex;
+        justify-content: center;
+      }
+      /* --- 수정된 부분 시작 --- */
+      .team-member {
+        width: 260px;
+        /* 높이를 자동으로 설정하여 텍스트 길이에 맞게 늘어남 */
+        height: auto; 
+        /* 내용이 적어도 최소한의 모양은 유지하도록 설정 (선택사항) */
+        min-height: 240px; 
+        /* 내용이 많을 때 위아래 여백이 답답하지 않도록 조절 */
+        padding: 30px 20px; 
+      }
+      /* --- 수정된 부분 끝 --- */
+    }
+
+    /* =======================
+       Research & Open Source
+       ======================= */
+    .research-list { text-align: left; max-width: 900px; width: 100%; }
+    .research-list li { margin-bottom: 15px; list-style-type: disc; margin-left: 20px; font-size: 1.2rem; }
+    
+    .opensource { background-color: #fff; }
+    .opensource p.link-text { font-size: 1.3rem; margin-top: 30px; }
+    .opensource a { color: var(--primary-blue); font-weight: 600; text-decoration: underline; }
+
+/* =======================
+       Media (PC 스크롤바 버그 수정 및 반응형 개선)
+       ======================= */
+    .media { background-color: #fff; }
+    .media a { color: var(--primary-blue); font-weight: 600; }
+    
+    /* 비디오 컨테이너: 유연하게 배치 */
+    .video-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap; /* 공간 부족 시 자동 줄바꿈 */
+      gap: 4vw; /* 고정 80px 대신 화면 너비 비례 간격 사용 */
+      margin-top: 30px;
+      width: 100%;
+      max-width: 1200px; /* 너무 넓게 퍼지지 않도록 제한 */
+      
+      /* PC 스크롤바 방지 및 내부 패딩 */
+      overflow: visible; 
+      padding: 10px; 
+    }
+    
+    /* 비디오 스타일: 크기 유동적 조절 */
+    .media video {
+      /* 기본적으로 화면의 30% 정도 차지하되, 최소/최대 크기 제한 */
+      width: 30%; 
+      min-width: 280px; /* 너무 작아지지 않음 */
+      max-width: 360px; /* 너무 커지지 않음 */
+      
+      /* 중요: 9:16 세로 영상이므로, 화면 높이에 맞춰 높이를 제한해야 함 */
+      max-height: 55vh; 
+      
+      aspect-ratio: 9 / 16; /* 비율 유지 */
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      background: #000;
+      transition: transform 0.3s;
+      display: block; 
+    }
+
+    .media video:hover { transform: scale(1.02); }
+
+    /* [Tablet & Mobile] 화면이 좁아지면 설정 변경 */
+    @media (max-width: 900px) {
+      .video-container {
+        gap: 20px; /* 모바일에서는 간격 축소 */
+        flex-direction: row; /* 가로 배치 유지하되 */
+      }
+
+      .media video {
+        /* 모바일에서는 비디오 크기를 조금 더 줄여서 한 화면에 들어오게 시도 */
+        width: 45%; 
+        min-width: 160px; /* 더 작은 화면 대응 */
+        max-width: 300px;
+        max-height: 50vh; /* 높이 제한을 더 빡빡하게 */
+      }
+    }
+
+    /* [Small Mobile] 아주 좁은 화면에서는 세로로 쌓기 */
+    @media (max-width: 480px) {
+      .video-container {
+        flex-direction: column; /* 세로 정렬 */
+      }
+      .media video {
+        width: 80%; /* 꽉 차게 */
+        max-width: 280px;
+        min-width: unset;
+        margin-bottom: 20px;
+      }
+    }
+
+    /* =======================
+       Contact Section
+       ======================= */
+    .contact {
+      width: 100%;
+      min-height: 100vh;
+      padding: 180px 20px 10px; 
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to bottom, #ffffff 0%, #ffffff 60%, #cce7ff 100%);
+    }
+    
+    .contact-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1600px;
+      height: 100%;
+      min-height: 50vh;
+    }
+    
+    .contact-top {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 40px;
+      width: 100%;
+    }
+
+    .contact-top h1 { margin-bottom: 20px; }
+    
+    .footer-info {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      text-align: center;
+      margin-top: 300px;
+    }
+    .footer-info a {
+      font-weight: 600;
+      color: #0078ff;
+      text-decoration: none;
+      margin-top: 260px;
+    }
+
+    /* Lab Logos (PC) */
+    .lab-logos {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center; 
+      gap: 180px; 
+      flex-wrap: wrap;
+      margin-top: auto; 
+      padding-top: 20px;
+    }
+    
+    .lab-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: #333;
+      transition: transform 0.3s;
+    }
+    .lab-link:hover { transform: translateY(-5px); color: #0078ff; }
+    
+    .lab-link img {
+      height: 120px; 
+      width: auto;
+      object-fit: contain; 
+      margin-bottom: 12px;
+      opacity: 0.9;
+      transition: 0.3s;
+    }
+    .lab-link img:hover { opacity: 1; transform: scale(1.05); }
+    .lab-link span { font-size: 1.1rem; font-weight: 600; color: #555; }
+
+    /* [Mobile] Global & Layout */
+    @media (max-width: 900px) {
+      .section {
+        /* height: auto !important;  <-- 삭제 */
+        /* min-height: 100vh;        <-- 삭제 */
+        /* display: block;           <-- 삭제 */
+        /* overflow: visible;        <-- 삭제 */
+        padding: 80px 20px;
+      }
+      
+      /* --- [수정 1] Open Source 섹션 최적화 시작 --- */
+      /* Research와 Media 사이에 자연스럽게 녹아들도록 설정 */
+      .section.opensource {
+        background-color: #fff !important; /* 배경을 흰색으로 변경 */
+        min-height: auto !important;       /* 강제 100vh 해제 (내용만큼만 높이 차지) */
+        padding-top: 20px;                 /* 위쪽 여백 줄임 (위 섹션과 가깝게) */
+        padding-bottom: 60px;              /* 아래쪽 여백 적당히 */
+      }
+      
+      .section h1 { font-size: 2.2rem; margin-bottom: 40px; }
+      
+      /* ★★★ [Team 섹션 잘림 현상 완벽 수정] ★★★ */
+      /* 1. 섹션 자체를 상단 정렬로 강제 변경 */
+      /* ★★★ [Team 섹션 수정] ★★★ */
+      .section.team {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        
+        /* padding-top을 120px에서 80px로 줄여 공간 확보 */
+        padding-top: 80px !important; 
+        padding-bottom: 60px !important;
+        
+        height: auto !important;
+        min-height: 100vh;
+      }
+      
+      /* 설명 글 여백 및 너비 수정 */
+      .section p.desc {
+          /* 1. 너비 강제 조정 (가장 중요) */
+          width: 100% !important;       /* 부모 컨테이너 너비에 맞춤 */
+          max-width: 100% !important;   /* 화면을 뚫고 나가지 않게 제한 */
+          
+          /* 2. 텍스트 줄바꿈 설정 */
+          white-space: normal !important;  /* 텍스트 자동 줄바꿈 허용 */
+          word-break: keep-all;            /* 단어 단위로 예쁘게 끊기 (한글/영문 혼용 시 좋음) */
+          word-wrap: break-word;           /* 긴 단어가 있을 경우 강제 줄바꿈 */
+  
+          /* 3. 여백 및 정렬 */
+          margin-bottom: 30px;
+          padding: 0 10px;         /* 좌우 안쪽 여백 */
+          box-sizing: border-box;  /* padding이 너비에 포함되도록 설정 (잘림 방지 필수) */
+          
+          font-size: 1rem;
+      }
+  
+      /* 만약 부모 컨테이너인 .max-w-container 때문에 잘리는 것이라면 아래 코드도 추가 */
+      .section.team .max-w-container {
+          width: 100% !important;
+          max-width: 100% !important;
+          padding-left: 0 !important;
+          padding-right: 0 !important;
+      }
+      
+      /* 2. FullPage.js가 만드는 내부 테이블 셀(fp-tableCell)의 수직 중앙 정렬 무력화 */
+      .section.team .fp-tableCell {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important; /* 내부 요소도 상단 정렬 */
+        align-items: center !important;
+        vertical-align: top !important;
+        height: auto !important;
+      }
+
+      /* 4. 제목이 너무 크면 줄임 (선택 사항) */
+      .section.team h1 {
+        margin-bottom: 20px !important;
+        margin-top: 0 !important;
+      }
+      
+      /* Contact 섹션 여백 최적화 */
+      .contact { 
+        /* 위아래 여백을 대폭 줄여서 화면 안에 들어오게 함 */
+        padding-top: 60px !important; 
+        padding-bottom: 40px !important;
+        /* 모바일에서도 플렉스 유지 (중앙 정렬 위해) */
+        display: flex !important; 
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .contact-container {
+        /* 강제 높이 100% 해제 -> 내용물만큼만 차지하게 */
+        height: auto !important; 
+        min-height: auto !important;
+        
+        /* 요소들을 쫙 벌리지 않고(space-between 해제) 중앙에 오밀조밀 모음 */
+        justify-content: center !important; 
+        gap: 40px; /* 요소 사이 간격 적당히 */
+      }
+      
+      .contact-top {
+        margin-bottom: 0 !important; /* 불필요한 여백 제거 */
+      }
+      
+      .footer-info {
+        /* 기존 100px ~ 300px 던 엄청난 여백 제거 */
+        margin-top: 20px !important; 
+        margin-bottom: 20px !important;
+      }
+      
+      .footer-info a {
+        margin-top: 0; 
+      }
+      
+      /* 로고 박스 설정 */
+      .lab-logos {
+        display: grid; 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 20px 30px; /* 로고 사이 간격 조절 */
+        width: 100%;
+        max-width: 360px; 
+        margin-top: 20px !important; 
+        padding-top: 0;
+        
+        /* 로고가 너무 바닥에 붙지 않게 하단 여백 확보 */
+        padding-bottom: 20px; 
+      }
+      
+      .lab-link img { height: 50px; } /* 로고 크기 살짝 줄여서 한눈에 들어오게 */
+      
+      /* Media Video Mobile: 원래대로 Stack */
+      .media video { width: 100%; max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Inha-United@Home</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#team">Team</a>
+      <a href="#research">Research</a>
+      <a href="#opensource">Open Source</a>
+      <a href="#media">Media</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <div id="fullpage">
+
+    <section class="section home" data-anchor="home">
+      <div class="social">
+        <a href="https://www.instagram.com/inha_united_official" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/company/inha-united" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.youtube.com/@InhaUnited" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://github.com/Inha-United" target="_blank"><i class="fab fa-github"></i></a>
+      </div>
+      <div class="max-w-container">
+        <h1>Welcome!</h1>
+        <p>We are <b>Inha-United@Home</b> 🤖</p>
+        <p>A newly founded RoboCup @Home team from Inha University (2025).</p>
+        <button onclick="location.href='#team'">Learn More</button>
+      </div>
+    </section>
+
+    <section class="section team" data-anchor="team">
+      <div class="max-w-container">
+        <h1>Our Team</h1>
+        <p class="desc">
+          We are a newly founded robotics research team at Inha University, 
+          focusing on service robots, autonomous perception, and intelligent control systems.
+        </p>
+    
+        <div class="slider-wrapper">
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+    
+          <div class="swiper-container team-slider">
+            <div class="swiper-wrapper">
+              
+              <div class="swiper-slide">
+                <div class="team-member">
+                  <img src="img/lmh.webp" alt="Minho Lee" onerror="this.src='https://via.placeholder.com/90?text=M1'" />
+                  <h3>Minho Lee</h3>
+                  <p>Team Leader</p>
+                  <div class="social-icons">
+                    <a href="https://github.com/minho0" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/minho-lee-144ba6379/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="mailto:mhlee00@inha.edu"><i class="fas fa-envelope"></i></a>
+                  </div>
+                </div>
+              </div>
+    
+              <div class="swiper-slide">
+                <div class="team-member">
+                  <img src="https://sparolab.github.io/img/people/master/%EC%A1%B0%EB%8F%99%EC%A7%84_%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84.jpg" alt="Dongjin Cho" onerror="this.src='https://via.placeholder.com/90?text=M2'" />
+                  <h3>Dongjin Cho</h3>
+                  <p>MS Student</p>
+                  <div class="social-icons">
+                    <a href="https://github.com/dongjineee" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/dongineee" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="mailto:d22g66@inha.edu"><i class="fas fa-envelope"></i></a>
+                    <a href="https://scholar.google.com/citations?hl=en&user=dE64iRYAAAAJ" target="_blank" title="Google Scholar"><i class="fa fa-scholar"></i></a>
+                  </div>
+                </div>
+              </div>
+    
+              <div class="swiper-slide">
+                <div class="team-member">
+                  <img src="https://sparolab.github.io/img/people/master/%EC%9D%B4%EB%AF%BC%ED%98%B8_%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84.jpg" alt="Minho Lee" onerror="this.src='https://via.placeholder.com/90?text=M3'" />
+                  <h3>Minho Lee</h3>
+                  <p>MS Student</p>
+                  <div class="social-icons">
+                    <a href="https://github.com/iminolee" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/iminolee" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="mailto:mino@inha.edu"><i class="fas fa-envelope"></i></a>
+                    <a href="https://scholar.google.com/citations?user=96AEAd0AAAAJ&hl=en" target="_blank" title="Google Scholar"><i class="fa fa-scholar"></i></a>
+                    <a href="https://roboxiv.com/" target="_blank" title="Homepage"><i class="fa fa-homepage"></i></a>
+                  </div>
+                </div>
+              </div>
+    
+              <div class="swiper-slide">
+                <div class="team-member">
+                  <img src="img/kjt.jpg" alt="Jungtae Kim" onerror="this.src='https://via.placeholder.com/90?text=M4'" />
+                  <h3>Jungtae Kim</h3>
+                  <p>Undergraduate</p>
+                  <div class="social-icons">
+                    <a href="https://github.com/JungtaeKim02" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="mailto:buttontg@naver.com"><i class="fas fa-envelope"></i></a>
+                  </div>
+                </div>
+              </div>
+    
+              <div class="swiper-slide">
+                <div class="team-member">
+                  <img src="img/lsh.jpg" alt="Sanghyun Lee" onerror="this.src='https://via.placeholder.com/90?text=M5'" />
+                  <h3>Sanghyun Lee</h3>
+                  <p>Undergraduate</p>
+                  <div class="social-icons">
+                    <a href="https://github.com/sanghyun819" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="mailto:12202900@inha.edu"><i class="fas fa-envelope"></i></a>
+                  </div>
+                </div>
+              </div>
+    
+              <div class="swiper-slide">
+                <div class="team-member">
+                  <img src="img/kjy.png" alt="Jiyun Kim" />
+                  <h3>Jiyun Kim</h3>
+                  <p>Undergraduate</p>
+                  <div class="social-icons">
+                    <a href="https://github.com/kjy0261" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="mailto:jiyun0261@inha.edu"><i class="fas fa-envelope"></i></a>
+                  </div>
+                </div>
+              </div>
+    
+              <div class="swiper-slide">
+                <div class="team-member">
+                  <img src="img/pgw.jpg" alt="Gunwoo Park" onerror="this.src='https://via.placeholder.com/90?text=M7'" />
+                  <h3>Gunwoo Park</h3>
+                  <p>Undergraduate</p>
+                  <div class="social-icons">
+                    <a href="https://github.com/PGW63" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="mailto:adgjl06@inha.edu"><i class="fas fa-envelope"></i></a>
+                  </div>
+                </div>
+              </div>
+    
+               <div class="swiper-slide">
+                <div class="team-member">
+                  <img src="img/jwk.jpg" alt="Wonhyuk Jung" onerror="this.src='https://via.placeholder.com/90?text=M8'" />
+                  <h3>Wonhyuk Jung</h3>
+                  <p>Undergraduate</p>
+                  <div class="social-icons">                    
+                    <a href="https://github.com/RB3159" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="mailto:rebullu3159@inha.edu"><i class="fas fa-envelope"></i></a>
+                  </div>
+                </div>
+              </div>
+    
+              <div class="swiper-slide">
+                <div class="team-member">
+                  <img src="img/hjh.jpg" alt="Jihyun Han" />
+                  <h3>Jihyun Han</h3>
+                  <p>Undergraduate</p>
+                  <div class="social-icons">
+                    <a href="https://github.com/han-jihyun" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="mailto:jhjhjh0122@inha.edu"><i class="fas fa-envelope"></i></a>
+                  </div>
+                </div>
+              </div>
+              
+              <!--<div class="swiper-slide">
+                <div class="team-member">
+                  <img src="https://via.placeholder.com/90?text=M10" alt="Member 10" />
+                  <h3>Member 10</h3>
+                  <p>New Researcher</p>
+                  <div class="social-icons">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                  </div>
+                </div>
+              </div>-->
+            </div> 
+            <div class="swiper-pagination"></div>
+          </div> 
+        </div> 
+      </div> 
+    </section>
+
+    <section class="section" data-anchor="research">
+      <div class="max-w-container">
+        <h1>Research</h1>
+        <p class="desc">
+          Our work focuses on integrating vision, language, and control in real-world service robots.
+          We aim to build reproducible systems that can perceive, plan, and act intelligently.
+        </p>
+        <ul class="research-list">
+          <li>Vision-Language Grounding for Object Understanding</li>
+          <li>Operational Space Control for Manipulation</li>
+          <li>Reinforcement Learning in Real-to-Sim Environments</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section opensource" data-anchor="opensource">
+      <div class="max-w-container">
+        <h1>Open-Source Contributions</h1>
+        <p class="desc">All our research outputs and robot models will be publicly available.</p>
+        <p class="link-text"><a href="https://github.com/Inha-United" target="_blank">🔗 Visit our GitHub</a></p>
+      </div>
+    </section>
+
+    <section class="section media" data-anchor="media">
+      <div class="max-w-container">
+        <h1>Media</h1>
+        <p class="desc">
+          Our Robot: 
+          <a href="https://www.rainbow-robotics.com/en_rby1" target="_blank" rel="noopener noreferrer">
+            RB-Y1 from Rainbow Robotics
+          </a>
+        </p>
+        <div class="video-container">
+          <video controls autoplay muted loop playsinline>
+            <source src="IMG_6070.mp4" type="video/mp4">
+            Your browser does not support video.
+          </video>
+          <video controls autoplay muted loop playsinline>
+            <source src="IMG_6071.mp4" type="video/mp4">
+            Your browser does not support video.
+          </video>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact" data-anchor="contact">
+      <div class="contact-container">
+        <div class="contact-top">
+          <h1>Contact</h1>
+          <div class="footer-info">
+            <p>📧 <a href="mailto:inharobocuphome@gmail.com">inharobocuphome@gmail.com</a></p>
+            <p>📍 Inha University, 100 Inha-ro, Michuhol-gu, Incheon, South Korea</p>
+          </div>
+        </div>
+
+        <div class="lab-logos">
+          <a href="https://sparolab.github.io" target="_blank" class="lab-link">
+            <img src="https://sparolab.github.io/assets/favicon.png" alt="Sparo Lab" onerror="this.src='https://via.placeholder.com/80'">
+            <span>SPARO Lab</span>
+          </a>
+          <a href="https://rcv-inha.notion.site/webhome" target="_blank" class="lab-link">
+            <img src="RCVLAB.webp" alt="RCV Lab" onerror="this.src='https://via.placeholder.com/80?text=RCV'">
+            <span>RCV Lab</span>
+          </a>
+          <a href="https://artemis-inha.github.io/" target="_blank" class="lab-link">
+            <img src="https://artemis-inha.github.io/assets/images/logo.jpg" alt="Artemis Lab" onerror="this.src='https://via.placeholder.com/80?text=Artemis'">
+            <span>ARTEMIS Lab</span>
+          </a>
+          <a href="https://wjahn.github.io/rils/" target="_blank" class="lab-link">
+            <img src="https://wjahn.github.io/rils/assets/images/logo_inha.png" alt="RILS Lab" onerror="this.src='https://via.placeholder.com/80?text=RILS'">
+            <span>RILS Lab</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // 1. FullPage.js Init
+    new fullpage('#fullpage', {
+      autoScrolling: true,
+      scrollOverflow: true,
+      fitToSection: false,
+      // responsiveWidth: 900, 
+      anchors: ['home', 'team', 'research', 'opensource', 'media', 'contact'],
+      navigationTooltips: ['Home', 'Team', 'Research', 'Open Source', 'Media', 'Contact'],
+      navigation: true,
+      showActiveTooltip: true,
+      credits: { enabled: false }
+    });
+
+    // 2. Swiper Slider Init
+    new Swiper('.team-slider', {
+      // 공통 설정 (기본값: 모바일용 1줄 세팅)
+      slidesPerView: 'auto', 
+      centeredSlides: true,  
+      spaceBetween: 20,
+      
+      grid: {
+        rows: 1,
+      },
+      
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+
+      // 화면 크기별 설정 (Breakpoints)
+      breakpoints: {
+        // [PC 모드] 901px 이상에서는 2줄 그리드 적용
+        901: {
+          slidesPerView: 5, // 한 줄에 4개
+          centeredSlides: false, // 왼쪽 정렬
+          grid: {
+            rows: 2,
+            fill: 'row',
+          },
+          spaceBetween: 30,
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
