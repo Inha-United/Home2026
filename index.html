@@ -224,7 +224,12 @@
 
     /* [Mobile] 1 Row Scroll (최적화) */
     @media (max-width: 900px) {
-      .slider-wrapper { padding: 0; }
+      .slider-wrapper { 
+        padding: 0; 
+        width: 100%;
+        flex-grow: 1; /* 남은 공간 차지 */
+        margin-top: 0;
+      }
       .swiper-button-next, .swiper-button-prev { display: none; }
       
       .swiper-container.team-slider {
@@ -238,37 +243,73 @@
         width: auto !important;
         display: flex;
         justify-content: center;
-        /* 슬라이드 자체의 높이를 유연하게 둠 */
-        align-items: stretch; 
+        align-items: stretch; /* 카드 높이 맞춤 */
       }
 
-      /* --- Team Member 카드 수정 (텍스트 잘림 해결) --- */
+      /* ★★★ [Team 섹션 레이아웃 구조 변경] ★★★ */
+      .section.team {
+        display: flex !important;
+        flex-direction: column !important;
+        /* 중앙 정렬(center) -> 상단 정렬(flex-start)로 변경하여 겹침 방지 */
+        justify-content: flex-start !important; 
+        
+        padding-top: 100px !important; /* 헤더 간격 */
+        padding-bottom: 50px !important;
+        
+        height: auto !important; /* 고정 높이 해제 */
+        min-height: 100vh;       /* 최소 높이 확보 */
+      }
+
+      /* FullPage.js 내부 컨테이너 상단 정렬 */
+      .section.team .fp-tableCell {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        height: auto !important;
+      }
+
+      /* ★★★ [텍스트 영역 분리 및 고정] ★★★ */
+      .section.team p.desc {
+        flex-shrink: 0 !important; /* 절대 찌그러지지 않음 */
+        width: 100% !important;
+        margin-bottom: 40px !important; /* 슬라이더와 간격 */
+        padding: 0 15px;
+        position: relative;
+        z-index: 10;
+        white-space: normal !important;
+        height: auto !important;
+      }
+
+      /* 제목(H1) 고정 */
+      .section.team h1 {
+        flex-shrink: 0 !important;
+        margin-top: 0 !important;
+        margin-bottom: 20px !important;
+      }
+
+      /* --- Team Member 카드 수정 --- */
       .team-member {
         width: 260px;
-        /* 높이 자동 설정: 내용이 많아지면 카드가 길어짐 */
         height: auto; 
         min-height: 240px; 
-        
         padding: 30px 20px;
-        
-        /* Flex 설정: 내용이 넘칠 경우를 대비 */
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center; /* 내용이 적을 땐 중앙, 많으면 위아래로 늘어남 */
+        justify-content: center;
       }
 
-      /* 텍스트 강제 줄바꿈 설정 (이메일 등이 잘리는 문제 해결) */
+      /* 텍스트 강제 줄바꿈 (이메일 잘림 방지) */
       .team-member h3, 
       .team-member p {
-        width: 100%;             /* 너비를 꽉 채움 */
-        word-wrap: break-word;   /* 긴 단어 강제 줄바꿈 */
-        word-break: break-all;   /* 영어/숫자 등도 강제로 줄바꿈 (이메일용) */
-        white-space: normal;     /* 줄바꿈 허용 */
-        line-height: 1.4;        /* 줄간격 확보 */
+        width: 100%;
+        word-wrap: break-word;
+        word-break: break-all;
+        white-space: normal;
+        line-height: 1.4;
       }
 
-      /* 소셜 아이콘들이 좁을 때 줄바꿈 되도록 설정 */
+      /* 소셜 아이콘 */
       .social-icons {
         display: flex;
         flex-wrap: wrap;
@@ -276,6 +317,7 @@
         gap: 10px;
         margin-top: 10px;
       }
+    } /* <--- ★★★ 여기에 닫는 괄호가 꼭 있어야 합니다! */
 
     /* =======================
        Research & Open Source
@@ -596,7 +638,7 @@
       <div class="social">
         <a href="https://www.instagram.com/inha_united_official" target="_blank"><i class="fab fa-instagram"></i></a>
         <a href="https://www.linkedin.com/company/inha-united" target="_blank"><i class="fab fa-linkedin"></i></a>
-        <a href="https://www.youtube.com/@InhaUnited" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.youtube.com/@Inha-United_Home" target="_blank"><i class="fab fa-youtube"></i></a>
         <a href="https://github.com/Inha-United" target="_blank"><i class="fab fa-github"></i></a>
       </div>
       <div class="max-w-container">
@@ -882,5 +924,6 @@
 
 </body>
 </html>
+
 
 
