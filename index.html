@@ -230,25 +230,52 @@
       .swiper-container.team-slider {
         height: auto; 
         padding-bottom: 40px;
+        overflow: visible; /* 그림자나 튀어나온 내용이 잘리지 않도록 설정 */
       }
+      
       .swiper-slide {
         height: auto !important;
         width: auto !important;
         display: flex;
         justify-content: center;
+        /* 슬라이드 자체의 높이를 유연하게 둠 */
+        align-items: stretch; 
       }
-      /* --- 수정된 부분 시작 --- */
+
+      /* --- Team Member 카드 수정 (텍스트 잘림 해결) --- */
       .team-member {
         width: 260px;
-        /* 높이를 자동으로 설정하여 텍스트 길이에 맞게 늘어남 */
+        /* 높이 자동 설정: 내용이 많아지면 카드가 길어짐 */
         height: auto; 
-        /* 내용이 적어도 최소한의 모양은 유지하도록 설정 (선택사항) */
         min-height: 240px; 
-        /* 내용이 많을 때 위아래 여백이 답답하지 않도록 조절 */
-        padding: 30px 20px; 
+        
+        padding: 30px 20px;
+        
+        /* Flex 설정: 내용이 넘칠 경우를 대비 */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center; /* 내용이 적을 땐 중앙, 많으면 위아래로 늘어남 */
       }
-      /* --- 수정된 부분 끝 --- */
-    }
+
+      /* 텍스트 강제 줄바꿈 설정 (이메일 등이 잘리는 문제 해결) */
+      .team-member h3, 
+      .team-member p {
+        width: 100%;             /* 너비를 꽉 채움 */
+        word-wrap: break-word;   /* 긴 단어 강제 줄바꿈 */
+        word-break: break-all;   /* 영어/숫자 등도 강제로 줄바꿈 (이메일용) */
+        white-space: normal;     /* 줄바꿈 허용 */
+        line-height: 1.4;        /* 줄간격 확보 */
+      }
+
+      /* 소셜 아이콘들이 좁을 때 줄바꿈 되도록 설정 */
+      .social-icons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 10px;
+      }
 
     /* =======================
        Research & Open Source
@@ -855,4 +882,5 @@
 
 </body>
 </html>
+
 
