@@ -108,18 +108,18 @@
     /* Research 전용 컨테이너 */
     .research-container {
       width: 100%;
-      max-width: 1400px; 
+      max-width: 1400; 
       margin: 0 auto;
-      display: flex; 
-      flex-direction: column;
+      display: block; 
       text-align: center; 
-      justify-content: flex-start;
       padding: 0 20px;
     }
 
     /* Research 섹션 강제 확장 스타일 */
     .section[data-anchor="research"] {
-      align-items: center !important; 
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      align-items: stretch !important; 
     }
     
     /* [수정] Home 섹션은 예외적으로 중앙 정렬 */
@@ -644,8 +644,8 @@
         <a href="https://www.youtube.com/@Inha-United_Home" target="_blank"><i class="fab fa-youtube"></i></a>
         <a href="https://github.com/Inha-United" target="_blank"><i class="fab fa-github"></i></a>
       </div>
+      <h1>Welcome!</h1>
       <div class="max-w-container">
-        <h1>Welcome!</h1>
         <p>We are <b>Inha-United@Home</b> 🤖</p>
         <p>A newly founded RoboCup @Home team from Inha University (2025).</p>
         <button onclick="location.href='#team'">Learn More</button>
@@ -653,8 +653,8 @@
     </section>
 
     <section class="section team" data-anchor="team">
+      <h1>People</h1>
       <div class="max-w-container">
-        <h1>Our Team</h1>
         <p class="desc">
           Advisors
         </p>
@@ -855,8 +855,8 @@
     </section>
 
     <section class="section" data-anchor="research">
+      <h1>Publications</h1>
       <div class="research-container">
-        <h1>Publications</h1>
         
         <div class="publication-wrap">
           
@@ -927,9 +927,9 @@
     </section>
 
     <section class="section contact" data-anchor="contact">
+      <h1>Contact</h1>
       <div class="contact-container">
         <div class="contact-top">
-          <h1>Contact</h1>
           <div class="footer-info">
             <p>📧 <a href="mailto:inharobocuphome@gmail.com">inharobocuphome@gmail.com</a></p>
             <p>📍 Inha University, 100 Inha-ro, Michuhol-gu, Incheon, South Korea</p>
