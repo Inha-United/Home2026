@@ -465,7 +465,7 @@
     .lab-link img:hover { opacity: 1; transform: scale(1.05); }
     .lab-link span { font-size: 1.1rem; font-weight: 600; color: #555; }
     
-    .lab-link img.rcv-logo { height: 160px; } 
+    .lab-link img.rcv-logo { height: 100px; } 
     .lab-link img.sparo-logo { height: 80px; } 
     .lab-link img.artemis-logo { height: 120px; } 
     .lab-link img.rils-logo { height: 160px; } 
@@ -850,10 +850,13 @@
       navigationTooltips: ['Home', 'Team', 'Publication', 'Media','', 'Contact'],
       navigation: true,
       showActiveTooltip: true,
-      credits: { enabled: false }
+      credits: { enabled: false },
+
+      // ★ [핵심 수정 1] 슬라이더와 비디오 영역에서는 fullPage 스크롤 간섭 금지
+      normalScrollElements: '.swiper, .video-container, .research-list',
     });
 
-    // 2. Swiper Slider Init (Updated for separate control)
+    // 2. Swiper Slider Init
 
     // PC Responsive Settings
     const pcBreakpoint = {
@@ -865,11 +868,16 @@
         }
     };
 
-    // --- A. Advisor Slider (Loop FALSE, No Autoplay) ---
+    // --- A. Advisor Slider (Loop FALSE) ---
     const advisorSliderEl = document.querySelector('.advisor-slider');
     new Swiper(advisorSliderEl, {
-        loop: false,             // ★ Advisor: Loop 꺼짐
-        autoplay: false,         // ★ Advisor: 자동재생 꺼짐
+        // ★ [핵심 수정 2] 모바일 터치 인식 개선 및 관찰자 설정
+        observer: true,
+        observeParents: true,
+        watchOverflow: true,   // 슬라이드가 적으면 스와이프 막음 (버그 방지)
+        
+        loop: false,             
+        autoplay: false,         
         
         slidesPerView: 'auto',
         centeredSlides: true,
@@ -888,11 +896,15 @@
         breakpoints: pcBreakpoint
     });
 
-    // --- B. Member Slider (Loop TRUE, Autoplay ON) ---
+    // --- B. Member Slider (Loop TRUE) ---
     const memberSliderEl = document.querySelector('.member-slider');
     new Swiper(memberSliderEl, {
-        loop: true,              // ★ Member: Loop 켜짐
-        autoplay: {              // ★ Member: 자동재생 켜짐
+        // ★ [핵심 수정 2] 모바일 터치 인식 개선
+        observer: true,
+        observeParents: true,
+
+        loop: true,              
+        autoplay: {              
           delay: 3000,
           disableOnInteraction: false,
           pauseOnMouseEnter: true,
@@ -917,4 +929,5 @@
   </script>
 </body>
 </html>
+
 
