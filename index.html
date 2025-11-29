@@ -227,7 +227,10 @@
     .advisor-wrapper {
       width: 100%;
       display: flex;
-      justify-content: center; /* 중앙 정렬 */
+      justify-content: center; /* 중앙 정렬 */align-items: flex-start;
+      flex-wrap: wrap;           /* 화면 좁으면 줄바꿈 */
+      /* ▼▼▼ 이 숫자를 늘리세요 (기존 20px -> 60px~80px 추천) ▼▼▼ */
+      gap: 60px;
       margin-bottom: 40px;     /* 아래 팀원들과의 간격 */
     }
     
@@ -255,10 +258,12 @@
     @media (max-width: 900px) {
       .advisor-wrapper {
         margin-bottom: 20px;
+        gap: 15px !important; /* 모바일은 좁게 유지 */
       }
       .advisor-wrapper .team-member {
         transform: none; /* 모바일엔 크기 원상복귀 */
         width: 260px;    /* 모바일 팀원 카드 크기와 동일하게 */
+        height: auto;
       }
     }
 
@@ -965,6 +970,7 @@
 
 </body>
 </html>
+
 
 
 
