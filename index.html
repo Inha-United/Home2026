@@ -152,6 +152,20 @@
        ======================= */
     .team { background-color: #f9f9f9; width: 100%; }
     
+    /* [Advisor] 상단 독립 컨테이너 스타일 */
+    .advisor-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center; /* 중앙 정렬 */
+      margin-bottom: 40px;     /* 아래 팀원들과의 간격 */
+    }
+    
+    /* [Advisor] 카드가 너무 작아 보이지 않게 조금 키움 (선택사항) */
+    .advisor-wrapper .team-member {
+      transform: scale(1.05); /* 팀원보다 5% 정도 크게 강조 */
+      border: 2px solid var(--primary-blue); /* 파란 테두리로 강조 */
+    }
+    
     .slider-wrapper {
       position: relative;
       width: 100%;
@@ -219,6 +233,17 @@
         display: flex;
         justify-content: center;
         align-items: center;
+      }
+    }
+    
+    /* [Mobile] 모바일 반응형 처리 */
+    @media (max-width: 900px) {
+      .advisor-wrapper {
+        margin-bottom: 20px;
+      }
+      .advisor-wrapper .team-member {
+        transform: none; /* 모바일엔 크기 원상복귀 */
+        width: 260px;    /* 모바일 팀원 카드 크기와 동일하게 */
       }
     }
 
@@ -925,6 +950,7 @@
 
 </body>
 </html>
+
 
 
 
