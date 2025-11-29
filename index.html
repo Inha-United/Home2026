@@ -531,106 +531,64 @@
         box-shadow: 0 15px 40px rgba(0,0,0,0.25);
       }
 
-      /* =======================
-         Contact Section
-      ======================= */
-      .contact {
-        width: 100%;
-        min-height: 100vh;
-        padding: 160px 40px 60px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: linear-gradient(180deg, #ffffff 0%, #ebf4ff 65%, #cfe5ff 100%);
-        box-sizing: border-box;
-      }
-      
-      /* 전체 영역 정렬 안정화 */
+      /* --- Contact PC (스크롤 제거: 간격 자동 조절) --- */
       .contact-container {
         width: 100%;
-        max-width: 1500px;
+        /* 화면 높이 꽉 채우되, 내부 요소 균등 배치 */
+        height: calc(100vh - 120px);
         display: flex;
         flex-direction: column;
+        justify-content: space-between; /* 중앙 집중 */
+        gap: 8vh;
         align-items: center;
-        justify-content: space-between; /* ↑ 위아래 공간 균등 */
+        padding: 40px 0; /* 픽셀 대신 화면 높이 비례 간격 사용 */
       }
       
-      /* 제목 영역 */
-      .contact-top {
-        text-align: center;
-        margin-bottom: 60px;
-      }
-      .contact-top h1 {
-        font-size: 2.6rem;
-        font-weight: 800;
-        letter-spacing: -0.5px;
-      }
-      .contact-top p {
-        font-size: 1.2rem;
-        opacity: 0.75;
-        margin-top: 10px;
-      }
-      
-      /* Footer Info (학교/주소/이메일 등) */
-      .footer-info {
-        font-size: 1.15rem;
-        line-height: 1.85;
-        text-align: center;
-        margin-top: 60px;
-      }
-      .footer-info a {
-        color: #006bda;
-        font-weight: 700;
-        text-decoration: none;
-      }
-      .footer-info a:hover { text-decoration: underline; }
-      
-      /* =======================
-         🔥 Lab Logo Section
-      ======================= */
-      .lab-logos {
+      .contact-top { 
         width: 100%;
+        /* margin-top: auto; 제거 -> flex gap으로 제어 */
+      }
+
+      .lab-logos {
         display: flex;
         justify-content: center;
-        gap: 120px;
-        margin-top: auto;
-        flex-wrap: wrap;
-        padding: 30px 0 20px;
+        align-items: center;
+        /* 고정 픽셀(130px) 대신 화면 너비 비례 간격 사용 */
+        gap: 15vw; 
+        width: 100%;
+        max-width: 100%;
+        /* 고정 마진 제거 -> flex gap이 처리함 */
+        margin-top: 0; 
+        margin-bottom: 0;
+        padding: 10px; /* hover 잘림 방지 */
       }
-      
-      /* 개별 연구실 카드 느낌 부여 */
-      .lab-link {
+
+      .footer-info { margin-top: 0; margin-bottom: 0; }
+
+      .lab-link { 
+        transition: transform 0.3s; 
         display: flex;
         flex-direction: column;
         align-items: center;
-        text-decoration: none;
-        color: #222;
-        transition: 0.35s ease;
-        padding: 10px 18px;
-        border-radius: 12px;
       }
-      .lab-link:hover {
-        transform: translateY(-6px) scale(1.03);
-        background: rgba(0,85,200,0.06);
-      }
+      .lab-link:hover { transform: translateY(-5px); color: #0078ff; }
       
-      /* Logo Image */
-      .lab-link img {
-        height: 110px;
-        object-fit: contain;
-        margin-bottom: 14px;
-        opacity: 0.88;
-        transition: 0.3s;
+      /* 로고 크기를 화면 높이(vh)에 맞춤 -> 화면 작아지면 로고도 작아짐 */
+      .lab-link img { 
+        height: 9vh; 
+        max-height: 90px; 
+        width: auto;
+        margin-bottom: 10px; 
+        opacity: 0.9; 
+        transition: 0.3s; 
       }
-      .lab-link:hover img { opacity: 1; }
+      .lab-link img:hover { opacity: 1; transform: scale(1.05); }
       
-      /* 연구실 이름 */
-      .lab-link span {
-        font-size: 1.15rem;
-        font-weight: 700;
-        letter-spacing: -0.3px;
-        color: #444;
-      }
+      /* RCV 로고 등 큰 로고도 비율에 맞춰 제한 */
+      .lab-link img.rcv-logo { height: 16vh; max-height: 160px; }
+      .lab-link img.sparo-logo { height: 7vh; max-height: 70px; }
+      
+      .lab-link span { font-size: 1.1rem; white-space: nowrap; }
     }
   </style>
 </head>
@@ -1002,8 +960,6 @@
   </script>
 </body>
 </html>
-
-
 
 
 
