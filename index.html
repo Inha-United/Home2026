@@ -502,7 +502,13 @@
       }
       .pub-links a:hover { text-decoration: underline; }
 
-      /* --- Media PC (스크롤 제거: 높이 자동 조절) --- */
+      /* --- Media PC --- */
+      .section[data-anchor="media"] .content-wrapper {
+         /* 부모 래퍼가 전체 높이를 쓰고, 내부 요소 분배 */
+         height: 100%;
+         justify-content: flex-start; /* 상단부터 배치하되 flex-grow로 조절 */
+      }
+
       .video-container {
         display: flex;
         flex-direction: row;
@@ -512,22 +518,25 @@
         width: 100%;
         padding: 10px;
         
-        /* [핵심] 높이를 화면의 50%로 제한 (헤더+텍스트 고려) */
-        height: calc(100vh - 250px); 
-        max-height: 500px; 
-        margin-top: 10px; 
+        /* [수정 핵심] */
+        /* 고정 계산식 제거: height: calc(100vh - 250px); */
+        /* 남은 공간을 자동으로 채우되, 너무 커지지 않게 제한 */
+        flex: 1; 
+        height: auto; 
+        max-height: 60vh; /* 비디오가 너무 커지는 것 방지 */
+        min-height: 0;    /* Flexbox 내부 스크롤 버그 방지 */
+        margin-top: 20px;
+        margin-bottom: 40px; /* 하단 여백 확보 */
       }
 
       .media video {
-        /* 높이에 맞춰 너비 자동 조절 */
-        height: 100%; 
-        width: auto;
+        height: 100%; /* 컨테이너(flex:1) 높이에 맞춤 */
+        width: auto;  /* 비율 유지 */
+        max-width: 45%; /* 비디오 두 개가 나란히 있을 때 겹치지 않게 */
         
-        max-width: 1600px;
         border-radius: 16px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        
-        object-fit: contain; /* 잘림 방지 */
+        object-fit: contain;
         transition: transform 0.3s;
         background: #000;
       }
@@ -536,39 +545,39 @@
         box-shadow: 0 15px 40px rgba(0,0,0,0.25);
       }
 
-      /* --- Contact PC (스크롤 제거: 간격 자동 조절) --- */
-      .contact-container {
-        width: 100%;
-        /* 화면 높이 꽉 채우되, 내부 요소 균등 배치 */
-        height: calc(100vh - 120px);
-        display: flex;
-        flex-direction: column;
-        justify-content: center; /* 중앙 집중 */
-        gap: 8vh; /* 픽셀 대신 화면 높이 비례 간격 사용 */
-        padding-bottom: 10px;
-        max-width: 2000px;
-      }
-      
-      .contact-top { 
-        width: 100%;
-        /* margin-top: auto; 제거 -> flex gap으로 제어 */
+      /* --- Contact PC --- */
+      .section[data-anchor="contact"] .content-wrapper {
+         height: 100%; /* 부모 높이 상속 */
+         justify-content: flex-start; /* flex로 내부 간격 조절 */
       }
 
+      .contact-container {
+        width: 100%;
+        max-width: 2000px;
+        
+        /* [수정 핵심] */
+        /* 고정 계산식 제거: height: calc(100vh - 120px); */
+        /* H1 제목을 제외한 나머지 공간을 균등하게 차지 */
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* 내부 요소 수직 중앙 정렬 */
+        gap: 8vh; /* 요소 사이 간격 */
+        
+        padding-bottom: 40px; /* 하단 여백 */
+      }
+      
       .lab-logos {
         display: flex;
         justify-content: center;
         align-items: center;
-        /* 고정 픽셀(130px) 대신 화면 너비 비례 간격 사용 */
         gap: 6vw; 
         width: 100%;
-        max-width: 100%;
-        /* 고정 마진 제거 -> flex gap이 처리함 */
-        margin-top: 0; 
-        margin-bottom: 0;
-        padding: 10px; /* hover 잘림 방지 */
+        margin: 0;
+        padding: 10px;
       }
 
-      .footer-info { margin-top: 0; margin-bottom: 0; }
+      .footer-info { margin: 0; }
 
       .lab-link { 
         transition: transform 0.3s; 
@@ -578,7 +587,6 @@
       }
       .lab-link:hover { transform: translateY(-5px); color: #0078ff; }
       
-      /* 로고 크기를 화면 높이(vh)에 맞춤 -> 화면 작아지면 로고도 작아짐 */
       .lab-link img { 
         height: 9vh; 
         max-height: 90px; 
@@ -589,7 +597,6 @@
       }
       .lab-link img:hover { opacity: 1; transform: scale(1.05); }
       
-      /* RCV 로고 등 큰 로고도 비율에 맞춰 제한 */
       .lab-link img.rcv-logo { height: 16vh; max-height: 160px; }
       .lab-link img.sparo-logo { height: 7vh; max-height: 70px; }
       
@@ -965,3 +972,4 @@
   </script>
 </body>
 </html>
+
