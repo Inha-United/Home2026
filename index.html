@@ -639,15 +639,14 @@
       }
 
     /* ========================================================
-       ★ [PC 전용 스타일] 901px 이상 - Research 완전 고정 ★
+       ★ [PC 전용 스타일] 901px 이상 - Research 꽉 채우기 ★
        ======================================================== */
     @media (min-width: 901px) {
       
-      /* 1. 컨테이너 100% 확장 (화면 끝까지) */
+      /* 1. 컨테이너 100% 확장 */
       .section[data-anchor="research"] .max-w-container {
         width: 100% !important;
-        /* "거의 최대 화면" = 1600px 또는 95% */
-        max-width: 1600px !important; 
+        max-width: 1400px !important; /* 최대 1400px까지 확장 */
         padding-left: 40px !important;
         padding-right: 40px !important;
       }
@@ -658,38 +657,33 @@
         margin: 0 auto;
       }
 
-      /* 2. 논문 카드를 '블록'으로 만들고 크기를 강제 고정 */
+      /* 2. PC에서는 아이템을 '박스' 형태로 만들어서 공간을 채움 */
       .pub-item {
-        /* [가로 고정] 무조건 부모 너비의 100%를 차지 */
-        display: block !important; 
-        width: 100% !important;
+        width: 100%;             /* 가로 꽉 채우기 */
+        background-color: #fff;  /* 배경색 (필수) */
+        border: 1px solid #ddd;  /* 회색 테두리 (필수) */
+        border-radius: 12px;     /* 둥근 모서리 */
+        padding: 20px 25px;      /* 넉넉한 안쪽 여백 */
+        margin-bottom: 20px;     /* 아이템 간격 */
         
-        /* [세로 고정] 내용이 짧든 길든 높이 220px로 고정 */
-        height: 220px !important; 
+        /* [높이 고정 설정 추가] */
+        min-height: 160px;       /* 최소 높이를 160px로 고정하여 큼직하게 유지 */
+        display: flex;           /* 내부 내용물 정렬을 위해 flex 사용 */
+        flex-direction: column;  /* 세로 정렬 */
+        justify-content: center; /* 내용이 적어도 수직 중앙에 예쁘게 배치 */
+        align-items: flex-start; /* 글자는 왼쪽 정렬 */
         
-        /* 박스 디자인 */
-        background-color: #fff;  
-        border: 1px solid #ddd;  
-        border-radius: 12px;     
-        padding: 0 40px;      /* 좌우 여백 넉넉히 */
-        margin-bottom: 20px;     
-        
-        /* 내용 정렬 (세로 중앙) */
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: center !important; 
-        align-items: flex-start !important;
-
+        /* 기존 왼쪽 선 스타일 유지/강화 */
         border-left: 6px solid #ddd; 
-        box-sizing: border-box; 
+        box-sizing: border-box; /* 패딩이 너비에 포함되도록 */
       }
 
       /* PC Hover 효과 */
       .pub-item:hover {
-        transform: translateX(10px); 
+        transform: translateX(10px); /* 오른쪽 살짝 이동 */
         border-color: var(--primary-blue);
         border-left-color: var(--primary-blue);
-        background-color: #f8fbff; 
+        background-color: #f8fbff; /* 호버 시 연한 파란 배경 */
         box-shadow: 0 4px 15px rgba(0,0,0,0.05);
       }
     }
@@ -732,49 +726,56 @@
         <p class="desc">
           Advisors
         </p>
+
+        <div class="slider-wrapper">
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
     
-        <div class="advisor-wrapper">
-          <div class="team-member">
-            <img src="https://github.com/octocat.png" alt="A" onerror="this.src='https://via.placeholder.com/90?text=Leader'" />
-            <h3>Minho Lee</h3>
-            <p>Professor</p>
-            <div class="social-icons">
-               <a href="https://github.com/minho0" target="_blank"><i class="fab fa-github"></i></a>
-               <a href="https://linkedin.com/in/minho-lee-144ba6379/" target="_blank"><i class="fab fa-linkedin"></i></a>
-               <a href="mailto:mhlee00@inha.edu"><i class="fas fa-envelope"></i></a>
+          <div class="swiper-container team-slider">
+            <div class="slider-wrapper">
+              <div class="team-member">
+                <img src="https://github.com/octocat.png" alt="A" onerror="this.src='https://via.placeholder.com/90?text=Leader'" />
+                <h3>Minho Lee</h3>
+                <p>Professor</p>
+                <div class="social-icons">
+                   <a href="https://github.com/minho0" target="_blank"><i class="fab fa-github"></i></a>
+                   <a href="https://linkedin.com/in/minho-lee-144ba6379/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                   <a href="mailto:mhlee00@inha.edu"><i class="fas fa-envelope"></i></a>
+                </div>
+              </div>
+              <div class="team-member">
+                <img src="https://github.com/octocat.png" alt="B" onerror="this.src='https://via.placeholder.com/90?text=Leader'" />
+                <h3>Minho Lee</h3>
+                <p>Professor</p>
+                <div class="social-icons">
+                   <a href="https://github.com/minho0" target="_blank"><i class="fab fa-github"></i></a>
+                   <a href="https://linkedin.com/in/minho-lee-144ba6379/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                   <a href="mailto:mhlee00@inha.edu"><i class="fas fa-envelope"></i></a>
+                </div>
+              </div>
+              <div class="team-member">
+                <img src="https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=1lbPybMAAAAJ&citpid=3" alt="C" onerror="this.src='https://via.placeholder.com/90?text=Leader'" />
+                <h3>Junwoo Jang</h3>
+                <p>Professor</p>
+                <div class="social-icons">
+                   <a href="https://github.com/minho0" target="_blank"><i class="fab fa-github"></i></a>
+                   <a href="https://linkedin.com/in/minho-lee-144ba6379/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                   <a href="mailto:mhlee00@inha.edu"><i class="fas fa-envelope"></i></a>
+                </div>
+              </div>
+              <div class="team-member">
+                <img src="https://media.licdn.com/dms/image/v2/D5603AQGrAIBlHg5KCQ/profile-displayphoto-shrink_200_200/B56ZV7n8KJGUAY-/0/1741535822803?e=2147483647&v=beta&t=K1kG55kvd55i8zy0tO0tqMIQgItrRwUywE8A7AIqLvI" alt="D" onerror="this.src='https://via.placeholder.com/90?text=Leader'" />
+                <h3>Woojin Ahn</h3>
+                <p>Professor</p>
+                <div class="social-icons">
+                   <a href="https://github.com/minho0" target="_blank"><i class="fab fa-github"></i></a>
+                   <a href="https://linkedin.com/in/minho-lee-144ba6379/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                   <a href="mailto:mhlee00@inha.edu"><i class="fas fa-envelope"></i></a>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="team-member">
-            <img src="https://github.com/octocat.png" alt="B" onerror="this.src='https://via.placeholder.com/90?text=Leader'" />
-            <h3>Minho Lee</h3>
-            <p>Professor</p>
-            <div class="social-icons">
-               <a href="https://github.com/minho0" target="_blank"><i class="fab fa-github"></i></a>
-               <a href="https://linkedin.com/in/minho-lee-144ba6379/" target="_blank"><i class="fab fa-linkedin"></i></a>
-               <a href="mailto:mhlee00@inha.edu"><i class="fas fa-envelope"></i></a>
-            </div>
-          </div>
-          <div class="team-member">
-            <img src="https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=1lbPybMAAAAJ&citpid=3" alt="C" onerror="this.src='https://via.placeholder.com/90?text=Leader'" />
-            <h3>Junwoo Jang</h3>
-            <p>Professor</p>
-            <div class="social-icons">
-               <a href="https://github.com/minho0" target="_blank"><i class="fab fa-github"></i></a>
-               <a href="https://linkedin.com/in/minho-lee-144ba6379/" target="_blank"><i class="fab fa-linkedin"></i></a>
-               <a href="mailto:mhlee00@inha.edu"><i class="fas fa-envelope"></i></a>
-            </div>
-          </div>
-          <div class="team-member">
-            <img src="https://media.licdn.com/dms/image/v2/D5603AQGrAIBlHg5KCQ/profile-displayphoto-shrink_200_200/B56ZV7n8KJGUAY-/0/1741535822803?e=2147483647&v=beta&t=K1kG55kvd55i8zy0tO0tqMIQgItrRwUywE8A7AIqLvI" alt="D" onerror="this.src='https://via.placeholder.com/90?text=Leader'" />
-            <h3>Woojin Ahn</h3>
-            <p>Professor</p>
-            <div class="social-icons">
-               <a href="https://github.com/minho0" target="_blank"><i class="fab fa-github"></i></a>
-               <a href="https://linkedin.com/in/minho-lee-144ba6379/" target="_blank"><i class="fab fa-linkedin"></i></a>
-               <a href="mailto:mhlee00@inha.edu"><i class="fas fa-envelope"></i></a>
-            </div>
-          </div>
-        </div> 
+        </div>
         
         <p class="desc">
           Team members
@@ -903,6 +904,7 @@
             <div class="swiper-pagination"></div>
           </div> 
         </div> 
+        
       </div> 
     </section>
 
@@ -1092,3 +1094,4 @@
   </script>
 </body>
 </html>
+
