@@ -391,15 +391,9 @@
 
       .content-wrapper {
         /* 기존 설정 유지하되 아래 내용 확인 */
-        width: 100%; 
-        max-width: 1280px; /* ★ PC 기준 너비 통일 (1200~1400px 추천) */
+        width: calc(100% - 20px); 
+        max-width: 1260px; /* ★ PC 기준 너비 통일 (1200~1400px 추천) */
         margin: 0 auto;    /* 중앙 정렬 */
-        padding: 0 20px;   /* 좌우 여백 확보 */
-        
-        /* Flex 관련 설정은 유지 */
-        display: flex;
-        flex-direction: column;
-        align-items: center; /* 내부 요소들을 중앙으로 모음 */
       }
       
       /* [스크롤 허용 섹션] Team, Research */
@@ -974,4 +968,5 @@
   </script>
 </body>
 </html>
+
 
