@@ -377,110 +377,73 @@
     .lab-link span { font-size: 0.9rem; font-weight: 600; color: #555; }
 
     /* ========================================================
-       ★ [PC Desktops] 901px 이상 - "자동 스크롤 & 고정 너비" 최종판 ★
+       ★ [PC Desktops] 901px 이상 - "칼각 너비 고정" 최종판 ★
        ======================================================== */
     @media (min-width: 901px) {
     
-      /* 1. [핵심] 레이아웃 흔들림 영구 방지 */
-      html {
-        /* 스크롤바가 없어도 있는 것처럼 공간을 미리 확보합니다.
-           따라서 Home(스크롤X)과 Research(스크롤O) 간에 너비 차이가 0px이 됩니다.
-           시각적으로는 회색 바가 보이지 않지만(투명), 공간은 계산됩니다. */
-        scrollbar-gutter: stable; 
-      }
+      /* 1. 레이아웃 흔들림 방지 */
+      html { scrollbar-gutter: stable; }
+      body { overflow-x: hidden !important; width: 100%; }
     
-      body {
-        overflow-x: hidden !important;
-        width: 100%;
-      }
-    
-      /* 2. 섹션 공통 설정: "필요할 때만 스크롤" */
+      /* 2. 섹션 공통 설정 */
       .section {
-        /* 무조건 화면 높이만큼 잡습니다 */
-        height: 100vh !important; 
-        
-        /* 내용이 길면 스크롤(auto), 짧으면 숨김(hidden 효과) */
-        overflow-y: auto !important; 
-        overflow-x: hidden !important; 
-        
-        /* 섹션 내부 여백 */
-        padding: 0; 
+        height: 100vh !important;
+        overflow-y: auto !important; /* 자동 스크롤 */
+        overflow-x: hidden !important;
+        padding: 0;
         box-sizing: border-box;
-        
-        /* 스크롤바 디자인 (크롬/사파리) - 선택사항 */
-        &::-webkit-scrollbar { width: 10px; }
-        &::-webkit-scrollbar-thumb { background-color: #ccc; border-radius: 5px; }
-        &::-webkit-scrollbar-track { background-color: transparent; }
       }
     
-      /* 3. 통합 컨테이너: "Stretch & Center" 로직 */
+      /* 3. 통합 컨테이너 (너비의 기준점) */
       .content-wrapper {
-        /* 너비 설정 */
         width: 100%;
-        max-width: 1400px; /* PC 최적 너비 제한 */
-        margin: 0 auto;    /* 가로 중앙 정렬 */
-        padding: 100px 40px 40px 40px; /* 상단 헤더 공간(100px) 확보 */
+        max-width: 1400px; /* 전체 최대 너비 (이 안에서 꽉 참) */
+        margin: 0 auto;
+        padding: 100px 40px 40px 40px; 
         box-sizing: border-box;
-    
-        /* Flex 설정 */
+        
         display: flex;
         flex-direction: column;
+        min-height: 100%;
+        justify-content: center;
         
-        /* ★ 핵심: 세로 내용이 짧아도 화면 전체를 쓰도록 설정 */
-        min-height: 100%; 
-        
-        /* ★ 핵심: 내용이 짧으면 수직 중앙 정렬, 길면 위에서부터 자연스럽게 배치 */
-        justify-content: center; 
-        
-        /* 가로 꽉 채우기 (Stretch) */
-        align-items: stretch;
+        /* ★ 핵심: 자식 요소들을 무조건 가로로 꽉 찢어 늘림 (Stretch) */
+        align-items: stretch; 
         text-align: center;
       }
     
-      /* 4. 자식 요소 공통 (폭주 방지) */
+      /* 4. 자식 요소 공통 (무조건 100% 꽉 채우기) */
       .slider-wrapper, 
       .video-container, 
       .contact-container,
       .pub-item {
         width: 100%;
-        min-width: 0; /* Flex 자식 요소가 화면 뚫고 나가는 것 방지 */
+        min-width: 0; 
       }
     
     
       /* -------------------------------
-         [Team Section] - Swiper
+         [Team Section]
          ------------------------------- */
       .slider-wrapper {
         margin-bottom: 20px;
-        padding: 0 40px; 
-        overflow: hidden; 
+        padding: 0; /* 패딩 제거 (꽉 차게) */
+        overflow: hidden;
       }
-    
       .swiper.team-slider {
         width: 100%;
         height: auto !important;
         padding-bottom: 40px;
-        overflow: visible; 
+        overflow: visible;
+        cursor: grab;
       }
-      
-      .swiper-slide {
-        height: auto !important;
-        display: flex;
-        justify-content: center;
-      }
-      
-      .team-member {
-        width: 180px; 
-        height: 250px;
-        padding: 15px 10px;
-      }
-      
-      .swiper-button-prev { left: 0; }
-      .swiper-button-next { right: 0; }
+      .swiper.team-slider:active { cursor: grabbing; }
+      .swiper-slide { height: auto !important; display: flex; justify-content: center; }
+      .team-member { width: 180px; height: 250px; padding: 15px 10px; }
     
     
       /* -------------------------------
-         [Research Section] - Stretch 적용됨
+         [Research Section] - 이미 꽉 차 있음
          ------------------------------- */
       .pub-item {
         background-color: #fff;
@@ -489,17 +452,15 @@
         padding: 30px 40px;
         margin: 0 0 20px 0;
         
-        /* 카드는 꽉 차게(stretch) 되어 있으나, 내부 텍스트는 왼쪽 정렬 */
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
-        text-align: left; 
+        align-items: flex-start; /* 내부는 왼쪽 정렬 */
+        text-align: left;
         
         border-left: 1px solid #ddd;
         border-top: 6px solid #ddd;
         box-shadow: 0 2px 5px rgba(0,0,0,0.05);
       }
-    
       .pub-item:hover {
         transform: translateY(-5px);
         border-color: var(--primary-blue);
@@ -507,7 +468,6 @@
         background-color: #f8fbff;
         box-shadow: 0 10px 20px rgba(0,0,0,0.08);
       }
-      
       .pub-venue { font-size: 0.95rem; color: var(--primary-blue); font-weight: 700; margin-bottom: 8px; }
       .pub-title { font-size: 1.6rem; font-weight: 700; color: #222; margin-bottom: 10px; line-height: 1.3; }
       .pub-authors { font-size: 1.05rem; color: #555; margin-bottom: 15px; }
@@ -515,22 +475,24 @@
     
     
       /* -------------------------------
-         [Media Section]
+         [Media Section] - ★ 수정됨
          ------------------------------- */
       .video-container {
         display: flex;
-        flex-direction: row; 
-        justify-content: center; /* 영상들은 중앙에 모음 */
-        gap: 30px;
-        /* 높이 제한 해제 (화면 크기에 맡김) */
+        flex-direction: row;
+        
+        /* ★ 핵심: 비디오를 중앙이 아니라 양 끝으로 벌림 */
+        justify-content: space-between; 
+        gap: 20px; /* 사이 간격 최소화 */
         margin-top: 20px;
       }
       
       .media video {
-        width: auto; 
-        max-width: 45%; 
+        /* ★ 비디오 크기를 키워서 가로를 꽉 채우게 유도 */
+        width: 49%;  /* 2개 합쳐서 98% */
+        max-width: none; /* 제한 해제 */
         height: auto;
-        max-height: 60vh; /* 너무 커지지 않게만 제한 */
+        max-height: 60vh;
         border-radius: 16px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         background: #000;
@@ -538,23 +500,33 @@
     
     
       /* -------------------------------
-         [Contact Section]
+         [Contact Section] - ★ 수정됨
          ------------------------------- */
-      /* Contact는 내용이 짧으므로 자동으로 수직 중앙 정렬됨 */
       .contact-container {
-        width: 100%;
         display: flex;
         flex-direction: column;
-        align-items: center; 
-        gap: 60px; /* 요소 간 간격 */
+        /* ★ 중앙 정렬 해제하고 꽉 채우기 */
+        align-items: stretch; 
+        justify-content: center;
+        gap: 60px;
+      }
+    
+      /* 텍스트 정보는 중앙에 두더라도 박스 자체는 꽉 채움 */
+      .footer-info {
+        width: 100%;
+        text-align: center; /* 텍스트만 중앙 */
+        background-color: #f8fbff; /* 박스 영역 확인용 배경 (선택사항, 지워도 됨) */
+        padding: 20px 0;
+        border-radius: 12px;
       }
       
       .lab-logos {
         display: flex;
-        justify-content: space-around;
+        /* ★ 핵심: 로고들을 양 끝으로 균등 배치하여 시각적 너비 확장 */
+        justify-content: space-between; 
         align-items: center;
         width: 100%;
-        padding: 10px 40px;
+        padding: 20px 0; /* 좌우 패딩 제거해서 끝까지 닿게 */
       }
       
       .lab-link { transition: transform 0.3s; display: flex; flex-direction: column; align-items: center; }
@@ -934,6 +906,7 @@
   </script>
 </body>
 </html>
+
 
 
 
