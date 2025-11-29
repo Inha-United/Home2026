@@ -545,62 +545,105 @@
         box-shadow: 0 15px 40px rgba(0,0,0,0.25);
       }
 
-      /* --- Contact PC --- */
-      .section[data-anchor="contact"] .content-wrapper {
-         height: 100%; /* 부모 높이 상속 */
-         justify-content: flex-start; /* flex로 내부 간격 조절 */
+      /* =======================
+         Contact 섹션 수정 (PC)
+         - 100vh 고정
+         - 내용을 강제로 화면 중앙에 배치
+         ======================= */
+      .section[data-anchor="contact"] {
+        height: 100vh !important;
+        overflow: hidden !important; /* 스크롤 절대 금지 */
+        padding-top: 80px !important; /* 상단 헤더 공간 */
+        padding-bottom: 0 !important;
+        
+        /* Flex를 이용해 전체 수직 배치 제어 */
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important; /* 제목은 위쪽에 */
+        align-items: center !important;
       }
 
-      .contact-container {
+      /* Content Wrapper: 제목 포함 전체 틀 */
+      .section[data-anchor="contact"] .content-wrapper {
+        height: 100%;
         width: 100%;
-        max-width: 2000px;
-        
-        /* [수정 핵심] */
-        /* 고정 계산식 제거: height: calc(100vh - 120px); */
-        /* H1 제목을 제외한 나머지 공간을 균등하게 차지 */
-        flex: 1;
         display: flex;
         flex-direction: column;
-        justify-content: center; /* 내부 요소 수직 중앙 정렬 */
-        gap: 8vh; /* 요소 사이 간격 */
+        justify-content: flex-start; /* 상단 정렬 시작 */
+        align-items: center;
+      }
+
+      /* Contact Container: 제목을 *제외한* 나머지 내용 (이메일+로고) */
+      .contact-container {
+        /* 제목 아래 남은 공간을 꽉 채우게 함 */
+        flex-grow: 1; 
+        width: 100%;
+        max-width: 1600px;
+
+        /* 내부 내용물들을 수직 중앙 정렬 */
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+        align-items: center;
         
-        padding-bottom: 40px; /* 하단 여백 */
+        /* 요소 사이 간격을 화면 높이 비례가 아닌 고정값+여유분으로 변경 */
+        gap: 60px; 
+        
+        /* 바닥에 너무 붙지 않도록 약간의 여백 확보 */
+        padding-bottom: 60px; 
       }
       
+      /* 이메일, 주소 텍스트 */
+      .footer-info {
+        font-size: 1.2rem; /* 폰트 조금 키움 */
+        margin: 0;
+      }
+
+      /* 로고 박스 */
       .lab-logos {
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 6vw; 
         width: 100%;
+        gap: 80px; /* 로고 사이 가로 간격 */
         margin: 0;
-        padding: 10px;
+        padding: 20px 0; /* 로고 호버 효과 잘림 방지 */
       }
-
-      .footer-info { margin: 0; }
 
       .lab-link { 
         transition: transform 0.3s; 
         display: flex;
         flex-direction: column;
         align-items: center;
+        text-decoration: none;
       }
-      .lab-link:hover { transform: translateY(-5px); color: #0078ff; }
       
+      .lab-link:hover { 
+        transform: translateY(-8px); 
+        color: #0078ff; 
+      }
+      
+      /* 로고 이미지 사이즈 최적화 */
       .lab-link img { 
-        height: 9vh; 
-        max-height: 90px; 
-        width: auto;
-        margin-bottom: 10px; 
+        height: 80px;      /* 고정 높이로 변경 (안정성 확보) */
+        width: auto;       /* 비율 유지 */
+        object-fit: contain;
+        margin-bottom: 12px; 
         opacity: 0.9; 
         transition: 0.3s; 
       }
       .lab-link img:hover { opacity: 1; transform: scale(1.05); }
       
-      .lab-link img.rcv-logo { height: 16vh; max-height: 160px; }
-      .lab-link img.sparo-logo { height: 7vh; max-height: 70px; }
+      /* 로고별 미세 크기 조정 (시각적 균형) */
+      .lab-link img.rcv-logo { height: 140px; } /* 세로로 긴 로고라 더 크게 */
+      .lab-link img.sparo-logo { height: 65px; } /* 가로로 긴 로고라 조금 작게 */
       
-      .lab-link span { font-size: 1.1rem; white-space: nowrap; }
+      .lab-link span { 
+        font-size: 1.1rem; 
+        white-space: nowrap; 
+        font-weight: 600;
+        color: #555;
+      }
     }
   </style>
 </head>
@@ -972,4 +1015,5 @@
   </script>
 </body>
 </html>
+
 
