@@ -156,14 +156,13 @@
     .advisor-wrapper {
       width: 100%;
       display: flex;
-      justify-content: center; /* 중앙 정렬 */
-      margin-bottom: 40px;     /* 아래 팀원들과의 간격 */
+      justify-content: center; 
+      margin-bottom: 40px;      
     }
     
-    /* [Advisor] 카드가 너무 작아 보이지 않게 조금 키움 (선택사항) */
     .advisor-wrapper .team-member {
-      transform: scale(1.05); /* 팀원보다 5% 정도 크게 강조 */
-      border: 2px solid var(--primary-blue); /* 파란 테두리로 강조 */
+      transform: scale(1.05); 
+      border: 2px solid var(--primary-blue); 
     }
     
     .slider-wrapper {
@@ -223,162 +222,72 @@
     .swiper-button-prev { left: 0; }
     .swiper-button-next { right: 0; }
     
-    /* [Advisor] 상단 독립 컨테이너 스타일 */
+    /* [Advisor] PC 스타일 */
     .advisor-wrapper {
       width: 100%;
       display: flex;
-      justify-content: center; /* 중앙 정렬 */align-items: flex-start;
-      flex-wrap: wrap;           /* 화면 좁으면 줄바꿈 */
-      /* ▼▼▼ 이 숫자를 늘리세요 (기존 20px -> 60px~80px 추천) ▼▼▼ */
+      justify-content: center; 
+      align-items: flex-start;
+      flex-wrap: wrap;            
       gap: 60px;
-      margin-bottom: 40px;     /* 아래 팀원들과의 간격 */
+      margin-bottom: 40px;      
     }
     
-    /* [Advisor] 카드가 너무 작아 보이지 않게 조금 키움 (선택사항) */
     .advisor-wrapper .team-member {
-      transform: scale(1.05); /* 팀원보다 5% 정도 크게 강조 */
-      border: 2px solid var(--primary-blue); /* 파란 테두리로 강조 */
-    }
-
-    /* [PC] 2 Rows Grid Layout (복구됨) */
-    @media (min-width: 901px) {
-      .swiper-container.team-slider {
-        height: 460px; /* 2줄 높이 확보 */
-        padding-bottom: 20px;
-      }
-      .swiper-slide {
-        height: calc((100% - 20px) / 2) !important; 
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-    }
-    
-    /* [Mobile] 모바일 반응형 처리 */
-    @media (max-width: 900px) {
-      .advisor-wrapper {
-        margin-bottom: 20px;
-        gap: 15px !important; /* 모바일은 좁게 유지 */
-      }
-      .advisor-wrapper .team-member {
-        transform: none; /* 모바일엔 크기 원상복귀 */
-        width: 260px;    /* 모바일 팀원 카드 크기와 동일하게 */
-        height: auto;
-      }
-    }
-
-    /* [Mobile] 1 Row Scroll (최적화) */
-    @media (max-width: 900px) {
-      .slider-wrapper { padding: 0; }
-      .swiper-button-next, .swiper-button-prev { display: none; }
-      
-      .swiper-container.team-slider {
-        height: auto; 
-        padding-bottom: 40px;
-      }
-      .swiper-slide {
-        height: auto !important;
-        width: auto !important;
-        display: flex;
-        justify-content: center;
-      }
-      /* --- 수정된 부분 시작 --- */
-      .team-member {
-        width: 180px;
-        /* 높이를 자동으로 설정하여 텍스트 길이에 맞게 늘어남 */
-        height: auto; 
-        /* 내용이 적어도 최소한의 모양은 유지하도록 설정 (선택사항) */
-        min-height: 200px; 
-        /* 내용이 많을 때 위아래 여백이 답답하지 않도록 조절 */
-        padding: 20px 10px; 
-      }
-      /* --- 수정된 부분 끝 --- */
+      transform: scale(1.05); 
+      border: 2px solid var(--primary-blue); 
     }
 
     /* =======================
-       Research & Open Source
+       Research & Open Source (기본/모바일)
        ======================= */
-    .research-list { text-align: left; max-width: 1600px; width: 100%; }
-    .research-list li { margin-bottom: 15px; list-style-type: disc; margin-left: 20px; font-size: 1.2rem; }
-    
+    .publication-wrap {
+      width: 100%;
+      max-width: 900px; /* 모바일용 제한 */
+      text-align: left;
+      padding-bottom: 50px;
+      margin-top: 20px;
+    }
+
     .opensource { background-color: #fff; }
     .opensource p.link-text { font-size: 1.3rem; margin-top: 30px; }
     .opensource a { color: var(--primary-blue); font-weight: 600; text-decoration: underline; }
 
-    /* =======================
-       Media (PC 스크롤바 버그 수정 및 반응형 개선)
-       ======================= */
+    /* Media Styles */
     .media { background-color: #fff; }
     .media a { color: var(--primary-blue); font-weight: 600; }
     
-    /* 비디오 컨테이너: 유연하게 배치 */
     .video-container {
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-wrap: wrap; /* 공간 부족 시 자동 줄바꿈 */
-      gap: 4vw; /* 고정 80px 대신 화면 너비 비례 간격 사용 */
+      flex-wrap: wrap; 
+      gap: 4vw; 
       margin-top: 30px;
       width: 100%;
-      max-width: 1600px; /* 너무 넓게 퍼지지 않도록 제한 */
+      max-width: 1200px; 
       
-      /* PC 스크롤바 방지 및 내부 패딩 */
       overflow: visible; 
       padding: 10px; 
     }
     
-    /* 비디오 스타일: 크기 유동적 조절 */
     .media video {
-      /* 기본적으로 화면의 30% 정도 차지하되, 최소/최대 크기 제한 */
       width: 30%; 
-      min-width: 280px; /* 너무 작아지지 않음 */
-      max-width: 360px; /* 너무 커지지 않음 */
+      min-width: 280px; 
+      max-width: 360px; 
       
-      /* 중요: 9:16 세로 영상이므로, 화면 높이에 맞춰 높이를 제한해야 함 */
       max-height: 55vh; 
       
-      aspect-ratio: 9 / 16; /* 비율 유지 */
+      aspect-ratio: 9 / 16; 
       border-radius: 16px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
       background: #000;
       transition: transform 0.3s;
       display: block; 
     }
-
     .media video:hover { transform: scale(1.02); }
 
-    /* [Tablet & Mobile] 화면이 좁아지면 설정 변경 */
-    @media (max-width: 900px) {
-      .video-container {
-        gap: 20px; /* 모바일에서는 간격 축소 */
-        flex-direction: row; /* 가로 배치 유지하되 */
-      }
-
-      .media video {
-        /* 모바일에서는 비디오 크기를 조금 더 줄여서 한 화면에 들어오게 시도 */
-        width: 45%; 
-        min-width: 160px; /* 더 작은 화면 대응 */
-        max-width: 300px;
-        max-height: 50vh; /* 높이 제한을 더 빡빡하게 */
-      }
-    }
-
-    /* [Small Mobile] 아주 좁은 화면에서는 세로로 쌓기 */
-    @media (max-width: 480px) {
-      .video-container {
-        flex-direction: column; /* 세로 정렬 */
-      }
-      .media video {
-        width: 80%; /* 꽉 차게 */
-        max-width: 280px;
-        min-width: unset;
-        margin-bottom: 20px;
-      }
-    }
-
-    /* =======================
-       Contact Section
-       ======================= */
+    /* Contact Section */
     .contact {
       width: 100%;
       min-height: 100vh;
@@ -458,125 +367,106 @@
     .lab-link img:hover { opacity: 1; transform: scale(1.05); }
     .lab-link span { font-size: 1.1rem; font-weight: 600; color: #555; }
     
-    /* [PC] 기본 120px보다 크게 설정 */
-    .lab-link img.rcv-logo {
-      height: 200px; /* 필요에 따라 숫자를 조절하세요 (기본: 120px) */
-      /* 만약 이미지가 위로 튀어 오르면 아래 마진 조절 */
-      margin-bottom: 12px; 
+    .lab-link img.rcv-logo { height: 200px; margin-bottom: 12px; }
+    .lab-link img.sparo-logo { height: 100px; margin-bottom: 12px; }
+    
+    /* Research Items (Default/Mobile) */
+    .year-header {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-blue);
+      border-bottom: 2px solid #eee;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+    }
+    .year-header:first-of-type { margin-top: 0; }
+  
+    .pub-item {
+      margin-bottom: 25px;
+      padding-left: 15px;
+      border-left: 3px solid transparent; 
+      transition: 0.2s;
     }
     
-    /* [PC] 기본 120px보다 크게 설정 */
-    .lab-link img.sparo-logo {
-      height: 100px; /* 필요에 따라 숫자를 조절하세요 (기본: 120px) */
-      /* 만약 이미지가 위로 튀어 오르면 아래 마진 조절 */
-      margin-bottom: 12px; 
+    .pub-item:hover {
+      border-left: 3px solid var(--primary-blue);
+      background-color: #f9f9f9;
     }
-    @media (min-width: 901px) {
-
-      /* 1. 컨테이너 100% 확장 */
-      .section[data-anchor="research"] .max-w-container {
-        width: 100% !important;
-        max-width: 1400px !important; /* 최대 1400px까지 확장 */
-        padding-left: 40px !important;
-        padding-right: 40px !important;
-
-        align-items: stretch !important;
-      }
-
-      .publication-wrap {
-        width: 100% !important;
-        max-width: 100% !important;
-        margin: 0 auto;
-      }
-
-      /* 2. PC에서는 아이템을 '박스' 형태로 만들어서 공간을 채움 */
-      .pub-item {
-        width: 100%;             /* 가로 꽉 채우기 */
-        background-color: #fff;  /* 배경색 (필수) */
-        border: 1px solid #ddd;  /* 회색 테두리 (필수) */
-        border-radius: 12px;     /* 둥근 모서리 */
-        padding: 20px 25px;      /* 넉넉한 안쪽 여백 */
-        margin-bottom: 20px;     /* 아이템 간격 */
-
-        /* [높이 고정 설정 추가] */
-        min-height: 160px;       /* 최소 높이를 160px로 고정하여 큼직하게 유지 */
-        display: flex;           /* 내부 내용물 정렬을 위해 flex 사용 */
-        flex-direction: column;  /* 세로 정렬 */
-        justify-content: center; /* 내용이 적어도 수직 중앙에 예쁘게 배치 */
-        align-items: flex-start; /* 글자는 왼쪽 정렬 */
-
-        /* 기존 왼쪽 선 스타일 유지/강화 */
-        border-left: 6px solid #ddd; 
-        box-sizing: border-box; /* 패딩이 너비에 포함되도록 */
-      }
-
-      /* PC Hover 효과 */
-      .pub-item:hover {
-        transform: translateX(10px); /* 오른쪽 살짝 이동 */
-        border-color: var(--primary-blue);
-        border-left-color: var(--primary-blue);
-        background-color: #f8fbff; /* 호버 시 연한 파란 배경 */
-        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-      }
+  
+    .pub-venue {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #fff;
+      background-color: var(--dark-blue);
+      padding: 4px 8px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+      margin-right: 8px;
     }
-    
-    /* [Mobile] Global & Layout */
+  
+    .pub-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #222;
+      display: block; 
+      margin-bottom: 5px;
+    }
+  
+    .pub-authors {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 8px;
+    }
+  
+    .pub-links a {
+      font-size: 0.9rem;
+      color: var(--primary-blue);
+      font-weight: 600;
+      margin-right: 15px;
+      text-decoration: none;
+    }
+    .pub-links a:hover { text-decoration: underline; }
+
+    /* =======================
+       [Mobile] Responsive 
+       ======================= */
     @media (max-width: 900px) {
-      .section {
-        /* height: auto !important;  <-- 삭제 */
-        /* min-height: 100vh;        <-- 삭제 */
-        /* display: block;           <-- 삭제 */
-        /* overflow: visible;        <-- 삭제 */
-        padding: 80px 20px;
-      }
+      .section { padding: 80px 20px; }
       
-      /* --- [수정 1] Open Source 섹션 최적화 시작 --- */
-      /* Research와 Media 사이에 자연스럽게 녹아들도록 설정 */
       .section.opensource {
-        background-color: #fff !important; /* 배경을 흰색으로 변경 */
-        min-height: auto !important;       /* 강제 100vh 해제 (내용만큼만 높이 차지) */
-        padding-top: 20px;                 /* 위쪽 여백 줄임 (위 섹션과 가깝게) */
-        padding-bottom: 60px;              /* 아래쪽 여백 적당히 */
+        background-color: #fff !important; 
+        min-height: auto !important; 
+        padding-top: 20px; 
+        padding-bottom: 60px; 
       }
       
       .section h1 { font-size: 2.2rem; margin-bottom: 40px; }
       
-      /* ★★★ [Team 섹션 잘림 현상 완벽 수정] ★★★ */
-      /* 1. 섹션 자체를 상단 정렬로 강제 변경 */
-      /* ★★★ [Team 섹션 수정] ★★★ */
+      /* Team Mobile */
       .section.team {
         display: flex !important;
         flex-direction: column !important;
         justify-content: flex-start !important;
-        
-        /* padding-top을 120px에서 80px로 줄여 공간 확보 */
         padding-top: 80px !important; 
         padding-bottom: 60px !important;
-        
         height: auto !important;
         min-height: 100vh;
       }
       
-      /* 설명 글 여백 및 너비 수정 */
       .section p.desc {
-          /* 1. 너비 강제 조정 (가장 중요) */
-          width: 100% !important;       /* 부모 컨테이너 너비에 맞춤 */
-          max-width: 100% !important;   /* 화면을 뚫고 나가지 않게 제한 */
-          
-          /* 2. 텍스트 줄바꿈 설정 */
-          white-space: normal !important;  /* 텍스트 자동 줄바꿈 허용 */
-          word-break: keep-all;            /* 단어 단위로 예쁘게 끊기 (한글/영문 혼용 시 좋음) */
-          word-wrap: break-word;           /* 긴 단어가 있을 경우 강제 줄바꿈 */
-  
-          /* 3. 여백 및 정렬 */
+          width: 100% !important; 
+          max-width: 100% !important; 
+          white-space: normal !important; 
+          word-break: keep-all; 
+          word-wrap: break-word; 
           margin-bottom: 30px;
-          padding: 0 10px;         /* 좌우 안쪽 여백 */
-          box-sizing: border-box;  /* padding이 너비에 포함되도록 설정 (잘림 방지 필수) */
-          
+          padding: 0 10px; 
+          box-sizing: border-box; 
           font-size: 1rem;
       }
   
-      /* 만약 부모 컨테이너인 .max-w-container 때문에 잘리는 것이라면 아래 코드도 추가 */
       .section.team .max-w-container {
           width: 100% !important;
           max-width: 100% !important;
@@ -584,91 +474,144 @@
           padding-right: 0 !important;
       }
       
-      /* 2. FullPage.js가 만드는 내부 테이블 셀(fp-tableCell)의 수직 중앙 정렬 무력화 */
       .section.team .fp-tableCell {
         display: flex !important;
         flex-direction: column !important;
-        justify-content: flex-start !important; /* 내부 요소도 상단 정렬 */
+        justify-content: flex-start !important; 
         align-items: center !important;
         vertical-align: top !important;
         height: auto !important;
       }
 
-      /* 4. 제목이 너무 크면 줄임 (선택 사항) */
-      .section.team h1 {
-        margin-bottom: 20px !important;
-        margin-top: 0 !important;
+      .section.team h1 { margin-bottom: 20px !important; margin-top: 0 !important; }
+
+      /* Mobile Team Slider */
+      .advisor-wrapper { margin-bottom: 20px; gap: 15px !important; }
+      .advisor-wrapper .team-member { transform: none; width: 260px; height: auto; }
+      .slider-wrapper { padding: 0; }
+      .swiper-button-next, .swiper-button-prev { display: none; }
+      
+      .swiper-container.team-slider { height: auto; padding-bottom: 40px; }
+      .swiper-slide {
+        height: auto !important;
+        width: auto !important;
+        display: flex;
+        justify-content: center;
+      }
+      .team-member {
+        width: 180px;
+        height: auto; 
+        min-height: 200px; 
+        padding: 20px 10px; 
       }
       
-      /* Contact 섹션 여백 최적화 */
+      /* Contact Mobile */
       .contact { 
-        /* 위아래 여백을 대폭 줄여서 화면 안에 들어오게 함 */
         padding-top: 60px !important; 
         padding-bottom: 40px !important;
-        /* 모바일에서도 플렉스 유지 (중앙 정렬 위해) */
         display: flex !important; 
         align-items: center;
         justify-content: center;
       }
-      
       .contact-container {
-        /* 강제 높이 100% 해제 -> 내용물만큼만 차지하게 */
         height: auto !important; 
         min-height: auto !important;
-        
-        /* 요소들을 쫙 벌리지 않고(space-between 해제) 중앙에 오밀조밀 모음 */
         justify-content: center !important; 
-        gap: 40px; /* 요소 사이 간격 적당히 */
+        gap: 40px; 
       }
+      .contact-top { margin-bottom: 0 !important; }
+      .footer-info { margin-top: 20px !important; margin-bottom: 20px !important; }
+      .footer-info a { margin-top: 0; }
       
-      .contact-top {
-        margin-bottom: 0 !important; /* 불필요한 여백 제거 */
-      }
-      
-      .footer-info {
-        /* 기존 100px ~ 300px 던 엄청난 여백 제거 */
-        margin-top: 20px !important; 
-        margin-bottom: 20px !important;
-      }
-      
-      .footer-info a {
-        margin-top: 0; 
-      }
-      
-      /* 로고 박스 설정 */
       .lab-logos {
         display: grid; 
         grid-template-columns: repeat(2, 1fr); 
-        gap: 20px 30px; /* 로고 사이 간격 조절 */
+        gap: 20px 30px; 
         width: 100%;
         max-width: 360px; 
         margin-top: 20px !important; 
         padding-top: 0;
-        
-        /* 로고가 너무 바닥에 붙지 않게 하단 여백 확보 */
         padding-bottom: 20px; 
       }
-      
-      .lab-link img { height: 50px; } /* 로고 크기 살짝 줄여서 한눈에 들어오게 */
-      
-      /* Media Video Mobile: 원래대로 Stack */
-      .media video { width: 100%; max-width: 100%; }
+      .lab-link img { height: 50px; } 
+      .lab-link img.rcv-logo { height: 90px; }
+      .lab-link img.sparo-logo { height: 40px; }
 
-      /* =======================
-       RCV 로고 개별 크기 조절
-       ======================= */
-      .lab-link img.rcv-logo {
-        height: 90px; /* 필요에 따라 숫자를 조절하세요 (기본: 50px) */
-      }
-
-      /* =======================
-       SPARO 로고 개별 크기 조절
-       ======================= */
-      .lab-link img.sparo-logo {
-        height: 40px; /* 필요에 따라 숫자를 조절하세요 (기본: 50px) */
-      }
+      /* Media Mobile */
+      .video-container { gap: 20px; flex-direction: row; }
+      .media video { width: 45%; min-width: 160px; max-width: 300px; max-height: 50vh; }
     }
 
+    @media (max-width: 480px) {
+      .video-container { flex-direction: column; }
+      .media video { width: 80%; max-width: 280px; min-width: unset; margin-bottom: 20px; }
+    }
+
+    /* ========================================================
+       ★ [PC 전용 스타일] 901px 이상 - Research 꽉 채우기 (FIX) ★
+       ======================================================== */
+    @media (min-width: 901px) {
+      
+      /* 1. Research 섹션 컨테이너: 가로 꽉 채우기 모드 설정 */
+      .section[data-anchor="research"] .max-w-container {
+        width: 100% !important;
+        max-width: 1400px !important;
+        padding-left: 40px !important;
+        padding-right: 40px !important;
+        
+        /* [핵심 수정] 센터 정렬을 풀고 자식 요소를 늘립니다(stretch) */
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important; 
+      }
+      
+      /* 2. 내부 래퍼: 모바일에서 걸린 너비 제한(900px)을 확실히 풉니다 */
+      .publication-wrap {
+        width: 100% !important;
+        max-width: none !important; /* 중요: max-width 해제 */
+        margin: 0; /* 중앙 정렬 불필요하므로 0 */
+      }
+
+      /* 3. 아이템 박스 스타일 */
+      .pub-item {
+        width: 100%;             /* 가로 100% 강제 */
+        background-color: #fff;  
+        border: 1px solid #ddd;  
+        border-radius: 12px;     
+        padding: 20px 25px;      
+        margin-bottom: 20px;     
+        
+        min-height: 140px;       /* 높이 고정 */
+        display: flex;           
+        flex-direction: column;  
+        justify-content: center; 
+        align-items: flex-start; 
+        
+        border-left: 6px solid #ddd; 
+        box-sizing: border-box; 
+      }
+
+      /* Hover 효과 */
+      .pub-item:hover {
+        transform: translateX(10px); 
+        border-color: var(--primary-blue);
+        border-left-color: var(--primary-blue);
+        background-color: #f8fbff; 
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      }
+
+      /* Team PC 2-row Layout */
+      .swiper-container.team-slider {
+        height: 460px; 
+        padding-bottom: 20px;
+      }
+      .swiper-slide {
+        height: calc((100% - 20px) / 2) !important; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
   </style>
 </head>
 <body>
@@ -708,49 +651,19 @@
         <p class="desc">
           Advisors
         </p>
-    
+
         <div class="advisor-wrapper">
-          <div class="team-member">
-            <img src="https://github.com/octocat.png" alt="A" onerror="this.src='https://via.placeholder.com/90?text=Leader'" />
-            <h3>Minho Lee</h3>
-            <p>Professor</p>
-            <div class="social-icons">
-               <a href="https://github.com/minho0" target="_blank"><i class="fab fa-github"></i></a>
-               <a href="https://linkedin.com/in/minho-lee-144ba6379/" target="_blank"><i class="fab fa-linkedin"></i></a>
-               <a href="mailto:mhlee00@inha.edu"><i class="fas fa-envelope"></i></a>
-            </div>
-          </div>
-          <div class="team-member">
-            <img src="https://github.com/octocat.png" alt="B" onerror="this.src='https://via.placeholder.com/90?text=Leader'" />
-            <h3>Minho Lee</h3>
-            <p>Professor</p>
-            <div class="social-icons">
-               <a href="https://github.com/minho0" target="_blank"><i class="fab fa-github"></i></a>
-               <a href="https://linkedin.com/in/minho-lee-144ba6379/" target="_blank"><i class="fab fa-linkedin"></i></a>
-               <a href="mailto:mhlee00@inha.edu"><i class="fas fa-envelope"></i></a>
-            </div>
-          </div>
-          <div class="team-member">
-            <img src="https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=1lbPybMAAAAJ&citpid=3" alt="C" onerror="this.src='https://via.placeholder.com/90?text=Leader'" />
-            <h3>Junwoo Jang</h3>
-            <p>Professor</p>
-            <div class="social-icons">
-               <a href="https://github.com/minho0" target="_blank"><i class="fab fa-github"></i></a>
-               <a href="https://linkedin.com/in/minho-lee-144ba6379/" target="_blank"><i class="fab fa-linkedin"></i></a>
-               <a href="mailto:mhlee00@inha.edu"><i class="fas fa-envelope"></i></a>
-            </div>
-          </div>
-          <div class="team-member">
-            <img src="https://media.licdn.com/dms/image/v2/D5603AQGrAIBlHg5KCQ/profile-displayphoto-shrink_200_200/B56ZV7n8KJGUAY-/0/1741535822803?e=2147483647&v=beta&t=K1kG55kvd55i8zy0tO0tqMIQgItrRwUywE8A7AIqLvI" alt="D" onerror="this.src='https://via.placeholder.com/90?text=Leader'" />
-            <h3>Woojin Ahn</h3>
-            <p>Professor</p>
-            <div class="social-icons">
-               <a href="https://github.com/minho0" target="_blank"><i class="fab fa-github"></i></a>
-               <a href="https://linkedin.com/in/minho-lee-144ba6379/" target="_blank"><i class="fab fa-linkedin"></i></a>
-               <a href="mailto:mhlee00@inha.edu"><i class="fas fa-envelope"></i></a>
-            </div>
-          </div>
-        </div> 
+             <div class="team-member">
+                <img src="https://github.com/octocat.png" alt="A" onerror="this.src='https://via.placeholder.com/90?text=Advisor1'" />
+                <h3>Minho Lee</h3>
+                <p>Professor</p>
+                <div class="social-icons">
+                   <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                   <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                   <a href="mailto:mhlee00@inha.edu"><i class="fas fa-envelope"></i></a>
+                </div>
+              </div>
+              </div>
         
         <p class="desc">
           Team members
@@ -830,7 +743,7 @@
     
               <div class="swiper-slide">
                 <div class="team-member">
-                  <img src="img/kjy.png" alt="Jiyun Kim" />
+                  <img src="img/kjy.png" alt="Jiyun Kim" onerror="this.src='https://via.placeholder.com/90?text=M6'" />
                   <h3>Jiyun Kim</h3>
                   <p>Undergraduate</p>
                   <div class="social-icons">
@@ -857,7 +770,7 @@
                   <img src="img/jwk.jpg" alt="Wonhyuk Jung" onerror="this.src='https://via.placeholder.com/90?text=M8'" />
                   <h3>Wonhyuk Jung</h3>
                   <p>Undergraduate</p>
-                  <div class="social-icons">                    
+                  <div class="social-icons">                      
                     <a href="https://github.com/RB3159" target="_blank"><i class="fab fa-github"></i></a>
                     <a href="mailto:rebullu3159@inha.edu"><i class="fas fa-envelope"></i></a>
                   </div>
@@ -866,7 +779,7 @@
     
               <div class="swiper-slide">
                 <div class="team-member">
-                  <img src="img/hjh.jpg" alt="Jihyun Han" />
+                  <img src="img/hjh.jpg" alt="Jihyun Han" onerror="this.src='https://via.placeholder.com/90?text=M9'" />
                   <h3>Jihyun Han</h3>
                   <p>Undergraduate</p>
                   <div class="social-icons">
@@ -875,25 +788,15 @@
                   </div>
                 </div>
               </div>
-              
-              <!--<div class="swiper-slide">
-                <div class="team-member">
-                  <img src="https://via.placeholder.com/90?text=M10" alt="Member 10" />
-                  <h3>Member 10</h3>
-                  <p>New Researcher</p>
-                  <div class="social-icons">
-                    <a href="#"><i class="fab fa-github"></i></a>
-                  </div>
-                </div>
-              </div>-->
             </div> 
             <div class="swiper-pagination"></div>
           </div> 
         </div> 
+        
       </div> 
     </section>
 
-<section class="section" data-anchor="research">
+    <section class="section" data-anchor="research">
       <div class="max-w-container">
         <h1>Publications</h1>
         
@@ -942,25 +845,6 @@
               <a href="#" target="_blank">[PDF]</a>
             </div>
           </div>
-
-          <h3 class="year-header">2023</h3>
-
-          <h3 class="year-header">2022</h3>
-
-          <h3 class="year-header">2021</h3>
-
-          <h3 class="year-header">2020</h3>
-
-          <h3 class="year-header">2019</h3>
-
-          <h3 class="year-header">2018</h3>
-
-          <h3 class="year-header">2017</h3>
-
-          <h3 class="year-header">2016</h3>
-
-          <h3 class="year-header">2015</h3>
-          
 
         </div>
       </div>
@@ -1066,7 +950,7 @@
       breakpoints: {
         // [PC 모드] 901px 이상에서는 2줄 그리드 적용
         901: {
-          slidesPerView: 5, // 한 줄에 4개
+          slidesPerView: 5, // 한 줄에 5개
           centeredSlides: false, // 왼쪽 정렬
           grid: {
             rows: 2,
@@ -1077,41 +961,5 @@
       }
     });
   </script>
-  <style>
-    /* PC 화면(901px 이상)일 때만 적용되는 강력한 스타일 */
-    @media (min-width: 901px) {
-      
-      /* 1. 가장 큰 범인: 전체 컨테이너 넓히기 */
-      .section[data-anchor="research"] .max-w-container {
-        width: 100% !important;        /* 꽉 채우기 */
-        max-width: 1400px !important;  /* 최대 1400px까지 허용 (기존 900px 무시) */
-        padding-left: 0 !important;    /* 불필요한 여백 제거 */
-        padding-right: 0 !important;
-      }
-  
-      /* 2. 공범: 논문 리스트 박스 넓히기 */
-      .publication-wrap {
-        width: 100% !important;
-        max-width: 1200px !important;  /* 논문 리스트는 1200px 정도가 적당 */
-        margin: 0 auto !important;     /* 중앙 정렬 */
-      }
-    }
-  </style>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
