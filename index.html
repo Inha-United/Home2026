@@ -412,7 +412,12 @@
     }
     .lab-link img:hover { opacity: 1; transform: scale(1.05); }
     .lab-link span { font-size: 1.1rem; font-weight: 600; color: #555; }
-
+    /* [PC] 기본 120px보다 크게 설정 */
+    .lab-link img.rcv-logo {
+      height: 200px; /* 필요에 따라 숫자를 조절하세요 (기본: 120px) */
+      /* 만약 이미지가 위로 튀어 오르면 아래 마진 조절 */
+      margin-bottom: 12px; 
+    }
     /* [Mobile] Global & Layout */
     @media (max-width: 900px) {
       .section {
@@ -550,19 +555,8 @@
       /* =======================
        RCV 로고 개별 크기 조절
        ======================= */
-
-      /* [PC] 기본 120px보다 크게 설정 */
       .lab-link img.rcv-logo {
-        height: 200px; /* 필요에 따라 숫자를 조절하세요 (기본: 120px) */
-        /* 만약 이미지가 위로 튀어 오르면 아래 마진 조절 */
-        margin-bottom: 12px; 
-      }
-      
-      /* [Mobile] 기본 50px보다 크게 설정 */
-      @media (max-width: 900px) {
-        .lab-link img.rcv-logo {
-          height: 75px; /* 필요에 따라 숫자를 조절하세요 (기본: 50px) */
-        }
+        height: 75px; /* 필요에 따라 숫자를 조절하세요 (기본: 50px) */
       }
     }
   </style>
@@ -873,6 +867,7 @@
 
 </body>
 </html>
+
 
 
 
