@@ -388,6 +388,19 @@
         padding: 100px 20px 20px 20px; /* 상단 헤더 공간 확보 */
         box-sizing: border-box;
       }
+
+      .content-wrapper {
+        /* 기존 설정 유지하되 아래 내용 확인 */
+        width: 100%; 
+        max-width: 1280px; /* ★ PC 기준 너비 통일 (1200~1400px 추천) */
+        margin: 0 auto;    /* 중앙 정렬 */
+        padding: 0 20px;   /* 좌우 여백 확보 */
+        
+        /* Flex 관련 설정은 유지 */
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* 내부 요소들을 중앙으로 모음 */
+      }
       
       /* [스크롤 허용 섹션] Team, Research */
       /* 이 두 섹션은 내용이 많으므로 화면을 넘어가면 스크롤 생성 */
@@ -421,13 +434,13 @@
 
       /* --- Team PC --- */
       .slider-wrapper { 
-        padding: 0 50px; 
+        padding: 0; 
         width: 100%; 
         margin-bottom: 20px;
       }
       .swiper-button-prev, .swiper-button-next { display: flex; align-items: center; justify-content: center; }
-      .swiper-button-prev { left: 0; }
-      .swiper-button-next { right: 0; }
+      .swiper-button-prev { left: -50px; }
+      .swiper-button-next { right: -50px; }
       
       .swiper.team-slider { 
         height: auto !important;
@@ -459,10 +472,11 @@
         justify-content: center;
         align-items: flex-start;  /* 좌측 정렬 */
         text-align: left;         /* 좌측 정렬 */
-        width: 1200px;        
-        max-width: 95vw;
+        width: 100%;        
+        max-width: 100%;
         border-left: 1px solid #ddd; 
         border-top: 6px solid #ddd;
+        box-sizing: border-box;
       }
       .pub-item:hover {
         transform: translateY(-5px);
@@ -960,3 +974,4 @@
   </script>
 </body>
 </html>
+
