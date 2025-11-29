@@ -222,6 +222,20 @@
     .swiper-button-next:after { font-size: 1.2rem; font-weight: bold; }
     .swiper-button-prev { left: 0; }
     .swiper-button-next { right: 0; }
+    
+    /* [Advisor] 상단 독립 컨테이너 스타일 */
+    .advisor-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center; /* 중앙 정렬 */
+      margin-bottom: 40px;     /* 아래 팀원들과의 간격 */
+    }
+    
+    /* [Advisor] 카드가 너무 작아 보이지 않게 조금 키움 (선택사항) */
+    .advisor-wrapper .team-member {
+      transform: scale(1.05); /* 팀원보다 5% 정도 크게 강조 */
+      border: 2px solid var(--primary-blue); /* 파란 테두리로 강조 */
+    }
 
     /* [PC] 2 Rows Grid Layout (복구됨) */
     @media (min-width: 901px) {
@@ -950,6 +964,7 @@
 
 </body>
 </html>
+
 
 
 
