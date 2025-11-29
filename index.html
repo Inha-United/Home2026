@@ -470,8 +470,13 @@
     .lab-link img.artemis-logo { height: 120px; } 
     .lab-link img.rils-logo { height: 160px; } 
 
-    /* [Mobile] 수정된 모바일 스타일 */
+    /* =========================================
+       [Mobile] Mobile Layout Fixes 
+       ========================================= */
     @media (max-width: 900px) {
+      .slider-wrapper { padding: 0; }
+      .swiper-button-next, .swiper-button-prev { display: none; }
+
       .section { padding: 80px 20px; }
       .section.opensource { background-color: #fff !important; min-height: auto !important; padding-bottom: 60px; }
       
@@ -493,29 +498,38 @@
         height: auto !important;
       }
 
-      /* ★★★ [핵심] 높이 강제 지정 및 패딩 추가 ★★★ */
+      /* ★★★ [핵심 수정] 슬라이더 컨테이너 강제 높이 지정 & 패딩 ★★★ */
       .swiper.team-slider {
         height: auto !important;
-        min-height: 350px !important; /* 사라짐 방지 */
+        min-height: 300px !important; /* 사라짐 방지 */
         padding-bottom: 40px;
-        padding-left: 20px;  /* 왼쪽 정렬 시 여백 */
+        padding-left: 20px; /* 왼쪽 정렬 시 여백 */
         padding-right: 20px;
         overflow: visible !important; /* 그림자 잘림 방지 */
       }
 
+      /* ★★★ [핵심 수정] 카드 사이즈 대폭 축소 ★★★ */
+      .team-member {
+        width: 160px; /* PC 200px -> 160px로 축소 */
+        height: auto; 
+        min-height: 200px; /* 높이도 축소 */
+        padding: 15px 10px; 
+      }
+      
+      .team-member img {
+        width: 65px; height: 65px; /* 이미지 축소 */
+        margin-bottom: 8px;
+      }
+      .team-member h3 { font-size: 0.95em; margin: 4px 0; }
+      .team-member p { font-size: 0.8em; margin-bottom: 5px; }
+
+      /* 슬라이드 찌그러짐 방지 */
       .swiper-slide {
         height: auto !important;
         width: auto !important;
         display: flex;
         justify-content: center;
-        flex-shrink: 0 !important; /* 찌그러짐 방지 */
-      }
-
-      .team-member {
-        width: 260px; 
-        height: auto; 
-        min-height: 240px; 
-        padding: 30px 20px; 
+        flex-shrink: 0 !important; 
       }
       
       .contact { 
@@ -525,12 +539,13 @@
       .contact-container { height: auto !important; justify-content: center !important; gap: 40px; }
       .footer-info { margin-top: 20px !important; margin-bottom: 20px !important; }
       
+      /* 모바일 로고 그리드 */
       .lab-logos {
         display: grid; 
-        grid-template-columns: repeat(2, 1fr); /* 2열 배치 */
-        gap: 40px 15px; /* 위아래 간격 40px, 좌우 간격 15px */
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 40px 15px; 
         width: 100%;
-        max-width: 400px; /* 너무 퍼지지 않게 제한 */
+        max-width: 400px; 
         margin-top: 30px !important;
         padding-bottom: 20px;
       }
@@ -540,48 +555,33 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: flex-end; /* 텍스트 바닥 라인 맞춤 */
+        justify-content: flex-end; 
       }
 
       .lab-link img {
-        /* 모바일용 이미지 박스 높이 고정 (PC 110px -> 모바일 70px) */
         height: 70px; 
         width: 100%; 
         object-fit: contain; 
-        object-position: center bottom; /* 바닥에 붙여서 텍스트와 가깝게 */
+        object-position: center bottom; 
         margin-bottom: 10px;
       }
       
-      .lab-link span {
-        font-size: 1rem; /* 폰트 크기 살짝 줄임 */
-      }
+      .lab-link span { font-size: 1rem; }
 
-      /* --- 모바일용 로고별 미세 조정 (비율 맞춤) --- */
-      
-      /* 1. SPARO: 기본 설정 유지 */
-      .lab-link img.sparo-logo { 
-        padding: 5px; 
-      }
-
-      /* 2. RCV: 납작하므로 조금 키움 */
+      /* 모바일 로고 개별 미세 조정 */
+      .lab-link img.sparo-logo { padding: 5px; }
       .lab-link img.rcv-logo { 
-         height: 70px; /* 높이 확보 */
-         transform: scale(1); /* 1.3배 확대 */
+         height: 70px; 
+         transform: scale(1.3); 
          transform-origin: center bottom;
-         margin-bottom: 15px; /* 확대된 만큼 여백 추가 */
+         margin-bottom: 15px; 
       }
-
-      /* 3. ARTEMIS: 직사각형이라 너무 크므로 높이 줄임 */
       .lab-link img.artemis-logo {
-         height: 55px !important; /* 높이를 55px로 제한 */
+         height: 55px !important; 
          border-radius: 6px;
          margin-bottom: 15px;
       }
-
-      /* 4. RILS: 원형이라 작아보일 수 있어 살짝 키움 */
-      .lab-link img.rils-logo {
-         transform: scale(1.1);
-      }
+      .lab-link img.rils-logo { transform: scale(1.1); }
     }
   </style>
 </head>
@@ -1003,6 +1003,7 @@
   </script>
 </body>
 </html>
+
 
 
 
