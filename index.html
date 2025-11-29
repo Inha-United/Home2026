@@ -646,7 +646,7 @@
       /* 1. 컨테이너 100% 확장 */
       .section[data-anchor="research"] .max-w-container {
         width: 100% !important;
-        max-width: 1800px !important; /* 최대 1400px까지 확장 */
+        max-width: 1400px !important; /* 최대 1400px까지 확장 */
         padding-left: 40px !important;
         padding-right: 40px !important;
       }
@@ -665,6 +665,13 @@
         border-radius: 12px;     /* 둥근 모서리 */
         padding: 20px 25px;      /* 넉넉한 안쪽 여백 */
         margin-bottom: 20px;     /* 아이템 간격 */
+        
+        /* [높이 고정 설정 추가] */
+        min-height: 160px;       /* 최소 높이를 160px로 고정하여 큼직하게 유지 */
+        display: flex;           /* 내부 내용물 정렬을 위해 flex 사용 */
+        flex-direction: column;  /* 세로 정렬 */
+        justify-content: center; /* 내용이 적어도 수직 중앙에 예쁘게 배치 */
+        align-items: flex-start; /* 글자는 왼쪽 정렬 */
         
         /* 기존 왼쪽 선 스타일 유지/강화 */
         border-left: 6px solid #ddd; 
@@ -902,17 +909,46 @@
           <h3 class="year-header">2025</h3>
           
           <div class="pub-item">
-            <span class="pub-venue">Example Conference</span>
-            <span class="pub-title">Example Title</span>
-            <div class="pub-authors">Example authors</div>
+            <span class="pub-venue">ICRA 2025</span>
+            <span class="pub-title">Deep Reinforcement Learning for Robust Navigation in Crowded Environments</span>
+            <div class="pub-authors">Minho Lee, Dongjin Cho, Junwoo Jang</div>
             <div class="pub-links">
-              <a href="https://dl.acm.org/doi/pdf/10.1145/1015706.1015775" target="_blank">[pdf]</a>
-              <a href="https://github.com/github-samples" target="_blank">[code]</a>
-              <a href="https://www.youtube.com/example" target="_blank">[youtube]</a>
+              <a href="#" target="_blank">[PDF]</a>
+              <a href="#" target="_blank">[Code]</a>
+              <a href="#" target="_blank">[Video]</a>
+            </div>
+          </div>
+
+          <div class="pub-item">
+            <span class="pub-venue">CVPR 2025</span>
+            <span class="pub-title">Real-time Object Grasping with Vision-Language Models</span>
+            <div class="pub-authors">Jihyun Han, Gunwoo Park, Minho Lee</div>
+            <div class="pub-links">
+              <a href="#" target="_blank">[PDF]</a>
+              <a href="#" target="_blank">[Project Page]</a>
             </div>
           </div>
 
           <h3 class="year-header">2024</h3>
+
+          <div class="pub-item">
+            <span class="pub-venue">IROS 2024</span>
+            <span class="pub-title">Hierarchical Behavior Trees for Service Robot Task Planning</span>
+            <div class="pub-authors">Sanghyun Lee, Wonhyuk Jung, Woojin Ahn</div>
+            <div class="pub-links">
+              <a href="#" target="_blank">[PDF]</a>
+              <a href="#" target="_blank">[Code]</a>
+            </div>
+          </div>
+
+          <div class="pub-item">
+            <span class="pub-venue">RA-L 2024</span>
+            <span class="pub-title">Sim-to-Real Transfer for Mobile Manipulation using Domain Randomization</span>
+            <div class="pub-authors">Dongjin Cho, Minho Lee</div>
+            <div class="pub-links">
+              <a href="#" target="_blank">[PDF]</a>
+            </div>
+          </div>
 
           <h3 class="year-header">2023</h3>
 
@@ -1050,6 +1086,3 @@
   </script>
 </body>
 </html>
-
-
-
