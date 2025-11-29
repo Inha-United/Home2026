@@ -166,22 +166,9 @@
     }
 
     /* =======================
-       Team (Responsive Grid)
+       Team (Responsive Grid & Slider)
        ======================= */
     .team { background-color: #f9f9f9; width: 100%; }
-    
-    /* [Advisor] 상단 독립 컨테이너 스타일 */
-    .advisor-wrapper {
-      width: 100%;
-      display: flex;
-      justify-content: center; 
-      margin-bottom: 40px;      
-    }
-    
-    .advisor-wrapper .team-member {
-      transform: scale(1.05); 
-      border: 2px solid var(--primary-blue); 
-    }
     
     .slider-wrapper {
       position: relative;
@@ -240,29 +227,13 @@
     .swiper-button-prev { left: 0; }
     .swiper-button-next { right: 0; }
     
-    /* [Advisor] PC 스타일 */
-    .advisor-wrapper {
-      width: 100%;
-      display: flex;
-      justify-content: center; 
-      align-items: flex-start;
-      flex-wrap: wrap;            
-      gap: 60px;
-      margin-bottom: 40px;      
-    }
-    
-    .advisor-wrapper .team-member {
-      transform: scale(1.05); 
-      border: 2px solid var(--primary-blue); 
-    }
-
     /* =======================
        Research Styles
        ======================= */
     .publication-wrap {
       width: 100%;
-      /* [수정] 중앙 정렬을 위한 설정 */
-      max-width: 1200px; /* 너무 넓게 퍼지지 않도록 제한 */
+      /* Team 섹션(1400px)과 동일하게 맞춤 */
+      max-width: 1400px; 
       margin: 0 auto;    /* 블록 자체를 중앙 정렬 */
       text-align: center; /* 내부 텍스트 중앙 정렬 */
       padding-bottom: 50px;
@@ -509,8 +480,6 @@
       .section.team h1 { margin-bottom: 20px !important; margin-top: 0 !important; }
 
       /* Mobile Team Slider */
-      .advisor-wrapper { margin-bottom: 20px; gap: 15px !important; }
-      .advisor-wrapper .team-member { transform: none; width: 260px; height: auto; }
       .slider-wrapper { padding: 0; }
       .swiper-button-next, .swiper-button-prev { display: none; }
       
@@ -576,18 +545,17 @@
     @media (min-width: 901px) {
       /* [수정] Research 리스트를 중앙에 정렬하되 최대폭을 줌 */
       .publication-wrap {
-         max-width: 1200px; /* 원하는 너비 */
+         max-width: 1400px; /* 원하는 너비 */
          margin: 0 auto;    /* 중앙 정렬 */
       }
 
       /* Research Item을 박스 형태로 변경 + 중앙 정렬 */
-.pub-item {
+      .pub-item {
         background-color: #fff;  
         border: 1px solid #ddd;  
         border-radius: 12px;     
         padding: 20px 25px;      
-        
-        /* [핵심 1] 박스 중앙 정렬을 위해 margin auto 사용 */
+        /* [중요 수정] 마진을 auto로 주어 박스를 중앙에 정렬하고, 아래 여백 유지 */
         margin: 0 auto 20px auto;     
         
         min-height: 140px;       
@@ -595,23 +563,23 @@
         flex-direction: column;  
         justify-content: center; 
         
-        /* [핵심 2] 박스 너비를 글자 길이에 딱 맞춤 */
+        /* [핵심 수정] 박스 크기를 내부 컨텐츠(글자 길이)에 맞춤 */
         width: fit-content; 
         
-        /* 텍스트 중앙 정렬 */
+        /* [핵심 수정] 텍스트 및 아이템 중앙 정렬 */
         align-items: center; 
         text-align: center;
         
-        /* 디자인 포인트 (왼쪽 선 -> 위쪽 선) */
+        /* [디자인 수정] 왼쪽 테두리 대신 위쪽 테두리로 포인트 변경 */
         border-left: 1px solid #ddd; 
         border-top: 6px solid #ddd; 
       }
 
-      /* Hover 효과도 위쪽 선 색상 변경으로 맞춰주세요 */
+      /* Hover 효과 */
       .pub-item:hover {
-        transform: translateY(-5px); 
+        transform: translateY(-5px); /* 위로 살짝 뜨는 효과 */
         border-color: var(--primary-blue);
-        border-top-color: var(--primary-blue); 
+        border-top-color: var(--primary-blue); /* 위쪽 테두리 색상 변경 */
         background-color: #f8fbff; 
         box-shadow: 0 10px 20px rgba(0,0,0,0.08);
       }
@@ -674,48 +642,70 @@
           Advisors
         </p>
 
-        <div class="advisor-wrapper">
-             <div class="team-member">
-                <img src="https://github.com/octocat.png" alt="A" onerror="this.src='https://via.placeholder.com/90?text=Advisor1'" />
-                <h3>Minho Lee</h3>
-                <p>Professor</p>
-                <div class="social-icons">
-                   <a href="#" target="_blank"><i class="fab fa-github"></i></a>
-                   <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
-                   <a href="mailto:mhlee00@inha.edu"><i class="fas fa-envelope"></i></a>
+        <!-- [Advisor - Slider 변경됨] -->
+        <div class="slider-wrapper">
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+    
+          <div class="swiper-container team-slider">
+            <div class="swiper-wrapper">
+              
+              <div class="swiper-slide">
+                <div class="team-member">
+                  <img src="https://github.com/octocat.png" alt="A" onerror="this.src='https://via.placeholder.com/90?text=Advisor1'" />
+                  <h3>Minho Lee</h3>
+                  <p>Professor</p>
+                  <div class="social-icons">
+                     <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                     <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                     <a href="mailto:mhlee00@inha.edu"><i class="fas fa-envelope"></i></a>
+                  </div>
                 </div>
               </div>
-              <div class="team-member">
-                <img src="https://github.com/octocat.png" alt="B" onerror="this.src='https://via.placeholder.com/90?text=Advisor2'" />
-                <h3>Minho Lee</h3>
-                <p>Professor</p>
-                <div class="social-icons">
-                   <a href="#" target="_blank"><i class="fab fa-github"></i></a>
-                   <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
-                   <a href="mailto:mhlee00@inha.edu"><i class="fas fa-envelope"></i></a>
+
+              <div class="swiper-slide">
+                <div class="team-member">
+                  <img src="https://github.com/octocat.png" alt="B" onerror="this.src='https://via.placeholder.com/90?text=Advisor2'" />
+                  <h3>Minho Lee</h3>
+                  <p>Professor</p>
+                  <div class="social-icons">
+                     <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                     <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                     <a href="mailto:mhlee00@inha.edu"><i class="fas fa-envelope"></i></a>
+                  </div>
                 </div>
               </div>
-              <div class="team-member">
-                <img src="https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=1lbPybMAAAAJ&citpid=3" alt="C" onerror="this.src='https://via.placeholder.com/90?text=Advisor3'" />
-                <h3>Junwoo Jang</h3>
-                <p>Professor</p>
-                <div class="social-icons">
-                   <a href="#" target="_blank"><i class="fab fa-github"></i></a>
-                   <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
-                   <a href="mailto:mhlee00@inha.edu"><i class="fas fa-envelope"></i></a>
+
+              <div class="swiper-slide">
+                <div class="team-member">
+                  <img src="https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=1lbPybMAAAAJ&citpid=3" alt="C" onerror="this.src='https://via.placeholder.com/90?text=Advisor3'" />
+                  <h3>Junwoo Jang</h3>
+                  <p>Professor</p>
+                  <div class="social-icons">
+                     <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                     <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                     <a href="mailto:mhlee00@inha.edu"><i class="fas fa-envelope"></i></a>
+                  </div>
                 </div>
               </div>
-              <div class="team-member">
-                <img src="https://media.licdn.com/dms/image/v2/D5603AQGrAIBlHg5KCQ/profile-displayphoto-shrink_200_200/B56ZV7n8KJGUAY-/0/1741535822803?e=2147483647&v=beta&t=K1kG55kvd55i8zy0tO0tqMIQgItrRwUywE8A7AIqLvI" alt="D" onerror="this.src='https://via.placeholder.com/90?text=Advisor4'" />
-                <h3>Woojin Ahn</h3>
-                <p>Professor</p>
-                <div class="social-icons">
-                   <a href="#" target="_blank"><i class="fab fa-github"></i></a>
-                   <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
-                   <a href="mailto:mhlee00@inha.edu"><i class="fas fa-envelope"></i></a>
+
+              <div class="swiper-slide">
+                <div class="team-member">
+                  <img src="https://media.licdn.com/dms/image/v2/D5603AQGrAIBlHg5KCQ/profile-displayphoto-shrink_200_200/B56ZV7n8KJGUAY-/0/1741535822803?e=2147483647&v=beta&t=K1kG55kvd55i8zy0tO0tqMIQgItrRwUywE8A7AIqLvI" alt="D" onerror="this.src='https://via.placeholder.com/90?text=Advisor4'" />
+                  <h3>Woojin Ahn</h3>
+                  <p>Professor</p>
+                  <div class="social-icons">
+                     <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                     <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                     <a href="mailto:mhlee00@inha.edu"><i class="fas fa-envelope"></i></a>
+                  </div>
                 </div>
               </div>
-        </div>
+
+            </div> 
+            <div class="swiper-pagination"></div>
+          </div> 
+        </div> 
         
         <p class="desc">
           Team members
@@ -858,70 +848,44 @@
           <h3 class="year-header">2025</h3>
           
           <div class="pub-item">
-            <span class="pub-venue">Conference</span>
-            <span class="pub-title">Title</span>
-            <div class="pub-authors">Authors</div>
+            <span class="pub-venue">ICRA 2025</span>
+            <span class="pub-title">Deep Reinforcement Learning for Robust Navigation in Crowded Environments</span>
+            <div class="pub-authors">Minho Lee, Dongjin Cho, Junwoo Jang</div>
             <div class="pub-links">
-              <a href="https://dl.acm.org/doi/pdf/10.1145/1015706.1015775" target="_blank">[PDF]</a>
-              <a href="https://github.com/github-samples" target="_blank">[Code]</a>
-              <a href="https://www.youtube.com/watch?v=CLXt3yh2g0s" target="_blank">[Video]</a>
+              <a href="#" target="_blank">[PDF]</a>
+              <a href="#" target="_blank">[Code]</a>
+              <a href="#" target="_blank">[Video]</a>
             </div>
           </div>
 
+          <div class="pub-item">
+            <span class="pub-venue">CVPR 2025</span>
+            <span class="pub-title">Real-time Object Grasping with Vision-Language Models</span>
+            <div class="pub-authors">Jihyun Han, Gunwoo Park, Minho Lee</div>
+            <div class="pub-links">
+              <a href="#" target="_blank">[PDF]</a>
+              <a href="#" target="_blank">[Project Page]</a>
+            </div>
+          </div>
 
           <h3 class="year-header">2024</h3>
+
           <div class="pub-item">
-            <span class="pub-venue">Conference</span>
-            <span class="pub-title">Title</span>
-            <div class="pub-authors">Authors</div>
+            <span class="pub-venue">IROS 2024</span>
+            <span class="pub-title">Hierarchical Behavior Trees for Service Robot Task Planning</span>
+            <div class="pub-authors">Sanghyun Lee, Wonhyuk Jung, Woojin Ahn</div>
             <div class="pub-links">
-              <a href="https://dl.acm.org/doi/pdf/10.1145/1015706.1015775" target="_blank">[PDF]</a>
-              <a href="https://github.com/github-samples" target="_blank">[Code]</a>
-              <a href="https://www.youtube.com/watch?v=CLXt3yh2g0s" target="_blank">[Video]</a>
+              <a href="#" target="_blank">[PDF]</a>
+              <a href="#" target="_blank">[Code]</a>
             </div>
           </div>
-          <h3 class="year-header">2023</h3>
+
           <div class="pub-item">
-            <span class="pub-venue">Conference</span>
-            <span class="pub-title">Title</span>
-            <div class="pub-authors">Authors</div>
+            <span class="pub-venue">RA-L 2024</span>
+            <span class="pub-title">Sim-to-Real Transfer for Mobile Manipulation using Domain Randomization</span>
+            <div class="pub-authors">Dongjin Cho, Minho Lee</div>
             <div class="pub-links">
-              <a href="https://dl.acm.org/doi/pdf/10.1145/1015706.1015775" target="_blank">[PDF]</a>
-              <a href="https://github.com/github-samples" target="_blank">[Code]</a>
-              <a href="https://www.youtube.com/watch?v=CLXt3yh2g0s" target="_blank">[Video]</a>
-            </div>
-          </div>
-          <h3 class="year-header">2022</h3>
-          <div class="pub-item">
-            <span class="pub-venue">Conference</span>
-            <span class="pub-title">Title</span>
-            <div class="pub-authors">Authors</div>
-            <div class="pub-links">
-              <a href="https://dl.acm.org/doi/pdf/10.1145/1015706.1015775" target="_blank">[PDF]</a>
-              <a href="https://github.com/github-samples" target="_blank">[Code]</a>
-              <a href="https://www.youtube.com/watch?v=CLXt3yh2g0s" target="_blank">[Video]</a>
-            </div>
-          </div>
-          <h3 class="year-header">2021</h3>
-          <div class="pub-item">
-            <span class="pub-venue">Conference</span>
-            <span class="pub-title">Title</span>
-            <div class="pub-authors">Authors</div>
-            <div class="pub-links">
-              <a href="https://dl.acm.org/doi/pdf/10.1145/1015706.1015775" target="_blank">[PDF]</a>
-              <a href="https://github.com/github-samples" target="_blank">[Code]</a>
-              <a href="https://www.youtube.com/watch?v=CLXt3yh2g0s" target="_blank">[Video]</a>
-            </div>
-          </div>
-          <h3 class="year-header">~2020</h3>
-          <div class="pub-item">
-            <span class="pub-venue">Conference</span>
-            <span class="pub-title">Title</span>
-            <div class="pub-authors">Authors</div>
-            <div class="pub-links">
-              <a href="https://dl.acm.org/doi/pdf/10.1145/1015706.1015775" target="_blank">[PDF]</a>
-              <a href="https://github.com/github-samples" target="_blank">[Code]</a>
-              <a href="https://www.youtube.com/watch?v=CLXt3yh2g0s" target="_blank">[Video]</a>
+              <a href="#" target="_blank">[PDF]</a>
             </div>
           </div>
 
@@ -1005,42 +969,44 @@
       credits: { enabled: false }
     });
 
-    // 2. Swiper Slider Init
-    new Swiper('.team-slider', {
-      // 공통 설정 (기본값: 모바일용 1줄 세팅)
-      slidesPerView: 'auto', 
-      centeredSlides: true,  
-      spaceBetween: 20,
-      
-      grid: {
-        rows: 1,
-      },
-      
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
+    // 2. Swiper Slider Init (Multi-Instance Support)
+    // [수정] 여러 개의 .team-slider를 독립적으로 초기화합니다.
+    document.querySelectorAll('.team-slider').forEach(function(sliderElement) {
+      new Swiper(sliderElement, {
+        // 공통 설정
+        slidesPerView: 'auto', 
+        centeredSlides: true,  
+        spaceBetween: 20,
+        
+        grid: {
+          rows: 1,
+        },
+        
+        pagination: {
+          el: sliderElement.querySelector('.swiper-pagination'), // 현재 슬라이더 내부의 pagination 찾기
+          clickable: true,
+        },
+        navigation: {
+          // 현재 슬라이더의 부모(.slider-wrapper) 내부에 있는 버튼을 찾습니다.
+          nextEl: sliderElement.parentElement.querySelector('.swiper-button-next'),
+          prevEl: sliderElement.parentElement.querySelector('.swiper-button-prev'),
+        },
 
-      // 화면 크기별 설정 (Breakpoints)
-      breakpoints: {
-        // [PC 모드] 901px 이상에서는 2줄 그리드 적용
-        901: {
-          slidesPerView: 5, // 한 줄에 5개
-          centeredSlides: false, // 왼쪽 정렬
-          grid: {
-            rows: 2,
-            fill: 'row',
-          },
-          spaceBetween: 30,
+        // 화면 크기별 설정 (Breakpoints)
+        breakpoints: {
+          // [PC 모드] 901px 이상에서는 2줄 그리드 적용
+          901: {
+            slidesPerView: 5, // 한 줄에 5개
+            centeredSlides: false, // 왼쪽 정렬
+            grid: {
+              rows: 2,
+              fill: 'row',
+            },
+            spaceBetween: 30,
+          }
         }
-      }
+      });
     });
   </script>
 </body>
 </html>
-
-
