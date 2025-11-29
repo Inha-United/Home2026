@@ -263,9 +263,38 @@
        Research Section (Restored from Broken Version)
        ======================= */
     /* Research content alignment */
+    /* =========================================
+       [수정] Publication(Research) 섹션 레이아웃 고치기
+       ========================================= */
+    
+    /* 1. 이 섹션만 '중앙 정렬'을 풀고 '위쪽 정렬'로 변경 */
+    .section[data-anchor="research"] {
+      display: flex !important;
+      flex-direction: column !important;
+      
+      /* ★ 핵심: 내용이 길어도 위에서부터 차곡차곡 쌓이게 함 (밀림 방지) */
+      justify-content: flex-start !important; 
+      
+      /* ★ 핵심: 헤더 높이(90px) + 제목 여백 확보 (잘림 방지) */
+      padding-top: 140px !important; 
+      padding-bottom: 60px !important;
+    }
+
+    /* 2. H1 제목 고정 및 여백 정리 */
+    .section[data-anchor="research"] h1 {
+      flex-shrink: 0; /* 제목이 찌그러지거나 밀리지 않게 고정 */
+      margin-top: 0 !important;
+      margin-bottom: 40px !important;
+    }
+
+    /* 3. 컨테이너 크기 줄이기 (1200px -> 1000px) */
     .section[data-anchor="research"] .max-w-container {
-        align-items: flex-start; /* Align left for PC list */
-        text-align: left;
+      width: 100% !important;
+      
+      /* ▼ 너비를 1000px로 줄여서 더 컴팩트하게 만듦 */
+      max-width: 1000px !important; 
+      
+      margin: 0 auto;
     }
 
     .year-header {
@@ -909,6 +938,7 @@
   </script>
 </body>
 </html>
+
 
 
 
