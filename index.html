@@ -470,6 +470,7 @@
     .lab-link img.artemis-logo { height: 120px; } 
     .lab-link img.rils-logo { height: 160px; } 
 
+    /* [Mobile] 수정된 모바일 스타일 */
     @media (max-width: 900px) {
       .section { padding: 80px 20px; }
       .section.opensource { background-color: #fff !important; min-height: auto !important; padding-bottom: 60px; }
@@ -490,6 +491,31 @@
         flex-direction: column !important;
         justify-content: flex-start !important;
         height: auto !important;
+      }
+
+      /* ★★★ [핵심] 높이 강제 지정 및 패딩 추가 ★★★ */
+      .swiper.team-slider {
+        height: auto !important;
+        min-height: 350px !important; /* 사라짐 방지 */
+        padding-bottom: 40px;
+        padding-left: 20px;  /* 왼쪽 정렬 시 여백 */
+        padding-right: 20px;
+        overflow: visible !important; /* 그림자 잘림 방지 */
+      }
+
+      .swiper-slide {
+        height: auto !important;
+        width: auto !important;
+        display: flex;
+        justify-content: center;
+        flex-shrink: 0 !important; /* 찌그러짐 방지 */
+      }
+
+      .team-member {
+        width: 260px; 
+        height: auto; 
+        min-height: 240px; 
+        padding: 30px 20px; 
       }
       
       .contact { 
@@ -850,19 +876,17 @@
       navigation: true,
       showActiveTooltip: true,
       credits: { enabled: false },
-
-      // ★ [핵심 수정 1] 슬라이더와 비디오 영역에서는 fullPage 스크롤 간섭 금지
       normalScrollElements: '.swiper, .video-container, .research-list',
     });
 
     // 2. Swiper Slider Init
 
-    // PC Responsive Settings
+    // PC Responsive Settings (여기서만 Grid 적용!)
     const pcBreakpoint = {
         901: {
             slidesPerView: 5,
             centeredSlides: false,
-            grid: { rows: 1, fill: 'row' },
+            grid: { rows: 1, fill: 'row' }, // ★ PC에서만 격자 사용
             spaceBetween: 30,
         }
     };
@@ -870,19 +894,20 @@
     // --- A. Advisor Slider (Loop FALSE) ---
     const advisorSliderEl = document.querySelector('.advisor-slider');
     new Swiper(advisorSliderEl, {
-        // ★ [핵심 수정 2] 모바일 터치 인식 개선 및 관찰자 설정
         observer: true,
         observeParents: true,
-        watchOverflow: true,   // 슬라이드가 적으면 스와이프 막음 (버그 방지)
+        watchOverflow: true,
         
         loop: false,             
         autoplay: false,         
         
+        // 모바일: 왼쪽 정렬
+        centeredSlides: false,   
         slidesPerView: 'auto',
-        centeredSlides: false,
         spaceBetween: 20,
         centerInsufficientSlides: true,
-        grid: { rows: 1 },
+        
+        // ★ [수정됨] 여기에 grid: { rows: 1 } 이 있으면 안 됩니다! (삭제됨)
 
         pagination: {
           el: advisorSliderEl.querySelector('.swiper-pagination'),
@@ -898,7 +923,6 @@
     // --- B. Member Slider (Loop TRUE) ---
     const memberSliderEl = document.querySelector('.member-slider');
     new Swiper(memberSliderEl, {
-        // ★ [핵심 수정 2] 모바일 터치 인식 개선
         observer: true,
         observeParents: true,
 
@@ -909,11 +933,13 @@
           pauseOnMouseEnter: true,
         },
 
+        // 모바일: 중앙 정렬 (Loop니까 중앙이 자연스러움)
+        centeredSlides: true, 
         slidesPerView: 'auto',
-        centeredSlides: true,
         spaceBetween: 20,
         centerInsufficientSlides: true,
-        grid: { rows: 1 },
+        
+        // ★ [수정됨] 여기도 grid 설정 삭제!
 
         pagination: {
           el: memberSliderEl.querySelector('.swiper-pagination'),
@@ -928,6 +954,7 @@
   </script>
 </body>
 </html>
+
 
 
 
