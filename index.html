@@ -15,7 +15,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <script>
-    // 모바일 브라우저 100vh 계산 보정
     function setVh() {
       const vh = window.innerHeight * 0.01;
       document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -26,9 +25,9 @@
   </script>
 
   <style>
-    /* =======================
-       Variables & Reset
-       ======================= */
+    /* =========================================
+       1. CORE VARIABLES & RESET (From Backup)
+       ========================================= */
     :root {
       --vh: 1vh;
       --primary-blue: #0078ff;
@@ -41,18 +40,19 @@
       box-sizing: border-box;
       font-family: 'Pretendard', sans-serif;
       margin: 0; padding: 0;
-      word-break: keep-all; /* 한글 줄바꿈 최적화 */
+      word-break: keep-all;
     }
     
     body {
       background-color: #fff;
       color: #333;
-      overflow-x: hidden !important;
     }
 
+    .fp-watermark { display: none !important; }
     a { text-decoration: none; color: inherit; transition: 0.3s; }
-    ul { list-style: none; }
-    .fp-watermark { display: none !important; } /* 라이선스 문구 숨김 (개발용) */
+    ul { list-style: none; padding: 0; }
+    .fa-scholar::before { content: "\f19d"; }
+    .fa-homepage::before { content: "\f015"; }
 
     /* =======================
        Header
@@ -79,24 +79,22 @@
     }
 
     /* =======================
-       Common Layout (Mobile First)
+       Common Layout (Backup Style)
        ======================= */
     .section {
       display: flex;
       flex-direction: column;
-      justify-content: flex-start; /* 기본 상단 정렬 */
+      justify-content: center;
       align-items: center;
       text-align: center;
-      /* 모바일 기준 패딩 */
-      padding: 90px 20px 40px 20px;
+      height: calc(var(--vh, 1vh) * 100); 
+      padding: 0 20px;
       position: relative;
       overflow: hidden;
-      /* fullPage.js 높이 계산 대응 */
-      height: calc(var(--vh, 1vh) * 100); 
     }
 
-    /* 통합 컨테이너 */
-    .content-wrapper {
+    /* PC Layout Fixer Container */
+    .max-w-container {
       width: 100%;
       max-width: 1400px;
       margin: 0 auto;
@@ -108,31 +106,26 @@
     }
 
     .section h1 {
-      font-size: 2.2rem;
+      font-size: 2.8rem;
       font-weight: 700;
+      margin-bottom: 30px; 
       margin-top: 0;
-      margin-bottom: 30px;
     }
     
     .section p.desc {
-      font-size: 1rem;
+      font-size: 1.15rem;
       max-width: 700px;
-      margin: 0 auto 30px auto;
+      margin: 0 auto 50px auto; 
       line-height: 1.6;
       color: #555;
-      padding: 0 10px;
     }
 
     /* =======================
-       Section: Home
+       Home Section
        ======================= */
-    .home { 
-      background: var(--bg-gradient-home); 
-      justify-content: center; /* 홈은 항상 중앙 정렬 */
-      padding-top: 0;
-    }
-    .home h1 { margin-bottom: 20px; font-size: 2.5rem; }
-    .home p { font-size: 1.2rem; margin-bottom: 40px; }
+    .home { background: var(--bg-gradient-home); }
+    .home h1 { margin-bottom: 20px; font-size: 3.5rem; }
+    .home p { font-size: 1.3rem; margin-bottom: 40px; }
     .home button {
       background-color: var(--primary-blue);
       color: white;
@@ -145,7 +138,6 @@
     }
     .home button:hover { background-color: #005fcc; }
 
-    /* 소셜 아이콘 (PC 전용, 모바일 숨김) */
     .social {
       position: fixed;
       left: 40px; top: 50%;
@@ -158,44 +150,44 @@
     
     @media (max-width: 900px) {
       .social { display: none; }
+      .home h1 { font-size: 2.5rem; margin-top: 50px; }
     }
 
     /* =======================
-       Section: Team
+       Team Section (Slider)
        ======================= */
-    .team { background-color: #f9f9f9; }
+    .team { background-color: #f9f9f9; width: 100%; }
     
+    /* Sub-headers for split sliders */
+    .team h2 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        color: var(--dark-blue);
+        margin-top: 10px;
+    }
+
     .slider-wrapper {
       position: relative;
       width: 100%;
-      padding: 0; /* 모바일 패딩 제거 */
-      margin-bottom: 20px;
+      padding: 0 50px; 
+      margin-bottom: 30px;
     }
 
-    /* Swiper (v11에서는 .swiper 사용) */
     .swiper.team-slider {
       width: 100%;
-      padding: 10px 10px 40px 10px; /* 그림자 잘림 방지 및 하단 점 공간 */
+      padding: 20px 10px 40px 10px;
       overflow: hidden;
-    }
-
-    .swiper-slide {
-      /* 모바일: Flex로 중앙 정렬만 */
-      display: flex;
-      justify-content: center;
-      height: auto;
     }
 
     .team-member {
       background: #ffffff;
-      border-radius: 16px;
-      padding: 20px 10px;
+      border-radius: 20px;
+      padding: 20px 15px;
       text-align: center;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      /* 모바일 사이즈 */
-      width: 180px; 
-      min-height: 200px;
+      width: 200px; 
+      height: 260px; 
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -217,25 +209,63 @@
     .social-icons a { color: #999; font-size: 1.1em; }
     .social-icons a:hover { color: var(--primary-blue); transform: scale(1.2); }
 
-    /* 네비게이션 버튼 (모바일 숨김) */
-    .swiper-button-prev, .swiper-button-next { display: none; }
-    
-    /* PC 모드에서 덮어쓰기 위해 색상 등 기본 설정만 */
-    .swiper-button-prev, .swiper-button-next {
+    .swiper-button-prev,
+    .swiper-button-next {
+      width: 40px; height: 40px;
       color: var(--primary-blue);
       background: rgba(255,255,255,0.8);
-      width: 40px; height: 40px;
       border-radius: 50%;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      z-index: 10;
     }
-    .swiper-button-prev:after, .swiper-button-next:after { font-size: 1.2rem; font-weight: bold; }
+    .swiper-button-prev:after, 
+    .swiper-button-next:after { font-size: 1.2rem; font-weight: bold; }
+    
+    /* PC: Grid Layout Support */
+    @media (min-width: 901px) {
+      /* Fixed: Removed fixed height 550px to allow separate sliders for PI and Team */
+      .swiper.team-slider {
+        height: auto; 
+        min-height: 320px;
+      }
+      .swiper-slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+      }
+    }
+
+    /* Mobile Optimization */
+    @media (max-width: 900px) {
+      .slider-wrapper { padding: 0; }
+      .swiper-button-next, .swiper-button-prev { display: none; }
+      
+      .swiper.team-slider {
+        height: auto; 
+        padding-bottom: 40px;
+      }
+      .swiper-slide {
+        height: auto !important;
+        width: auto !important;
+        display: flex;
+        justify-content: center;
+      }
+      .team-member {
+        width: 260px;
+        height: auto; 
+        min-height: 240px; 
+        padding: 30px 20px; 
+      }
+    }
 
     /* =======================
-       Section: Research
+       Research Section (Restored from Broken Version)
        ======================= */
-    /* Research 섹션은 내용이 많을 수 있으므로 Flex 정렬 주의 */
-    .section[data-anchor="research"] {
-      justify-content: flex-start;
+    /* Research content alignment */
+    .section[data-anchor="research"] .max-w-container {
+        align-items: flex-start; /* Align left for PC list */
+        text-align: left;
     }
 
     .year-header {
@@ -247,49 +277,41 @@
       margin-bottom: 20px;
       padding-bottom: 10px;
       width: 100%;
-      align-items: flex-start;  /* 좌측 정렬 */
-      text-align: left;   
+      display: block;
     }
     .year-header:first-of-type { margin-top: 0; }
 
-    /* Research Item (Mobile Default: Simple List) */
     .pub-item {
       width: 100%;
-      margin-bottom: 25px;
-      padding: 15px;
-      border-left: 3px solid transparent;
-      transition: 0.2s;
-      text-align: left; /* 모바일은 좌측 정렬이 가독성 좋음 */
+      margin-bottom: 20px;
+      padding: 25px;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      border-left: 4px solid #ddd;
+      background: #fff;
+      transition: 0.3s;
+      display: flex;
+      flex-direction: column;
+      text-align: left;
     }
     .pub-item:hover {
-      border-left: 3px solid var(--primary-blue);
-      background-color: #f9f9f9;
+      border-left-color: var(--primary-blue);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     }
     .pub-venue {
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       color: var(--primary-blue);
-      font-weight: 600;
-      margin-right: 15px;
-    }
-    /*.pub-venue {
-      display: inline-block;
-      font-size: 0.85rem;
       font-weight: 700;
-      color: #fff;
-      background-color: var(--dark-blue);
-      padding: 4px 8px;
-      border-radius: 4px;
-      margin-bottom: 8px;
-      margin-right: 8px;
-    }*/
-    .pub-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #222;
-      display: block;
       margin-bottom: 5px;
     }
-    .pub-authors { font-size: 1rem; color: #555; margin-bottom: 8px; }
+    .pub-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #222;
+      margin-bottom: 8px;
+    }
+    .pub-authors { font-size: 1rem; color: #555; margin-bottom: 10px; }
     
     .pub-links a {
       font-size: 0.9rem;
@@ -300,247 +322,172 @@
     .pub-links a:hover { text-decoration: underline; }
 
     /* =======================
-       Section: Open Source
+       Open Source & Media
        ======================= */
-    .opensource { background-color: #fff; justify-content: center; }
+    .opensource { background-color: #fff; }
     .opensource p.link-text { font-size: 1.3rem; margin-top: 30px; }
     .opensource a { color: var(--primary-blue); font-weight: 600; text-decoration: underline; }
 
-    /* =======================
-       Section: Media
-       ======================= */
+    /* Media Section */
     .media { background-color: #fff; }
     .media a { color: var(--primary-blue); font-weight: 600; }
-
+    
     .video-container {
       display: flex;
-      flex-direction: column; /* 모바일: 세로 배치 */
+      justify-content: center;
       align-items: center;
-      gap: 20px;
+      flex-wrap: wrap; 
+      gap: 4vw; 
       margin-top: 30px;
       width: 100%;
+      max-width: 1200px; 
+      padding: 10px; 
     }
-
+    
     .media video {
-      width: 90%;
-      max-width: 360px;
-      aspect-ratio: 9 / 16;
+      width: 30%; 
+      min-width: 280px; 
+      max-width: 360px; 
+      max-height: 55vh; 
+      aspect-ratio: 9 / 16; 
       border-radius: 16px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
       background: #000;
-      display: block;
+      transition: transform 0.3s;
+      display: block; 
+    }
+    .media video:hover { transform: scale(1.02); }
+
+    @media (max-width: 900px) {
+      .video-container { gap: 20px; flex-direction: row; }
+      .media video { width: 45%; min-width: 160px; max-width: 300px; max-height: 50vh; }
+    }
+    @media (max-width: 480px) {
+      .video-container { flex-direction: column; }
+      .media video { width: 80%; margin-bottom: 20px; }
     }
 
     /* =======================
-       Section: Contact
+       Contact Section
        ======================= */
     .contact {
+      width: 100%;
+      min-height: 100vh;
+      padding: 100px 20px 20px; 
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       background: linear-gradient(to bottom, #ffffff 0%, #ffffff 60%, #cce7ff 100%);
-      justify-content: center; /* 수직 중앙 정렬 */
     }
-
+    
     .contact-container {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
       width: 100%;
       max-width: 1600px;
-      gap: 40px;
+      height: 100%;
+      min-height: 50vh;
     }
-
+    
+    .contact-top {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 40px;
+      width: 100%;
+    }
+    .contact-top h1 { margin-bottom: 20px; }
+    
     .footer-info {
       font-size: 1.1rem;
       line-height: 1.8;
       text-align: center;
-      margin-bottom: 20px;
+      margin-top: 50px; /* Reduced from backup's 300px for better fit */
     }
-    .footer-info a { color: #0078ff; font-weight: 600; }
+    .footer-info a {
+      font-weight: 600;
+      color: #0078ff;
+      text-decoration: none;
+    }
 
-    /* Lab Logos (Mobile: Grid) */
+    /* Lab Logos */
     .lab-logos {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px 30px;
       width: 100%;
-      max-width: 360px;
-      padding-bottom: 20px;
+      display: flex;
+      justify-content: center; /* Centered instead of space-between for better looks */
+      align-items: center; 
+      gap: 50px; 
+      flex-wrap: wrap;
+      margin-top: auto; 
+      padding-top: 20px;
     }
+    
     .lab-link {
       display: flex;
       flex-direction: column;
       align-items: center;
+      text-decoration: none;
       color: #333;
+      transition: transform 0.3s;
     }
-    .lab-link img { height: 50px; width: auto; object-fit: contain; margin-bottom: 8px; }
-    .lab-link img.rcv-logo { height: 90px; } /* 예외 사이즈 */
-    .lab-link span { font-size: 0.9rem; font-weight: 600; color: #555; }
+    .lab-link:hover { transform: translateY(-5px); color: #0078ff; }
+    
+    .lab-link img {
+      height: 100px; 
+      width: auto;
+      object-fit: contain; 
+      margin-bottom: 12px;
+      opacity: 0.9;
+      transition: 0.3s;
+    }
+    .lab-link img:hover { opacity: 1; transform: scale(1.05); }
+    .lab-link span { font-size: 1.1rem; font-weight: 600; color: #555; }
+    
+    .lab-link img.rcv-logo { height: 160px; } /* Specific sizing for RCV */
 
-    /* ========================================================
-       ★ [PC Desktops] 901px 이상 - "칼각 너비 고정" 최종판 ★
-       ======================================================== */
-    @media (min-width: 901px) {
-    
-      /* 1. 레이아웃 흔들림 방지 */
-      html { scrollbar-gutter: stable; }
-      body { overflow-x: hidden !important; width: 100%; }
-    
-      /* 2. 섹션 공통 설정 */
-      .section {
-        height: 100vh !important;
-        overflow-y: auto !important; /* 자동 스크롤 */
-        overflow-x: hidden !important;
-        padding: 0;
-        box-sizing: border-box;
-      }
-    
-      /* 3. 통합 컨테이너 (너비의 기준점) */
-      .content-wrapper {
-        width: 100%;
-        max-width: 1400px; /* 전체 최대 너비 (이 안에서 꽉 참) */
-        margin: 0 auto;
-        padding: 100px 40px 40px 40px; 
-        box-sizing: border-box;
-        
-        display: flex;
-        flex-direction: column;
-        min-height: 100%;
-        justify-content: center;
-        
-        /* ★ 핵심: 자식 요소들을 무조건 가로로 꽉 찢어 늘림 (Stretch) */
-        align-items: stretch; 
-        text-align: center;
-      }
-    
-      /* 4. 자식 요소 공통 (무조건 100% 꽉 채우기) */
-      .slider-wrapper, 
-      .video-container, 
-      .contact-container,
-      .pub-item {
-        width: 100%;
-        min-width: 0; 
-      }
-    
-    
-      /* -------------------------------
-         [Team Section]
-         ------------------------------- */
-      .slider-wrapper {
-        margin-bottom: 20px;
-        padding: 0; /* 패딩 제거 (꽉 차게) */
-        overflow: hidden;
-      }
-      .swiper.team-slider {
-        width: 100%;
+    /* Mobile Layout Fixes */
+    @media (max-width: 900px) {
+      .section { padding: 80px 20px; }
+      .section.opensource { background-color: #fff !important; min-height: auto !important; padding-bottom: 60px; }
+      
+      .section.team {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        padding-top: 80px !important; 
+        padding-bottom: 60px !important;
         height: auto !important;
-        padding-bottom: 40px;
-        overflow: visible;
-        cursor: grab;
+        min-height: 100vh;
       }
-      .swiper.team-slider:active { cursor: grabbing; }
-      .swiper-slide { height: auto !important; display: flex; justify-content: center; }
-      .team-member { width: 180px; height: 250px; padding: 15px 10px; }
-    
-    
-      /* -------------------------------
-         [Research Section] - 이미 꽉 차 있음
-         ------------------------------- */
-      .pub-item {
-        background-color: #fff;
-        border: 1px solid #ddd;
-        border-radius: 12px;
-        padding: 30px 40px;
-        margin: 0 0 20px 0;
-        width: 100%;
-        
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start; /* 내부는 왼쪽 정렬 */
-        text-align: left;
-        
-        border-left: 1px solid #ddd;
-        border-top: 6px solid #ddd;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-      }
-      .pub-item:hover {
-        transform: translateY(-5px);
-        border-color: var(--primary-blue);
-        border-top-color: var(--primary-blue);
-        background-color: #f8fbff;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-      }
-      .pub-venue { font-size: 0.95rem; color: var(--primary-blue); font-weight: 700; margin-bottom: 8px; }
-      .pub-title { font-size: 1.6rem; font-weight: 700; color: #222; margin-bottom: 10px; line-height: 1.3; }
-      .pub-authors { font-size: 1.05rem; color: #555; margin-bottom: 15px; }
-      .pub-links a { font-size: 0.95rem; color: var(--primary-blue); font-weight: 600; margin-right: 20px; }
-    
-    
-      /* -------------------------------
-         [Media Section] - ★ 수정됨
-         ------------------------------- */
-      .video-container {
-        display: flex;
-        flex-direction: row;
-        
-        /* ★ 핵심: 비디오를 중앙이 아니라 양 끝으로 벌림 */
-        justify-content: space-between; 
-        gap: 20px; /* 사이 간격 최소화 */
-        margin-top: 20px;
+      .section p.desc { width: 100% !important; white-space: normal !important; margin-bottom: 30px; padding: 0 10px; }
+      
+      .section.team .fp-tableCell {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        height: auto !important;
       }
       
-      .media video {
-        /* ★ 비디오 크기를 키워서 가로를 꽉 채우게 유도 */
-        width: 49%;  /* 2개 합쳐서 98% */
-        max-width: none; /* 제한 해제 */
-        height: auto;
-        max-height: 60vh;
-        border-radius: 16px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        background: #000;
+      .contact { 
+        padding-top: 60px !important; padding-bottom: 40px !important; 
+        display: flex !important; align-items: center; justify-content: center;
       }
-    
-    
-      /* -------------------------------
-         [Contact Section] - ★ 수정됨
-         ------------------------------- */
-      .contact-container {
-        display: flex;
-        flex-direction: column;
-        /* ★ 중앙 정렬 해제하고 꽉 채우기 */
-        align-items: stretch; 
-        justify-content: center;
-        gap: 60px;
-      }
-    
-      /* 텍스트 정보는 중앙에 두더라도 박스 자체는 꽉 채움 */
-      .footer-info {
-        width: 100%;
-        text-align: center; /* 텍스트만 중앙 */
-        background-color: #f8fbff; /* 박스 영역 확인용 배경 (선택사항, 지워도 됨) */
-        padding: 20px 0;
-        border-radius: 12px;
-      }
+      .contact-container { height: auto !important; justify-content: center !important; gap: 40px; }
+      .footer-info { margin-top: 20px !important; margin-bottom: 20px !important; }
       
       .lab-logos {
-        display: flex;
-        /* ★ 핵심: 로고들을 양 끝으로 균등 배치하여 시각적 너비 확장 */
-        justify-content: space-between; 
-        align-items: center;
-        width: 100%;
-        padding: 20px 0; /* 좌우 패딩 제거해서 끝까지 닿게 */
+        display: grid; 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 20px 30px; 
+        max-width: 360px; 
+        margin-top: 20px !important;
       }
-      
-      .lab-link { transition: transform 0.3s; display: flex; flex-direction: column; align-items: center; }
-      .lab-link:hover { transform: translateY(-5px); color: #0078ff; }
-      .lab-link img { height: 8vh; max-height: 80px; width: auto; margin-bottom: 10px; }
-      .lab-link img.rcv-logo { height: 14vh; max-height: 140px; }
-      .lab-link img.sparo-logo { height: 6vh; max-height: 60px; }
-      .lab-link span { font-size: 1.1rem; }
-    
-      /* 폰트 및 기타 */
-      .section h1 { font-size: 2.8rem; margin-bottom: 30px; }
-      .home h1 { font-size: 3.5rem; margin-bottom: 20px; }
-      .home p { font-size: 1.3rem; margin-bottom: 30px; }
+      .lab-link img { height: 50px; }
+      .lab-link img.rcv-logo { height: 75px; }
     }
   </style>
 </head>
@@ -562,7 +509,13 @@
   <div id="fullpage">
 
     <section class="section home" data-anchor="home">
-      <div class="content-wrapper">
+      <div class="social">
+        <a href="https://www.instagram.com/inha_united_official" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/company/inha-united" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.youtube.com/@Inha-United_Home" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://github.com/Inha-United" target="_blank"><i class="fab fa-github"></i></a>
+      </div>
+      <div class="max-w-container">
         <h1>Welcome!</h1>
         <p>We are <b>Inha-United@Home</b> 🤖</p>
         <p>A newly founded RoboCup @Home team from Inha University (2025).</p>
@@ -571,9 +524,9 @@
     </section>
 
     <section class="section team" data-anchor="team">
-      <div class="content-wrapper">
+      <div class="max-w-container">
         
-        <h1>Principal Investigator</h1>
+        <h2>Principal Investigator</h2>
         <div class="slider-wrapper">
           <div class="swiper-button-prev"></div>
           <div class="swiper-button-next"></div>
@@ -645,7 +598,7 @@
           </div> 
         </div> 
 
-        <h1>Team Member</h1>
+        <h2>Team Member</h2>
         <div class="slider-wrapper">
           <div class="swiper-button-prev"></div>
           <div class="swiper-button-next"></div>
@@ -744,7 +697,7 @@
                   <img src="img/jwk.jpg" alt="Wonhyuk Jung" onerror="this.src='https://via.placeholder.com/90?text=WJ'" />
                   <h3>Wonhyuk Jung</h3>
                   <p>Undergraduate</p>
-                  <div class="social-icons">                       
+                  <div class="social-icons">                        
                     <a href="https://github.com/RB3159" target="_blank"><i class="fab fa-github"></i></a>
                     <a href="mailto:rebullu3159@inha.edu"><i class="fas fa-envelope"></i></a>
                   </div>
@@ -771,7 +724,7 @@
 
     <section class="section" data-anchor="research">
       <h1>Publications</h1>
-      <div class="content-wrapper">
+      <div class="max-w-container">
         
         <h3 class="year-header">2025</h3>
         <div class="pub-item">
@@ -802,7 +755,7 @@
 
     <section class="section media" data-anchor="media">
       <h1>Media</h1>
-      <div class="content-wrapper">
+      <div class="max-w-container">
         <p class="desc">
           Our Robot: 
           <a href="https://www.rainbow-robotics.com/en_rby1" target="_blank" rel="noopener noreferrer">
@@ -823,35 +776,34 @@
     </section>
 
     <section class="section contact" data-anchor="contact">
-      <div class="content-wrapper">
-        <h1>Contact</h1>
-        <div class="contact-container">
-          
+      <div class="max-w-container contact-container">
+        <div class="contact-top">
+          <h1>Contact</h1>
           <div class="footer-info">
             <p>📧 <a href="mailto:inharobocuphome@gmail.com">inharobocuphome@gmail.com</a></p>
             <p>📍 Inha University, 100 Inha-ro, Michuhol-gu, Incheon, South Korea</p>
           </div>
-
-          <div class="lab-logos">
-            <a href="https://sparolab.github.io" target="_blank" class="lab-link">
-              <img src="sparo.png" alt="Sparo Lab" class="sparo-logo" onerror="this.src='https://via.placeholder.com/80'">
-              <span>SPARO Lab</span>
-            </a>
-            <a href="https://rcv-inha.notion.site/webhome" target="_blank" class="lab-link">
-              <img src="RCVLAB.webp" alt="RCV Lab" class="rcv-logo" onerror="this.src='https://via.placeholder.com/80?text=RCV'">
-              <span>RCV Lab</span>
-            </a>
-            <a href="https://artemis-inha.github.io/" target="_blank" class="lab-link">
-              <img src="https://artemis-inha.github.io/assets/images/logo.jpg" alt="Artemis Lab" onerror="this.src='https://via.placeholder.com/80?text=Artemis'">
-              <span>ARTEMIS Lab</span>
-            </a>
-            <a href="https://wjahn.github.io/rils/" target="_blank" class="lab-link">
-              <img src="https://wjahn.github.io/rils/assets/images/logo_inha.png" alt="RILS Lab" onerror="this.src='https://via.placeholder.com/80?text=RILS'">
-              <span>RILS Lab</span>
-            </a>
-          </div>
-
         </div>
+
+        <div class="lab-logos">
+          <a href="https://sparolab.github.io" target="_blank" class="lab-link">
+            <img src="sparo.png" alt="Sparo Lab" class="sparo-logo" onerror="this.src='https://via.placeholder.com/80'">
+            <span>SPARO Lab</span>
+          </a>
+          <a href="https://rcv-inha.notion.site/webhome" target="_blank" class="lab-link">
+            <img src="RCVLAB.webp" alt="RCV Lab" class="rcv-logo" onerror="this.src='https://via.placeholder.com/80?text=RCV'">
+            <span>RCV Lab</span>
+          </a>
+          <a href="https://artemis-inha.github.io/" target="_blank" class="lab-link">
+            <img src="https://artemis-inha.github.io/assets/images/logo.jpg" alt="Artemis Lab" onerror="this.src='https://via.placeholder.com/80?text=Artemis'">
+            <span>ARTEMIS Lab</span>
+          </a>
+          <a href="https://wjahn.github.io/rils/" target="_blank" class="lab-link">
+            <img src="https://wjahn.github.io/rils/assets/images/logo_inha.png" alt="RILS Lab" onerror="this.src='https://via.placeholder.com/80?text=RILS'">
+            <span>RILS Lab</span>
+          </a>
+        </div>
+
       </div>
     </section>
   </div>
@@ -863,23 +815,24 @@
       scrollOverflow: true,
       fitToSection: false,
       anchors: ['home', 'team', 'Publication', 'media', 'opensource', 'contact'],
-      navigationTooltips: ['Home', 'Team', 'research', 'Media','', 'Contact'],
+      navigationTooltips: ['Home', 'Team', 'Publication', 'Media','', 'Contact'],
       navigation: true,
       showActiveTooltip: true,
       credits: { enabled: false }
     });
 
-    // 2. Swiper Slider Init (Updated for v11)
+    // 2. Swiper Slider Init
+    // Initialize multiple sliders using querySelectorAll (Same logic as broken version, but improved)
     document.querySelectorAll('.team-slider').forEach(function(sliderElement) {
       new Swiper(sliderElement, {
-        // 공통 설정 (모바일 우선)
+        // Common Settings
         slidesPerView: 'auto', 
         centeredSlides: true,  
         spaceBetween: 20,
         centerInsufficientSlides: true, 
 
         grid: {
-          rows: 1, // 모바일: 1줄
+          rows: 1, // Mobile: 1 row
         },
         
         pagination: {
@@ -891,14 +844,18 @@
           prevEl: sliderElement.parentElement.querySelector('.swiper-button-prev'),
         },
 
-        // 화면 크기별 설정 (Breakpoints)
+        // Responsive Breakpoints
         breakpoints: {
-          // [PC 모드] 901px 이상에서는 2줄 그리드 적용
+          // [PC Mode] 901px+
+          // We apply Single Row for PIs and Team to ensure the new split layout looks clean.
+          // The backup used 2 rows, but that was for a combined list. 
+          // Since the lists are now split, 2 rows might look empty for PIs.
+          // We use slidesPerView: 5 to show many members at once.
           901: {
             slidesPerView: 5, 
             centeredSlides: false,
             grid: {
-              rows: 2,
+              rows: 1, // Keep 1 row per slider for cleanliness
               fill: 'row',
             },
             spaceBetween: 30,
@@ -909,15 +866,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
