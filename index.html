@@ -370,38 +370,66 @@
 
     /* ========================================================
        ★ [PC Desktops] 901px 이상 ★
-       (여기서 모바일 스타일을 덮어씀 -> !important 제거 효과)
+       Research 제외 스크롤 방지 및 Fit-to-Screen 적용
        ======================================================== */
     @media (min-width: 901px) {
+      
+      /* 1. 공통 PC 레이아웃 */
       .section {
-        /* 상단 패딩 고정, 내용은 섹션별로 다름 */
         padding: 100px 20px 20px 20px; 
       }
-      .section h1 { font-size: 2.8rem; }
-      .section p.desc { font-size: 1.15rem; margin-bottom: 50px; }
+      
+      /* [핵심] Research가 아닌 섹션은 스크롤바 강제 제거 및 높이 고정 */
+      .section:not([data-anchor="research"]) {
+        height: 100vh !important; /* 강제 높이 고정 */
+        overflow: hidden !important; /* 넘치는 내용 숨김 (스크롤바 제거) */
+      }
+      
+      /* 내부 컨텐츠 래퍼도 100% 높이 내에서 정렬 */
+      .section:not([data-anchor="research"]) .content-wrapper {
+        height: 100%;
+        justify-content: center; /* 수직 중앙 정렬 */
+      }
 
-      /* Home PC */
-      .home h1 { font-size: 3.5rem; }
-      .home p { font-size: 1.3rem; }
+      /* 폰트 및 마진 최적화 (화면 꽉 참 방지) */
+      .section h1 { font-size: 2.8rem; margin-bottom: 30px; }
+      .section p.desc { font-size: 1.15rem; margin-bottom: 40px; }
 
-      /* Team PC (Slider Grid) */
-      .slider-wrapper { padding: 0 50px; }
+      /* --- Home PC --- */
+      .home h1 { font-size: 3.5rem; margin-bottom: 20px; }
+      .home p { font-size: 1.3rem; margin-bottom: 30px; }
+
+      /* --- Team PC (2줄 그리드 + 높이 제한) --- */
+      /* 화면이 작을 때 스크롤 생기는 것을 방지하기 위해 vh 단위 사용 */
+      .slider-wrapper { padding: 0 50px; width: 100%; }
       .swiper-button-prev, .swiper-button-next { display: flex; align-items: center; justify-content: center; }
       .swiper-button-prev { left: 0; }
       .swiper-button-next { right: 0; }
       
-      .swiper.team-slider { height: 460px; padding-bottom: 20px; }
+      /* 슬라이더 전체 높이를 화면 높이의 55%로 제한 */
+      .swiper.team-slider { 
+        height: 55vh; 
+        max-height: 480px; /* 너무 커지는 것 방지 */
+        min-height: 400px;
+        padding-bottom: 20px; 
+      }
       
       .swiper-slide {
-        /* 높이 강제 (2줄 배치를 위함) */
         height: calc((100% - 20px) / 2) !important;
         align-items: center;
       }
       .team-member {
-        width: 160px; height: 210px; padding: 15px 10px;
+        width: 160px; 
+        height: 90%; /* 슬라이드 칸 안에서 꽉 차게 */
+        padding: 15px 10px;
       }
 
-      /* Research PC (Box Style) */
+      /* --- Research PC (스크롤 허용 섹션) --- */
+      .section[data-anchor="research"] {
+        height: auto !important; /* 높이 자동 (스크롤 허용) */
+        overflow: visible !important;
+      }
+      
       .pub-item {
         background-color: #fff;
         border: 1px solid #ddd;
@@ -415,7 +443,6 @@
         align-items: center;
         text-align: center;
         width: fit-content;
-        /* 상단 보더 포인트 */
         border-left: 1px solid #ddd; 
         border-top: 6px solid #ddd;
       }
@@ -428,43 +455,51 @@
       }
       .pub-venue { margin-right: 0; margin-bottom: 12px; }
 
-      /* Media PC */
+      /* --- Media PC --- */
       .video-container {
         flex-direction: row;
         justify-content: center;
         gap: 4vw;
         padding: 10px;
+        /* 비디오가 화면을 넘어가지 않도록 높이 제한 */
+        max-height: 60vh; 
       }
       .media video {
         width: 30%;
         min-width: 280px;
+        /* 화면 세로가 짧을 때 비디오 크기 자동 줄임 */
+        max-height: 50vh; 
+        object-fit: cover; /* 비율 유지 */
         transition: transform 0.3s;
       }
       .media video:hover { transform: scale(1.02); }
 
-      /* Contact PC */
+      /* --- Contact PC --- */
       .contact-container {
         height: 100%;
-        min-height: 50vh;
         justify-content: space-between;
+        padding-bottom: 40px; /* 하단 여백 확보 */
       }
-      .footer-info { margin-top: 300px; }
-      .footer-info a { margin-top: 260px; } /* 기존 디자인 유지 */
-
+      /* Contact 내용은 위아래로 분산 배치 */
+      .contact-top { margin-top: auto; }
       .lab-logos {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: 180px;
+        gap: 150px; /* 간격 조정 */
         max-width: none;
-        margin-top: auto;
+        margin-bottom: auto; /* 상하단 중앙 배치 유도 */
+        margin-top: 100px;
       }
+      .footer-info { margin-top: 0; margin-bottom: 0; }
+      .footer-info a { margin-top: 0; }
+
       .lab-link { transition: transform 0.3s; }
       .lab-link:hover { transform: translateY(-5px); color: #0078ff; }
-      .lab-link img { height: 120px; margin-bottom: 12px; opacity: 0.9; transition: 0.3s; }
+      .lab-link img { height: 100px; margin-bottom: 12px; opacity: 0.9; transition: 0.3s; }
       .lab-link img:hover { opacity: 1; transform: scale(1.05); }
-      .lab-link img.rcv-logo { height: 200px; }
-      .lab-link img.sparo-logo { height: 100px; }
+      .lab-link img.rcv-logo { height: 180px; }
+      .lab-link img.sparo-logo { height: 80px; }
       .lab-link span { font-size: 1.1rem; }
     }
   </style>
@@ -843,3 +878,4 @@
   </script>
 </body>
 </html>
+
