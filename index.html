@@ -320,7 +320,23 @@
       margin-right: 15px;
     }
     .pub-links a:hover { text-decoration: underline; }
-
+    @media (min-width: 901px) {
+      .section[data-anchor="research"] .max-w-container {
+        /* ▼ 이 숫자를 조절하여 너비를 늘리거나 줄이세요 (예: 1000px, 1200px, 1400px) */
+        width: 1200px !important; 
+        
+        /* ▼ 박스가 화면 밖으로 나가는 것을 방지 */
+        max-width: 95vw !important; 
+        
+        /* ▼ 왼쪽 정렬이 아닌 중앙 정렬을 원하면 아래 주석을 해제하세요 */
+        /* align-items: center !important; */
+      }
+      
+      /* 개별 박스가 컨테이너를 가득 채우도록 설정 */
+      .pub-item {
+        width: 100% !important;
+      }
+    }
     /* =======================
        Open Source & Media
        ======================= */
@@ -866,4 +882,5 @@
   </script>
 </body>
 </html>
+
 
