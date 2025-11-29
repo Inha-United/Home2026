@@ -497,30 +497,35 @@
       }
       .pub-links a:hover { text-decoration: underline; }
 
-        /* Media 섹션 개선 */
+      /* --- Media PC (스크롤 제거: 높이 자동 조절) --- */
       .video-container {
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        gap: 3vw;
+        gap: 4vw;
         width: 100%;
-        /* 헤더와 제목 공간 고려 */
-        height: calc(100vh - 280px);
-        max-height: 480px;
-        margin-top: 0;
+        padding: 0px;
+        
+        /* [핵심] 높이를 화면의 50%로 제한 (헤더+텍스트 고려) */
+        height: calc(100vh - 250px); 
+        max-height: 500px; 
+        margin-top: 10px; 
       }
-    
+
       .media video {
-        height: 100%;
+        /* 높이에 맞춰 너비 자동 조절 */
+        height: 100%; 
         width: auto;
-        max-width: 380px;
-        aspect-ratio: 9 / 16;
+        
+        max-width: 400px;
         border-radius: 16px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        object-fit: cover; /* contain 대신 cover 사용 */
+        
+        object-fit: contain; /* 잘림 방지 */
+        transition: transform 0.3s;
+        background: #000;
       }
-      
       .media video:hover { 
         transform: scale(1.05);
         box-shadow: 0 15px 40px rgba(0,0,0,0.25);
@@ -548,24 +553,42 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-wrap: wrap; /* 추가 */
-        gap: 8vw;
+        /* 고정 픽셀(130px) 대신 화면 너비 비례 간격 사용 */
+        gap: 15vw; 
         width: 100%;
-        max-width: 1200px; /* 추가 */
-        padding: 20px;
+        max-width: 100%;
+        /* 고정 마진 제거 -> flex gap이 처리함 */
+        margin-top: 0; 
+        margin-bottom: 0;
+        padding: 10px; /* hover 잘림 방지 */
       }
-    
-      .lab-link {
-        min-width: 120px; /* 추가 */
-        max-width: 200px; /* 추가 */
+
+      .footer-info { margin-top: 0; margin-bottom: 0; }
+
+      .lab-link { 
+        transition: transform 0.3s; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
-    
-      .lab-link img {
-        height: 8vh;
-        max-height: 80px;
-        min-height: 50px; /* 추가 */
+      .lab-link:hover { transform: translateY(-5px); color: #0078ff; }
+      
+      /* 로고 크기를 화면 높이(vh)에 맞춤 -> 화면 작아지면 로고도 작아짐 */
+      .lab-link img { 
+        height: 9vh; 
+        max-height: 90px; 
         width: auto;
+        margin-bottom: 10px; 
+        opacity: 0.9; 
+        transition: 0.3s; 
       }
+      .lab-link img:hover { opacity: 1; transform: scale(1.05); }
+      
+      /* RCV 로고 등 큰 로고도 비율에 맞춰 제한 */
+      .lab-link img.rcv-logo { height: 16vh; max-height: 160px; }
+      .lab-link img.sparo-logo { height: 7vh; max-height: 70px; }
+      
+      .lab-link span { font-size: 1.1rem; white-space: nowrap; }
     }
   </style>
 </head>
@@ -937,25 +960,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
