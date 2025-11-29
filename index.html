@@ -374,39 +374,41 @@
     .lab-link img.rcv-logo { height: 90px; } /* 예외 사이즈 */
     .lab-link span { font-size: 0.9rem; font-weight: 600; color: #555; }
 
-  /* ========================================================
-     ★ [PC Desktops] 901px 이상 수정본 ★
-     ======================================================== */
-  @media (min-width: 901px) {
-    
-    /* 1. 공통 PC 레이아웃 */
-    .section {
-      padding: 100px 20px 20px 20px; 
-      box-sizing: border-box;
-    }
-    
-    /* 스크롤 금지 섹션: 높이를 100vh로 고정하고 넘치는 것 숨김 */
-    .section:not([data-anchor="research"]):not([data-anchor="team"]) {
-      height: 100vh !important;
-      overflow: hidden !important;
-    }
-    
-    /* 내부 컨텐츠 수직 중앙 정렬을 위한 Flex 설정 */
-    .section:not([data-anchor="research"]):not([data-anchor="team"]) .content-wrapper {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center; /* 수직 중앙 정렬 */
-    }
-
-    /* 폰트 조정 */
-    .section h1 { font-size: 2.8rem; margin-bottom: 20px; flex-shrink: 0; } /* 제목이 찌그러지지 않게 설정 */
-    .section p.desc { font-size: 1.15rem; margin-bottom: 15px; flex-shrink: 0; }
-
+    /* ========================================================
+       ★ [PC Desktops] 901px 이상 최종 수정본 (안전한 방식) ★
+       ======================================================== */
+    @media (min-width: 901px) {
+      
+      /* 1. 공통 PC 레이아웃 */
+      .section {
+        /* 상단 패딩을 100px에서 80px로 줄여 공간 확보 */
+        padding: 80px 20px 20px 20px; 
+        box-sizing: border-box;
+      }
+      
+      /* 스크롤 금지 섹션: 화면 밖으로 나가는 것 숨김 */
+      .section:not([data-anchor="research"]):not([data-anchor="team"]) {
+        height: 100vh !important;
+        overflow: hidden !important;
+      }
+      
+      /* fullPage.js와 호환되는 수직 중앙 정렬 */
+      .section:not([data-anchor="research"]):not([data-anchor="team"]) .content-wrapper {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* 수직 중앙 정렬 */
+        align-items: center;
+      }
+  
+      /* 폰트 조정 */
+      .section h1 { font-size: 2.8rem; margin-bottom: 20px; }
+      .section p.desc { font-size: 1.15rem; margin-bottom: 20px; }
+  
       /* --- Home PC --- */
       .home h1 { font-size: 3.5rem; margin-bottom: 20px; }
       .home p { font-size: 1.3rem; margin-bottom: 30px; }
-
+  
       /* --- Team PC --- */
       .slider-wrapper { 
         padding: 0 50px; 
@@ -433,7 +435,7 @@
         height: 230px; 
         padding: 15px 10px;
       }
-
+  
       /* --- Research PC --- */
       .pub-item {
         background-color: #fff;
@@ -445,8 +447,8 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: flex-start;  /* 좌측 정렬 */
-        text-align: left;         /* 좌측 정렬 */
+        align-items: flex-start;
+        text-align: left;
         width: 1200px;        
         max-width: 95vw;
         border-left: 1px solid #ddd; 
@@ -484,8 +486,9 @@
         display: inline-block;
       }
       .pub-links a:hover { text-decoration: underline; }
-
-        /* --- Media PC 수정 (스크롤 방지 핵심) --- */
+  
+  
+      /* --- Media PC (수정됨: 높이를 명확하게 제한) --- */
       .video-container {
         display: flex;
         flex-direction: row;
@@ -494,17 +497,16 @@
         gap: 30px;
         width: 100%;
         
-        /* [변경점] 고정 height 대신 flex로 남은 공간 채우기 & 최대 높이 제한 */
-        flex: 1; 
-        min-height: 0; /* Flexbox 넘침 방지 트릭 */
-        max-height: 60vh; /* 너무 커지지 않게 제한 */
+        /* [핵심] 높이를 화면의 45%로 딱 고정해서 넘치지 않게 함 */
+        height: 45vh; 
+        max-height: 500px; 
         margin-top: 10px;
       }
   
       .media video {
-        height: 100%;       /* 컨테이너 높이에 맞춤 */
-        width: auto;        /* 비율 유지 */
-        max-width: 45%;     /* 가로로 두 개 배치되므로 너비 제한 */
+        height: 100%;       /* 컨테이너 높이(45vh)를 꽉 채움 */
+        width: auto;        /* 비율 자동 유지 */
+        max-width: 45%;     /* 가로로 너무 길어지면 제한 */
         border-radius: 16px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         object-fit: contain; 
@@ -517,34 +519,30 @@
       }
   
   
-      /* --- Contact PC 수정 (스크롤 방지 핵심) --- */
+      /* --- Contact PC (수정됨: 간격과 로고 크기 제한) --- */
       .contact-container {
         width: 100%;
-        
-        /* [변경점] height: 100% 제거 -> flex: 1로 변경 */
-        /* 부모(.content-wrapper)의 남은 공간만큼만 차지하게 함 */
-        flex: 1;
         display: flex;
         flex-direction: column;
         justify-content: center; 
-        gap: 5vh; /* 요소 간 간격 */
-        padding-bottom: 20px; /* 하단 여유 */
+        
+        /* [핵심] 요소 사이 간격을 vh 단위로 주어 화면이 작으면 간격도 줄어들게 함 */
+        gap: 6vh; 
+        padding-bottom: 20px;
       }
       
       .footer-info { 
         margin: 0; 
-        flex-shrink: 0; /* 줄어들지 않음 */
       }
   
       .lab-logos {
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 5vw; 
+        gap: 5vw; /* 화면 너비 비례 간격 */
         width: 100%;
         margin: 0;
         padding: 10px;
-        flex-shrink: 0; /* 로고 영역도 줄어들지 않도록 */
       }
   
       .lab-link { 
@@ -555,16 +553,17 @@
       }
       .lab-link:hover { transform: translateY(-5px); color: #0078ff; }
       
-      /* 로고 이미지 크기 최적화 */
+      /* [핵심] 로고 이미지 크기를 화면 높이(vh)에 비례하게 설정 */
       .lab-link img { 
-        height: 8vh;       /* 화면 높이에 비례 */
-        max-height: 80px;  /* 최대 크기 제한 */
+        height: 8vh;       /* 화면이 작아지면 로고도 작아짐 */
+        max-height: 80px;  /* 너무 커지지 않게 제한 */
         width: auto;
         margin-bottom: 10px; 
         opacity: 0.9; 
       }
       .lab-link img:hover { opacity: 1; transform: scale(1.05); }
       
+      /* 다른 로고들도 vh 단위로 비율 맞춤 */
       .lab-link img.rcv-logo { height: 14vh; max-height: 140px; }
       .lab-link img.sparo-logo { height: 7vh; max-height: 70px; }
       
@@ -941,6 +940,7 @@
   </script>
 </body>
 </html>
+
 
 
 
