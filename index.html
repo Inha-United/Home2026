@@ -506,7 +506,12 @@
         padding-right: 20px; /* 오른쪽 끝 여백 */
         overflow: visible !important; /* 그림자 잘림 방지 */
       }
-
+      
+      /* [추가] 슬라이더 내부 강제 왼쪽 정렬 (오른쪽 쏠림 방지) */
+      .swiper-wrapper {
+        justify-content: flex-start !important;
+      }
+      
       /* 2. 카드 크기 고정 (핵심: 너비를 줄이고 고정해야 슬라이드 됨) */
       .team-member {
         width: 160px;       /* PC 200px -> 160px로 고정 */
@@ -932,8 +937,7 @@
         901: {
             slidesPerView: 5,
             centeredSlides: false,
-            grid: { rows: 1, fill: 'row' }, // ★ PC에서만 격자 사용
-            spaceBetween: 30,
+            spaceBetween: 20,
         }
     };
 
@@ -965,7 +969,6 @@
             901: {
                 slidesPerView: 4,
                 centeredSlides: false,
-                grid: { rows: 1, fill: 'row' },
                 spaceBetween: 20,
             }
         }
@@ -1005,6 +1008,7 @@
   </script>
 </body>
 </html>
+
 
 
 
