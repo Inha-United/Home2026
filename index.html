@@ -382,74 +382,78 @@
     .lab-link span { font-size: 0.9rem; font-weight: 600; color: #555; }
 
     /* ========================================================
-       ★ [PC Desktops] 901px 이상 최종 수정본 ★
-       - Media, Contact: 화면 꽉 채움 (스크롤 절대 없음)
-       - Team, Research: 내용 길면 스크롤 허용
+       ★ [PC Desktops] 901px 이상 최종 수정본 (Ver. 2) ★
+       - Team: 가로 100% 꽉 차게 복구 + 스크롤 허용
+       - Media/Contact: 세로 스크롤 제거 + 가로 100% 유지
        ======================================================== */
     @media (min-width: 901px) {
       
-      /* 1. 공통 PC 레이아웃 */
+      /* 1. 공통 PC 레이아웃 보정 */
       .section {
-        padding: 100px 20px 20px 20px; /* 상단 헤더 공간 확보 */
+        padding: 100px 20px 20px 20px;
         box-sizing: border-box;
       }
       
-      /* [스크롤 허용 섹션] Team, Research */
-      /* 이 두 섹션은 내용이 많으므로 화면을 넘어가면 스크롤 생성 */
-      .section[data-anchor="research"],
-      .section[data-anchor="team"] {
-        height: auto !important; 
-        min-height: 100vh;
-        overflow: visible !important;
+      .content-wrapper {
+        /* [중요] 쪼그라듦 방지: 너비를 부모의 100%까지 쓰도록 강제 */
+        width: 100% !important;
+        max-width: 1600px; /* 너무 넓게 퍼지는 것 방지용 맥시멈 */
+        margin: 0 auto;
+        
+        /* 세로 배치 설정 */
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
       }
 
-      /* [스크롤 금지 섹션] Home, OpenSource, Media, Contact */
-      /* 화면 밖으로 나가는 컨텐츠는 잘라버림(hidden) -> 스크롤바 생성 방지 */
-      .section:not([data-anchor="research"]):not([data-anchor="team"]) {
-        height: 100vh !important;
-        overflow: hidden !important;
-      }
-      
-      /* 스크롤 없는 섹션은 내부 컨텐츠 수직 중앙 정렬 */
-      .section:not([data-anchor="research"]):not([data-anchor="team"]) .content-wrapper {
-        height: 100%;
-        justify-content: center;
-      }
-
-      /* 폰트 및 마진 최적화 */
+      /* 폰트 사이즈 PC 최적화 */
       .section h1 { font-size: 2.8rem; margin-bottom: 20px; }
       .section p.desc { font-size: 1.15rem; margin-bottom: 15px; }
 
-      /* --- Home PC --- */
-      .home h1 { font-size: 3.5rem; margin-bottom: 20px; }
-      .home p { font-size: 1.3rem; margin-bottom: 30px; }
 
-      /* --- Team PC --- */
-      .slider-wrapper { 
-        padding: 0 50px; 
-        width: 100%; 
-        margin-bottom: 20px;
-      }
-      .swiper-button-prev, .swiper-button-next { display: flex; align-items: center; justify-content: center; }
-      .swiper-button-prev { left: 0; }
-      .swiper-button-next { right: 0; }
-      
-      .swiper.team-slider { 
+      /* --------------------------------------------------------
+         [Team 섹션] 가로 꽉 차게 복구
+         -------------------------------------------------------- */
+      .section[data-anchor="team"] {
         height: auto !important;
-        min-height: 0 !important;
-        padding-bottom: 40px;
+        min-height: 100vh;
+        overflow: visible !important; /* 내용 많으면 스크롤 허용 */
       }
+
+      /* 슬라이더 감싸는 박스 너비 100% 강제 */
+      .slider-wrapper { 
+        width: 100%; 
+        padding: 0 60px; /* 좌우 화살표 공간 확보 */
+        margin-bottom: 40px;
+        box-sizing: border-box;
+      }
+
+      .swiper.team-slider { 
+        width: 100%;
+        height: auto !important;
+        padding-bottom: 40px;
+        overflow: hidden; /* 슬라이더 넘치는 것 자름 */
+      }
+
+      /* 슬라이드 개별 설정 */
       .swiper-slide {
         height: auto !important;
         display: flex;
         justify-content: center;
-        margin-bottom: 0;
       }
       .team-member {
-        width: 160px; 
-        height: 230px; 
-        padding: 15px 10px;
+        width: 180px;  /* 카드 크기 */
+        height: 250px; 
+        padding: 20px 10px;
       }
+      
+      /* 화살표 위치 보정 */
+      .swiper-button-prev, .swiper-button-next { 
+        width: 50px; height: 50px;
+        margin-top: -25px; /* 수직 중앙 정렬 보정 */
+      }
+      .swiper-button-prev { left: 0; }
+      .swiper-button-next { right: 0; }
 
       /* --- Research PC --- */
       .pub-item {
@@ -502,148 +506,103 @@
       }
       .pub-links a:hover { text-decoration: underline; }
 
-      /* --- Media PC --- */
+      /* --------------------------------------------------------
+         [Media 섹션] 스크롤 제거 + 가로 확보
+         -------------------------------------------------------- */
+      .section[data-anchor="media"] {
+        height: 100vh !important;
+        overflow: hidden !important;
+      }
+      /* 부모 높이 꽉 채우기 */
       .section[data-anchor="media"] .content-wrapper {
-         /* 부모 래퍼가 전체 높이를 쓰고, 내부 요소 분배 */
-         height: 100%;
-         justify-content: flex-start; /* 상단부터 배치하되 flex-grow로 조절 */
+        height: 100%;
+        justify-content: flex-start; 
       }
 
       .video-container {
+        /* [중요] flex: 1로 남은 높이 차지하되, width는 100% 유지 */
+        flex: 1; 
+        width: 100%; 
+        
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        gap: 4vw;
-        width: 100%;
-        padding: 10px;
+        gap: 30px;
         
-        /* [수정 핵심] */
-        /* 고정 계산식 제거: height: calc(100vh - 250px); */
-        /* 남은 공간을 자동으로 채우되, 너무 커지지 않게 제한 */
-        flex: 1; 
-        height: auto; 
-        max-height: 60vh; /* 비디오가 너무 커지는 것 방지 */
-        min-height: 0;    /* Flexbox 내부 스크롤 버그 방지 */
-        margin-top: 20px;
-        margin-bottom: 40px; /* 하단 여백 확보 */
+        min-height: 0; /* Flex 버그 방지 */
+        max-height: 70vh; /* 너무 커짐 방지 */
+        margin-bottom: 20px;
       }
 
       .media video {
-        height: 100%; /* 컨테이너(flex:1) 높이에 맞춤 */
+        height: 100%; /* 컨테이너 높이에 맞춤 */
         width: auto;  /* 비율 유지 */
-        max-width: 45%; /* 비디오 두 개가 나란히 있을 때 겹치지 않게 */
-        
+        max-width: 48%; /* 가로로 2개 배치 시 겹침 방지 */
+        object-fit: contain;
         border-radius: 16px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        object-fit: contain;
-        transition: transform 0.3s;
         background: #000;
+        transition: transform 0.3s;
       }
-      .media video:hover { 
-        transform: scale(1.05);
-        box-shadow: 0 15px 40px rgba(0,0,0,0.25);
-      }
+      .media video:hover { transform: scale(1.05); }
 
-      /* =======================
-         Contact 섹션 수정 (PC)
-         - 100vh 고정
-         - 내용을 강제로 화면 중앙에 배치
-         ======================= */
+
+      /* --------------------------------------------------------
+         [Contact 섹션] 스크롤 제거 + 가로 확보
+         -------------------------------------------------------- */
       .section[data-anchor="contact"] {
         height: 100vh !important;
-        overflow: hidden !important; /* 스크롤 절대 금지 */
-        padding-top: 80px !important; /* 상단 헤더 공간 */
-        padding-bottom: 0 !important;
-        
-        /* Flex를 이용해 전체 수직 배치 제어 */
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: flex-start !important; /* 제목은 위쪽에 */
-        align-items: center !important;
+        overflow: hidden !important;
       }
-
-      /* Content Wrapper: 제목 포함 전체 틀 */
       .section[data-anchor="contact"] .content-wrapper {
         height: 100%;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start; /* 상단 정렬 시작 */
-        align-items: center;
+        justify-content: flex-start;
       }
 
-      /* Contact Container: 제목을 *제외한* 나머지 내용 (이메일+로고) */
       .contact-container {
-        /* 제목 아래 남은 공간을 꽉 채우게 함 */
-        flex-grow: 1; 
+        /* [중요] 너비 100% 강제 (쪼그라듦 해결) */
         width: 100%;
-        max-width: 1600px;
-
-        /* 내부 내용물들을 수직 중앙 정렬 */
+        
+        /* 높이는 flex로 자동 채움 (스크롤 해결) */
+        flex: 1;
+        
         display: flex;
         flex-direction: column;
-        justify-content: center; 
-        align-items: center;
-        
-        /* 요소 사이 간격을 화면 높이 비례가 아닌 고정값+여유분으로 변경 */
-        gap: 60px; 
-        
-        /* 바닥에 너무 붙지 않도록 약간의 여백 확보 */
-        padding-bottom: 60px; 
-      }
-      
-      /* 이메일, 주소 텍스트 */
-      .footer-info {
-        font-size: 1.2rem; /* 폰트 조금 키움 */
-        margin: 0;
-      }
-
-      /* 로고 박스 */
-      .lab-logos {
-        display: flex;
         justify-content: center;
         align-items: center;
-        width: 100%;
-        gap: 80px; /* 로고 사이 가로 간격 */
-        margin: 0;
-        padding: 20px 0; /* 로고 호버 효과 잘림 방지 */
+        gap: 8vh; /* 요소 간격 유동적 */
+        padding-bottom: 20px;
       }
 
-      .lab-link { 
-        transition: transform 0.3s; 
+      .lab-logos {
+        width: 100%;
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-decoration: none;
+        justify-content: center;
+        gap: 6vw;
+        margin: 0;
       }
-      
-      .lab-link:hover { 
-        transform: translateY(-8px); 
-        color: #0078ff; 
+
+      .footer-info { margin: 0; font-size: 1.2rem; }
+
+      .lab-link { 
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        transition: transform 0.3s;
       }
+      .lab-link:hover { transform: translateY(-5px); color: #0078ff; }
       
-      /* 로고 이미지 사이즈 최적화 */
       .lab-link img { 
-        height: 80px;      /* 고정 높이로 변경 (안정성 확보) */
-        width: auto;       /* 비율 유지 */
-        object-fit: contain;
-        margin-bottom: 12px; 
-        opacity: 0.9; 
-        transition: 0.3s; 
+        height: 10vh;       /* 화면 높이 비례 */
+        max-height: 100px;  /* 최대 크기 제한 */
+        width: auto; 
+        margin-bottom: 10px; 
       }
-      .lab-link img:hover { opacity: 1; transform: scale(1.05); }
+      .lab-link img.rcv-logo { height: 16vh; max-height: 160px; }
+      .lab-link img.sparo-logo { height: 8vh; max-height: 80px; }
       
-      /* 로고별 미세 크기 조정 (시각적 균형) */
-      .lab-link img.rcv-logo { height: 140px; } /* 세로로 긴 로고라 더 크게 */
-      .lab-link img.sparo-logo { height: 65px; } /* 가로로 긴 로고라 조금 작게 */
-      
-      .lab-link span { 
-        font-size: 1.1rem; 
-        white-space: nowrap; 
-        font-weight: 600;
-        color: #555;
-      }
+      .lab-link span { font-size: 1.1rem; white-space: nowrap; }
     }
   </style>
 </head>
@@ -1015,5 +974,6 @@
   </script>
 </body>
 </html>
+
 
 
