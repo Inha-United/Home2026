@@ -181,13 +181,13 @@
 
     .team-member {
       background: #ffffff;
-      border-radius: 20px;
-      padding: 20px 15px;
+      border-radius: 16px;
+      padding: 15px 10px;
       text-align: center;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      width: 200px; 
-      height: 240px; 
+      width: 160px; 
+      height: 210px; 
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -240,10 +240,11 @@
     /* [PC] 2 Rows Grid Layout (복구됨) */
     @media (min-width: 901px) {
       .swiper-container.team-slider {
-        height: 550px; /* 2줄 높이 확보 */
+        height: 460px; /* 2줄 높이 확보 */
+        padding-bottom: 20px;
       }
       .swiper-slide {
-        height: calc((100% - 30px) / 2) !important; 
+        height: calc((100% - 20px) / 2) !important; 
         display: flex;
         justify-content: center;
         align-items: center;
@@ -278,13 +279,13 @@
       }
       /* --- 수정된 부분 시작 --- */
       .team-member {
-        width: 260px;
+        width: 180px;
         /* 높이를 자동으로 설정하여 텍스트 길이에 맞게 늘어남 */
         height: auto; 
         /* 내용이 적어도 최소한의 모양은 유지하도록 설정 (선택사항) */
-        min-height: 240px; 
+        min-height: 200px; 
         /* 내용이 많을 때 위아래 여백이 답답하지 않도록 조절 */
-        padding: 30px 20px; 
+        padding: 20px 10px; 
       }
       /* --- 수정된 부분 끝 --- */
     }
@@ -964,6 +965,7 @@
 
 </body>
 </html>
+
 
 
 
