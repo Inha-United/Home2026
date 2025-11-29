@@ -469,84 +469,49 @@
       }
       .pub-venue { margin-right: 0; margin-bottom: 12px; }
 
-      /* --- Media PC (세로 스크롤 해결) --- */
+      /* --- Media PC --- */
       .video-container {
         flex-direction: row;
         justify-content: center;
         gap: 4vw;
         padding: 10px;
-        width: 100%;
-        /* 비디오 영역이 너무 커지지 않도록 화면 높이 비례 제한 */
-        height: 60vh; 
-        display: flex;
-        align-items: center;
+        max-height: 60vh; 
       }
-      
-        .media video {
+      .media video {
         width: 30%;
         min-width: 280px;
-        /* 높이를 vh로 제한하여 화면 밖으로 나가는 것 방지 */
         max-height: 50vh; 
         object-fit: cover;
         transition: transform 0.3s;
       }
       .media video:hover { transform: scale(1.02); }
 
-      /* --- Contact PC (가로/세로 스크롤 해결) --- */
+      /* --- Contact PC --- */
       .contact-container {
-        width: 100%;
         height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between; /* 위아래 끝으로 배치 */
+        justify-content: space-between;
         padding-bottom: 40px;
-        overflow: hidden; /* 내부 스크롤 방지 */
       }
-      
-      .contact-top { 
-        margin-top: auto; /* 중앙~하단 사이 위치 유도 */
-        width: 100%;
-      }
-
+      .contact-top { margin-top: auto; }
       .lab-logos {
         display: flex;
-        justify-content: center; /* 로고들을 중앙 정렬 */
+        justify-content: space-between;
         align-items: center;
-        /* [중요] 고정 gap(150px) 대신 유동적 간격 사용해 가로 스크롤 방지 */
-        gap: 5vw; 
-        width: 100%;
-        max-width: 100%;
-        flex-wrap: nowrap; /* 줄바꿈 방지 */
+        gap: 150px;
+        max-width: none;
         margin-bottom: auto;
-        margin-top: 5vh;
-        padding: 0 20px; /* 좌우 여백 */
+        margin-top: 100px;
       }
-
       .footer-info { margin-top: 0; margin-bottom: 0; }
+      .footer-info a { margin-top: 0; }
 
-      .lab-link { 
-        transition: transform 0.3s; 
-        flex-shrink: 1; /* 화면 좁아지면 로고 크기 줄어들게 허용 */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
+      .lab-link { transition: transform 0.3s; }
       .lab-link:hover { transform: translateY(-5px); color: #0078ff; }
-      
-      /* 로고 이미지 크기도 화면 높이에 따라 반응하도록 vh 단위 섞음 */
-      .lab-link img { 
-        height: 12vh; 
-        max-height: 100px; 
-        width: auto;
-        margin-bottom: 12px; 
-        opacity: 0.9; 
-        transition: 0.3s; 
-      }
+      .lab-link img { height: 100px; margin-bottom: 12px; opacity: 0.9; transition: 0.3s; }
       .lab-link img:hover { opacity: 1; transform: scale(1.05); }
-      
-      .lab-link img.rcv-logo { height: 18vh; max-height: 180px; }
-      .lab-link img.sparo-logo { height: 10vh; max-height: 80px; }
-      .lab-link span { font-size: 1.1rem; white-space: nowrap; }
+      .lab-link img.rcv-logo { height: 180px; }
+      .lab-link img.sparo-logo { height: 80px; }
+      .lab-link span { font-size: 1.1rem; }
     }
   </style>
 </head>
@@ -924,6 +889,4 @@
   </script>
 </body>
 </html>
-
-
 
