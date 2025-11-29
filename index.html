@@ -346,6 +346,13 @@
       max-width: 1600px;
       gap: 40px;
     }
+    
+    .content-wrapper {
+    /* 기존 1400px -> 1600px 또는 95%로 변경 */
+    max-width: 100% !important; 
+    width: 95% !important;      /* 양옆에 2.5%씩만 여백 남기고 꽉 채움 */
+    padding: 0 40px;            /* 내부 콘텐츠가 벽에 딱 붙지 않게 */
+    }
 
     .footer-info {
       font-size: 1.1rem;
@@ -516,7 +523,7 @@
         height: 100%; 
         width: auto;
         
-        max-width: 400px;
+        max-width: 1600px;
         border-radius: 16px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         
@@ -539,6 +546,7 @@
         justify-content: center; /* 중앙 집중 */
         gap: 8vh; /* 픽셀 대신 화면 높이 비례 간격 사용 */
         padding-bottom: 10px;
+        max-width: 2000px;
       }
       
       .contact-top { 
@@ -957,23 +965,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
