@@ -581,32 +581,37 @@
       }
 
       /* Research Item을 박스 형태로 변경 + 중앙 정렬 */
-      .pub-item {
+.pub-item {
         background-color: #fff;  
         border: 1px solid #ddd;  
         border-radius: 12px;     
         padding: 20px 25px;      
-        margin-bottom: 20px;     
+        
+        /* [핵심 1] 박스 중앙 정렬을 위해 margin auto 사용 */
+        margin: 0 auto 20px auto;     
         
         min-height: 140px;       
         display: flex;           
         flex-direction: column;  
         justify-content: center; 
         
-        /* [핵심 수정] 텍스트 및 아이템 중앙 정렬 */
+        /* [핵심 2] 박스 너비를 글자 길이에 딱 맞춤 */
+        width: fit-content; 
+        
+        /* 텍스트 중앙 정렬 */
         align-items: center; 
         text-align: center;
         
-        /* [디자인 수정] 왼쪽 테두리 대신 위쪽 테두리로 포인트 변경 */
+        /* 디자인 포인트 (왼쪽 선 -> 위쪽 선) */
         border-left: 1px solid #ddd; 
         border-top: 6px solid #ddd; 
       }
 
-      /* Hover 효과 */
+      /* Hover 효과도 위쪽 선 색상 변경으로 맞춰주세요 */
       .pub-item:hover {
-        transform: translateY(-5px); /* 위로 살짝 뜨는 효과 */
+        transform: translateY(-5px); 
         border-color: var(--primary-blue);
-        border-top-color: var(--primary-blue); /* 위쪽 테두리 색상 변경 */
+        border-top-color: var(--primary-blue); 
         background-color: #f8fbff; 
         box-shadow: 0 10px 20px rgba(0,0,0,0.08);
       }
@@ -1037,4 +1042,5 @@
   </script>
 </body>
 </html>
+
 
