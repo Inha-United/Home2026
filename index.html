@@ -98,6 +98,15 @@
       justify-content: center;
     }
 
+    .research-container {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      display: block; /* Flex 제거하여 자식 요소가 100% 차지하도록 함 */
+      text-align: left; /* 제목 중앙 정렬 */
+      padding: 0 40px;
+    }
+
     .section h1 {
       font-size: 2.8rem;
       font-weight: 700;
@@ -642,50 +651,44 @@
        ★ [PC 전용 스타일] 901px 이상 - Research 꽉 채우기 ★
        ======================================================== */
     @media (min-width: 901px) {
+      /* .research-container는 위에서 이미 width 100%로 설정됨 */
 
-      /* 1. 컨테이너 100% 확장 */
-      .section[data-anchor="research"] .max-w-container {
-        width: 100% !important;
-        max-width: 1800px !important; /* 최대 1400px까지 확장 */
-        max-width: 1400px !important; /* 최대 1400px까지 확장 */
-        padding-left: 40px !important;
-        padding-right: 40px !important;
-      }
-
-      .publication-wrap {
-        width: 100% !important;
-        max-width: 100% !important;
-        margin: 0 auto;
-      }
-
-      /* 2. PC에서는 아이템을 '박스' 형태로 만들어서 공간을 채움 */
+      /* Research Item을 박스 형태로 변경 */
       .pub-item {
-        width: 100%;             /* 가로 꽉 채우기 */
-        background-color: #fff;  /* 배경색 (필수) */
-        border: 1px solid #ddd;  /* 회색 테두리 (필수) */
-        border-radius: 12px;     /* 둥근 모서리 */
-        padding: 20px 25px;      /* 넉넉한 안쪽 여백 */
-        margin-bottom: 20px;     /* 아이템 간격 */
-
-        /* [높이 고정 설정 추가] */
-        min-height: 160px;       /* 최소 높이를 160px로 고정하여 큼직하게 유지 */
-        display: flex;           /* 내부 내용물 정렬을 위해 flex 사용 */
-        flex-direction: column;  /* 세로 정렬 */
-        justify-content: center; /* 내용이 적어도 수직 중앙에 예쁘게 배치 */
-        align-items: flex-start; /* 글자는 왼쪽 정렬 */
+        background-color: #fff;  
+        border: 1px solid #ddd;  
+        border-radius: 12px;     
+        padding: 20px 25px;      
+        margin-bottom: 20px;     
         
-        /* 기존 왼쪽 선 스타일 유지/강화 */
+        min-height: 140px;       
+        display: flex;           
+        flex-direction: column;  
+        justify-content: center; 
+        align-items: flex-start; 
+        
         border-left: 6px solid #ddd; 
-        box-sizing: border-box; /* 패딩이 너비에 포함되도록 */
       }
 
-      /* PC Hover 효과 */
+      /* Hover 효과 */
       .pub-item:hover {
-        transform: translateX(10px); /* 오른쪽 살짝 이동 */
+        transform: translateX(10px); 
         border-color: var(--primary-blue);
         border-left-color: var(--primary-blue);
-        background-color: #f8fbff; /* 호버 시 연한 파란 배경 */
+        background-color: #f8fbff; 
         box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      }
+
+      /* Team PC 2-row Layout */
+      .swiper-container.team-slider {
+        height: 460px; 
+        padding-bottom: 20px;
+      }
+      .swiper-slide {
+        height: calc((100% - 20px) / 2) !important; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     }
   </style>
@@ -1093,4 +1096,5 @@
   </script>
 </body>
 </html>
+
 
