@@ -861,6 +861,15 @@
       new Swiper(sliderElement, {
         // Common Settings
         slidesPerView: 'auto', 
+        // ★ [추가된 부분 1] 무한 반복 설정
+        loop: true, 
+
+        // ★ [추가된 부분 2] 자동 재생 설정
+        autoplay: {
+          delay: 3000,              // 3초마다 넘어감 (숫자를 2000으로 하면 2초)
+          disableOnInteraction: false, // 사용자가 터치해도 자동 재생 멈추지 않음
+          pauseOnMouseEnter: true,     // (선택) 마우스를 올리면 잠시 멈춤
+        },
         centeredSlides: true,  
         spaceBetween: 20,
         centerInsufficientSlides: true, 
@@ -900,6 +909,7 @@
   </script>
 </body>
 </html>
+
 
 
 
