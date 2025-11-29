@@ -546,6 +546,24 @@
       
       /* Media Video Mobile: 원래대로 Stack */
       .media video { width: 100%; max-width: 100%; }
+
+      /* =======================
+       RCV 로고 개별 크기 조절
+       ======================= */
+
+      /* [PC] 기본 120px보다 크게 설정 */
+      .lab-link img.rcv-logo {
+        height: 160px; /* 필요에 따라 숫자를 조절하세요 (기본: 120px) */
+        /* 만약 이미지가 위로 튀어 오르면 아래 마진 조절 */
+        margin-bottom: 12px; 
+      }
+      
+      /* [Mobile] 기본 50px보다 크게 설정 */
+      @media (max-width: 900px) {
+        .lab-link img.rcv-logo {
+          height: 75px; /* 필요에 따라 숫자를 조절하세요 (기본: 50px) */
+        }
+      }
     }
   </style>
 </head>
@@ -787,7 +805,7 @@
             <span>SPARO Lab</span>
           </a>
           <a href="https://rcv-inha.notion.site/webhome" target="_blank" class="lab-link">
-            <img src="RCVLAB.webp" alt="RCV Lab" onerror="this.src='https://via.placeholder.com/80?text=RCV'">
+            <img src="RCVLAB.webp" alt="RCV Lab" class="rcv-logo" onerror="this.src='https://via.placeholder.com/80?text=RCV'">
             <span>RCV Lab</span>
           </a>
           <a href="https://artemis-inha.github.io/" target="_blank" class="lab-link">
@@ -855,6 +873,7 @@
 
 </body>
 </html>
+
 
 
 
