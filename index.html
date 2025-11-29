@@ -260,7 +260,7 @@
     .opensource p.link-text { font-size: 1.3rem; margin-top: 30px; }
     .opensource a { color: var(--primary-blue); font-weight: 600; text-decoration: underline; }
 
-/* =======================
+    /* =======================
        Media (PC 스크롤바 버그 수정 및 반응형 개선)
        ======================= */
     .media { background-color: #fff; }
@@ -412,12 +412,21 @@
     }
     .lab-link img:hover { opacity: 1; transform: scale(1.05); }
     .lab-link span { font-size: 1.1rem; font-weight: 600; color: #555; }
+    
     /* [PC] 기본 120px보다 크게 설정 */
     .lab-link img.rcv-logo {
       height: 200px; /* 필요에 따라 숫자를 조절하세요 (기본: 120px) */
       /* 만약 이미지가 위로 튀어 오르면 아래 마진 조절 */
       margin-bottom: 12px; 
     }
+    
+    /* [PC] 기본 120px보다 크게 설정 */
+    .lab-link img.sparo-logo {
+      height: 100px; /* 필요에 따라 숫자를 조절하세요 (기본: 120px) */
+      /* 만약 이미지가 위로 튀어 오르면 아래 마진 조절 */
+      margin-bottom: 12px; 
+    }
+    
     /* [Mobile] Global & Layout */
     @media (max-width: 900px) {
       .section {
@@ -556,6 +565,13 @@
        RCV 로고 개별 크기 조절
        ======================= */
       .lab-link img.rcv-logo {
+        height: 90px; /* 필요에 따라 숫자를 조절하세요 (기본: 50px) */
+      }
+
+      /* =======================
+       SPARO 로고 개별 크기 조절
+       ======================= */
+      .lab-link img.sparo-logo {
         height: 75px; /* 필요에 따라 숫자를 조절하세요 (기본: 50px) */
       }
     }
@@ -600,6 +616,48 @@
           focusing on service robots, autonomous perception, and intelligent control systems.
         </p>
     
+        <div class="leader-wrapper">
+          <div class="team-member">
+            <img src="img/lmh.webp" alt="A" onerror="this.src='https://via.placeholder.com/90?text=Leader'" />
+            <h3>Minho Lee</h3>
+            <p>Team Leader</p>
+            <div class="social-icons">
+               <a href="https://github.com/minho0" target="_blank"><i class="fab fa-github"></i></a>
+               <a href="https://linkedin.com/in/minho-lee-144ba6379/" target="_blank"><i class="fab fa-linkedin"></i></a>
+               <a href="mailto:mhlee00@inha.edu"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+          <div class="team-member">
+            <img src="img/lmh.webp" alt="B" onerror="this.src='https://via.placeholder.com/90?text=Leader'" />
+            <h3>Minho Lee</h3>
+            <p>Team Leader</p>
+            <div class="social-icons">
+               <a href="https://github.com/minho0" target="_blank"><i class="fab fa-github"></i></a>
+               <a href="https://linkedin.com/in/minho-lee-144ba6379/" target="_blank"><i class="fab fa-linkedin"></i></a>
+               <a href="mailto:mhlee00@inha.edu"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+          <div class="team-member">
+            <img src="img/lmh.webp" alt="C" onerror="this.src='https://via.placeholder.com/90?text=Leader'" />
+            <h3>Minho Lee</h3>
+            <p>Team Leader</p>
+            <div class="social-icons">
+               <a href="https://github.com/minho0" target="_blank"><i class="fab fa-github"></i></a>
+               <a href="https://linkedin.com/in/minho-lee-144ba6379/" target="_blank"><i class="fab fa-linkedin"></i></a>
+               <a href="mailto:mhlee00@inha.edu"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+          <div class="team-member">
+            <img src="img/lmh.webp" alt="D" onerror="this.src='https://via.placeholder.com/90?text=Leader'" />
+            <h3>Minho Lee</h3>
+            <p>Team Leader</p>
+            <div class="social-icons">
+               <a href="https://github.com/minho0" target="_blank"><i class="fab fa-github"></i></a>
+               <a href="https://linkedin.com/in/minho-lee-144ba6379/" target="_blank"><i class="fab fa-linkedin"></i></a>
+               <a href="mailto:mhlee00@inha.edu"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </div> 
         <div class="slider-wrapper">
           <div class="swiper-button-prev"></div>
           <div class="swiper-button-next"></div>
@@ -795,7 +853,7 @@
 
         <div class="lab-logos">
           <a href="https://sparolab.github.io" target="_blank" class="lab-link">
-            <img src="sparo.png" alt="Sparo Lab" onerror="this.src='https://via.placeholder.com/80'">
+            <img src="sparo.png" alt="Sparo Lab" class="sparo-logo" onerror="this.src='https://via.placeholder.com/80'">
             <span>SPARO Lab</span>
           </a>
           <a href="https://rcv-inha.notion.site/webhome" target="_blank" class="lab-link">
@@ -867,6 +925,7 @@
 
 </body>
 </html>
+
 
 
 
