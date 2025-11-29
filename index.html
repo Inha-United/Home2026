@@ -108,18 +108,18 @@
     /* Research 전용 컨테이너 */
     .research-container {
       width: 100%;
-      max-width: 1400; 
+      max-width: 1400px; 
       margin: 0 auto;
-      display: block; 
+      display: flex; 
+      flex-direction: column;
       text-align: center; 
+      justify-content: flex-start;
       padding: 0 20px;
     }
 
     /* Research 섹션 강제 확장 스타일 */
     .section[data-anchor="research"] {
-      padding-left: 0 !important;
-      padding-right: 0 !important;
-      align-items: stretch !important; 
+      align-items: center !important; 
     }
     
     /* [수정] Home 섹션은 예외적으로 중앙 정렬 */
@@ -1013,3 +1013,4 @@
   </script>
 </body>
 </html>
+
