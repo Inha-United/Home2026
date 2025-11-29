@@ -456,7 +456,9 @@
         justify-content: center;
         align-items: center;
         text-align: center;
-        width: fit-content;
+        /* [핵심 수정] 고정 너비 설정 */
+        width: 1200px;        /* 원하는 픽셀 값 입력 (예: 800px ~ 1200px) */
+        max-width: 95vw;      /* 화면이 1000px보다 작을 경우를 대비한 안전장치 */
         border-left: 1px solid #ddd; 
         border-top: 6px solid #ddd;
       }
@@ -490,7 +492,7 @@
       .contact-container {
         height: 100%;
         justify-content: space-between;
-        padding-bottom: 20px;
+        padding-bottom: 5px;
       }
       .contact-top { margin-top: auto; }
       .lab-logos {
@@ -507,7 +509,7 @@
 
       .lab-link { transition: transform 0.3s; }
       .lab-link:hover { transform: translateY(-5px); color: #0078ff; }
-      .lab-link img { height: 100px; margin-bottom: 12px; opacity: 0.9; transition: 0.3s; }
+      .lab-link img { height: 100px; margin-bottom: 6px; opacity: 0.9; transition: 0.3s; }
       .lab-link img:hover { opacity: 1; transform: scale(1.05); }
       .lab-link img.rcv-logo { height: 180px; }
       .lab-link img.sparo-logo { height: 80px; }
@@ -889,4 +891,5 @@
   </script>
 </body>
 </html>
+
 
