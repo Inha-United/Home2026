@@ -476,24 +476,20 @@
        Research 섹션 전용 스타일 (여기를 수정해도 다른 곳은 안 변해요!)
        ======================= */
       /* 1. Research 섹션 전체 컨테이너 제한 풀기 */
+/* Research 섹션 컨테이너 전체를 항상 꽉 차게 */
       .section[data-anchor="research"] .max-w-container {
         width: 100% !important;
-        
-        /* ▼ 여기를 100%로 설정하면 화면 끝까지 늘어납니다 (기존 1400px) */
-        max-width: 100% !important; 
-        
-        /* 화면 양옆에 너무 딱 붙지 않게 최소한의 여백 */
-        padding-left: 40px !important; 
+        max-width: 100% !important;
+        padding-left: 40px !important;
         padding-right: 40px !important;
       }
       
+      /* 논문 리스트 컨테이너도 꽉 차게 */
       .publication-wrap {
         width: 100% !important;
-        /* ▼ 이 숫자를 조절하면 논문 리스트의 폭이 변합니다. (최대 1400px까지 가능) */
         max-width: 100% !important;
-        
-        text-align: left; /* 글자 왼쪽 정렬 */
-        padding-bottom: 50px; /* 아래 여백 */
+        text-align: left;
+        padding-bottom: 50px;
         margin-top: 20px;
       }
   
@@ -1145,6 +1141,7 @@
   </style>
 </body>
 </html>
+
 
 
 
