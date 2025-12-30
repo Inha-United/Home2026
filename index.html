@@ -649,45 +649,46 @@
       align-items: center;
     }
 
+    /* 공통 카드 */
     .media-item {
-      height: 520px;                 /* ★ 카드 높이 고정 */
-      width: auto;                   /* 가로는 컨텐츠에 맡김 */
-      max-width: 90vw;               /* 모바일 안전장치 */
-      position: relative;
-      border-radius: 16px;
-      overflow: hidden;
-      background: #000;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-
-      /* Swiper용 */
+      height: 520px;
+      width: auto;
       flex-shrink: 0;
+      position: relative;
     }
-
-    /* 이미지 / 비디오 / iframe 공통 */
+    
+    /* 이미지 / mp4 */
     .media-item img,
-    .media-item video,
-    .media-item iframe {
+    .media-item video {
       height: 100%;
       width: auto;
       max-width: 100%;
-      object-fit: contain;   /* ★ 비율 유지 + 잘림 없음 */
+      object-fit: contain;
       display: block;
       margin: 0 auto;
     }
-
-    /* YouTube iframe은 contain 느낌으로 */
+    
+    /* ★ 유튜브만 가로형 강제 */
+    .media-item.youtube {
+      width: calc(520px * 16 / 9);   /* height 기준으로 width 계산 */
+      max-width: 90vw;              /* 모바일 안전장치 */
+    }
+    
+    /* iframe은 카드에 꽉 차게 */
     .media-item.youtube iframe {
-      width: auto;
-      min-width: 320px;   /* 너무 얇아지는 것 방지 */
+      width: 100%;
+      height: 100%;
+      border: 0;
     }
 
-    /* 반응형 설정: 화면이 좁아지면 2개, 1개씩 보이도록 */
-    @media (max-width: 900px) {
-      .media-grid { gap: 15px; }
-      .media-item { width: 45%; min-width: 160px; }
-    }
     @media (max-width: 480px) {
-      .media-item { width: 85%; }
+      .media-item {
+        height: 420px;
+      }
+    
+      .media-item.youtube {
+        width: calc(420px * 16 / 9);
+      }
     }
 
     /* =======================
