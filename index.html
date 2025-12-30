@@ -639,22 +639,33 @@
       padding: 10px; 
     }
 
-    /* [수정 포인트] 사진(img)과 비디오(video) 공용 스타일 */
+    /* media-item을 "카드 컨테이너"로 사용 */
     .media-item {
-      width: 30%; /* 3개가 한 줄에 나오도록 설정 */
-      min-width: 250px; 
-      max-width: 360px; 
-      max-height: 55vh; 
-      aspect-ratio: 9 / 16; /* 세로형 비율 유지 */
-      object-fit: cover;    /* 비율이 달라도 영역을 꽉 채움 */
+      position: relative;
+      width: 30%;
+      min-width: 250px;
+      max-width: 360px;
+      aspect-ratio: 9 / 16;
       border-radius: 16px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
       background: #000;
+      overflow: hidden;        /* ★ iframe 모서리 깔끔 */
       transition: transform 0.3s;
-      display: block; 
     }
-    
-    .media-item:hover { transform: scale(1.02); }
+
+    .media-item:hover {
+      transform: scale(1.02);
+    }
+
+    /* iframe을 카드에 꽉 차게 */
+    .media-item iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
 
     /* 반응형 설정: 화면이 좁아지면 2개, 1개씩 보이도록 */
     @media (max-width: 900px) {
@@ -1351,6 +1362,11 @@
             <source src="K1_walking.mp4" type="video/mp4">
             Your browser does not support video.
           </video>
+          
+          <!-- 유튜브 -->
+            <div class="media-item youtube">
+              <iframe src="https://www.youtube.com/watch?v=IE_m4ILwg-4&pp=ygULaW5oYS11bml0ZWQ%3D"></iframe>
+            </div>
         </div>
       </div>
     </section>
