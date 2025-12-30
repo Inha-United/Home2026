@@ -627,16 +627,26 @@
     } */
 
     /* 기존 video-container 스타일을 media-grid로 변경 및 확장 */
-    .media-grid {
+    /*.media-grid {
       display: flex;
       justify-content: center;
       align-items: center;
       flex-wrap: wrap; 
       gap: 2vw; /* 간격을 약간 조절 */
-      margin-top: 30px;
+       /*margin-top: 30px;
       width: 100%;
       max-width: 1200px; 
       padding: 10px; 
+    } */
+    .media-slider {
+      width: 100%;
+      max-width: 1200px;
+      margin: 40px auto;
+      overflow: hidden;
+    }
+
+    .media-slider .swiper-wrapper {
+      align-items: center;
     }
 
     /* media-item을 "카드 컨테이너"로 사용 */
@@ -1328,50 +1338,67 @@
       </div>
     </section>
     
-    <!-- 로봇 -->
+    <!-- Media / Robots -->
     <section class="section media" data-anchor="media">
       <h1>Media</h1>
+
       <div class="max-w-container">
         <p class="desc">
-          Our Robots: 
-          <a href="https://www.rainbow-robotics.com/en_rby1" target="_blank" rel="noopener noreferrer">
+          Our Robots:
+          <a href="https://www.rainbow-robotics.com/en_rby1"
+             target="_blank"
+             rel="noopener noreferrer">
             RB-Y1 from Rainbow Robotics
           </a>
         </p>
-        <!-- <div class="video-container">
-          <video controls autoplay muted loop playsinline>
-            <source src="two_k1.mp4" type="video/mp4">
-            Your browser does not support video.
-          </video>
-          <video controls autoplay muted loop playsinline>
-            <source src="IMG_6071.mp4" type="video/mp4">
-            Your browser does not support video.
-          </video>
-        </div>
-      </div>
-    </section> -->
-        <div class="media-grid">
-          <img src="twoK1_seatdown.jpeg" alt="Robot Photo" class="media-item" onerror="this.src='https://via.placeholder.com/360x640?text=Robot+Photo'">
-          
-          <video class="media-item" controls autoplay muted loop playsinline>
-            <source src="two_k1.mp4" type="video/mp4">
-            Your browser does not support video.
-          </video>
-          
-          <video class="media-item" controls autoplay muted loop playsinline>
-            <source src="K1_walking.mp4" type="video/mp4">
-            Your browser does not support video.
-          </video>
-          
-          <div class="media-item youtube">
-            <iframe
-              src="https://www.youtube.com/embed/IE_m4ILwg-4"
-              title="Robot demo video"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen>
-            </iframe>
+
+        <!-- Swiper Media Slider -->
+        <div class="media-slider swiper">
+          <div class="swiper-wrapper">
+
+            <!-- Image -->
+            <div class="swiper-slide media-item">
+              <img
+                src="twoK1_seatdown.jpeg"
+                alt="Robot Photo"
+                onerror="this.src='https://via.placeholder.com/360x640?text=Robot+Photo'">
+            </div>
+
+            <!-- Video 1 -->
+            <div class="swiper-slide media-item">
+              <video controls autoplay muted loop playsinline>
+                <source src="two_k1.mp4" type="video/mp4">
+                Your browser does not support video.
+              </video>
+            </div>
+
+            <!-- Video 2 -->
+            <div class="swiper-slide media-item">
+              <video controls autoplay muted loop playsinline>
+                <source src="K1_walking.mp4" type="video/mp4">
+                Your browser does not support video.
+              </video>
+            </div>
+
+            <!-- YouTube -->
+            <div class="swiper-slide media-item youtube">
+              <iframe
+                src="https://www.youtube.com/embed/IE_m4ILwg-4"
+                title="Robot demo video"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+
           </div>
+
+          <!-- Navigation -->
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+
+          <!-- Pagination -->
+          <div class="swiper-pagination"></div>
         </div>
       </div>
     </section>
@@ -1438,7 +1465,6 @@
 
     // --- A. Advisor Slider (Principal Investigator) ---
     const advisorSliderEl = document.querySelector('.advisor-slider');
-    
     new Swiper(advisorSliderEl, {
         observer: true,
         observeParents: true,
@@ -1499,6 +1525,35 @@
           prevEl: memberSliderEl.parentElement.querySelector('.swiper-button-prev'),
         },
         breakpoints: pcBreakpoint
+    });
+
+      // --- C. Media Slider ---
+    const mediaSliderEl = document.querySelector('.media-slider');
+    new Swiper(mediaSliderEl, {
+      observer: true,
+      observeParents: true,
+      watchOverflow: true,
+
+      slidesPerView: 'auto',
+      spaceBetween: 20,
+      centeredSlides: true,
+
+      loop: false,
+
+      pagination: {
+        el: mediaSliderEl.querySelector('.swiper-pagination'),
+        clickable: true,
+      },
+      navigation: {
+        nextEl: mediaSliderEl.querySelector('.swiper-button-next'),
+        prevEl: mediaSliderEl.querySelector('.swiper-button-prev'),
+      },
+
+      breakpoints: {
+        901: {
+          centeredSlides: false,
+        }
+      }
     });
   </script>
 </body>
