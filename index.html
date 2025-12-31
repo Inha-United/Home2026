@@ -1553,7 +1553,23 @@
             spaceBetween: 20,
         }
     };
-
+    
+    // --- A. [NEW] About Section Slider ---
+    // 이미지 2개가 부드럽게 교체되는 슬라이더입니다.
+    new Swiper('.about-slider', {
+        loop: true,
+        effect: 'fade', // 부드럽게 겹치며 바뀌는 효과
+        fadeEffect: { crossFade: true },
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: '.about-slider .swiper-pagination',
+            clickable: true,
+        },
+    });
+    
     // --- A. Advisor Slider (Principal Investigator) ---
     const advisorSliderEl = document.querySelector('.advisor-slider');
     new Swiper(advisorSliderEl, {
