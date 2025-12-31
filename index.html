@@ -212,18 +212,23 @@
        About Section (독립 섹션 스타일)
        ========================================= */
     .about {
+      /* 헤더 높이만큼 여백을 주어 글자가 가려지지 않게 함 */
+      padding-top: 80px !important;
       background-color: #fff;
+      overflow-y: auto !important; /* 내용이 많으면 내부 스크롤 허용 */
     }
 
     .about-content {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 60px;
+      gap: 40px;
       text-align: left;
+      width: 100%;
+      height: auto; /* 고정 높이 해제 */
     }
 
-    .about-text { flex: 1; }
+    .about-text { flex: 1.0; }
     .about-text h1 {
       font-size: 3rem !important;
       color: var(--dark-green);
@@ -238,12 +243,82 @@
     }
     .about-text .sub-desc { font-size: 1rem; color: #666; }
 
-    .about-image { flex: 1.2; }
+    .about-image { 
+      flex: 1.2; 
+      width: 100%;
+      max-width: 800px;
+      position: relative;
+    }
     .about-image img {
       width: 100%;
       border-radius: 20px;
       box-shadow: 0 15px 35px rgba(0,0,0,0.12);
       object-fit: cover;
+    }
+
+    /* 슬라이더 높이를 PC에서 명시적으로 지정 */
+    .about-slider {
+      width: 100%;
+      height: 450px; /* PC 슬라이더 높이 */
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+    }
+
+    .about-slider img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* 영역에 맞게 꽉 채움 */
+      display: block;
+    }
+
+    /* 슬라이더 점(Pagination) 색상 변경 */
+    .about-slider .swiper-pagination-bullet-active {
+      background: var(--primary-green);
+    }
+
+      /* =========================================
+       [Mobile] 모바일 전용 레이아웃 최적화 
+       ========================================= */
+    @media (max-width: 900px) {
+      /* 1. Home 모바일 패딩 축소 */
+      .home .max-w-container {
+        padding-top: 30vh; /* 모바일에서는 조금 덜 밀어내기 */
+        padding-left: 0;
+      }
+      .home h1 { font-size: 2.5rem; }
+      .home p { font-size: 1.1rem; }
+
+      /* 2. About 모바일 레이아웃 */
+      .about {
+        padding-top: 100px !important; /* 모바일 헤더 대응 */
+        justify-content: flex-start !important;
+      }
+      .about-content {
+        flex-direction: column; /* 위아래로 배치 */
+        text-align: center;
+        gap: 20px;
+      }
+      .about-text h1 {
+        font-size: 2.2rem !important;
+        margin-bottom: 15px !important;
+        text-align: center !important;
+      }
+      .about-text p {
+        font-size: 1rem;
+        padding: 0 10px;
+      }
+
+      /* 3. About 슬라이더 모바일 높이 고정 (중요: 안 보임 방지) */
+      .about-image {
+        width: 100%;
+        max-width: 100%;
+        order: -1; /* 사진을 글보다 위로 올리고 싶다면 사용 (선택) */
+      }
+      .about-slider {
+        height: 280px; /* 모바일에서 사진이 확실히 보이게 높이 지정 */
+        margin-bottom: 20px;
+      }
     }
 
     /* =======================
@@ -929,8 +1004,19 @@
           <p>Inha-United@Home is a collaborative team from four major robotics and AI laboratories at Inha University.</p>
           <p class="sub-desc">We bring together expertise in perception, localization, control, and strategy to create the next generation of soccer robots.</p>
         </div>
+        <!-- swiper로 변경해서 이미지 넘어가게끔 구현 -->
         <div class="about-image">
-          <img src="img/team_home1.jpg" alt="Inha-United Team Photo">
+          <div class="swiper about-slider">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <img src="img/team_all2.jpg" alt="Inha-United Team Photo 1">
+              </div>
+              <div class="swiper-slide">
+                <img src="img/team_home1.jpg" alt="Inha-United Team Photo 2">
+              </div>
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
         </div>
       </div>
     </section>
