@@ -37,8 +37,8 @@
        ========================================= */
     :root {
       --vh: 1vh;
-      --primary-blue: #0078ff;
-      --dark-blue: #004c99;
+      --primary-color: #0078ff;
+      --dark-color: #004c99;
       --bg-gradient-header: linear-gradient(to bottom, #b5dbff 0%, #cce7ff 100%);
       --bg-gradient-home: linear-gradient(to bottom, #cce7ff 0%, #ffffff 100%);
     }
@@ -67,18 +67,18 @@
     header {
       position: fixed;
       top: 0; left: 0; right: 0;
-      height: 80px;
+      height: clamp(60px, 8vh, 80px);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 40px;
+      padding: 0 clamp(20px, 4vw, 40px);
       background: var(--bg-gradient-header);
       backdrop-filter: blur(10px);
       z-index: 100;
     }
-    header h1 { font-size: 1.6rem; font-weight: 700; color: #000; }
-    nav a { margin-left: 25px; color: var(--dark-green); font-size: 1.5rem; font-weight: 500; }
-    nav a:hover { color: var(--primary-green); }
+    header h1 { font-size: clamp(1.2rem, 2vw, 1.6rem); font-weight: 700; color: #000; }
+    nav a { margin-left: clamp(15px, 2vw, 25px); color: var(--dark-green); font-size: clamp(1rem, 1.5vw, 1.5rem); font-weight: 500; }
+    nav a:hover { color: var(--primary-color); }
 
     @media (max-width: 900px) {
       header { padding: 0 20px; justify-content: center; }
@@ -95,172 +95,195 @@
       align-items: center;
       text-align: center;
       height: calc(var(--vh, 1vh) * 100); 
-      padding: 0 20px;
+      padding: 0 clamp(15px, 3vw, 20px);
+      padding-top: clamp(60px, 8vh, 80px); /* 헤더 높이 대응 */
+      padding-bottom: clamp(20px, 3vh, 40px);
       position: relative;
       overflow: hidden;
+      box-sizing: border-box;
     }
 
-    /* PC Layout Fixer Container */
+    /* PC Layout Fixer Container - viewport 기반 */
     .max-w-container {
       width: 100%;
-      max-width: 1400px;
+      max-width: min(1400px, 95vw);
+      max-height: calc(100vh - clamp(80px, 12vh, 120px)); /* 헤더 + 여백 제외 */
       margin: 0 auto;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       position: relative;
+      overflow: hidden;
     }
 
     .section h1 {
-      font-size: 2.8rem;
+      font-size: clamp(1.6rem, 3.5vh, 2.8rem);
       font-weight: 700;
-      margin-bottom: 30px; 
+      margin-bottom: clamp(10px, 2vh, 30px); 
       margin-top: 0;
     }
     
     .section p.desc {
-      font-size: 1.15rem;
-      max-width: 700px;
-      margin: 0 auto 50px auto; 
-      line-height: 1.6;
+      font-size: clamp(0.9rem, 1.8vh, 1.15rem);
+      max-width: min(700px, 90vw);
+      margin: 0 auto clamp(15px, 3vh, 50px) auto; 
+      line-height: 1.5;
       color: #555;
     }
 
     /* =======================
-       Home Section (기존 원혁님꺼)
-       ======================= */
-    /* .home { background: var(--bg-gradient-home); }
-    .home h1 { margin-bottom: 20px; font-size: 3.5rem; }
-    .home p { font-size: 1.3rem; margin-bottom: 40px; }
-    .home button {
-      background-color: var(--primary-green);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 14px 32px;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .home button:hover { background-color: #129e52; }
-
-    .social {
-      position: fixed;
-      left: 40px; top: 50%;
-      transform: translateY(-50%);
-      display: flex; flex-direction: column; gap: 20px;
-      z-index: 99;
-    }
-    .social a { color: #6fcf97; font-size: 26px; }
-    .social a:hover { color: var(--primary-green); transform: scale(1.15); }
-    
-    @media (max-width: 900px) {
-      .social { display: none; }
-      .home h1 { font-size: 2.5rem; margin-top: 50px; }
-    }*/
-    /* =======================
        Home Section (팀 사진 배경 버전)
        ======================= */
     .home {
-      /* [중요] 'team_photo.jpg'를 실제 팀 사진 파일 이름으로 바꾸세요 */
-      background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), /* 흐림도 조정 */
-                  url('img/inha-united.jpg'); 
+      position: relative;
+      padding-top: 80px;
+      overflow: hidden;
+    }
+    
+    .home::before {
+      content: "";
+      position: absolute;
+      top: 80px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url('img/inha-united.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      color: #fff; /* 기본 글자색 흰색으로 변경 */
+      z-index: -1;
     }
 
     .home h1 { 
-      margin-bottom: 20px; 
-      font-size: 4rem; /* 조금 더 크게 강조 */
+      margin-bottom: clamp(10px, 2vh, 20px); 
+      font-size: clamp(2.5rem, 6vw, 4rem);
       color: #ffffff;
-      text-shadow: 0 4px 10px rgba(0,0,0,0.3); /* 가독성을 위한 그림자 */
+      text-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
 
     .home p { 
-      font-size: 1.4rem; 
-      margin-bottom: 40px; 
-      color: rgba(255, 255, 255, 0.9); /* 본문은 살짝 투명한 흰색 */
+      font-size: clamp(1rem, 2vw, 1.4rem); 
+      margin-bottom: clamp(20px, 4vh, 40px); 
+      color: rgba(255, 255, 255, 0.9);
       text-shadow: 0 2px 5px rgba(0,0,0,0.3);
     }
 
-    /* 버튼 스타일 유지 (배경이 어두워졌으므로 초록색이 더 잘 보입니다) */
     .home button {
-      background-color: var(--primary-green);
+      background-color: var(--primary-color);
       color: white;
       border: none;
-      border-radius: 8px;
-      padding: 16px 40px;
-      font-size: 1.1rem;
+      border-radius: clamp(6px, 1vw, 8px);
+      padding: clamp(12px, 2vh, 16px) clamp(25px, 4vw, 40px);
+      font-size: clamp(0.9rem, 1.5vw, 1.1rem);
       font-weight: 600;
       cursor: pointer;
       transition: 0.3s;
-      box-shadow: 0 4px 15px rgba(23, 188, 97, 0.3);
+      box-shadow: 0 4px 15px rgba(0, 120, 255, 0.3);
     }
     .home button:hover { 
-      background-color: #129e52; 
+      background-color: var(--dark-color); 
       transform: translateY(-2px);
     }
-
-    @media (max-width: 900px) {
-      .home h1 { font-size: 2.8rem; }
-      .home p { font-size: 1.1rem; }
+    
+    .home .max-w-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
+
+    /* clamp()로 자동 반응형 처리됨 */
       /* =========================================
        About Section (독립 섹션 스타일)
        ========================================= */
     .about {
-      /* 헤더 높이만큼 여백을 주어 글자가 가려지지 않게 함 */
-      padding-top: 80px !important;
+      padding-top: clamp(60px, 8vh, 80px) !important;
+      padding-bottom: clamp(20px, 3vh, 40px) !important;
       background-color: #fff;
-      overflow-y: auto !important; /* 내용이 많으면 내부 스크롤 허용 */
+      overflow: hidden !important;
+    }
+
+    .about .max-w-container {
+      max-height: calc(100vh - clamp(80px, 12vh, 120px));
     }
 
     .about-content {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 40px;
+      gap: clamp(15px, 3vw, 40px);
       text-align: left;
       width: 100%;
-      height: auto; /* 고정 높이 해제 */
+      height: 100%;
+      max-height: calc(100vh - clamp(100px, 15vh, 150px));
     }
 
-    .about-text { flex: 1.0; }
+    .about-text { 
+      flex: 1; 
+      max-height: 100%;
+      overflow: hidden;
+    }
     .about-text h1 {
-      font-size: 3rem !important;
+      font-size: clamp(1.5rem, 3.5vh, 3rem) !important;
       color: var(--dark-green);
-      margin-bottom: 25px !important;
+      margin-bottom: clamp(10px, 2vh, 25px) !important;
       text-align: left !important;
     }
     .about-text p {
-      font-size: 1.2rem;
-      line-height: 1.7;
+      font-size: clamp(0.8rem, 1.8vh, 1.2rem);
+      line-height: 1.6;
       color: #333;
-      margin-bottom: 15px;
+      margin-bottom: clamp(8px, 1.2vh, 15px);
     }
-    .about-text .sub-desc { font-size: 1rem; color: #666; }
+    .about-text .sub-desc { font-size: clamp(0.75rem, 1.5vh, 1rem); color: #666; }
+    
+    /* TDP 버튼 스타일 */
+    .tdp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: clamp(10px, 1.5vh, 20px);
+      padding: clamp(8px, 1.2vh, 14px) clamp(16px, 2vw, 28px);
+      background: var(--primary-color);
+      color: #fff;
+      font-size: clamp(0.75rem, 1.4vh, 1rem);
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 120, 255, 0.3);
+    }
+    .tdp-btn:hover {
+      background: var(--dark-color);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 120, 255, 0.4);
+    }
+    .tdp-btn i {
+      font-size: 1.1em;
+    }
 
     .about-image { 
       flex: 1.2; 
       width: 100%;
-      max-width: 800px;
+      max-width: min(800px, 45vw);
+      max-height: calc(100vh - clamp(120px, 18vh, 180px));
       position: relative;
     }
     .about-image img {
       width: 100%;
-      border-radius: 20px;
+      height: 100%;
+      border-radius: clamp(10px, 1.5vh, 20px);
       box-shadow: 0 15px 35px rgba(0,0,0,0.12);
       object-fit: cover;
     }
 
-    /* 슬라이더 높이를 PC에서 명시적으로 지정 */
     .about-slider {
       width: 100%;
-      height: 450px; /* PC 슬라이더 높이 */
-      border-radius: 20px;
+      height: clamp(200px, 55vh, 450px);
+      max-height: calc(100vh - clamp(140px, 20vh, 200px));
+      border-radius: clamp(10px, 1.5vh, 20px);
       overflow: hidden;
       box-shadow: 0 15px 35px rgba(0,0,0,0.12);
     }
@@ -274,7 +297,7 @@
 
     /* 슬라이더 점(Pagination) 색상 변경 */
     .about-slider .swiper-pagination-bullet-active {
-      background: var(--primary-green);
+      background: var(--primary-color);
     }
 
       /* =========================================
@@ -324,37 +347,49 @@
     /* =======================
        Team Section (Slider)
        ======================= */
-    .team { background-color: #f9f9f9; width: 100%; }
+    .team { 
+      background-color: #f9f9f9; 
+      width: 100%; 
+      padding-top: clamp(60px, 8vh, 80px) !important;
+    }
+
+    .team .max-w-container {
+      max-height: calc(100vh - clamp(80px, 10vh, 100px));
+      justify-content: flex-start;
+      padding-top: clamp(10px, 2vh, 20px);
+    }
     
     .team h2 {
-        font-size: 1.8rem;
-        margin-bottom: 20px;
+        font-size: clamp(1.1rem, 2.2vh, 1.8rem);
+        margin-bottom: clamp(8px, 1.5vh, 20px);
         color: var(--dark-green);
-        margin-top: 10px;
+        margin-top: clamp(5px, 1vh, 10px);
     }
 
     .slider-wrapper {
       position: relative;
       width: 100%;
-      padding: 0 50px; 
-      margin-bottom: 30px;
+      padding: 0 clamp(20px, 4vw, 50px); 
+      margin-bottom: clamp(10px, 2vh, 30px);
+      max-height: clamp(200px, 35vh, 350px);
     }
 
     .swiper.team-slider {
       width: 100%;
-      padding: 20px 10px 40px 10px;
+      padding: clamp(8px, 1.5vh, 20px) clamp(5px, 1vw, 10px) clamp(20px, 3vh, 40px) clamp(5px, 1vw, 10px);
       overflow: hidden;
+      max-height: clamp(180px, 32vh, 320px);
     }
 
     .team-member {
       background: #ffffff;
-      border-radius: 20px;
-      padding: 20px 15px;
+      border-radius: clamp(10px, 1.5vh, 20px);
+      padding: clamp(10px, 1.5vh, 20px) clamp(8px, 1vw, 15px);
       text-align: center;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      width: 200px; 
-      height: 260px; 
+      width: clamp(130px, 12vw, 200px); 
+      height: clamp(170px, 28vh, 260px); 
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -363,30 +398,32 @@
     .team-member:hover { transform: translateY(-6px); box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15); }
     
     .team-member img {
-      width: 90px; height: 90px;
+      width: clamp(50px, 8vh, 90px); 
+      height: clamp(50px, 8vh, 90px);
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid rgba(23, 188, 97, 0.35);
-      margin-bottom: 10px;
+      border: 3px solid rgba(0, 120, 255, 0.35);
+      margin-bottom: clamp(5px, 1vh, 10px);
     }
-    .team-member h3 { font-size: 1.1em; font-weight: 600; margin: 5px 0; }
-    .team-member p { color: #666; font-size: 0.9em; margin-bottom: 10px; }
+    .team-member h3 { font-size: clamp(0.8em, 1.5vh, 1.1em); font-weight: 600; margin: clamp(2px, 0.5vh, 5px) 0; }
+    .team-member p { color: #666; font-size: clamp(0.7em, 1.2vh, 0.9em); margin-bottom: clamp(5px, 1vh, 10px); }
 
-    .social-icons { display: flex; justify-content: center; gap: 10px; }
-    .social-icons a { color: #999; font-size: 1.1em; }
-    .social-icons a:hover { color: var(--primary-green); transform: scale(1.2); }
+    .social-icons { display: flex; justify-content: center; gap: clamp(5px, 1vh, 10px); }
+    .social-icons a { color: #999; font-size: clamp(0.8em, 1.3vh, 1.1em); }
+    .social-icons a:hover { color: var(--primary-color); transform: scale(1.2); }
 
     .swiper-button-prev,
     .swiper-button-next {
-      width: 40px; height: 40px;
-      color: var(--primary-green);
+      width: clamp(30px, 4vh, 40px); 
+      height: clamp(30px, 4vh, 40px);
+      color: var(--primary-color);
       background: rgba(255,255,255,0.8);
       border-radius: 50%;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       z-index: 10;
     }
     .swiper-button-prev:after, 
-    .swiper-button-next:after { font-size: 1.2rem; font-weight: bold; }
+    .swiper-button-next:after { font-size: clamp(0.9rem, 1.5vh, 1.2rem); font-weight: bold; }
     
     @media (min-width: 901px) {
       .swiper.team-slider {
@@ -475,7 +512,7 @@
       font-size: 1.8rem;
       margin-bottom: 25px;
       color: var(--dark-green);
-      border-left: 5px solid var(--primary-green);
+      border-left: 5px solid var(--primary-color);
       padding-left: 15px;
       margin-top: 20px;
     }
@@ -514,7 +551,7 @@
       width: 90px; height: 90px;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid rgba(23, 188, 97, 0.35);
+      border: 3px solid rgba(0, 120, 255, 0.35);
       margin-bottom: 10px;
     }
     .team-member h3 { font-size: 1.1em; font-weight: 600; margin: 5px 0; }
@@ -522,11 +559,11 @@
 
     .social-icons { display: flex; justify-content: center; gap: 10px; }
     .social-icons a { color: #999; font-size: 1.1em; }
-    .social-icons a:hover { color: var(--primary-green); transform: scale(1.2); }
+    .social-icons a:hover { color: var(--primary-color); transform: scale(1.2); }
 
     .swiper-button-prev, .swiper-button-next {
       width: 40px; height: 40px;
-      color: var(--primary-green);
+      color: var(--primary-color);
       background: rgba(255,255,255,0.8);
       border-radius: 50%;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
@@ -577,94 +614,228 @@
       display: flex !important;
       flex-direction: column !important;
       justify-content: flex-start !important; 
-      padding-top: 140px !important; 
-      padding-bottom: 60px !important;
+      padding-top: clamp(60px, 7vh, 75px) !important; 
+      padding-bottom: clamp(10px, 1.5vh, 20px) !important;
     }
 
     .section[data-anchor="research"] h1 {
       flex-shrink: 0;
       margin-top: 0 !important;
-      margin-bottom: 40px !important;
+      margin-bottom: clamp(10px, 1.5vh, 18px) !important;
+      font-size: clamp(1.3rem, 2.2vh, 2rem);
     }
 
     .section[data-anchor="research"] .max-w-container {
       width: 100% !important;
-      max-width: 1400px !important; /* 너비 */
+      max-width: min(1000px, 90vw) !important;
       margin: 0 auto;
     }
 
+    /* 연도 헤더 */
     .year-header {
-      font-size: 1.8rem;
+      font-size: clamp(0.85rem, 1.4vh, 1.1rem);
       font-weight: 700;
-      color: var(--primary-green);
-      border-bottom: 2px solid #eee;
-      margin-top: 40px;
-      margin-bottom: 20px;
-      padding-bottom: 10px;
-      width: 100%;
-      display: block;
+      color: var(--primary-color);
+      background: linear-gradient(to right, rgba(0,120,255,0.1), transparent);
+      padding: clamp(4px, 0.6vh, 8px) clamp(10px, 1.5vh, 16px);
+      margin-top: clamp(8px, 1vh, 12px);
+      margin-bottom: clamp(6px, 0.8vh, 10px);
+      border-radius: 4px;
     }
     .year-header:first-of-type { margin-top: 0; }
 
+    /* BibTeX 스타일 출판물 */
     .pub-item {
       width: 100%;
-      margin-bottom: 20px;
-      padding: 25px;
-      border: 1px solid #eee;
-      border-radius: 12px;
-      border-left: 4px solid #ddd;
+      margin-bottom: clamp(3px, 0.4vh, 5px);
+      padding: clamp(5px, 0.7vh, 8px) clamp(8px, 1vh, 12px);
       background: #fff;
-      transition: 0.3s;
+      transition: 0.2s;
       display: flex;
-      flex-direction: column;
+      align-items: baseline;
       text-align: left;
+      border-radius: 3px;
+      font-size: clamp(0.7rem, 1.1vh, 0.88rem);
+      line-height: 1.5;
     }
     .pub-item:hover {
-      border-left-color: var(--primary-green);
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      background: #f5f9ff;
     }
-    .pub-venue {
-      font-size: 0.9rem;
-      color: var(--primary-green);
-      font-weight: 700;
-      margin-bottom: 5px;
-    }
-    .pub-title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: #222;
-      margin-bottom: 8px;
-    }
-    .pub-authors { font-size: 1rem; color: #555; margin-bottom: 10px; }
     
-    .pub-links a {
-      font-size: 0.9rem;
-      color: var(--primary-green);
-      font-weight: 600;
-      margin-right: 15px;
+    .pub-number {
+      color: var(--primary-color);
+      font-weight: 700;
+      margin-right: clamp(6px, 0.8vh, 10px);
+      flex-shrink: 0;
+      min-width: 24px;
     }
-    .pub-links a:hover { text-decoration: underline; }
+    
+    .pub-content {
+      flex: 1;
+      color: #444;
+    }
+    
+    .pub-authors-inline {
+      color: #666;
+    }
+    
+    .pub-title-inline {
+      font-weight: 600;
+      color: #222;
+    }
+    
+    .pub-venue-inline {
+      font-style: italic;
+      color: var(--primary-color);
+    }
+    
+    .pub-year-inline {
+      color: #888;
+    }
+    
+    .pub-links-inline {
+      margin-left: clamp(4px, 0.5vh, 6px);
+    }
+    
+    .pub-links-inline a {
+      color: var(--primary-color);
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.9em;
+    }
+    .pub-links-inline a:hover { 
+      text-decoration: underline;
+    }
     
     @media (min-width: 901px) {
       .section[data-anchor="research"] .max-w-container {
-        width: 1200px !important; 
-        max-width: 95vw !important; 
-      }
-      .pub-item {
-        width: 100% !important;
+        max-width: min(1100px, 85vw) !important; 
       }
     }
+    
+    /* [모바일] Research 섹션 스크롤 보장 */
+    @media (max-width: 900px) {
+      .section[data-anchor="research"] {
+        height: auto !important;
+        min-height: 100vh;
+        padding-bottom: 40px !important;
+      }
+      .section[data-anchor="research"] .max-w-container {
+        max-height: calc(100vh - 120px);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 30px;
+      }
+    }
+
+    /* =======================
+       GitHub Section
+       ======================= */
+    .section[data-anchor="github"] {
+      background-color: #f9f9f9;
+      padding-top: clamp(60px, 7vh, 75px) !important;
+    }
+    
+    .section[data-anchor="github"] h1 {
+      margin-bottom: clamp(15px, 2vh, 25px);
+    }
+    
+    .github-container {
+      width: 100%;
+      max-width: min(1100px, 92vw);
+      margin: 0 auto;
+    }
+    
+    .github-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(12px, 1.5vh, 20px);
+    }
+    
+    .repo-card {
+      background: #fff;
+      border-radius: clamp(8px, 1vh, 12px);
+      padding: clamp(14px, 2vh, 24px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      border-left: 3px solid var(--primary-color);
+    }
+    
+    .repo-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 120, 255, 0.15);
+    }
+    
+    .repo-header {
+      display: flex;
+      align-items: center;
+      gap: clamp(6px, 1vh, 10px);
+      margin-bottom: clamp(8px, 1vh, 12px);
+    }
+    
+    .repo-header i {
+      font-size: clamp(1.2rem, 2vh, 1.6rem);
+      color: var(--primary-color);
+    }
+    
+    .repo-header h3 {
+      font-size: clamp(0.85rem, 1.4vh, 1.1rem);
+      font-weight: 600;
+      color: #222;
+      margin: 0;
+    }
+    
+    .repo-card p {
+      font-size: clamp(0.72rem, 1.1vh, 0.88rem);
+      color: #666;
+      line-height: 1.5;
+      flex: 1;
+      margin-bottom: clamp(10px, 1.2vh, 16px);
+    }
+    
+    .repo-card a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--primary-color);
+      font-size: clamp(0.72rem, 1.1vh, 0.88rem);
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    
+    .repo-card a:hover {
+      text-decoration: underline;
+    }
+    
+    .repo-card a i {
+      font-size: 0.9em;
+    }
+    
+    @media (max-width: 900px) {
+      .github-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .github-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* =======================
        Open Source & Media
        ======================= */
     .opensource { background-color: #fff; }
     .opensource p.link-text { font-size: 1.3rem; margin-top: 30px; }
-    .opensource a { color: var(--primary-green); font-weight: 600; text-decoration: underline; }
+    .opensource a { color: var(--primary-color); font-weight: 600; text-decoration: underline; }
 
     /* Media Section */
     .media { background-color: #fff; }
-    .media a { color: var(--primary-green); font-weight: 600; }
+    .media a { color: var(--primary-color); font-weight: 600; }
     
     /* .video-container {
       display: flex;
@@ -715,9 +886,10 @@
     } */
     .media-slider {
       width: 100%;
-      max-width: 1200px;
-      margin: 40px auto;
+      max-width: min(1200px, 95vw);
+      margin: clamp(15px, 2.5vh, 30px) auto;
       overflow: hidden;
+      max-height: calc(100vh - clamp(150px, 22vh, 220px));
     }
 
     .media-slider .swiper-wrapper {
@@ -726,7 +898,8 @@
 
     /* 공통 카드 */
     .media-item {
-      height: 520px;
+      height: clamp(280px, 55vh, 480px);
+      max-height: calc(100vh - clamp(180px, 25vh, 250px));
       width: auto;
       flex-shrink: 0;
       position: relative;
@@ -745,8 +918,8 @@
     
     /* ★ 유튜브만 가로형 강제 */
     .media-item.youtube {
-      width: calc(520px * 16 / 9);   /* height 기준으로 width 계산 */
-      max-width: 90vw;              /* 모바일 안전장치 */
+      width: calc(clamp(350px, 45vh, 520px) * 16 / 9);
+      max-width: 90vw;
     }
     
     /* iframe은 카드에 꽉 차게 */
@@ -756,13 +929,41 @@
       border: 0;
     }
 
+    /* [모바일] Media 사이즈 균일화 */
+    @media (max-width: 768px) {
+      .media-slider {
+        max-height: calc(100vh - 140px);
+      }
+      
+      .media-item {
+        height: clamp(200px, 40vh, 300px);
+      }
+      
+      .media-item.youtube {
+        width: calc(clamp(200px, 40vh, 300px) * 16 / 9);
+        max-width: 85vw;
+      }
+      
+      /* 세로 비디오도 높이 맞춤 */
+      .media-item video,
+      .media-item img {
+        max-height: clamp(200px, 40vh, 300px);
+      }
+    }
+    
     @media (max-width: 480px) {
       .media-item {
-        height: 420px;
+        height: clamp(180px, 35vh, 250px);
       }
     
       .media-item.youtube {
-        width: calc(420px * 16 / 9);
+        width: calc(clamp(180px, 35vh, 250px) * 16 / 9);
+        max-width: 90vw;
+      }
+      
+      .media-item video,
+      .media-item img {
+        max-height: clamp(180px, 35vh, 250px);
       }
     }
 
@@ -809,7 +1010,7 @@
     }
     .footer-info a {
       font-weight: 600;
-      color: var(--primary-green);
+      color: var(--primary-color);
       text-decoration: none;
     }
 
@@ -832,7 +1033,7 @@
       color: #333;
       transition: transform 0.3s;
     }
-    .lab-link:hover { transform: translateY(-5px); color: var(--primary-green); }
+    .lab-link:hover { transform: translateY(-5px); color: var(--primary-color); }
     
     .lab-link img {
       height: 100px; 
@@ -979,9 +1180,10 @@
       <a href="#research">Publication</a>
       <a href="#media">Media</a>
       <a href="#contact">Contact</a>
-      <!-- 실제 youtube 링크 필요 -->
+      <!-- GitHub 내부 탭으로 이동 -->
+      <a href="#github"><i class="fab fa-github"></i></a>
+      <!-- 실제 youtube 링크 -->
       <a href="https://www.youtube.com/@Inha-United_Home" target="_blank"><i class="fab fa-youtube"></i></a>
-      <a href="https://github.com/Inha-United" target="_blank"><i class="fab fa-github"></i></a>
     </nav>
   </header>
 
@@ -990,8 +1192,8 @@
     <section class="section home" data-anchor="home">
       <div class="max-w-container">
         <h1>Welcome!</h1>
-        <!-- <p>We are <b>Inha-United@Home</b> ⚽️</p>
-        <p>A newly founded RoboCup @Home team from Inha University (2025).</p> -->
+        <p>We are <b>Inha-United@Home</b> 🏠</p>
+        <p>A newly founded RoboCup @Home team from Inha University (2025).</p>
         <button onclick="location.href='#about'">Learn More</button>
       </div>
     </section>
@@ -1003,6 +1205,7 @@
           <h1>About Inha-United</h1>
           <p>Inha-United@Home is a collaborative team from four major robotics and AI laboratories at Inha University.</p>
           <p class="sub-desc">We bring together expertise in perception, localization, control, and strategy to create the next generation of service robots.</p>
+          <a href="Inha_United_Team_Description_Paper.pdf" target="_blank" class="tdp-btn"><i class="fas fa-file-pdf"></i> Team Description Paper</a>
         </div>
         <!-- swiper로 변경해서 이미지 넘어가게끔 구현 -->
         <div class="about-image">
@@ -1170,12 +1373,12 @@
               </div>
               <div class="swiper-slide">
                 <div class="team-member">
-                  <img src="img/kjy.png" alt="Jiyun Kim" onerror="this.src='https://via.placeholder.com/90?text=JK'" />
-                  <h3>Jiyun Kim</h3>
+                  <img src="img/kgh.jpg" alt="Gihyeok Kwon" onerror="this.src='https://via.placeholder.com/90?text=GK'" />
+                  <h3>Gihyeok Kwon</h3>
                   <p>Undergraduate</p>
-                  <div class="social-icons">
-                    <a href="https://github.com/kjy0261" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="mailto:jiyun0261@inha.edu"><i class="fas fa-envelope"></i></a>
+                  <div class="social-icons">                        
+                    <a href="https://github.com/GiHyeokKwon" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="mailto:newhaneul@inha.edu"><i class="fas fa-envelope"></i></a>
                   </div>
                 </div>
               </div>
@@ -1225,207 +1428,95 @@
       <div class="max-w-container">
         
         <h3 class="year-header">2025</h3>
-        <div class="pub-item">
-          <span class="pub-title">MSG-Loc: Multi-Label Likelihood-based Semantic Graph Matching for Object-Level Global Localization (Accepted)</span>
-          <span class="pub-venue">IEEE Robotics and Automation Letters (RA-L)</span>
-          <div class="pub-authors">Gihyeon Lee, Jungwoo Lee, Juwon Kim, Young-Sik Shin, and Younggun Cho</div>
-          <div class="pub-links">
-            <a href="https://sparolab.github.io/research/msg-loc" target="_blank">[LINK]</a>
-          </div>
-        </div>
-
-        <div class="pub-item">
-          <!--25-11-12-->
-          <span class="pub-title">Freeze-Frame with StaticNeRF Uncertainty-Guided NeRF Map Reconstruction in Dynamic Scenes</span>
-          <span class="pub-venue">IEEE Robotics and Automation Letters (RA-L)</span>
-          <div class="pub-authors">Juhui Lee, Geonmo Yang, Seungjun Ma, and Younggun Cho</div>
-          <div class="pub-links">
-            <a href="https://sparolab.github.io/research/staticnerf/" target="_blank">[LINK]</a>
-          </div>
-        </div>
-        
-        <div class="pub-item">
-          <!--25-12-XX-->
-          <span class="pub-title">REPLAY: Robot Embodiment via Intent-aware Policy Imitation by Replicating Human Demonstrations from Video (Accepted)</span>
-          <span class="pub-venue">International Journal of Control, Automation and Systems (IJCAS)</span>
-          <div class="pub-authors">Sung-Gil Park, Han-Byeol Kim, Yong-Geon Kim, Seuk-Woo Ryu, Byeong-Gil Yoo, Sungeun Chung, Yong-Jun Lee, Jeong-Seop Park, Woo-Jin Ahn*, Myo-Taeg Lim*</div>
-          <div class="pub-links">
-            <!--<a href="https://#" target="_blank">[LINK]</a>-->
-          </div>
-        </div>
-        
-        <div class="pub-item">
-          <!--25-11-27-->
-          <span class="pub-title">Practical Mixed Palletizing Manipulator System: Incorporating Practical Reinforcement Learning and Configuration-Space Motion Planning</span>
-          <span class="pub-venue">IEEE Transactions on Automation Science and Engineering (T-ASE)</span>
-          <div class="pub-authors">Woo-Jin Ahn, Kyuwon Choi, Seong-Woo Kang, Cheol-Kyun Rho, Dong-Sung Pae, Myo-Taeg Lim</div>
-          <div class="pub-links">
-            <a href="https://ieeexplore.ieee.org/document/11270909" target="_blank">[LINK]</a>
-          </div>
-        </div>
-
-        <div class="pub-item">
-          <!--25-10-17-->
-          <span class="pub-title">OffSim: Offline Simulator for Model-based Offline Inverse Reinforcement Learning</span>
-          <span class="pub-venue">arXiv</span>
-          <div class="pub-authors">Woo-Jin Ahn, Sang-Ryul Baek, Yong-Jun Lee, Hyun-Duck Choi, Myo-Taeg Lim</div>
-          <div class="pub-links">
-            <a href="https://arxiv.org/abs/2510.15495" target="_blank">[LINK]</a>
-          </div>
-        </div>
-    
-        <div class="pub-item">
-          <!--25-07-28-->
-          <span class="pub-title">Uni-Mapper: Unified Mapping Framework for Multi-modal LiDARs in Complex and Dynamic Environments</span>
-          <span class="pub-venue">IEEE Transactions on Intelligent Vehicles (T-IV)</span>
-          <div class="pub-authors">Gilhwan Kang, Hogyun Kim, Byunghee Choi, Seokhwan Jeong, Young-Sik Shin, Younggun Cho</div>
-          <div class="pub-links">
-            <a href="https://sparolab.github.io/research/uni_mapper/" target="_blank">[LINK]</a>
-          </div>
-        </div>
-        
-        <div class="pub-item">
-          <!--25-07-24-->
-          <span class="pub-title">Registration beyond Points: General Affine Subspace Alignment via Geodesic Distance on Grassmann Manifold</span>
-          <span class="pub-venue">IEEE/CVF International Conference on Computer Vision (ICCV)</span>
-          <div class="pub-authors">Jaeho Shin, Hyeonjae Gil, Junwoo Jang, Maani Ghaffari, Ayoung Kim</div>
-          <div class="pub-links">
-            <a href="https://openaccess.thecvf.com/content/ICCV2025/html/Shin_Registration_beyond_Points_General_Affine_Subspace_Alignment_via_Geodesic_Distance_ICCV_2025_paper.html" target="_blank">[LINK]</a>
-          </div>
-        </div>
-        
-        <div class="pub-item">
-          <!--25-07-08-->
-          <span class="pub-title">Contrastive Learning in NMPC Behavior Cloning for Generalized Trajectory Tracking of Marine Vehicles</span>
-          <span class="pub-venue">IEEE Journal of Oceanic Engineering</span>
-          <div class="pub-authors">Junwoo Jang, Maani Ghaffari</div>
-          <div class="pub-links">
-            <a href="https://ieeexplore.ieee.org/abstract/document/11072715" target="_blank">[LINK]</a>
-          </div>
-        </div>
-
-        <div class="pub-item">
-          <!--25-06-17-->
-          <span class="pub-title">SceneAware: Scene-Constrained Pedestrian Trajectory Prediction with LLM-Guided Walkability</span>
-          <span class="pub-venue">arXiv</span>
-          <div class="pub-authors">Juho Bai, Inwook Shim</div>
-          <div class="pub-links">
-            <a href="https://arxiv.org/abs/2506.14144" target="_blank">[LINK]</a>
-          </div>
-        </div>
-        
-        <div class="pub-item">
-          <!--25-04-02-->
-          <span class="pub-title">Learning Implicit Social Navigation Behavior using Deep Inverse Reinforcement Learning</span>
-          <span class="pub-venue">IEEE Robotics and Automation Letters (RA-L)</span>
-          <div class="pub-authors">Tribhi Kathuria, Ke Liu, Junwoo Jang, X. Jessie Yang, Maani Ghaffari</div>
-          <div class="pub-links">
-            <a href="https://ieeexplore.ieee.org/abstract/document/10947583" target="_blank">[LINK]</a>
-          </div>
-        </div>
-        
-        <div class="pub-item">
-          <!--25-02-05-->
-          <span class="pub-title">TARG: Tree of Action-Reward Generation with Large Language Model for Cabinet Opening with Manipulator</span>
-          <span class="pub-venue">International Journal of Control, Automation and Systems (IJCAS)</span>
-          <div class="pub-authors">Sung-Gil Park, Han-Byeol Kim, Yong-Jun Lee, Woo-Jin Ahn*, Myo-Taeg Lim*</div>
-          <div class="pub-links">
-            <a href="https://link.springer.com/article/10.1007/s12555-024-0528-6" target="_blank">[LINK]</a>
-          </div>
-        </div>
+        <div class="pub-item"><span class="pub-number">[1]</span><span class="pub-content"><span class="pub-authors-inline">G. Lee et al.,</span> "<span class="pub-title-inline">MSG-Loc: Multi-Label Likelihood-based Semantic Graph Matching for Object-Level Global Localization</span>," <span class="pub-venue-inline">RA-L</span>, 2025. <span class="pub-links-inline"><a href="https://sparolab.github.io/research/msg-loc" target="_blank">[Paper]</a></span></span></div>
+        <div class="pub-item"><span class="pub-number">[2]</span><span class="pub-content"><span class="pub-authors-inline">J. Lee et al.,</span> "<span class="pub-title-inline">Freeze-Frame with StaticNeRF: Uncertainty-Guided NeRF Map Reconstruction in Dynamic Scenes</span>," <span class="pub-venue-inline">RA-L</span>, 2025. <span class="pub-links-inline"><a href="https://sparolab.github.io/research/staticnerf/" target="_blank">[Paper]</a></span></span></div>
+        <div class="pub-item"><span class="pub-number">[3]</span><span class="pub-content"><span class="pub-authors-inline">S.-G. Park et al.,</span> "<span class="pub-title-inline">REPLAY: Robot Embodiment via Intent-aware Policy Imitation by Replicating Human Demonstrations from Video</span>," <span class="pub-venue-inline">IJCAS</span>, 2025.</span></div>
+        <div class="pub-item"><span class="pub-number">[4]</span><span class="pub-content"><span class="pub-authors-inline">W.-J. Ahn et al.,</span> "<span class="pub-title-inline">Practical Mixed Palletizing Manipulator System: Incorporating Practical RL and Configuration-Space Motion Planning</span>," <span class="pub-venue-inline">T-ASE</span>, 2025. <span class="pub-links-inline"><a href="https://ieeexplore.ieee.org/document/11270909" target="_blank">[Paper]</a></span></span></div>
+        <div class="pub-item"><span class="pub-number">[5]</span><span class="pub-content"><span class="pub-authors-inline">W.-J. Ahn et al.,</span> "<span class="pub-title-inline">OffSim: Offline Simulator for Model-based Offline Inverse Reinforcement Learning</span>," <span class="pub-venue-inline">arXiv</span>, 2025. <span class="pub-links-inline"><a href="https://arxiv.org/abs/2510.15495" target="_blank">[Paper]</a></span></span></div>
+        <div class="pub-item"><span class="pub-number">[6]</span><span class="pub-content"><span class="pub-authors-inline">G. Kang et al.,</span> "<span class="pub-title-inline">Uni-Mapper: Unified Mapping Framework for Multi-modal LiDARs in Complex and Dynamic Environments</span>," <span class="pub-venue-inline">T-IV</span>, 2025. <span class="pub-links-inline"><a href="https://sparolab.github.io/research/uni_mapper/" target="_blank">[Paper]</a></span></span></div>
+        <div class="pub-item"><span class="pub-number">[7]</span><span class="pub-content"><span class="pub-authors-inline">J. Shin et al.,</span> "<span class="pub-title-inline">Registration beyond Points: General Affine Subspace Alignment via Geodesic Distance on Grassmann Manifold</span>," <span class="pub-venue-inline">ICCV</span>, 2025. <span class="pub-links-inline"><a href="https://openaccess.thecvf.com/content/ICCV2025/html/Shin_Registration_beyond_Points_General_Affine_Subspace_Alignment_via_Geodesic_Distance_ICCV_2025_paper.html" target="_blank">[Paper]</a></span></span></div>
+        <div class="pub-item"><span class="pub-number">[8]</span><span class="pub-content"><span class="pub-authors-inline">J. Jang, M. Ghaffari,</span> "<span class="pub-title-inline">Contrastive Learning in NMPC Behavior Cloning for Generalized Trajectory Tracking of Marine Vehicles</span>," <span class="pub-venue-inline">J. Oceanic Eng.</span>, 2025. <span class="pub-links-inline"><a href="https://ieeexplore.ieee.org/abstract/document/11072715" target="_blank">[Paper]</a></span></span></div>
+        <div class="pub-item"><span class="pub-number">[9]</span><span class="pub-content"><span class="pub-authors-inline">J. Bai, I. Shim,</span> "<span class="pub-title-inline">SceneAware: Scene-Constrained Pedestrian Trajectory Prediction with LLM-Guided Walkability</span>," <span class="pub-venue-inline">arXiv</span>, 2025. <span class="pub-links-inline"><a href="https://arxiv.org/abs/2506.14144" target="_blank">[Paper]</a></span></span></div>
+        <div class="pub-item"><span class="pub-number">[10]</span><span class="pub-content"><span class="pub-authors-inline">T. Kathuria et al.,</span> "<span class="pub-title-inline">Learning Implicit Social Navigation Behavior using Deep Inverse Reinforcement Learning</span>," <span class="pub-venue-inline">RA-L</span>, 2025. <span class="pub-links-inline"><a href="https://ieeexplore.ieee.org/abstract/document/10947583" target="_blank">[Paper]</a></span></span></div>
+        <div class="pub-item"><span class="pub-number">[11]</span><span class="pub-content"><span class="pub-authors-inline">S.-G. Park et al.,</span> "<span class="pub-title-inline">TARG: Tree of Action-Reward Generation with Large Language Model for Cabinet Opening with Manipulator</span>," <span class="pub-venue-inline">IJCAS</span>, 2025. <span class="pub-links-inline"><a href="https://link.springer.com/article/10.1007/s12555-024-0528-6" target="_blank">[Paper]</a></span></span></div>
         
         <h3 class="year-header">2024</h3>
-          <!--2024-->
-        <div class="pub-item">
-          <span class="pub-title">Close imitation of expert retouching for black-and-white photography</span>
-          <span class="pub-venue">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</span>
-          <div class="pub-authors">Seunghyun Shin, Jisu Shin, Jihwan Bae, Inwook Shim, Hae-Gon Jeon</div>
-          <div class="pub-links">
-            <a href="https://openaccess.thecvf.com/content/CVPR2024/html/Shin_Close_Imitation_of_Expert_Retouching_for_Black-and-White_Photography_CVPR_2024_paper.html" target="_blank">[LINK]</a>
-          </div>
-        </div>
-        
-        <div class="pub-item">
-          <!--24-10-17-->
-          <span class="pub-title">Efficient Data Collection Strategy for Modeling the Dynamics of Floating Robotic Vehicles Using Neural Networks</span>
-          <span class="pub-venue">Journal of Intelligent & Robotic Systems</span>
-          <div class="pub-authors">Junwoo Jang, Haggi Do, Maani Ghaffari, Jinwhan Kim</div>
-          <div class="pub-links">
-            <a href="https://link.springer.com/article/10.1007/s10846-024-02183-3" target="_blank">[LINK]</a>
-          </div>
-        </div>
-
-        <div class="pub-item">
-          <!--00-00-00-->
-          <span class="pub-title">Dynamic Multi-Object Analysis Using Particles for Social Navigation</span>
-          <span class="pub-venue">International Conference on Control, Automation and Systems (ICCAS)</span>
-          <div class="pub-authors">Minho Lee, Miryeong Park, Jiyun Lee, and Younggun Cho</div>
-          <div class="pub-links">
-            <a href="https://sparolab.github.io/research/uni_mapper/" target="_blank">[LINK]</a>
-          </div>
-        </div>
-        
-        <div class="pub-item">
-          <!--24-05-30-->
-          <span class="pub-title">Salience-guided Ground Factor for Robust Localization of Delivery Robots in Complex Urban Environments</span>
-          <span class="pub-venue">IEEE International Conference on Robotics and Automation (ICRA)</span>
-          <div class="pub-authors">Jooyong Park, Jungwoo Lee, Euncheol Choi, and Younggun Cho</div>
-          <div class="pub-links">
-            <a href="https://sparolab.github.io/research/salient-ground-feature/" target="_blank">[LINK]</a>
-          </div>
-        </div>
-
-        <div class="pub-item">
-          <!--24-03-10-->
-          <span class="pub-title">Style Blind Domain Generalized Semantic Segmentation via Covariance Alignment and Semantic Consistence Contrastive Learning</span>
-          <span class="pub-venue">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</span>
-          <div class="pub-authors">Woo-Jin Ahn, Geun-Yeong Yang, Hyun-Duck Choi, Myo-Taeg Lim</div>
-          <div class="pub-links">
-            <a href="https://openaccess.thecvf.com/content/CVPR2024/papers/Ahn_Style_Blind_Domain_Generalized_Semantic_Segmentation_via_Covariance_Alignment_and_CVPR_2024_paper.pdf" target="_blank">[LINK]</a>
-          </div>
-        </div>
+        <div class="pub-item"><span class="pub-number">[12]</span><span class="pub-content"><span class="pub-authors-inline">S. Shin et al.,</span> "<span class="pub-title-inline">Close Imitation of Expert Retouching for Black-and-White Photography</span>," <span class="pub-venue-inline">CVPR</span>, 2024. <span class="pub-links-inline"><a href="https://openaccess.thecvf.com/content/CVPR2024/html/Shin_Close_Imitation_of_Expert_Retouching_for_Black-and-White_Photography_CVPR_2024_paper.html" target="_blank">[Paper]</a></span></span></div>
+        <div class="pub-item"><span class="pub-number">[13]</span><span class="pub-content"><span class="pub-authors-inline">J. Jang et al.,</span> "<span class="pub-title-inline">Efficient Data Collection Strategy for Modeling the Dynamics of Floating Robotic Vehicles Using Neural Networks</span>," <span class="pub-venue-inline">J. Intell. Robot. Syst.</span>, 2024. <span class="pub-links-inline"><a href="https://link.springer.com/article/10.1007/s10846-024-02183-3" target="_blank">[Paper]</a></span></span></div>
+        <div class="pub-item"><span class="pub-number">[14]</span><span class="pub-content"><span class="pub-authors-inline">M. Lee et al.,</span> "<span class="pub-title-inline">Dynamic Multi-Object Analysis Using Particles for Social Navigation</span>," <span class="pub-venue-inline">ICCAS</span>, 2024. <span class="pub-links-inline"><a href="https://sparolab.github.io/research/uni_mapper/" target="_blank">[Paper]</a></span></span></div>
+        <div class="pub-item"><span class="pub-number">[15]</span><span class="pub-content"><span class="pub-authors-inline">J. Park et al.,</span> "<span class="pub-title-inline">Salience-guided Ground Factor for Robust Localization of Delivery Robots in Complex Urban Environments</span>," <span class="pub-venue-inline">ICRA</span>, 2024. <span class="pub-links-inline"><a href="https://sparolab.github.io/research/salient-ground-feature/" target="_blank">[Paper]</a></span></span></div>
+        <div class="pub-item"><span class="pub-number">[16]</span><span class="pub-content"><span class="pub-authors-inline">W.-J. Ahn et al.,</span> "<span class="pub-title-inline">Style Blind Domain Generalized Semantic Segmentation via Covariance Alignment and Semantic Consistence Contrastive Learning</span>," <span class="pub-venue-inline">CVPR</span>, 2024. <span class="pub-links-inline"><a href="https://openaccess.thecvf.com/content/CVPR2024/papers/Ahn_Style_Blind_Domain_Generalized_Semantic_Segmentation_via_Covariance_Alignment_and_CVPR_2024_paper.pdf" target="_blank">[Paper]</a></span></span></div>
         
         <h3 class="year-header">2023</h3>
-          <div class="pub-item">
-            <!--23-06-08-->
-            <span class="pub-title">Learning off-road terrain traversability with self-supervisions only</span>
-            <span class="pub-venue">IEEE Robotics and Automation Letters (RA-L)</span>
-            <div class="pub-authors">Junwon Seo, Sungdae Sim, Inwook Shim</div>
-            <div class="pub-links">
-              <a href="https://ieeexplore.ieee.org/abstract/document/10146445" target="_blank">[LINK]</a>
-            </div>
-          </div>
-        
-        <div class="pub-item">
-          <!--23-05-15-->
-          <span class="pub-title">Convex geometric trajectory tracking using Lie algebraic MPC for autonomous marine vehicles</span>
-          <span class="pub-venue">IEEE Robotics and Automation Letters (RA-L)</span>
-          <div class="pub-authors">Junwoo Jang, Sangli Teng, Maani Ghaffari</div>
-          <div class="pub-links">
-            <a href="https://ieeexplore.ieee.org/abstract/document/10301632" target="_blank">[LINK]</a>
-          </div>
-        </div>
-        
-        <div class="pub-item">
-          <!--23-01-06-->
-          <span class="pub-title">Scate: A scalable framework for self-supervised traversability estimation in unstructured environments</span>
-          <span class="pub-venue">IEEE Robotics and Automation Letters (RA-L)</span>
-          <div class="pub-authors">Junwon Seo, Taekyung Kim, Kiho Kwak, Jihong Min, Inwook Shim</div>
-          <div class="pub-links">
-            <a href="https://ieeexplore.ieee.org/abstract/document/10007922" target="_blank">[LINK]</a>
-          </div>
-        </div>
+        <div class="pub-item"><span class="pub-number">[17]</span><span class="pub-content"><span class="pub-authors-inline">J. Seo et al.,</span> "<span class="pub-title-inline">Learning Off-road Terrain Traversability with Self-supervisions Only</span>," <span class="pub-venue-inline">RA-L</span>, 2023. <span class="pub-links-inline"><a href="https://ieeexplore.ieee.org/abstract/document/10146445" target="_blank">[Paper]</a></span></span></div>
+        <div class="pub-item"><span class="pub-number">[18]</span><span class="pub-content"><span class="pub-authors-inline">J. Jang et al.,</span> "<span class="pub-title-inline">Convex Geometric Trajectory Tracking using Lie Algebraic MPC for Autonomous Marine Vehicles</span>," <span class="pub-venue-inline">RA-L</span>, 2023. <span class="pub-links-inline"><a href="https://ieeexplore.ieee.org/abstract/document/10301632" target="_blank">[Paper]</a></span></span></div>
+        <div class="pub-item"><span class="pub-number">[19]</span><span class="pub-content"><span class="pub-authors-inline">J. Seo et al.,</span> "<span class="pub-title-inline">Scate: A Scalable Framework for Self-supervised Traversability Estimation in Unstructured Environments</span>," <span class="pub-venue-inline">RA-L</span>, 2023. <span class="pub-links-inline"><a href="https://ieeexplore.ieee.org/abstract/document/10007922" target="_blank">[Paper]</a></span></span></div>
         
         <h3 class="year-header">~2022</h3>
-          <div class="pub-item">
-            <!--22-10-23-->
-            <span class="pub-title">Slide: Self-supervised lidar de-snowing through reconstruction difficulty</span>
-            <span class="pub-venue">European Conference on Computer Vision (ECCV)</span>
-            <div class="pub-authors">Gwangtak Bae, Byungjun Kim, Seongyong Ahn, Jihong Min, Inwook Shim</div>
-            <div class="pub-links">
-              <a href="https://link.springer.com/chapter/10.1007/978-3-031-19842-7_17" target="_blank">[LINK]</a>
+        <div class="pub-item"><span class="pub-number">[20]</span><span class="pub-content"><span class="pub-authors-inline">G. Bae et al.,</span> "<span class="pub-title-inline">Slide: Self-supervised Lidar De-snowing through Reconstruction Difficulty</span>," <span class="pub-venue-inline">ECCV</span>, 2022. <span class="pub-links-inline"><a href="https://link.springer.com/chapter/10.1007/978-3-031-19842-7_17" target="_blank">[Paper]</a></span></span></div>
+        
+      </div>
+    </section>
+    
+    <!-- GitHub Repositories -->
+    <section class="section" data-anchor="github">
+      <h1>GitHub Repositories</h1>
+      <div class="github-container">
+        <div class="github-grid">
+          <div class="repo-card">
+            <div class="repo-header">
+              <i class="fab fa-github"></i>
+              <h3>RoboCup@Home</h3>
             </div>
+            <p>Main repository for RoboCup@Home 2026 competition code, including robot control, perception, and planning modules.</p>
+            <a href="https://github.com/" target="_blank"><i class="fab fa-github"></i>View Repository</a>
           </div>
+          
+          <div class="repo-card">
+            <div class="repo-header">
+              <i class="fab fa-github"></i>
+              <h3>SLAM-Toolkit</h3>
+            </div>
+            <p>Advanced SLAM algorithms for indoor localization and mapping using LiDAR and camera sensors.</p>
+            <a href="https://github.com/" target="_blank"><i class="fab fa-github"></i>View Repository</a>
+          </div>
+          
+          <div class="repo-card">
+            <div class="repo-header">
+              <i class="fab fa-github"></i>
+              <h3>Object-Detection</h3>
+            </div>
+            <p>Real-time object detection and recognition system optimized for domestic service robot applications.</p>
+            <a href="https://github.com/" target="_blank"><i class="fab fa-github"></i>View Repository</a>
+          </div>
+          
+          <div class="repo-card">
+            <div class="repo-header">
+              <i class="fab fa-github"></i>
+              <h3>Speech-Interface</h3>
+            </div>
+            <p>Natural language processing and speech recognition module for human-robot interaction.</p>
+            <a href="https://github.com/" target="_blank"><i class="fab fa-github"></i>View Repository</a>
+          </div>
+          
+          <div class="repo-card">
+            <div class="repo-header">
+              <i class="fab fa-github"></i>
+              <h3>Motion-Planning</h3>
+            </div>
+            <p>Motion planning and navigation stack for mobile manipulator robots in dynamic environments.</p>
+            <a href="https://github.com/" target="_blank"><i class="fab fa-github"></i>View Repository</a>
+          </div>
+          
+          <div class="repo-card">
+            <div class="repo-header">
+              <i class="fab fa-github"></i>
+              <h3>Manipulation</h3>
+            </div>
+            <p>Robotic arm manipulation library for grasping, pick-and-place, and object handling tasks.</p>
+            <a href="https://github.com/" target="_blank"><i class="fab fa-github"></i>View Repository</a>
+          </div>
+        </div>
       </div>
     </section>
     
@@ -1535,8 +1626,8 @@
       autoScrolling: true,
       scrollOverflow: true,
       fitToSection: false,
-      anchors: ['home', 'team', 'Publication', 'media', 'opensource', 'contact'],
-      navigationTooltips: ['Home', 'Team', 'Publication', 'Media','', 'Contact'],
+      anchors: ['home', 'team', 'Publication', 'github', 'media', 'opensource', 'contact'],
+      navigationTooltips: ['Home', 'Team', 'Publication', 'GitHub', 'Media', '', 'Contact'],
       navigation: true,
       showActiveTooltip: true,
       credits: { enabled: false },
