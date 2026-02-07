@@ -223,7 +223,7 @@
     .about-text { 
       flex: 1; 
       max-height: 100%;
-      overflow: hidden;
+      overflow: visible;
     }
     .about-text h1 {
       font-size: clamp(1.5rem, 3.5vh, 3rem) !important;
@@ -321,13 +321,23 @@
 
       /* 2. About 모바일 레이아웃 */
       .about {
-        padding-top: 100px !important; /* 모바일 헤더 대응 */
+        padding-top: 80px !important;
         justify-content: flex-start !important;
+        overflow-y: auto !important; /* 내용 넘치면 스크롤 */
+        height: auto !important;
+        min-height: 100vh;
+      }
+      .about .max-w-container {
+        max-height: none; /* 높이 제한 해제 */
       }
       .about-content {
-        flex-direction: column; /* 위아래로 배치 */
+        flex-direction: column;
         text-align: center;
-        gap: 20px;
+        gap: 15px;
+        max-height: none; /* 높이 제한 해제 */
+      }
+      .about-text {
+        overflow: visible;
       }
       .about-text h1 {
         font-size: 2.2rem !important;
