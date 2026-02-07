@@ -106,8 +106,8 @@
     /* PC Layout Fixer Container - viewport 기반 */
     .max-w-container {
       width: 100%;
-      max-width: min(1400px, 95vw);
-      max-height: calc(100vh - clamp(80px, 12vh, 120px)); /* 헤더 + 여백 제외 */
+      max-width: 95vw;
+      max-height: calc(100vh - clamp(80px, 12vh, 120px));
       margin: 0 auto;
       display: flex;
       flex-direction: column;
@@ -267,7 +267,7 @@
     .about-image { 
       flex: 1.2; 
       width: 100%;
-      max-width: min(800px, 45vw);
+      max-width: 45vw;
       max-height: calc(100vh - clamp(120px, 18vh, 180px));
       position: relative;
     }
@@ -654,7 +654,7 @@
 
     .section[data-anchor="research"] .max-w-container {
       width: 100% !important;
-      max-width: min(1000px, 90vw) !important;
+      max-width: 90vw !important;
       margin: 0 auto;
     }
 
@@ -736,7 +736,7 @@
     
     @media (min-width: 901px) {
       .section[data-anchor="research"] .max-w-container {
-        max-width: min(1100px, 85vw) !important; 
+        max-width: 85vw !important; 
       }
     }
     
@@ -769,7 +769,7 @@
     
     .github-container {
       width: 100%;
-      max-width: min(1300px, 95vw);
+      max-width: 95vw;
       margin: 0 auto;
     }
     
@@ -940,7 +940,7 @@
     } */
     .media-slider {
       width: 100%;
-      max-width: min(1200px, 95vw);
+      max-width: 95vw;
       margin: clamp(15px, 2.5vh, 30px) auto;
       overflow: hidden;
       max-height: calc(100vh - clamp(150px, 22vh, 220px));
