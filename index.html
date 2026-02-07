@@ -288,10 +288,17 @@
       box-shadow: 0 15px 35px rgba(0,0,0,0.12);
     }
 
+    /* fade 효과에서 슬라이드가 컨테이너를 꽉 채우도록 강제 */
+    .about-slider .swiper-slide {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
     .about-slider img {
       width: 100%;
       height: 100%;
       object-fit: cover; /* 영역에 맞게 꽉 채움 */
+      object-position: center center;
       display: block;
     }
 
@@ -332,15 +339,35 @@
         padding: 0 10px;
       }
 
-      /* 3. About 슬라이더 모바일 높이 고정 (중요: 안 보임 방지) */
+      /* 3. About 슬라이더 모바일 높이 - 비율 기반 */
       .about-image {
         width: 100%;
         max-width: 100%;
         order: -1; /* 사진을 글보다 위로 올리고 싶다면 사용 (선택) */
       }
       .about-slider {
-        height: 280px; /* 모바일에서 사진이 확실히 보이게 높이 지정 */
-        margin-bottom: 20px;
+        width: 100%;
+        height: 0;
+        padding-bottom: 56.25%; /* 16:9 비율 유지 (9/16 = 0.5625) */
+        position: relative;
+        max-height: 40vh;
+        margin-bottom: 15px;
+      }
+      .about-slider .swiper-wrapper {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .about-slider .swiper-slide {
+        width: 100% !important;
+        height: 100% !important;
+      }
+      .about-slider img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center; /* 중앙 기준 크롭 */
       }
     }
 
@@ -813,6 +840,13 @@
     .repo-card a i {
       font-size: 0.9em;
     }
+
+    .repo-coming-soon {
+      color: #999 !important;
+      font-weight: 600;
+      cursor: default;
+      pointer-events: none;
+    }
     
     @media (max-width: 900px) {
       .github-grid {
@@ -896,30 +930,36 @@
       align-items: center;
     }
 
-    /* 공통 카드 */
+    /* 공통 카드 - 모든 미디어 동일 높이 */
     .media-item {
-      height: clamp(280px, 55vh, 480px);
+      height: clamp(280px, 50vh, 420px);
       max-height: calc(100vh - clamp(180px, 25vh, 250px));
-      width: auto;
       flex-shrink: 0;
       position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #000;
     }
     
-    /* 이미지 / mp4 */
-    .media-item img,
-    .media-item video {
+    /* 세로 영상 (9:16) - 높이 기준, 너비 자동 */
+    .media-item video,
+    .media-item img {
       height: 100%;
       width: auto;
       max-width: 100%;
       object-fit: contain;
       display: block;
-      margin: 0 auto;
     }
     
-    /* ★ 유튜브만 가로형 강제 */
+    /* ★ 유튜브 (16:9) - 높이 동일, 너비는 비율로 계산 */
     .media-item.youtube {
-      width: calc(clamp(350px, 45vh, 520px) * 16 / 9);
-      max-width: 90vw;
+      /* 동일한 높이에서 16:9 비율 너비 산출 */
+      width: calc(clamp(280px, 50vh, 420px) * 16 / 9);
+      max-width: 85vw;
+      background: #000;
     }
     
     /* iframe은 카드에 꽉 차게 */
@@ -929,41 +969,49 @@
       border: 0;
     }
 
-    /* [모바일] Media 사이즈 균일화 */
+    /* [모바일] Media - 높이만 통일, 비율은 각자 유지 */
     @media (max-width: 768px) {
       .media-slider {
         max-height: calc(100vh - 140px);
       }
       
+      /* 모든 아이템 높이 통일 */
       .media-item {
-        height: clamp(200px, 40vh, 300px);
+        height: clamp(250px, 45vh, 350px);
+        width: auto;
+        background: transparent;
       }
       
+      /* 유튜브: 같은 높이에서 16:9 너비 */
       .media-item.youtube {
-        width: calc(clamp(200px, 40vh, 300px) * 16 / 9);
-        max-width: 85vw;
+        width: calc(clamp(250px, 45vh, 350px) * 16 / 9);
+        max-width: 92vw;
+        background: #000;
       }
       
-      /* 세로 비디오도 높이 맞춤 */
+      /* 세로 영상: 높이 채우고 너비는 자연스럽게 */
       .media-item video,
       .media-item img {
-        max-height: clamp(200px, 40vh, 300px);
+        height: 100%;
+        width: auto;
+        max-height: clamp(250px, 45vh, 350px);
+        object-fit: contain;
       }
     }
     
     @media (max-width: 480px) {
       .media-item {
-        height: clamp(180px, 35vh, 250px);
+        height: clamp(220px, 40vh, 300px);
       }
-    
+      
       .media-item.youtube {
-        width: calc(clamp(180px, 35vh, 250px) * 16 / 9);
-        max-width: 90vw;
+        width: calc(clamp(220px, 40vh, 300px) * 16 / 9);
+        max-width: 94vw;
       }
       
       .media-item video,
       .media-item img {
-        max-height: clamp(180px, 35vh, 250px);
+        max-height: clamp(220px, 40vh, 300px);
       }
     }
 
@@ -1104,6 +1152,8 @@
       .team-member img {
         width: 65px; height: 65px; /* 이미지 축소 */
         margin-bottom: 8px;
+        object-fit: cover; /* 원형 프로필 비율 유지 */
+        aspect-ratio: 1 / 1; /* 정사각형 비율 강제 */
       }
       .team-member h3 { font-size: 0.95em; margin: 4px 0; }
       .team-member p { font-size: 0.8em; margin-bottom: 5px; }
@@ -1466,55 +1516,55 @@
           <div class="repo-card">
             <div class="repo-header">
               <i class="fab fa-github"></i>
-              <h3>RoboCup@Home</h3>
+              <h3>RB-Y1 Hardware</h3>
             </div>
-            <p>Main repository for RoboCup@Home 2026 competition code, including robot control, perception, and planning modules.</p>
-            <a href="https://github.com/" target="_blank"><i class="fab fa-github"></i>View Repository</a>
+            <p>Hardware configuration and setup documentation for the Rainbow Robotics RB-Y1 platform.</p>
+            <a href="#" class="repo-coming-soon"><i class="fas fa-clock"></i>Coming Soon</a>
           </div>
           
           <div class="repo-card">
             <div class="repo-header">
               <i class="fab fa-github"></i>
-              <h3>SLAM-Toolkit</h3>
+              <h3>GraspGen</h3>
             </div>
-            <p>Advanced SLAM algorithms for indoor localization and mapping using LiDAR and camera sensors.</p>
-            <a href="https://github.com/" target="_blank"><i class="fab fa-github"></i>View Repository</a>
+            <p>Grasp generation module for robust and adaptive robotic grasping in domestic environments.</p>
+            <a href="#" class="repo-coming-soon"><i class="fas fa-clock"></i>Coming Soon</a>
           </div>
           
           <div class="repo-card">
             <div class="repo-header">
               <i class="fab fa-github"></i>
-              <h3>Object-Detection</h3>
+              <h3>rby1-isaacsim-ros2</h3>
             </div>
-            <p>Real-time object detection and recognition system optimized for domestic service robot applications.</p>
-            <a href="https://github.com/" target="_blank"><i class="fab fa-github"></i>View Repository</a>
+            <p>RB-Y1 simulation environment in NVIDIA Isaac Sim with ROS 2 integration.</p>
+            <a href="https://github.com/inha-united-athome/rby1-isaacsim-ros2" target="_blank"><i class="fab fa-github"></i>View Repository</a>
           </div>
           
           <div class="repo-card">
             <div class="repo-header">
               <i class="fab fa-github"></i>
-              <h3>Speech-Interface</h3>
+              <h3>rby1-mujoco-ros2</h3>
             </div>
-            <p>Natural language processing and speech recognition module for human-robot interaction.</p>
-            <a href="https://github.com/" target="_blank"><i class="fab fa-github"></i>View Repository</a>
+            <p>RB-Y1 simulation environment in MuJoCo with ROS 2 integration.</p>
+            <a href="https://github.com/inha-united-athome/rby1-mujoco-ros2" target="_blank"><i class="fab fa-github"></i>View Repository</a>
           </div>
           
           <div class="repo-card">
             <div class="repo-header">
               <i class="fab fa-github"></i>
-              <h3>Motion-Planning</h3>
+              <h3>rby1_LIBERO</h3>
             </div>
-            <p>Motion planning and navigation stack for mobile manipulator robots in dynamic environments.</p>
-            <a href="https://github.com/" target="_blank"><i class="fab fa-github"></i>View Repository</a>
+            <p>LIBERO benchmark integration for RB-Y1 manipulation tasks and policy learning.</p>
+            <a href="https://github.com/inha-united-athome/rby1_LIBERO" target="_blank"><i class="fab fa-github"></i>View Repository</a>
           </div>
           
           <div class="repo-card">
             <div class="repo-header">
               <i class="fab fa-github"></i>
-              <h3>Manipulation</h3>
+              <h3>rby1-lerobot_dataset</h3>
             </div>
-            <p>Robotic arm manipulation library for grasping, pick-and-place, and object handling tasks.</p>
-            <a href="https://github.com/" target="_blank"><i class="fab fa-github"></i>View Repository</a>
+            <p>LeRobot dataset collection and processing pipeline for RB-Y1 imitation learning.</p>
+            <a href="https://github.com/inha-united-athome/rby1-lerobot_dataset" target="_blank"><i class="fab fa-github"></i>View Repository</a>
           </div>
         </div>
       </div>
@@ -1670,10 +1720,11 @@
         watchOverflow: true,
         
         // [핵심] 모바일 설정
-        loop: false,            // 교수님 목록은 보통 반복 안 함
-        slidesPerView: 'auto',  // CSS에서 지정한 width(160px)를 따름
-        centeredSlides: true,  // 왼쪽부터 정렬 (모바일에서 자연스러움)
-        spaceBetween: 20,       // 카드 사이 간격
+        loop: false,
+        slidesPerView: 2,        // 모바일: 2장씩 보여줌
+        centeredSlides: false,    // 그룹 정렬 (빈 공간 없음)
+        centerInsufficientSlides: true,
+        spaceBetween: 15,
         
         pagination: {
           el: advisorSliderEl.querySelector('.swiper-pagination'),
@@ -1684,11 +1735,12 @@
           prevEl: advisorSliderEl.parentElement.querySelector('.swiper-button-prev'),
         },
         
-        // [PC 설정 유지] 901px 이상에서는 격자(Grid) 모드
+        // [PC 설정 유지] 901px 이상에서는 4열
         breakpoints: {
             901: {
                 slidesPerView: 4,
                 centeredSlides: false,
+                centerInsufficientSlides: true,
                 spaceBetween: 20,
             }
         }
