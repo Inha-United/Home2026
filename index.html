@@ -1242,9 +1242,55 @@
       }
       .lab-link img.rils-logo { transform: scale(1.1); }
     }
+
+    /* =======================
+       Mobile Floating Bar
+       ======================= */
+    .mobile-fab {
+      display: none;
+    }
+    @media (max-width: 900px) {
+      .mobile-fab {
+        display: flex;
+        position: fixed;
+        bottom: 20px;
+        right: 16px;
+        z-index: 200;
+        gap: 10px;
+        flex-direction: column;
+      }
+      .mobile-fab a {
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.55);
+        backdrop-filter: blur(6px);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        transition: transform 0.2s, background 0.2s;
+      }
+      .mobile-fab a:active {
+        transform: scale(0.92);
+        background: rgba(0, 0, 0, 0.7);
+      }
+    }
   </style>
 </head>
 <body>
+
+  <!-- Mobile Floating Bar -->
+  <div class="mobile-fab">
+    <a href="https://github.com/Inha-United" target="_blank" rel="noopener noreferrer" class="fab-github" aria-label="GitHub">
+      <i class="fab fa-github"></i>
+    </a>
+    <a href="https://www.youtube.com/@Inha-United_Home" target="_blank" rel="noopener noreferrer" class="fab-youtube" aria-label="YouTube">
+      <i class="fab fa-youtube"></i>
+    </a>
+  </div>
 
   <!-- 상위 헤더 구현 파트 -->
   <header>
