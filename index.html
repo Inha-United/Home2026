@@ -969,17 +969,14 @@
       position: relative;
     }
 
-    /* 스와이프 투명 오버레이 - 영상 위에서도 스와이프 가능 */
+    /* 스와이프 투명 오버레이 - 평소에는 클릭 통과, 스와이프 중에만 활성화 */
     .media-item .swipe-overlay {
       position: absolute;
       top: 0; left: 0;
       width: 100%;
       height: 100%;
       z-index: 2;
-      cursor: grab;
-    }
-    .media-item .swipe-overlay:active {
-      cursor: grabbing;
+      pointer-events: none; /* 클릭/탭을 아래 콘텐츠에 전달 */
     }
     
     /* 이미지 / mp4 */
