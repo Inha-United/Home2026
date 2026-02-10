@@ -137,14 +137,14 @@
        ======================= */
     .home {
       position: relative;
-      padding-top: 80px;
+      padding-top: 0;
       overflow: hidden;
     }
     
     .home::before {
       content: "";
       position: absolute;
-      top: 80px;
+      top: 0;
       left: 0;
       right: 0;
       bottom: 0;
@@ -658,7 +658,7 @@
     .section[data-anchor="research"] h1 {
       flex-shrink: 0;
       margin-top: 0 !important;
-      margin-bottom: clamp(10px, 1.5vh, 18px) !important;
+      margin-bottom: clamp(8px, 1vh, 14px) !important;
       font-size: clamp(1.3rem, 2.2vh, 2rem);
     }
 
@@ -666,34 +666,47 @@
       width: 100% !important;
       max-width: 90vw !important;
       margin: 0 auto;
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 10px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0,120,255,0.15) transparent;
     }
+    .section[data-anchor="research"] .max-w-container::-webkit-scrollbar { width: 3px; }
+    .section[data-anchor="research"] .max-w-container::-webkit-scrollbar-track { background: transparent; }
+    .section[data-anchor="research"] .max-w-container::-webkit-scrollbar-thumb { background: rgba(0,120,255,0.15); border-radius: 2px; }
 
     /* 연도 헤더 */
     .year-header {
-      font-size: clamp(0.85rem, 1.4vh, 1.1rem);
+      font-size: clamp(0.8rem, 1.3vh, 1rem);
       font-weight: 700;
       color: var(--primary-color);
-      background: linear-gradient(to right, rgba(0,120,255,0.1), transparent);
-      padding: clamp(4px, 0.6vh, 8px) clamp(10px, 1.5vh, 16px);
-      margin-top: clamp(8px, 1vh, 12px);
-      margin-bottom: clamp(6px, 0.8vh, 10px);
+      background: linear-gradient(to right, rgba(0,120,255,0.1), rgba(255,255,255,0.95));
+      padding: clamp(3px, 0.5vh, 6px) clamp(10px, 1.5vh, 16px);
+      margin-top: clamp(4px, 0.6vh, 8px);
+      margin-bottom: clamp(3px, 0.4vh, 6px);
       border-radius: 4px;
+      position: sticky;
+      top: 0;
+      z-index: 2;
     }
     .year-header:first-of-type { margin-top: 0; }
 
     /* BibTeX 스타일 출판물 */
     .pub-item {
       width: 100%;
-      margin-bottom: clamp(3px, 0.4vh, 5px);
-      padding: clamp(5px, 0.7vh, 8px) clamp(8px, 1vh, 12px);
+      margin-bottom: clamp(2px, 0.3vh, 4px);
+      padding: clamp(4px, 0.5vh, 6px) clamp(8px, 1vh, 12px);
       background: #fff;
       transition: 0.2s;
       display: flex;
       align-items: baseline;
       text-align: left;
       border-radius: 3px;
-      font-size: clamp(0.7rem, 1.1vh, 0.88rem);
-      line-height: 1.5;
+      font-size: clamp(0.68rem, 1vh, 0.85rem);
+      line-height: 1.45;
     }
     .pub-item:hover {
       background: #f5f9ff;
@@ -779,8 +792,9 @@
     
     .github-container {
       width: 100%;
-      max-width: 95vw;
+      max-width: 90vw;
       margin: 0 auto;
+      padding: 0 clamp(60px, 5vw, 80px);
     }
     
     .github-grid {
@@ -950,10 +964,11 @@
     } */
     .media-slider {
       width: 100%;
-      max-width: 95vw;
+      max-width: 90vw;
       margin: clamp(15px, 2.5vh, 30px) auto;
       overflow: hidden;
       max-height: calc(100vh - clamp(150px, 22vh, 220px));
+      padding: 0 clamp(60px, 5vw, 80px);
     }
 
     .media-slider .swiper-wrapper {
@@ -1244,6 +1259,134 @@
     }
 
     /* =======================
+       Vertical Floating Bar (Left)
+       ======================= */
+    .vertical-float-bar {
+      position: fixed;
+      left: clamp(16px, 2vw, 28px);
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 150;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .vertical-float-bar .vfb-line {
+      width: clamp(1.5px, 0.15vw, 3px);
+      height: clamp(20px, 2.5vh, 40px);
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 1px;
+    }
+
+    .vertical-float-bar .vfb-icons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(10px, 1.2vw, 18px);
+      padding: clamp(10px, 1.2vw, 18px) 0;
+    }
+
+    .vertical-float-bar .vfb-icons a {
+      width: clamp(36px, 3.2vw, 56px);
+      height: clamp(36px, 3.2vw, 56px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(1rem, 1.1vw, 1.5rem);
+      color: #fff;
+      background: rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    /* 개별 아이콘 색상 — Home 섹션 (어두운 배경) */
+    .vertical-float-bar .vfb-icons a[aria-label="GitHub"]   { color: #111; }
+    .vertical-float-bar .vfb-icons a[aria-label="YouTube"]  { color: #ff4444; }
+    .vertical-float-bar .vfb-icons a[aria-label="Email"]    { color: #4dabff; }
+
+    .vertical-float-bar .vfb-icons a:hover {
+      transform: scale(1.12);
+      background: rgba(255, 255, 255, 0.32);
+      border-color: rgba(255, 255, 255, 0.45);
+    }
+
+    /* TDP: 흰색 아이콘 (GitHub와 반전) */
+    .vertical-float-bar .vfb-icons .tdp-icon {
+      width: clamp(22px, 2vw, 36px);
+      height: auto;
+      filter: brightness(0) invert(1);
+      transition: filter 0.3s ease;
+    }
+
+    /* 다른 섹션에서는 색상 변경 */
+    .vertical-float-bar.dark-mode .vfb-line {
+      background: rgba(0, 0, 0, 0.15);
+    }
+    .vertical-float-bar.dark-mode .vfb-icons a {
+      background: rgba(0, 0, 0, 0.06);
+      border-color: rgba(0, 0, 0, 0.12);
+    }
+    /* GitHub: 밝은 배경에서 흰색 배경으로 통일 */
+    .vertical-float-bar.dark-mode .vfb-icons a[aria-label="GitHub"]   { color: #111; }
+    .vertical-float-bar.dark-mode .vfb-icons a[aria-label="YouTube"]  { color: #e02020; }
+    .vertical-float-bar.dark-mode .vfb-icons a[aria-label="Email"]    { color: #1a7fd6; }
+
+    /* TDP: 밝은 배경에서 검정 아이콘 (GitHub 흰색과 반전) */
+    .vertical-float-bar.dark-mode .vfb-icons .tdp-icon {
+      filter: brightness(0);
+    }
+    .vertical-float-bar.dark-mode .vfb-icons a:hover {
+      transform: scale(1.12);
+      background: rgba(0, 0, 0, 0.1);
+      border-color: rgba(0, 0, 0, 0.2);
+    }
+    .vertical-float-bar.dark-mode .vfb-icons a:hover .tdp-icon {
+      filter: brightness(0);
+    }
+
+    @media (max-width: 900px) {
+      .vertical-float-bar {
+        display: none;
+      }
+    }
+
+    /* =======================
+       FullPage Navigation (Right dots & tooltips)
+       ======================= */
+    #fp-nav ul li a span,
+    .fp-slidesNav ul li a span {
+      background: rgba(255, 255, 255, 0.7) !important;
+      transition: background 0.3s ease;
+    }
+    #fp-nav ul li a.active span,
+    .fp-slidesNav ul li a.active span {
+      background: #fff !important;
+    }
+    #fp-nav ul li .fp-tooltip {
+      color: #fff;
+      transition: color 0.3s ease;
+    }
+
+    /* 밝은 배경 섹션용 */
+    body.nav-dark #fp-nav ul li a span,
+    body.nav-dark .fp-slidesNav ul li a span {
+      background: rgba(0, 0, 0, 0.25) !important;
+    }
+    body.nav-dark #fp-nav ul li a.active span,
+    body.nav-dark .fp-slidesNav ul li a.active span {
+      background: #333 !important;
+    }
+    body.nav-dark #fp-nav ul li .fp-tooltip {
+      color: #333;
+    }
+
+    /* =======================
        Mobile Floating Bar
        ======================= */
     .mobile-fab {
@@ -1253,34 +1396,51 @@
       .mobile-fab {
         display: flex;
         position: fixed;
-        bottom: 20px;
-        right: 16px;
+        bottom: clamp(16px, 3vh, 24px);
+        right: clamp(12px, 2vw, 20px);
         z-index: 200;
-        gap: 10px;
+        gap: clamp(8px, 1.5vw, 14px);
         flex-direction: column;
       }
       .mobile-fab a {
-        width: 46px;
-        height: 46px;
+        width: clamp(40px, 10vw, 54px);
+        height: clamp(40px, 10vw, 54px);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.25rem;
+        font-size: clamp(1.1rem, 3vw, 1.4rem);
         color: #fff;
-        background: rgba(0, 0, 0, 0.55);
-        backdrop-filter: blur(6px);
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-        transition: transform 0.2s, background 0.2s;
+        transition: all 0.3s ease;
       }
       .mobile-fab a:active {
         transform: scale(0.92);
-        background: rgba(0, 0, 0, 0.7);
+      }
+      .mobile-fab.dark-mode a {
+        color: #333;
+        background: rgba(0, 0, 0, 0.06);
+        border-color: rgba(0, 0, 0, 0.12);
       }
     }
   </style>
 </head>
 <body>
+
+  <!-- Vertical Floating Bar -->
+  <div class="vertical-float-bar" id="verticalFloatBar">
+    <div class="vfb-line"></div>
+    <div class="vfb-icons">
+      <a href="Inha_United_Team_Description_Paper.pdf" target="_blank" aria-label="TDP" title="Team Description Paper"><img src="img/tdp.png" alt="TDP" class="tdp-icon"></a>
+      <a href="https://github.com/inha-united-athome" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://www.youtube.com/@Inha-United_Home" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube"><i class="fab fa-youtube"></i></a>
+      <a href="mailto:inharobocuphome@gmail.com" aria-label="Email" title="Email"><i class="fas fa-envelope"></i></a>
+    </div>
+    <div class="vfb-line"></div>
+  </div>
 
   <!-- Mobile Floating Bar -->
   <div class="mobile-fab">
@@ -1687,7 +1847,7 @@
             <div class="swiper-slide media-item">
               <div class="swipe-overlay"></div>
               <video controls autoplay muted loop playsinline>
-                <source src="IMG_6071.mp4" type="video/mp4">
+                <source src="vid/IMG_6071.mp4" type="video/mp4">
                 Your browser does not support video.
               </video>
             </div>
@@ -1696,7 +1856,7 @@
             <div class="swiper-slide media-item">
               <div class="swipe-overlay"></div>
               <video controls autoplay muted loop playsinline>
-                <source src="IMG_6070.mp4" type="video/mp4">
+                <source src="vid/IMG_6070.mp4" type="video/mp4">
                 Your browser does not support video.
               </video>
             </div>
@@ -1727,11 +1887,11 @@
 
         <div class="lab-logos">
           <a href="https://sparolab.github.io" target="_blank" class="lab-link">
-            <img src="sparo.png" alt="Sparo Lab" class="sparo-logo" onerror="this.src='https://via.placeholder.com/80'">
+            <img src="img/sparo.png" alt="Sparo Lab" class="sparo-logo" onerror="this.src='https://via.placeholder.com/80'">
             <span>SPARO Lab</span>
           </a>
           <a href="https://rcv-inha.notion.site/webhome" target="_blank" class="lab-link">
-            <img src="RCVLAB.png" alt="RCV Lab" class="rcv-logo" onerror="this.src='https://via.placeholder.com/80?text=RCV'">
+            <img src="img/RCVLAB.png" alt="RCV Lab" class="rcv-logo" onerror="this.src='https://via.placeholder.com/80?text=RCV'">
             <span>RCV Lab</span>
           </a>
           <a href="https://artemis-inha.github.io/" target="_blank" class="lab-link">
@@ -1750,17 +1910,32 @@
 
   <script>
     // 1. FullPage.js Init
+    const darkSections = ['home']; // 어두운 배경 섹션
+    const floatBar = document.getElementById('verticalFloatBar');
+    const mobileFab = document.querySelector('.mobile-fab');
+
     new fullpage('#fullpage', {
       autoScrolling: true,
       scrollOverflow: true,
       fitToSection: false,
-      anchors: ['home', 'team', 'Publication', 'github', 'media', 'opensource', 'contact'],
-      navigationTooltips: ['Home', 'Team', 'Publication', 'GitHub', 'Media', '', 'Contact'],
+      anchors: ['home', 'about', 'team', 'research', 'github', 'media', 'contact'],
+      navigationTooltips: ['Home', 'About', 'People', 'Publication', 'GitHub', 'Media', 'Contact'],
       navigation: true,
       showActiveTooltip: true,
       credits: { enabled: false },
       // normalScrollElements: '.swiper, .video-container, .research-list',
       normalScrollElements: '.swiper, .media-grid, .research-list',
+      afterLoad: function(origin, destination) {
+        if (darkSections.includes(destination.anchor)) {
+          floatBar.classList.remove('dark-mode');
+          mobileFab.classList.remove('dark-mode');
+          document.body.classList.remove('nav-dark');
+        } else {
+          floatBar.classList.add('dark-mode');
+          mobileFab.classList.add('dark-mode');
+          document.body.classList.add('nav-dark');
+        }
+      },
     });
 
     // 2. Swiper Slider Init
